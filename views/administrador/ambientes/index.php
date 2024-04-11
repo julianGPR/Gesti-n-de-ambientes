@@ -86,13 +86,19 @@
         </table>
         <?php
         // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-        $url_regresar= '/dashboard/gestion%20de%20ambientes/admin/home' ; // Corregir la construcción de la URL
+        $url_regresar = '/dashboard/gestion%20de%20ambientes/admin/home' ; // Corregir la construcción de la URL
         ?>
         <div class="regresar">
             <a href="<?php echo $url_regresar; ?>" class="button" id="btn-regresar">Regresar</a>
         </div>
         <div class="salir">
             <button id="btn_salir">Salir</button>
+        </div>
+        <?php
+            $url_create ='/dashboard/gestion%20de%20ambientes/admin/createAmbiente' ;
+        ?>
+        <div class="create">
+            <a href="<?php echo $url_create; ?>" class="button" id="btn-create">Crear Nuevo Ambiente</a>
         </div>
     </div>
 </body>

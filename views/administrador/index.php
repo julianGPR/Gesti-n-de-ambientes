@@ -14,8 +14,8 @@
         <img src="path/to/your/logo.png" alt="Logo de la empresa">
     </div>
     <div class="datetime">
-        <p id="fecha">01/01/2024</p>
-        <p id="hora">12:00 PM</p>
+        <p id="fecha"><?php echo date('d/m/Y'); ?></p>
+        <p id="hora"><?php echo date('H:i'); ?></p>
     </div>
     <div class="subtitulo">
         <h2>Administrador</h2>
