@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2024 a las 01:04:08
+-- Tiempo de generación: 17-04-2024 a las 06:25:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -37,8 +37,16 @@ CREATE TABLE `t_ambientes` (
   `Tablero` tinyint(1) NOT NULL,
   `Archivador` tinyint(1) NOT NULL,
   `Infraestructura` tinyint(1) NOT NULL,
-  `Observacion` varchar(500) DEFAULT NULL
+  `Observacion` varchar(500) DEFAULT NULL,
+  `Estado` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_ambientes`
+--
+
+INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Computadores`, `Tv`, `Sillas`, `Mesas`, `Tablero`, `Archivador`, `Infraestructura`, `Observacion`, `Estado`) VALUES
+(1, 'Lego', 10, 1, 15, 10, 1, 1, 1, 'Nada que reportar.\r\n', 'Inhabilitado');
 
 -- --------------------------------------------------------
 
@@ -123,7 +131,7 @@ ALTER TABLE `t_usuarios`
 -- AUTO_INCREMENT de la tabla `t_ambientes`
 --
 ALTER TABLE `t_ambientes`
-  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `t_computadores`

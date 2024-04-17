@@ -220,6 +220,7 @@ footer .button:hover {
 
 /* Estilo para los botones de la sección Ambiente */
 .boton-modificar,
+.boton-habilitar,
 .boton-inhabilitar,
 .boton-centrado {
     background-color: #66BB6A;
@@ -231,6 +232,7 @@ footer .button:hover {
 }
 
 .boton-modificar:hover,
+.boton-habilitar:hover,
 .boton-inhabilitar:hover,
 .boton-centrado:hover {
     background-color: #45a049;

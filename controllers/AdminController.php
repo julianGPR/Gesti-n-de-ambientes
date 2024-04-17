@@ -4,10 +4,9 @@ include_once 'models/AdminModel.php';
 
 class AdminController {
     public function home() {
-        include 'views/administrador/index.php'; // Incluir la vista del index del administrador
+        include 'views/administrador/index.php';
     }
     
-    // APARTADO DE AMBIENTES!!!
     public function ambientes() {
         include 'views/administrador/ambientes/index.php';
     }
@@ -28,20 +27,19 @@ class AdminController {
             $result = $adminModel->guardarAmbiente($nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
 
             if ($result) {
-                header("Location: ../ambientes"); // Redirigir a la página de ambientes
+                header("Location: ../ambientes");
                 exit();
             } else {
-                header("Location: index.php?error=Error al crear el ambiente"); // Redirigir al index con mensaje de error
+                header("Location: index.php?error=Error al crear el ambiente");
                 exit();
             }
         } else {
-            include 'views/administrador/ambientes/create.php'; // Mostrar el formulario de creación de ambiente
+            include 'views/administrador/ambientes/create.php';
         }
     }
 
     public function updateAmbiente($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Obtén los datos del formulario de modificación del ambiente
             $nombre = $_POST["nombre"];
             $computadores = $_POST["computadores"];
             $tv = $_POST["tv"];
@@ -52,34 +50,57 @@ class AdminController {
             $infraestructura = $_POST["infraestructura"];
             $observacion = $_POST["observacion"];
     
-            // Modifica el ambiente en la base de datos utilizando el modelo AdminModel
             $adminModel = new AdminModel();
             $result = $adminModel->modificarAmbiente($id, $nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
     
             if ($result) {
-                header("Location: ../ambientes"); // Redirigir a la página de ambientes
+                header("Location: ../ambientes");
                 exit();
             } else {
-                header("Location: index.php?error=Error al actualizar el ambiente&id=$id"); // Redirigir al index con mensaje de error
+                header("Location: index.php?error=Error al actualizar el ambiente&id=$id");
                 exit();
             }
         } else {
-            // Obtener el ambiente por su ID para mostrarlo en el formulario de actualización
             $adminModel = new AdminModel();
             $ambiente = $adminModel->obtenerAmbientePorId($id);
             include 'views/administrador/ambientes/update.php';
         }
     }
-    
 
-    // APARTADO DE USUARIOS!!!
-    public function usuarios() {
-        // Agrega la lógica para manejar el apartado de usuarios
+    public function inhabilitarAmbiente($id) {
+        $adminModel = new AdminModel();
+        $result = $adminModel->inhabilitarAmbiente($id);
+
+        if ($result) {
+            echo "<script>alert('Ambiente inhabilitado exitosamente');</script>";
+        } else {
+            echo "<script>alert('Error al inhabilitar el ambiente');</script>";
+        }
+        
+        header("Location: ../ambientes");
+        exit();
     }
 
-    // APARTADO DE REPORTES!!!
+    public function habilitarAmbiente($id) {
+        $adminModel = new AdminModel();
+        $result = $adminModel->habilitarAmbiente($id);
+    
+        if ($result) {
+            echo "<script>alert('Ambiente habilitado exitosamente');</script>";
+        } else {
+            echo "<script>alert('Error al habilitar el ambiente');</script>";
+        }
+        
+        header("Location: ../ambientes");
+        exit();
+    }
+    
+    public function usuarios() {
+        // Lógica para manejar el apartado de usuarios
+    }
+
     public function reportes() {
-        // Agrega la lógica para manejar el apartado de reportes
+        // Lógica para manejar el apartado de reportes
     }
 }
 
