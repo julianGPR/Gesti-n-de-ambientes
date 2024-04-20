@@ -99,6 +99,16 @@ class AdminController {
         // Lógica para manejar el apartado de usuarios
     }
 
+
+
+
+
+
+
+
+
+    
+
     public function reportes() {
         // Lógica para manejar el apartado de reportes
     }
