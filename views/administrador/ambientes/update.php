@@ -75,5 +75,20 @@
     <p>Sena todos los derechos reservados </p>
 </footer>
 
+<<<<<<< HEAD
 </body>
 </html>
+=======
+<div class="regresar">
+    <?php
+    $url_regresar = 'admin';
+    ?>
+    <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
+</div>
+<div class="salir">
+    <button id="btn_salir">Salir</button>
+</div>
+
+</body>
+</html>
+>>>>>>> origin/devjuan

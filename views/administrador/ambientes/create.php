@@ -63,8 +63,23 @@
         <button type="submit">Guardar Ambiente</button>
     </form>
     </section>
+<<<<<<< HEAD
     <footer>
         <p>Sena derechos recervados</p>
     </footer>
+=======
+<footer>
+    <p>Sena todos los derechos reservados </p>
+</footer>
+    <div class="regresar">
+    <?php
+    $url_regresar = 'admin';
+    ?>
+    <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
+</div>
+<div class="salir">
+    <button id="btn_salir">Salir</button>
+</div>
+>>>>>>> origin/devjuan
 </body>
 </html>

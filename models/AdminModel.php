@@ -61,6 +61,48 @@ class AdminModel {
             return null;
         }
     }
+<<<<<<< HEAD
 }
 
+=======
+
+    public function guardarUsuario($nombres, $apellidos, $correo, $pin, $rol) {
+        $conn = Database::connect();
+
+        $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Correo, Clave, Rol)
+                VALUES ('$nombres', '$apellidos', '$correo', $pin, $rol)";
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function modificarUsuario($id, $nombres, $apellidos, $correo, $pin, $rol){
+        $conn = Database::connect();
+
+        $sql = "UPDATE t_usuarios SET Nombres='$nombres', Apellidos='$apellidos', Correo='$correo', Clave='$pin', Rol='$rol' WHERE Id_usuario='$id'";
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function obtenerUsuarioPorId($id) {
+        $conn = Database::connect();
+        $sql = "SELECT * FROM t_usuarios WHERE Id_usuario='$id'";
+        $result = $conn->query($sql);
+    
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
+}
+>>>>>>> origin/devjuan
 ?>
