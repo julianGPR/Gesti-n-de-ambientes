@@ -61,10 +61,6 @@ class AdminModel {
             return null;
         }
     }
-<<<<<<< HEAD
-}
-
-=======
 
     public function guardarUsuario($nombres, $apellidos, $correo, $pin, $rol) {
         $conn = Database::connect();
@@ -104,5 +100,5 @@ class AdminModel {
     }
 
 }
->>>>>>> origin/devjuan
+
 ?>

@@ -74,11 +74,6 @@
 <footer>
     <p>Sena todos los derechos reservados </p>
 </footer>
-
-<<<<<<< HEAD
-</body>
-</html>
-=======
 <div class="regresar">
     <?php
     $url_regresar = 'admin';
@@ -91,4 +86,4 @@
 
 </body>
 </html>
->>>>>>> origin/devjuan
+

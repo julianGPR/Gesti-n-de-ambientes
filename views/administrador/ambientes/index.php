@@ -101,11 +101,10 @@ if ($result->num_rows > 0) {
         if ($row['Estado'] !== 'Inhabilitado') {
             $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAmbiente/';
             echo "<a href='" . $url_update . $row['Id_ambiente'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
-<<<<<<< HEAD
-=======
+
             $url_update = '/dashboard/gestion%20de%20ambientes/admin/generateQR/';
             echo "<a href='" . $url_update . $row['Id_ambiente'] . "' class='boton-generar-qr'>Generar QR</a>";
->>>>>>> origin/devjuan
+
         } else {
             // Si el ambiente está inhabilitado, mostrar el botón de habilitar
             echo "<a href='#' onclick='confirmarHabilitar(" . $row['Id_ambiente'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";

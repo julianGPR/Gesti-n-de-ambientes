@@ -3,10 +3,6 @@
 include_once 'models/AdminModel.php';
 
 class AdminController {
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/devjuan
     public function home() {
         include 'views/administrador/index.php';
     }
@@ -15,13 +11,10 @@ class AdminController {
         include 'views/administrador/ambientes/index.php';
     }
 
-<<<<<<< HEAD
-=======
     public function usuarios() {
         include 'views/administrador/usuarios/index.php';
     }
 
->>>>>>> origin/devjuan
     public function createAmbiente() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre = $_POST["nombre"];
@@ -38,15 +31,12 @@ class AdminController {
             $result = $adminModel->guardarAmbiente($nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
 
             if ($result) {
-<<<<<<< HEAD
-=======
                 // Lógica para generar el contenido del QR
                 $contenido_qr = "Nombre: $nombre\nComputadores: $computadores\nTV: $tv\nSillas: $sillas\nMesas: $mesas\nTablero: $tablero\nArchivador: $archivador\nInfraestructura: $infraestructura\nObservación: $observacion";
 
                 // Lógica para generar el código QR
                 $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr) .'&rand=' . uniqid();
 
->>>>>>> origin/devjuan
                 header("Location: ../ambientes");
                 exit();
             } else {
@@ -114,22 +104,6 @@ class AdminController {
         header("Location: ../ambientes");
         exit();
     }
-<<<<<<< HEAD
-    
-    public function usuarios() {
-        // Lógica para manejar el apartado de usuarios
-    }
-
-
-
-
-
-
-
-
-
-    
-=======
 
     public function createUsuario(){
 
@@ -180,16 +154,11 @@ class AdminController {
             include 'views/administrador/usuarios/update.php';
         }
     }
->>>>>>> origin/devjuan
+
 
     public function reportes() {
         // Lógica para manejar el apartado de reportes
     }
-<<<<<<< HEAD
-}
-
-?>
-=======
 
     public function generateQR($id) {
         $id_ambiente = $id;
@@ -202,5 +171,11 @@ class AdminController {
         echo "<img src='" . $qrCodeAPIURL . "' alt='QR Code'>";
 
     }
+
 }
->>>>>>> origin/devjuan
+
+?>
+
+
+    
+

@@ -63,11 +63,6 @@
         <button type="submit">Guardar Ambiente</button>
     </form>
     </section>
-<<<<<<< HEAD
-    <footer>
-        <p>Sena derechos recervados</p>
-    </footer>
-=======
 <footer>
     <p>Sena todos los derechos reservados </p>
 </footer>

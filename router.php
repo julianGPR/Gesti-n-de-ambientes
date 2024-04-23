@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/devjuan
 require_once 'config.php'; // Incluir el archivo de configuración donde se define la constante URL
 
 class Router{
