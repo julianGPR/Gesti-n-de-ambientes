@@ -66,9 +66,9 @@
 <footer>
     <p>Sena todos los derechos reservados </p>
 </footer>
-    <div class="regresar">
+<div class="regresar">
     <?php
-    $url_regresar = 'admin';
+    $url_regresar = '../ambientes';
     ?>
     <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
 </div>

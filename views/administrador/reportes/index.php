@@ -5,17 +5,15 @@ $db = Database::connect();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USUARIOS</title>
+    <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-
 </head>
 <body>
-<header>
+    <header>
         <div class="logo-container">
             <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
         </div>
@@ -46,67 +44,59 @@ $db = Database::connect();
                 </form>
             </div>
             <div class="crear-ambiente">
-                <ul>
-                    <?php
-                    // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-                    $url_create = '/dashboard/gestion%20de%20ambientes/admin/createUsuario/' ; // Corregir la construcción de la URL
-                    ?>
-                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Usuario</a></li>
-                </ul>
             </div>
         </div>
     </nav>  
-    <section class="ambiente" id="section-ambiente">
-        <div class="subtitulo-ambiente">
-            <h2>Usuarios</h2>
+    <section class="reporte" id="section-reporte">
+        <div class="subtitulo-reporte">
+            <h2>Reportes</h2>
         </div>
-        <div class="descripcion-ambiente">
-            <p>Gestión de Usuarios</p>
+        <div class="descripcion-reporte">
+            <p>Gestión de ambientes de formación</p>
         </div>
         <div class="tabla-ambientes tabla-scroll">
-        <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
-            
+            <table border="1" >
                 <thead>
                     <tr>
                         <th>Id</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Clave</th>
-                        <th>Correo</th>
-                        <th>Acciones</th>
+                        <th>Fecha y Hora</th>
+                        <th>Id usuario</th>
+                        <th>Id ambiente</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
-    
-    <?php
+                <?php
+// Consulta SQL para seleccionar todos los registros de la tabla t_ambientes
+$query = "SELECT * FROM t_reportes";
+$result = $db->query($query);
 
-    // Consulta para obtener los datos
-    $query = "SELECT id_usuario, Clave, Nombres, Apellidos, Correo FROM t_usuarios";
-    $result = $db->query($query);
-
-    // Mostrar los datos en la tabla
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["id_usuario"] . "</td>";
-            echo "<td>" . $row["Nombres"] . "</td>";
-            echo "<td>" . $row["Apellidos"] . "</td>";
-            echo "<td>" . $row["Clave"] . "</td>";
-            echo "<td>" . $row["Correo"] . "</td>";
-            echo "<td>";
-            $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateUsuario/';
-            echo "<a href='" . $url_update . $row['id_usuario'] . "' class=''><img src='../assets/editar.svg'></a>";
-            echo "</td>";
-            echo "</tr>";
-        }
-    } else {
-        echo "<tr><td colspan='3'>0 resultados</td></tr>";
+if ($result->num_rows > 0) {
+    // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>";
+        echo "<td>" . $row['Id_reporte'] . "</td>";
+        echo "<td>" . $row['FechaHora'] . "</td>";
+        echo "<td>" . $row['Id_usuario'] . "</td>";
+        echo "<td>" . $row['Id_ambiente'] . "</td>";
+        echo "<td>" . $row['Estado'] . "</td>";
+        echo "<td>" . $row['Observaciones'] . "</td>";
+        echo "<td>";
     }
-    $db->close();
-    ?>
+} else {
+    // Si no hay filas en el resultado, mostrar un mensaje de que no hay registros
+    echo "<tr><td colspan='10'>No hay registros</td></tr>";
+}
+
+// Cerrar la conexión a la base de datos
+$db->close();
+?>
+
                 </tbody>
             </table>
-            <div class="regresar">
+        </div>
+        <div class="regresar">
             <?php
                 $url_regresar = 'home';
             ?>
@@ -116,7 +106,7 @@ $db = Database::connect();
             <button id="btn_salir">Salir</button>
         </div>
     </section>
-    </div>
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script src="../assets/buscador.js"></script>

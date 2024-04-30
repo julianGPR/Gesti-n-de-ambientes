@@ -39,10 +39,12 @@ $db = Database::connect();
         <?php
         // Construir la URL adecuada para el botón de "Gestión de Ambientes"
         $url_gestion_ambientes = '/dashboard/gestion%20de%20ambientes/admin/ambientes' ; // Corregir la construcción de la URL
+        $url_gestion_usuarios = '/dashboard/gestion%20de%20ambientes/admin/usuarios';
+        $url_gestion_reportes = '/dashboard/gestion%20de%20ambientes/admin/reportes';
         ?>
         <a href="<?php echo $url_gestion_ambientes; ?>" class="button-admin" id="btn-ambientes">Gestión de Ambientes</a>
-        <a href="<?php echo $url_gestion_ambientes; ?>" class="button-admin" id="btn-ambientes">Gestión de Ambientes</a>
-        <a href="<?php echo $url_gestion_ambientes; ?>" class="button-admin" id="btn-ambientes">Gestión de Ambientes</a>
+        <a href="<?php echo $url_gestion_usuarios; ?>" class="button-admin" id="btn-ambientes">Gestión de Usuarios</a>
+        <a href="<?php echo $url_gestion_reportes; ?>" class="button-admin" id="btn-ambientes">Gestión de Reportes</a>
 
     </div>
     </section>
