@@ -16,16 +16,20 @@ $db = Database::connect();
 </head>
 <body>
     <style>
-
-        bellButton{
-            background-color: white;
-        }
         .notification-bell {
             position: relative;
+            margin-left: 700px;
+            margin-top: 10px;
+        }
+
+        .notification-bell button{
+            background-color: white;
+            border: none;
         }
 
         .notification-bell img {
             transition: transform 0.8s ease-in-out;
+            width: 50px;
         }
 
         .flying {
@@ -67,6 +71,16 @@ $db = Database::connect();
             right: 10px;
             cursor: pointer;
         }
+        .notification-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 8px;
+            font-size: 12px;
+        }
 
     </style>
     <script>
@@ -82,6 +96,7 @@ $db = Database::connect();
 
         function closePopup() {
             document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+            location.reload();
         }
 
 
@@ -113,48 +128,43 @@ $db = Database::connect();
 
     <!-- Elemento para la ventana emergente -->
     <div id="popup" class="popup">
-        <div class="popup-content">
+    <div class="popup-content">
         <span class="popup-close" onclick="closePopup()">&times;</span>
-            <div class="tabla-ambientes tabla-scroll">
-                    <table border="1" >
-                        <thead>
-                            <tr>
-                                <th>Fecha y Hora</th>
-                                <th>Id usuario</th>
-                                <th>Id ambiente</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-        // Consulta SQL para seleccionar todos los registros de la tabla t_ambientes
-        $query = "SELECT r.*, u.Nombres AS nombre_usuario, u.Apellidos AS apellido_usuario, a.Nombre AS nombre_ambiente 
-                FROM t_reportes r 
-                INNER JOIN t_usuarios u ON r.Id_usuario = u.Id_usuario 
-                INNER JOIN t_ambientes a ON r.Id_ambiente = a.Id_ambiente";
-        $result = $db->query($query);
+        <div class="notificaciones">
+        <?php
+            // Consulta SQL para seleccionar todos los registros de la tabla t_reportes que no han sido vistos
+            $query = "SELECT r.*, u.Nombres AS nombre_usuario, u.Apellidos AS apellido_usuario, a.Nombre AS nombre_ambiente 
+                    FROM t_reportes r 
+                    INNER JOIN t_usuarios u ON r.Id_usuario = u.Id_usuario 
+                    INNER JOIN t_ambientes a ON r.Id_ambiente = a.Id_ambiente 
+                    WHERE r.estado = 1"; // Notificaciones no vistas
+            $result = $db->query($query);
 
-        if ($result->num_rows > 0) {
-            // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row['FechaHora'] . "</td>";
-                echo "<td>" . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . "</td>";
-                echo "<td>" . $row['nombre_ambiente'] . "</td>";
+            if ($result->num_rows > 0) {
+                // Iterar sobre los resultados y mostrar cada notificación en formato de texto
+                while ($row = $result->fetch_assoc()) {
+                    echo "<div class='notificacion'>";
+                    echo "El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . " envió un nuevo reporte del ambiente " . $row['nombre_ambiente'];
+                    echo "</div>";
+
+                    // Marcar la notificación como vista
+                    $reporte_id = $row['Id_reporte'];
+                    $query_update = "UPDATE t_reportes SET Estado = 2 WHERE Id_reporte = $reporte_id";
+                    $db->query($query_update);
+                }
+
+            } else {
+                // Si no hay filas en el resultado, mostrar un mensaje de que no hay notificaciones nuevas
+                echo "<div class='notificacion'>No hay notificaciones nuevas</div>";
             }
-        } else {
-            // Si no hay filas en el resultado, mostrar un mensaje de que no hay registros
-            echo "<tr><td colspan='10'>No hay registros</td></tr>";
-        }
 
-        // Cerrar la conexión a la base de datos
-        $db->close();
+            // Cerrar la conexión a la base de datos
+            $db->close();
         ?>
-
-                        </tbody>
-                    </table>
-                </div>
         </div>
     </div>
+</div>
+
 
 
 
