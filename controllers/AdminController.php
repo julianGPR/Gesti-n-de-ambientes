@@ -3,7 +3,6 @@
 include_once 'models/AdminModel.php';
 
 class AdminController {
-
     public function home() {
         include 'views/administrador/index.php';
     }
@@ -156,8 +155,9 @@ class AdminController {
         }
     }
 
+
     public function reportes() {
-        // Lógica para manejar el apartado de reportes
+        include 'views/administrador/reportes/index.php';
     }
 
     public function generateQR($id) {
@@ -171,4 +171,40 @@ class AdminController {
         echo "<img src='" . $qrCodeAPIURL . "' alt='QR Code'>";
 
     }
+
+
+    public function enviarInforme() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["observacion"])) {
+            // Obtener los datos del formulario
+            $observacion = $_POST["observacion"];
+            $id_usuario = $_SESSION["id_usuario"]; // Obtener el ID del usuario de la sesión
+            $id_ambiente = $_POST["id_ambiente"]; // Obtener el ID del ambiente del formulario
+    
+            // Llamar al método para agregar el informe en el modelo
+            $this->agregarReporte($observacion, $id_usuario, $id_ambiente);
+            // Redirigir al instructor a alguna página
+            header("Location: ../home");
+            exit();
+        } else {
+            // Manejar el caso en que no se haya enviado un formulario POST
+            echo "Error: Método de solicitud incorrecto.";
+        }
+    }
+    
+    public function agregarReporte($observacion, $id_usuario, $id_ambiente) {
+        $adminModel = new AdminModel();
+        $result = $adminModel->insertarReporte($observacion, $id_usuario, $id_ambiente);
+        if ($result) {
+            // Redireccionar de vuelta a la página de reportes del instructor
+            header("Location: ../reportes");
+            exit();
+        } else {
+            // Manejar el caso en que ocurra un error al agregar el reporte
+            echo "<script>alert('Error al agregar el reporte');</script>";
+            exit();
+        }
+    }
+    
 }
+
+?>

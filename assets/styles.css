@@ -220,6 +220,7 @@ footer .button:hover {
 
 /* Estilo para los botones de la sección Ambiente */
 .boton-modificar,
+.boton-generar-qr,
 .boton-habilitar,
 .boton-inhabilitar,
 .boton-centrado {
@@ -232,6 +233,7 @@ footer .button:hover {
 }
 
 .boton-modificar:hover,
+.boton-generar-qr:hover,
 .boton-habilitar:hover,
 .boton-inhabilitar:hover,
 .boton-centrado:hover {

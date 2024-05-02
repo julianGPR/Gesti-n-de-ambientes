@@ -7,8 +7,12 @@ $db = Database::connect();
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>USUARIOS</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
 </head>
 <body>
 <header>
@@ -36,9 +40,10 @@ $db = Database::connect();
     </header>
     <nav>
         <div class="filtro-y-crear">
-            <div class="filtro">
-                <label for="filtro_ambiente">Buscar Usuario:</label>
-                <input type="text" id="filtro_ambiente" name="filtro_ambiente">
+        <div class="container-fluid">
+                <form class="d-flex">
+                    <input class="form-control me-2 light-table-filter" data-table="table_id" type="text" placeholder="Buscar por Nombre">
+                </form>
             </div>
             <div class="crear-ambiente">
                 <ul>
@@ -59,7 +64,8 @@ $db = Database::connect();
             <p>Gestión de Usuarios</p>
         </div>
         <div class="tabla-ambientes tabla-scroll">
-            <table border="1" >
+        <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
+            
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -100,9 +106,9 @@ $db = Database::connect();
     ?>
                 </tbody>
             </table>
-        <div class="regresar">
+            <div class="regresar">
             <?php
-                $url_regresar = 'usuarios';
+                $url_regresar = 'home';
             ?>
             <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
         </div>
@@ -111,6 +117,9 @@ $db = Database::connect();
         </div>
     </section>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="../assets/buscador.js"></script>
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>

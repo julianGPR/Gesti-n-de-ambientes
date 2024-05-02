@@ -99,5 +99,19 @@ class AdminModel {
         }
     }
 
+
+    public function insertarReporte($observacion, $id_usuario, $id_ambiente) {
+        $conn = Database::connect();
+        $fechaHora = date("Y-m-d H:i:s"); // Obtenemos la fecha y hora actual
+        
+        // Insertar la observación en la tabla de reportes
+        $query = "INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Estado, Observaciones) VALUES ('$fechaHora', '$id_usuario', '$id_ambiente', 'Pendiente', '$observacion')";
+        $result = $conn->query($query);
+        $conn->close();
+        return $result;
+    }
+
 }
+
+
 ?>
