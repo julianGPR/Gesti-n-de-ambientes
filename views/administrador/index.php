@@ -84,6 +84,7 @@ $db = Database::connect();
 
     </style>
     <script>
+
         function flyBell() {
             var bellImage = document.getElementById("bellImage");
             bellImage.classList.add("flying");
@@ -98,7 +99,6 @@ $db = Database::connect();
             document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
             location.reload();
         }
-
 
     </script>
 
@@ -121,7 +121,7 @@ $db = Database::connect();
                     // Si la consulta falla, muestra un mensaje de error o un valor predeterminado
                     echo "Error al obtener el número de reportes pendientes";
                 }
-                ?>
+                ?> 
             </span>
         </div>
     </button>
@@ -143,14 +143,18 @@ $db = Database::connect();
             if ($result->num_rows > 0) {
                 // Iterar sobre los resultados y mostrar cada notificación en formato de texto
                 while ($row = $result->fetch_assoc()) {
+
                     echo "<div class='notificacion'>";
                     echo "El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . " envió un nuevo reporte del ambiente " . $row['nombre_ambiente'];
+                    echo "<br>";
+                    echo "<br>";
                     echo "</div>";
 
                     // Marcar la notificación como vista
                     $reporte_id = $row['Id_reporte'];
                     $query_update = "UPDATE t_reportes SET Estado = 2 WHERE Id_reporte = $reporte_id";
                     $db->query($query_update);
+
                 }
 
             } else {
