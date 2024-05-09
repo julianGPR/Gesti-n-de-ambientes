@@ -204,7 +204,6 @@ class AdminController {
             exit();
         }
     }
-    
 
 }
 
