@@ -66,17 +66,17 @@
             <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Computadores</th>
-                        <th>TV</th>
-                        <th>Sillas</th>
-                        <th>Mesas</th>
-                        <th>Tablero</th>
-                        <th>Archivador</th>
-                        <th>Infraestructura</th>
-                        <th>Observación</th>
-                        <th>Acción</th>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Torre</th>
+                    <th>Computadores</th>
+                    <th>Tvs</th>
+                    <th>Sillas</th>
+                    <th>Mesas</th>
+                    <th>Tableros</th>
+                    <th>Nineras</th>
+                    <th>Observaciones</th>
+                    <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,14 +97,14 @@
                             echo "<tr>";
                             echo "<td>" . $row['Id_ambiente'] . "</td>";
                             echo "<td>" . $row['Nombre'] . "</td>";
+                            echo "<td>" . $row['Torre'] . "</td>";
                             echo "<td>" . $row['Computadores'] . "</td>";
-                            echo "<td>" . $row['Tv'] . "</td>";
+                            echo "<td>" . $row['Tvs'] . "</td>";
                             echo "<td>" . $row['Sillas'] . "</td>";
                             echo "<td>" . $row['Mesas'] . "</td>";
-                            echo "<td>" . $row['Tablero'] . "</td>";
-                            echo "<td>" . $row['Archivador'] . "</td>";
-                            echo "<td>" . $row['Infraestructura'] . "</td>";
-                            echo "<td>" . $row['Observacion'] . "</td>";
+                            echo "<td>" . $row['Tableros'] . "</td>";
+                            echo "<td>" . $row['Nineras'] . "</td>";
+                            echo "<td>" . $row['Observaciones'] . "</td>";
                             echo "<td>";
                             if ($row['Estado'] !== 'Inhabilitado') {
                                 $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAmbiente/';

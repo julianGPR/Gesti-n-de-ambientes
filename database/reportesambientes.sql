@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-04-2024 a las 23:43:30
+-- Tiempo de generación: 14-05-2024 a las 02:08:34
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 -- Base de datos: `reportesambientes`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `validarUsuario` (IN `claveDigitada` INT(50))   BEGIN
+    IF EXISTS(SELECT * FROM t_usuarios WHERE Clave = claveDigitada) THEN
+        SELECT Nombres, Apellidos, Rol FROM t_usuarios WHERE Clave = claveDigitada;
+    ELSE
+        SELECT null;
+    END IF;
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -29,74 +43,79 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `t_ambientes` (
   `Id_ambiente` int(50) NOT NULL,
-  `Nombre` varchar(250) NOT NULL,
-  `Computadores` tinyint(1) NOT NULL,
-  `Tv` tinyint(1) NOT NULL,
-  `Sillas` tinyint(1) NOT NULL,
-  `Mesas` tinyint(1) NOT NULL,
-  `Tablero` tinyint(1) NOT NULL,
-  `Archivador` tinyint(1) NOT NULL,
-  `Infraestructura` tinyint(1) NOT NULL,
-  `Observacion` varchar(500) DEFAULT NULL,
-  `Estado` varchar(255) DEFAULT NULL
+  `Nombre` varchar(100) NOT NULL,
+  `Torre` enum('Oriental','Occidental') NOT NULL,
+  `Computadores` int(50) DEFAULT NULL,
+  `CheckPcs` tinyint(1) NOT NULL DEFAULT 1,
+  `Tvs` int(50) DEFAULT NULL,
+  `CheckTvs` tinyint(1) NOT NULL DEFAULT 1,
+  `Sillas` int(50) DEFAULT NULL,
+  `CheckSillas` tinyint(1) NOT NULL DEFAULT 1,
+  `Mesas` int(50) DEFAULT NULL,
+  `CheckMesas` tinyint(1) NOT NULL DEFAULT 1,
+  `Tableros` int(50) DEFAULT NULL,
+  `CheckTableros` tinyint(1) NOT NULL DEFAULT 1,
+  `Nineras` int(50) DEFAULT NULL,
+  `CheckNineras` tinyint(1) NOT NULL DEFAULT 1,
+  `CheckInfraestructura` tinyint(1) NOT NULL DEFAULT 1,
+  `Estado` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `t_ambientes`
 --
 
-INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Computadores`, `Tv`, `Sillas`, `Mesas`, `Tablero`, `Archivador`, `Infraestructura`, `Observacion`, `Estado`) VALUES
-(1, 'Lego', 10, 1, 15, 10, 1, 1, 1, 'Nada que reportar.\r\n', 'Habilitado'),
-(2, 'Sala de conferencias', 0, 1, 50, 10, 1, 0, 1, 'Sala grande con pantalla de proyección', 'Disponible'),
-(3, 'Aula 101', 30, 0, 25, 25, 1, 1, 1, 'Aula equipada con escritorios y sillas cómodas', 'Ocupado'),
-(4, 'Laboratorio de Informática', 50, 0, 30, 30, 0, 0, 1, 'Laboratorio con equipos de última generación', 'Disponible'),
-(5, 'Sala de Reuniones', 0, 1, 20, 10, 1, 0, 1, 'Sala para reuniones de equipo', 'Disponible'),
-(6, 'Aula 102', 40, 0, 30, 30, 1, 1, 1, 'Aula amplia con pizarra y proyector', 'Disponible'),
-(7, 'Oficina 1', 5, 0, 5, 5, 1, 1, 1, 'Oficina pequeña para uso individual', 'Disponible'),
-(8, 'Sala de espera', 0, 1, 15, 5, 0, 0, 1, 'Área para esperar a los visitantes', 'Disponible'),
-(9, 'Auditorio principal', 0, 1, 127, 100, 1, 0, 1, 'Gran auditorio con asientos para cientos de personas', 'Disponible'),
-(10, 'Aula magna', 100, 0, 127, 50, 1, 1, 1, 'Aula con capacidad para eventos especiales', 'Disponible'),
-(11, 'Oficina de administración', 10, 0, 10, 10, 1, 1, 1, 'Oficina para el personal administrativo', 'Disponible'),
-(12, 'Aula 101', 20, 1, 40, 40, 1, 1, 1, 'Buena infraestructura', 'Disponible'),
-(13, 'Aula 102', 15, 1, 30, 30, 1, 1, 1, 'Falta mantenimiento en algunas sillas', 'Disponible'),
-(14, 'Aula 103', 25, 1, 35, 35, 1, 1, 1, 'Excelente ambiente', 'Disponible'),
-(15, 'Aula 104', 30, 1, 45, 45, 1, 1, 1, 'Ambiente espacioso', 'Disponible'),
-(16, 'Aula 105', 18, 1, 28, 28, 1, 1, 1, 'Buen ambiente para clases', 'Disponible'),
-(17, 'Aula 106', 22, 1, 32, 32, 1, 1, 1, 'Equipada con TV', 'Disponible'),
-(18, 'Aula 107', 20, 1, 40, 40, 1, 1, 1, 'Necesita reparación en el tablero', 'No disponible'),
-(19, 'Aula 108', 25, 1, 35, 35, 1, 1, 1, 'Sillas nuevas', 'Disponible'),
-(20, 'Aula 109', 30, 1, 45, 45, 1, 1, 1, 'Tablero en mal estado', 'No disponible'),
-(21, 'Aula 110', 18, 1, 28, 28, 1, 1, 1, 'Ambiente tranquilo', 'Disponible'),
-(22, 'Aula 111', 22, 1, 32, 32, 1, 1, 1, 'Buena iluminación', 'Disponible'),
-(23, 'Aula 112', 20, 1, 40, 40, 1, 1, 1, 'Equipada con proyector', 'Disponible'),
-(24, 'Aula 113', 15, 1, 30, 30, 1, 1, 1, 'Necesita mantenimiento en las mesas', 'No disponible'),
-(25, 'Aula 114', 25, 1, 35, 35, 1, 1, 1, 'Excelente ambiente para estudio', 'Disponible'),
-(26, 'Aula 115', 30, 1, 45, 45, 1, 1, 1, 'Ambiente amplio', 'Disponible'),
-(27, 'Aula 116', 18, 1, 28, 28, 1, 1, 1, 'Sillas cómodas', 'Disponible'),
-(28, 'Aula 117', 22, 1, 32, 32, 1, 1, 1, 'Buena ventilación', 'Disponible'),
-(29, 'Aula 118', 20, 1, 40, 40, 1, 1, 1, 'Ambiente climatizado', 'Disponible'),
-(30, 'Aula 119', 15, 1, 30, 30, 1, 1, 1, 'Espacio para trabajo en equipo', 'Disponible'),
-(31, 'Aula 120', 25, 1, 35, 35, 1, 1, 1, 'Buena conexión a internet', 'Disponible'),
-(32, 'Aula 121', 30, 1, 45, 45, 1, 1, 1, 'Ambiente adecuado para conferencias', 'Disponible'),
-(33, 'Aula 122', 18, 1, 28, 28, 1, 1, 1, 'Buena ubicación', 'Disponible'),
-(34, 'Aula 123', 22, 1, 32, 32, 1, 1, 1, 'Equipada con pizarrón', 'Disponible'),
-(35, 'Aula 124', 20, 1, 40, 40, 1, 1, 1, 'Ambiente tranquilo', 'Disponible'),
-(36, 'Aula 125', 15, 1, 30, 30, 1, 1, 1, 'Excelente iluminación', 'Disponible'),
-(37, 'Aula 126', 25, 1, 35, 35, 1, 1, 1, 'Buena acústica', 'Disponible'),
-(38, 'Aula 127', 30, 1, 45, 45, 1, 1, 1, 'Ambiente adaptado para personas con discapacidad', 'Disponible'),
-(39, 'Aula 128', 18, 1, 28, 28, 1, 1, 1, 'Equipada con TV y proyector', 'Disponible'),
-(40, 'Aula 129', 22, 1, 32, 32, 1, 1, 1, 'Ambiente confortable', 'Disponible'),
-(41, 'Aula 130', 20, 1, 40, 40, 1, 1, 1, 'Ambiente adecuado para seminarios', 'Disponible'),
-(42, 'Aula 131', 15, 1, 30, 30, 1, 1, 1, 'Mesas en buen estado', 'Disponible'),
-(43, 'Aula 132', 25, 1, 35, 35, 1, 1, 1, 'Ambiente moderno', 'Disponible'),
-(44, 'Aula 133', 30, 1, 45, 45, 1, 1, 1, 'Equipada con sistemas audiovisuales', 'Disponible'),
-(45, 'Aula 134', 18, 1, 28, 28, 1, 1, 1, 'Espacio para trabajo individual', 'Disponible'),
-(46, 'Aula 135', 22, 1, 32, 32, 1, 1, 1, 'Ambiente seguro', 'Disponible'),
-(47, 'Aula 136', 20, 1, 40, 40, 1, 1, 1, 'Ambiente apto para talleres', 'Disponible'),
-(48, 'Aula 137', 15, 1, 30, 30, 1, 1, 1, 'Buena disposición de las sillas', 'Disponible'),
-(49, 'Aula 138', 25, 1, 35, 35, 1, 1, 1, 'Excelente ventilación', 'Disponible'),
-(50, 'Aula 139', 30, 1, 45, 45, 1, 1, 1, 'Ambiente con buena temperatura', 'Disponible'),
-(51, 'Aula 140', 18, 1, 28, 28, 1, 1, 1, 'Ambiente silencioso', 'Disponible');
+INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `CheckPcs`, `Tvs`, `CheckTvs`, `Sillas`, `CheckSillas`, `Mesas`, `CheckMesas`, `Tableros`, `CheckTableros`, `Nineras`, `CheckNineras`, `CheckInfraestructura`, `Estado`, `Observaciones`) VALUES
+(1, 'Ambiente 101', 'Oriental', 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(2, 'Ambiente 104', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(3, 'Ambiente 110', 'Oriental', 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(4, 'Ambiente 114', 'Oriental', 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(5, 'Ambiente 115', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(6, 'Ambiente 116', 'Oriental', 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(7, 'Ambiente 119', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(8, 'Ambiente 122', 'Oriental', 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(9, 'Ambiente 201', 'Oriental', 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(10, 'Ambiente 202', 'Oriental', 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(11, 'Ambiente 203', 'Oriental', 30, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(12, 'Ambiente 204', 'Oriental', 18, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(13, 'Ambiente Festo', 'Oriental', 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(14, 'Ambiente Lego', 'Oriental', 20, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(15, 'Ambiente Órtesis', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(16, 'Ambiente 301', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(17, 'Ambiente 302', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(18, 'Ambiente 303', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(19, 'Ambiente 304', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
+(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL);
+
+--
+-- Disparadores `t_ambientes`
+--
+DELIMITER $$
+CREATE TRIGGER `borrarAmbiente` BEFORE DELETE ON `t_ambientes` FOR EACH ROW BEGIN
+    DELETE FROM t_infraestructura WHERE id_ambiente = OLD.id_ambiente;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaAmbiente` AFTER INSERT ON `t_ambientes` FOR EACH ROW BEGIN
+    INSERT INTO t_infraestructura (Id_ambiente)
+    VALUES
+    (NEW.id_ambiente);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionAmbientes` AFTER UPDATE ON `t_ambientes` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('El ',NEW.Nombre, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -106,11 +125,602 @@ INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Computadores`, `Tv`, `Silla
 
 CREATE TABLE `t_computadores` (
   `Id_computador` int(50) NOT NULL,
-  `Hardware` tinyint(1) NOT NULL,
-  `Software` tinyint(1) NOT NULL,
-  `Observacion` varchar(500) DEFAULT NULL,
-  `Id_ambiente` int(50) NOT NULL
+  `Tipo` enum('Laptop','Desktop') NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `Modelo` varchar(100) NOT NULL,
+  `Serial` varchar(100) NOT NULL,
+  `PlacaInventario` varchar(100) NOT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `CheckPc` tinyint(1) NOT NULL DEFAULT 1,
+  `Hardware` tinyint(1) NOT NULL DEFAULT 1,
+  `Software` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_computadores`
+--
+
+INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Serial`, `PlacaInventario`, `Id_ambiente`, `CheckPc`, `Hardware`, `Software`, `Observaciones`) VALUES
+(1, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MTL', '9216108660', 1, 0, 1, 1, 'El computador no enciende'),
+(2, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5M', '9216108724', 1, 1, 1, 1, ''),
+(3, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '33PYS13', '9216108838', 2, 1, 1, 1, NULL),
+(4, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '373WS13', '9216109087', 2, 1, 1, 1, NULL),
+(5, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65GWS13', '9216108934', 2, 1, 1, 1, NULL),
+(6, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65QWS13', '9216109069', 2, 1, 1, 1, NULL),
+(7, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65QZS13', '9216109066', 2, 1, 1, 1, NULL),
+(8, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '696ZS13', '9216109354', 2, 1, 1, 1, NULL),
+(9, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '69RRS13', '9216108820', 2, 1, 1, 1, NULL),
+(10, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '83HTS13', '9216109228', 2, 1, 1, 1, NULL),
+(11, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '856TS13', '9216109102', 2, 1, 1, 1, NULL),
+(12, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '859VS13', '9216108796', 2, 1, 1, 1, NULL),
+(13, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85MYS13', '9216109351', 2, 1, 1, 1, NULL),
+(14, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85N0T13', '9216108814', 2, 1, 1, 1, NULL),
+(15, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85YRS13', '9216108844', 2, 1, 1, 1, NULL),
+(16, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85ZXS13', '9216108829', 2, 1, 1, 1, NULL),
+(17, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86DYS13', '9216109042', 2, 1, 1, 1, NULL),
+(18, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86NTS13', '9216108994', 2, 1, 1, 1, NULL),
+(19, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86T0T13', '9216109111', 2, 1, 1, 1, NULL),
+(20, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '66MVS13', '9216108940', 3, 1, 1, 1, NULL),
+(21, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65QSS13', '9216109072', 3, 1, 1, 1, NULL),
+(22, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '857YS13', '9216109093', 3, 1, 1, 1, NULL),
+(23, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65NSS13', '9216109084', 4, 1, 1, 1, NULL),
+(24, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860K6', '9216109674', 4, 1, 1, 1, NULL),
+(25, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860PB', '9216109688', 4, 1, 1, 1, NULL),
+(26, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860N3', '9216109689', 4, 1, 1, 1, NULL),
+(27, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860QB', '9216109734', 4, 1, 1, 1, NULL),
+(28, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860P6', '9216109755', 4, 1, 1, 1, NULL),
+(29, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BL5', '9216109760', 4, 1, 1, 1, NULL),
+(30, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BHB', '9216109761', 4, 1, 1, 1, NULL),
+(31, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485B8X', '9216109786', 4, 1, 1, 1, NULL),
+(32, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJB', '9216109787', 4, 1, 1, 1, NULL),
+(33, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BGL', '9216109788', 4, 1, 1, 1, NULL),
+(34, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BL6', '9216109791', 4, 1, 1, 1, NULL),
+(35, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860N7', '9216109794', 4, 1, 1, 1, NULL),
+(36, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BLP', '9216109798', 4, 1, 1, 1, NULL),
+(37, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BLN', '9216109802', 4, 1, 1, 1, NULL),
+(38, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860ST', '9216109853', 4, 1, 1, 1, NULL),
+(39, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86H1T13', '9216109330', 5, 1, 1, 1, NULL),
+(40, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860FP', '9216109665', 5, 1, 1, 1, NULL),
+(41, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860J4', '9216109667', 5, 1, 1, 1, NULL),
+(42, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LB', '9216109673', 5, 1, 1, 1, NULL),
+(43, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JG', '9216109676', 5, 1, 1, 1, NULL),
+(44, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LW', '9216109687', 5, 1, 1, 1, NULL),
+(45, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BL9', '9216109745', 5, 1, 1, 1, NULL),
+(46, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BKW', '9216109751', 5, 1, 1, 1, NULL),
+(47, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BLF', '9216109757', 5, 1, 1, 1, NULL),
+(48, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860VQ', '9216109759', 5, 1, 1, 1, NULL),
+(49, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860NY', '9216109766', 5, 1, 1, 1, NULL),
+(50, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485B5W', '9216109785', 5, 1, 1, 1, NULL),
+(51, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860RN', '9216109811', 5, 1, 1, 1, NULL),
+(52, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860SP', '9216109819', 5, 1, 1, 1, NULL),
+(53, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860Q0', '9216109820', 5, 1, 1, 1, NULL),
+(54, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860NQ', '9216109821', 5, 1, 1, 1, NULL),
+(55, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860RB', '9216109825', 5, 1, 1, 1, NULL),
+(56, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BL1', '9216109844', 5, 1, 1, 1, NULL),
+(57, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BL3', '9216109845', 5, 1, 1, 1, NULL),
+(58, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86LVS13', '9216109258', 6, 1, 1, 1, NULL),
+(59, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850SS13', '9216109294', 6, 1, 1, 1, NULL),
+(60, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LN', '9216109664', 6, 1, 1, 1, NULL),
+(61, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862B7', '9216109684', 6, 1, 1, 1, NULL),
+(62, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JS', '9216109699', 6, 1, 1, 1, NULL),
+(63, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JF', '9216109707', 6, 1, 1, 1, NULL),
+(64, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JV', '9216109717', 6, 1, 1, 1, NULL),
+(65, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860J5', '9216109737', 6, 1, 1, 1, NULL),
+(66, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JX', '9216109738', 6, 1, 1, 1, NULL),
+(67, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948627Y', '9216109741', 6, 1, 1, 1, NULL),
+(68, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BDC', '9216109765', 6, 1, 1, 1, NULL),
+(69, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9486059', '9216109771', 6, 1, 1, 1, NULL),
+(70, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BLM', '9216109789', 6, 1, 1, 1, NULL),
+(71, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860RY', '9216109823', 6, 1, 1, 1, NULL),
+(72, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BBV', '9216109849', 6, 1, 1, 1, NULL),
+(73, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '33KWS13', '9216108871', 7, 1, 1, 1, NULL),
+(74, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4GFWS13', '9216108913', 7, 1, 1, 1, NULL),
+(75, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65GVS13', '9216108928', 7, 1, 1, 1, NULL),
+(76, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '68WWS13', '9216108778', 7, 1, 1, 1, NULL),
+(77, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '6971T13', '9216108772', 7, 1, 1, 1, NULL),
+(78, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '69Q0T13', '9216108868', 7, 1, 1, 1, NULL),
+(79, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '84WZS13', '9216109099', 7, 1, 1, 1, NULL),
+(80, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '856ZS13', '9216109174', 7, 1, 1, 1, NULL),
+(81, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85H1T13', '9216108967', 7, 1, 1, 1, NULL),
+(82, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85QVS13', '9216108832', 7, 1, 1, 1, NULL),
+(83, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85TVS13', '9216108835', 7, 1, 1, 1, NULL),
+(84, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85ZYS13', '9216108856', 7, 1, 1, 1, NULL),
+(85, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8612T13', '9216108847', 7, 1, 1, 1, NULL),
+(86, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86DXS13', '9216109039', 7, 1, 1, 1, NULL),
+(87, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86JZS13', '9216109054', 7, 1, 1, 1, NULL),
+(88, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86T1T13', '9216109114', 7, 1, 1, 1, NULL),
+(89, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '87F0T13', '9216108853', 7, 1, 1, 1, NULL),
+(90, 'Desktop', 'DELL', 'AIO OPTIPLEX 7471', '65QXS13', '9216109078', 8, 1, 1, 1, NULL),
+(91, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '6981T13', '9216108811', 9, 1, 1, 1, NULL),
+(92, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JN', '9216109669', 9, 1, 1, 1, NULL),
+(93, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JC', '9216109670', 9, 1, 1, 1, NULL),
+(94, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JW', '9216109671', 9, 1, 1, 1, NULL),
+(95, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948629L', '9216109679', 9, 1, 1, 1, NULL),
+(96, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948629T', '9216109682', 9, 1, 1, 1, NULL),
+(97, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948629H', '9216109683', 9, 1, 1, 1, NULL),
+(98, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860MP', '9216109724', 9, 1, 1, 1, NULL),
+(99, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860MX', '9216109725', 9, 1, 1, 1, NULL),
+(100, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860NC', '9216109729', 9, 1, 1, 1, NULL),
+(101, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860R2', '9216109740', 9, 1, 1, 1, NULL),
+(102, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94861L4', '9216109742', 9, 1, 1, 1, NULL),
+(103, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJP', '9216109743', 9, 1, 1, 1, NULL),
+(104, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BKV', '9216109758', 9, 1, 1, 1, NULL),
+(105, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860PY', '9216109768', 9, 1, 1, 1, NULL),
+(106, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJ5', '9216109797', 9, 1, 1, 1, NULL),
+(107, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BCM', '9216109805', 9, 1, 1, 1, NULL),
+(108, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BGR', '9216109806', 9, 1, 1, 1, NULL),
+(109, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860RP', '9216109818', 9, 1, 1, 1, NULL),
+(110, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860R5', '9216109836', 9, 1, 1, 1, NULL),
+(111, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BHD', '9216109839', 9, 1, 1, 1, NULL),
+(112, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '340ZS13', '9216108916', 10, 1, 1, 1, NULL),
+(113, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '354TS13', '9216108898', 10, 1, 1, 1, NULL),
+(114, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4G4XS13', '9216108874', 10, 1, 1, 1, NULL),
+(115, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4GFVS13', '9216108877', 10, 1, 1, 1, NULL),
+(116, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65KVS13', '9216108931', 10, 1, 1, 1, NULL),
+(117, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65SRS13', '9216109063', 10, 1, 1, 1, NULL),
+(118, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '698WS13', '9216109363', 10, 1, 1, 1, NULL),
+(119, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85N1T13', '9216108823', 10, 1, 1, 1, NULL),
+(120, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85QTS13', '9216108808', 10, 1, 1, 1, NULL),
+(121, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85TZS13', '9216108910', 10, 1, 1, 1, NULL),
+(122, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '860WS13', '9216108901', 10, 1, 1, 1, NULL),
+(123, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8610T13', '9216108886', 10, 1, 1, 1, NULL),
+(124, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '869WS13', '9216109351', 10, 1, 1, 1, NULL),
+(125, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86FYS13', '9216109048', 10, 1, 1, 1, NULL),
+(126, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86GTS13', '9216109051', 10, 1, 1, 1, NULL),
+(127, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86GVS13', '9216109033', 10, 1, 1, 1, NULL),
+(128, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86NXS13', '9216109369', 10, 1, 1, 1, NULL),
+(129, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86QXS13', '9216109108', 10, 1, 1, 1, NULL),
+(130, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86RRS13', '9216109117', 10, 1, 1, 1, NULL),
+(131, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '872ZS13', '9216108976', 10, 1, 1, 1, NULL),
+(132, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '874VS13', '9216109312', 10, 1, 1, 1, NULL),
+(133, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65T1T13', '9216109060', 11, 1, 1, 1, NULL),
+(134, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '666SS13', '9216109156', 11, 1, 1, 1, NULL),
+(135, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '84MTS13', '9216109324', 11, 1, 1, 1, NULL),
+(136, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '868YS13', '9216109366', 11, 1, 1, 1, NULL),
+(137, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86DWS13', '9216109090', 11, 1, 1, 1, NULL),
+(138, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86GRS13', '9216109207', 11, 1, 1, 1, NULL),
+(139, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '874ZS13', '9216109261', 11, 1, 1, 1, NULL),
+(140, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '87D1T13', '9216109321', 11, 1, 1, 1, NULL),
+(141, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '87DYS13', '9216109339', 11, 1, 1, 1, NULL),
+(142, 'Desktop', 'DELL', 'AIO OPTIPLEX 7474', '84PTS13', '9216109105', 11, 1, 1, 1, NULL),
+(143, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860P9', '9216109666', 11, 1, 1, 1, NULL),
+(144, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948629C', '9216109680', 11, 1, 1, 1, NULL),
+(145, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860L0', '9216109697', 11, 1, 1, 1, NULL),
+(146, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860DF', '9216109698', 11, 1, 1, 1, NULL),
+(147, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860K1', '9216109706', 11, 1, 1, 1, NULL),
+(148, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862BQ', '9216109723', 11, 1, 1, 1, NULL),
+(149, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860Q7', '9216109730', 11, 1, 1, 1, NULL),
+(150, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860RH', '9216109731', 11, 1, 1, 1, NULL),
+(151, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BLG', '9216109746', 11, 1, 1, 1, NULL),
+(152, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BLQ', '9216109749', 11, 1, 1, 1, NULL),
+(153, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BKD', '9216109754', 11, 1, 1, 1, NULL),
+(154, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862FT', '9216109773', 11, 1, 1, 1, NULL),
+(155, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JP', '9216109779', 11, 1, 1, 1, NULL),
+(156, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860P4', '9216109783', 11, 1, 1, 1, NULL),
+(157, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJQ', '9216109803', 11, 1, 1, 1, NULL),
+(158, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BL2', '9216109804', 11, 1, 1, 1, NULL),
+(159, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BBX', '9216109834', 11, 1, 1, 1, NULL),
+(160, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJH', '9216109841', 11, 1, 1, 1, NULL),
+(161, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LT', '9216109857', 11, 1, 1, 1, NULL),
+(162, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862Q8', '9216109862', 11, 1, 1, 1, NULL),
+(163, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MC1', '9216108636', 12, 1, 1, 1, NULL),
+(164, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MD5', '9216108640', 12, 1, 1, 1, NULL),
+(165, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MF9', '9216108644', 12, 1, 1, 1, NULL),
+(166, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MMW', '9216108652', 12, 1, 1, 1, NULL),
+(167, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MPD', '9216108656', 12, 1, 1, 1, NULL),
+(168, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MW6', '9216108668', 12, 1, 1, 1, NULL),
+(169, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MZF', '9216108684', 12, 1, 1, 1, NULL),
+(170, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MZG', '9216108688', 12, 1, 1, 1, NULL),
+(171, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MZR', '9216108692', 12, 1, 1, 1, NULL),
+(172, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493NB9', '9216108696', 12, 1, 1, 1, NULL),
+(173, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493ND6', '9216108704', 12, 1, 1, 1, NULL),
+(174, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T32', '9216108708', 12, 1, 1, 1, NULL),
+(175, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T4X', '9216108712', 12, 1, 1, 1, NULL),
+(176, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T56', '9216108716', 12, 1, 1, 1, NULL),
+(177, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5B', '9216108720', 12, 1, 1, 1, NULL),
+(178, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5Q', '9216108728', 12, 1, 1, 1, NULL),
+(179, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493TS0', '9216108752', 12, 1, 1, 1, NULL),
+(180, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493TS5', '9216108756', 12, 1, 1, 1, NULL),
+(181, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860K3', '9216109675', 13, 1, 1, 1, NULL),
+(182, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948629Z', '9216109663', 14, 1, 1, 1, NULL),
+(183, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862FW', '9216109692', 14, 1, 1, 1, NULL),
+(184, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LR', '9216109715', 14, 1, 1, 1, NULL),
+(185, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860QG', '9216109769', 14, 1, 1, 1, NULL),
+(186, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94858KN', '9216109808', 14, 1, 1, 1, NULL),
+(187, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BHM', '9216109810', 14, 1, 1, 1, NULL),
+(188, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860S6', '9216109824', 14, 1, 1, 1, NULL),
+(189, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860P0', '9216109832', 14, 1, 1, 1, NULL),
+(190, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJJ', '9216109840', 14, 1, 1, 1, NULL),
+(191, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860S0', '9216109854', 14, 1, 1, 1, NULL),
+(192, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862Q4', '9216109696', 14, 1, 1, 1, NULL),
+(193, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860K4', '9216109678', 14, 1, 1, 1, NULL),
+(194, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860KS', '9216109695', 14, 1, 1, 1, NULL),
+(195, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948629B', '9216109704', 14, 1, 1, 1, NULL),
+(196, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860PQ', '9216109726', 14, 1, 1, 1, NULL),
+(197, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860L1', '9216109781', 14, 1, 1, 1, NULL),
+(198, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860ND', '9216109782', 14, 1, 1, 1, NULL),
+(199, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860MZ', '9216109784', 14, 1, 1, 1, NULL),
+(200, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860KP', '9216109855', 14, 1, 1, 1, NULL),
+(201, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862B3', '9216109856', 14, 1, 1, 1, NULL),
+(202, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LY', '9216109668', 15, 1, 1, 1, NULL),
+(203, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860MB', '9216109685', 15, 1, 1, 1, NULL),
+(204, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LS', '9216109702', 15, 1, 1, 1, NULL),
+(205, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860MN', '9216109705', 15, 1, 1, 1, NULL),
+(206, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9486242', '9216109709', 15, 1, 1, 1, NULL),
+(207, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860K7', '9216109711', 15, 1, 1, 1, NULL),
+(208, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860JQ', '9216109713', 15, 1, 1, 1, NULL),
+(209, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LK', '9216109721', 15, 1, 1, 1, NULL),
+(210, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', 'BCD9485BKL', '9216109762', 15, 1, 1, 1, NULL),
+(211, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BG8', '9216109828', 15, 1, 1, 1, NULL),
+(212, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860QP', '9216109833', 15, 1, 1, 1, NULL),
+(213, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860J9', '9216109708', 15, 1, 1, 1, NULL),
+(214, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860KG', '9216109722', 15, 1, 1, 1, NULL),
+(215, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860PG', '9216109728', 15, 1, 1, 1, NULL),
+(216, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BK4', '9216109846', 15, 1, 1, 1, NULL),
+(217, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860SW', '9216109777', 15, 1, 1, 1, NULL),
+(218, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9486247', '9216109710', 15, 1, 1, 1, NULL),
+(219, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD948628L', '9216109691', 15, 1, 1, 1, NULL),
+(220, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860R8', '9216109693', 15, 1, 1, 1, NULL),
+(221, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '33NWS13', '9216108892', 16, 1, 1, 1, NULL),
+(222, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '34XZS13', '9216108889', 16, 1, 1, 1, NULL),
+(223, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '374YS13', '9216108784', 16, 1, 1, 1, NULL),
+(224, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '37WZS13', '9216109204', 16, 1, 1, 1, NULL),
+(225, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65RYS13', '9216109057', 16, 1, 1, 1, NULL),
+(226, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65RZS13', '9216109081', 16, 1, 1, 1, NULL),
+(227, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '857ZS13', '9216109288', 16, 1, 1, 1, NULL),
+(228, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85XXS13', '9216108850', 16, 1, 1, 1, NULL),
+(229, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '860YS13', '9216108907', 16, 1, 1, 1, NULL),
+(230, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8661T13', '9216109249', 16, 1, 1, 1, NULL),
+(231, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8670T13', '9216108979', 16, 1, 1, 1, NULL),
+(232, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8681T13', '9216109342', 16, 1, 1, 1, NULL),
+(233, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86KTS13', '9216109273', 16, 1, 1, 1, NULL),
+(234, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86P1T13', '9216109237', 16, 1, 1, 1, NULL),
+(235, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86PXS13', '9216109336', 16, 1, 1, 1, NULL),
+(236, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86RTS13', '9216109147', 16, 1, 1, 1, NULL),
+(237, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86TTS13', '9216109297', 16, 1, 1, 1, NULL),
+(238, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '878XS13', '9216108988', 16, 1, 1, 1, NULL),
+(239, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '87D0T13', '9216109300', 16, 1, 1, 1, NULL),
+(240, 'Desktop', 'DELL', 'AIO OPTIPLEX 7473', '84MXS13', '9216109333', 16, 1, 1, 1, NULL),
+(241, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '656SS13', '9216109138', 16, 1, 1, 1, NULL),
+(242, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65DYS13', '9216108943', 16, 1, 1, 1, NULL),
+(243, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4GVRS13', '9216108883', 17, 1, 1, 1, NULL),
+(244, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '665ZS13', '9216109198', 17, 1, 1, 1, NULL),
+(245, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '69QXS13', '9216108859', 17, 1, 1, 1, NULL),
+(246, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '84PRS13', '9216109096', 17, 1, 1, 1, NULL),
+(247, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8512T13', '9216109282', 17, 1, 1, 1, NULL),
+(248, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '858YS13', '9216109192', 17, 1, 1, 1, NULL),
+(249, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85PRS13', '9216108790', 17, 1, 1, 1, NULL),
+(250, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85TSS13', '9216108826', 17, 1, 1, 1, NULL),
+(251, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85YWS13', '9216108865', 17, 1, 1, 1, NULL),
+(252, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '867ZS13', '9216109345', 17, 1, 1, 1, NULL),
+(253, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '868XS13', '9216109318', 17, 1, 1, 1, NULL),
+(254, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '869SS13', '9216109354', 17, 1, 1, 1, NULL),
+(255, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '869TS13', '9216109357', 17, 1, 1, 1, NULL),
+(256, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '869VS13', '9216109009', 17, 1, 1, 1, NULL),
+(257, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86CVS13', '9216109246', 17, 1, 1, 1, NULL),
+(258, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86JXS13', '9216109234', 17, 1, 1, 1, NULL),
+(259, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86KSS13', '9216109264', 17, 1, 1, 1, NULL),
+(260, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86N1T13', '9216108982', 17, 1, 1, 1, NULL),
+(261, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86NZS13', '9216109360', 17, 1, 1, 1, NULL),
+(262, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86Q1T13', '9216109021', 17, 1, 1, 1, NULL),
+(263, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86SYS13', '9216109213', 17, 1, 1, 1, NULL),
+(264, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '6530T13', '9216108787', 17, 1, 1, 1, NULL),
+(265, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '344XS13', '9216108904', 18, 1, 1, 1, NULL),
+(266, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '346TS13', '9216108961', 18, 1, 1, 1, NULL),
+(267, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '37X0T13', '9216109168', 18, 1, 1, 1, NULL),
+(268, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4G6YS13', '9216108925', 18, 1, 1, 1, NULL),
+(269, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '656XS13', '9216109141', 18, 1, 1, 1, NULL),
+(270, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65CWS13', '9216108937', 18, 1, 1, 1, NULL),
+(271, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65DZS13', '9216108949', 18, 1, 1, 1, NULL),
+(272, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65GRS13', '9216109123', 18, 1, 1, 1, NULL),
+(273, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65HYS13', '9216108919', 18, 1, 1, 1, NULL),
+(274, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '661XS13', '9216109159', 18, 1, 1, 1, NULL),
+(275, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '662YS13', '9216109144', 18, 1, 1, 1, NULL),
+(276, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '665XS13', '9216109165', 18, 1, 1, 1, NULL),
+(277, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '667ZS13', '9216109162', 18, 1, 1, 1, NULL),
+(278, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '6961T13', '9216109171', 18, 1, 1, 1, NULL),
+(279, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '696WS13', '9216109177', 18, 1, 1, 1, NULL),
+(280, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '84MRS13', '9216109120', 18, 1, 1, 1, NULL),
+(281, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850YS13', '9216109150', 18, 1, 1, 1, NULL),
+(282, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '866SS13', '9216109252', 18, 1, 1, 1, NULL),
+(283, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86B0T13', '9216109012', 18, 1, 1, 1, NULL),
+(284, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86MZS13', '9216108985', 18, 1, 1, 1, NULL),
+(285, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86QVS13', '9216108997', 18, 1, 1, 1, NULL),
+(286, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86R1T13', '9216109210', 18, 1, 1, 1, NULL),
+(287, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86VXS13', '9216109186', 18, 1, 1, 1, NULL),
+(288, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86VZS13', '9216109189', 18, 1, 1, 1, NULL),
+(289, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8771T13', '9216109291', 18, 1, 1, 1, NULL),
+(290, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MHM', '9216108536', 19, 1, 1, 1, NULL),
+(291, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MN2', '9216108540', 19, 1, 1, 1, NULL),
+(292, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MV5', '9216108544', 19, 1, 1, 1, NULL),
+(293, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MVQ', '9216108548', 19, 1, 1, 1, NULL),
+(294, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MWN', '9216108552', 19, 1, 1, 1, NULL),
+(295, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MY8', '9216108556', 19, 1, 1, 1, NULL),
+(296, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493N0L', '9216108560', 19, 1, 1, 1, NULL),
+(297, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493NC4', '9216108564', 19, 1, 1, 1, NULL),
+(298, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493NCK', '9216108568', 19, 1, 1, 1, NULL),
+(299, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493ND8', '9216108572', 19, 1, 1, 1, NULL),
+(300, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493NF8', '9216108576', 19, 1, 1, 1, NULL),
+(301, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493NFQ', '9216108580', 19, 1, 1, 1, NULL),
+(302, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493NHD', '9216108584', 19, 1, 1, 1, NULL),
+(303, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T25', '9216108588', 19, 1, 1, 1, NULL),
+(304, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T3Q', '9216108592', 19, 1, 1, 1, NULL),
+(305, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T59', '9216108596', 19, 1, 1, 1, NULL),
+(306, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5V', '9216108600', 19, 1, 1, 1, NULL),
+(307, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T6N', '9216108604', 19, 1, 1, 1, NULL),
+(308, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T6X', '9216108608', 19, 1, 1, 1, NULL),
+(309, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493TPL', '9216108612', 19, 1, 1, 1, NULL),
+(310, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493TRK', '9216108616', 19, 1, 1, 1, NULL),
+(311, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493TSY', '9216108620', 19, 1, 1, 1, NULL),
+(312, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493TW8', '9216108624', 19, 1, 1, 1, NULL),
+(313, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9494B3J', '9216108628', 19, 1, 1, 1, NULL),
+(314, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493M9G', '9216108532', 19, 1, 1, 1, NULL),
+(315, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4G4ZS13', '9216108895', 20, 1, 1, 1, NULL),
+(316, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4GRSS13', '9216108880', 20, 1, 1, 1, NULL),
+(317, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '6551T13', '9216108922', 20, 1, 1, 1, NULL),
+(318, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '83HZS13', '9216109225', 20, 1, 1, 1, NULL),
+(319, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '84KXS13', '9216108781', 20, 1, 1, 1, NULL),
+(320, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8510T13', '9216109135', 20, 1, 1, 1, NULL),
+(321, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85RRS13', '9216108862', 20, 1, 1, 1, NULL),
+(322, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86DZS13', '9216109045', 20, 1, 1, 1, NULL),
+(323, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86FXS13', '9216109036', 20, 1, 1, 1, NULL),
+(324, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '871TS13', '9216109243', 20, 1, 1, 1, NULL),
+(325, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '37XSS13', '9216108775', 20, 1, 1, 1, NULL),
+(326, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '656VS13', '9216108946', 20, 1, 1, 1, NULL),
+(327, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '84M1T13', '9216109153', 20, 1, 1, 1, NULL),
+(328, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8581T13', '9216109309', 20, 1, 1, 1, NULL),
+(329, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85H0T13', '9216108958', 20, 1, 1, 1, NULL),
+(330, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85JWS13', '9216108964', 20, 1, 1, 1, NULL),
+(331, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85KYS13', '9216109018', 20, 1, 1, 1, NULL),
+(332, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85LVS13', '9216109327', 20, 1, 1, 1, NULL),
+(333, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '85LXS13', '9216108805', 20, 1, 1, 1, NULL),
+(334, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '8630T13', '9216109015', 20, 1, 1, 1, NULL),
+(335, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '869ZS13', '9216109348', 20, 1, 1, 1, NULL),
+(336, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86L0T13', '9216109240', 20, 1, 1, 1, NULL),
+(337, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86WSS13', '9216109201', 20, 1, 1, 1, NULL),
+(338, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '879SS13', '9216109303', 20, 1, 1, 1, NULL),
+(339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL);
+
+--
+-- Disparadores `t_computadores`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizaComputador` AFTER UPDATE ON `t_computadores` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Computadores = (
+    SELECT COUNT(*)
+    FROM t_computadores AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminaComputador` AFTER DELETE ON `t_computadores` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Computadores = (
+    SELECT COUNT(*)
+    FROM t_computadores AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaComputador` AFTER INSERT ON `t_computadores` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Computadores = (
+    SELECT COUNT(*)
+    FROM t_computadores AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionComputador` AFTER UPDATE ON `t_computadores` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('En el ', nombreAmbiente,'; El computador con número de serie ', NEW.Serial, ' y Placa de Inventario ', NEW.PlacaInventario, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_infraestructura`
+--
+
+CREATE TABLE `t_infraestructura` (
+  `Id_infraestructura` int(50) NOT NULL,
+  `Id_ambiente` int(50) NOT NULL,
+  `CheckPisos` tinyint(1) NOT NULL DEFAULT 1,
+  `CheckTechos` tinyint(1) NOT NULL DEFAULT 1,
+  `CheckParedes` tinyint(1) NOT NULL DEFAULT 1,
+  `CheckVentaneria` tinyint(1) NOT NULL DEFAULT 1,
+  `CheckLuz` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_infraestructura`
+--
+
+INSERT INTO `t_infraestructura` (`Id_infraestructura`, `Id_ambiente`, `CheckPisos`, `CheckTechos`, `CheckParedes`, `CheckVentaneria`, `CheckLuz`, `Observaciones`) VALUES
+(1, 1, 1, 1, 1, 1, 1, NULL),
+(2, 2, 1, 1, 1, 1, 1, NULL),
+(3, 3, 1, 1, 1, 1, 1, NULL),
+(4, 4, 1, 1, 1, 1, 1, NULL),
+(5, 5, 1, 1, 1, 1, 1, NULL),
+(6, 6, 1, 1, 1, 1, 1, NULL),
+(7, 7, 1, 1, 1, 1, 1, NULL),
+(8, 8, 1, 1, 1, 1, 1, NULL),
+(9, 9, 1, 1, 1, 1, 1, NULL),
+(10, 10, 1, 1, 1, 1, 1, NULL),
+(11, 11, 1, 1, 1, 1, 1, NULL),
+(12, 12, 1, 1, 1, 1, 1, NULL),
+(13, 13, 1, 1, 1, 1, 1, NULL),
+(14, 14, 1, 1, 1, 1, 1, NULL),
+(15, 15, 1, 1, 1, 1, 1, NULL),
+(16, 16, 1, 1, 1, 1, 1, NULL),
+(17, 17, 1, 1, 1, 1, 1, NULL),
+(18, 18, 1, 1, 1, 1, 1, NULL),
+(19, 19, 1, 1, 1, 1, 1, NULL),
+(20, 20, 1, 1, 1, 1, 1, NULL);
+
+--
+-- Disparadores `t_infraestructura`
+--
+DELIMITER $$
+CREATE TRIGGER `observacionInfraestructura` AFTER UPDATE ON `t_infraestructura` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('La Infraestructura del ', nombreAmbiente, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_mesas`
+--
+
+CREATE TABLE `t_mesas` (
+  `Id_mesa` int(50) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `PlacaInventario` varchar(100) NOT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `CheckMesa` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Disparadores `t_mesas`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizaMesa` AFTER UPDATE ON `t_mesas` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Mesas = (
+    SELECT COUNT(*)
+    FROM t_mesas AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminaMesa` AFTER DELETE ON `t_mesas` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Mesas = (
+    SELECT COUNT(*)
+    FROM t_mesas AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaMesa` AFTER INSERT ON `t_mesas` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Mesas = (
+    SELECT COUNT(*)
+    FROM t_mesas AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionMesa` AFTER UPDATE ON `t_mesas` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('En el ', nombreAmbiente,'; La Mesa con Placa de Inventario ', NEW.PlacaInventario, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_nineras`
+--
+
+CREATE TABLE `t_nineras` (
+  `Id_ninera` int(50) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `PlacaInventario` varchar(100) NOT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `CheckNinera` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Disparadores `t_nineras`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizaNinera` AFTER UPDATE ON `t_nineras` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Nineras = (
+    SELECT COUNT(*)
+    FROM t_nineras AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminaNinera` AFTER DELETE ON `t_nineras` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Nineras = (
+    SELECT COUNT(*)
+    FROM t_nineras AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaNinera` AFTER INSERT ON `t_nineras` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Nineras = (
+    SELECT COUNT(*)
+    FROM t_nineras AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionNinera` AFTER UPDATE ON `t_nineras` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('En el ', nombreAmbiente,'; La Niñera con Placa de Inventario ', NEW.PlacaInventario, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -121,11 +731,219 @@ CREATE TABLE `t_computadores` (
 CREATE TABLE `t_reportes` (
   `Id_reporte` int(50) NOT NULL,
   `FechaHora` datetime NOT NULL,
-  `Id_usuario` int(50) NOT NULL,
-  `Id_ambiente` int(50) NOT NULL,
-  `Estado` tinyint(1) NOT NULL,
+  `Id_usuario` int(50) DEFAULT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `Estado` tinyint(1) DEFAULT NULL,
   `Observaciones` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_reportes`
+--
+
+INSERT INTO `t_reportes` (`Id_reporte`, `FechaHora`, `Id_usuario`, `Id_ambiente`, `Estado`, `Observaciones`) VALUES
+(80, '2024-05-13 18:59:08', NULL, NULL, NULL, 'El Biblioteca: El ambiente se encontraba desordenado y sucio'),
+(81, '2024-05-13 19:00:25', NULL, NULL, NULL, 'El Biblioteca: Se requiere instalación de xampp en los equipos'),
+(82, '2024-05-13 19:01:25', NULL, NULL, NULL, 'En el Biblioteca; El computador con número de serie MXL9493MTL y Placa de Inventario 9216108660: El computador no enciende'),
+(83, '2024-05-13 19:02:35', NULL, NULL, NULL, 'La Infraestructura del Biblioteca: El ambiente presenta goteras'),
+(84, '2024-05-13 19:03:28', NULL, NULL, NULL, 'En el Biblioteca; La Silla con Placa de Inventario Silla01: La silla se desoldó');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_sillas`
+--
+
+CREATE TABLE `t_sillas` (
+  `Id_silla` int(50) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `PlacaInventario` varchar(100) NOT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `CheckSilla` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Disparadores `t_sillas`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizaSilla` AFTER UPDATE ON `t_sillas` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Sillas = (
+        SELECT COUNT(*)
+        FROM t_sillas AS t
+        WHERE a.Id_ambiente = t.Id_ambiente);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminaSilla` AFTER DELETE ON `t_sillas` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Sillas = (
+    SELECT COUNT(*)
+    FROM t_sillas AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaSilla` AFTER INSERT ON `t_sillas` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Sillas = (
+    SELECT COUNT(*)
+    FROM t_sillas AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionSilla` AFTER UPDATE ON `t_sillas` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+        SET nuevaObservacion = CONCAT('En el ', nombreAmbiente,'; La Silla con Placa de Inventario ', NEW.PlacaInventario, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_tableros`
+--
+
+CREATE TABLE `t_tableros` (
+  `Id_tablero` int(50) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `PlacaInventario` varchar(100) NOT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `CheckTablero` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Disparadores `t_tableros`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizaTablero` AFTER UPDATE ON `t_tableros` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Tableros = (
+    SELECT COUNT(*)
+    FROM t_tableros AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminaTablero` AFTER DELETE ON `t_tableros` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Tableros = (
+    SELECT COUNT(*)
+    FROM t_tableros AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaTablero` AFTER INSERT ON `t_tableros` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Tableros = (
+    SELECT COUNT(*)
+    FROM t_tableros AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionTablero` AFTER UPDATE ON `t_tableros` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('En el ', nombreAmbiente,'; El Tablero con Placa de Inventario ', NEW.PlacaInventario, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_televisores`
+--
+
+CREATE TABLE `t_televisores` (
+  `Id_televisor` int(50) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `Modelo` varchar(100) NOT NULL,
+  `Serial` varchar(100) NOT NULL,
+  `PlacaInventario` varchar(100) NOT NULL,
+  `Id_ambiente` int(50) DEFAULT NULL,
+  `CheckTv` tinyint(1) NOT NULL DEFAULT 1,
+  `Observaciones` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Disparadores `t_televisores`
+--
+DELIMITER $$
+CREATE TRIGGER `actualizaTelevisor` AFTER UPDATE ON `t_televisores` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Tvs = (
+    SELECT COUNT(*)
+    FROM t_televisores AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `eliminaTelevisor` AFTER DELETE ON `t_televisores` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Tvs = (
+    SELECT COUNT(*)
+    FROM t_televisores AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `insertaTelevisor` AFTER INSERT ON `t_televisores` FOR EACH ROW BEGIN
+    UPDATE t_ambientes AS a
+    SET a.Tvs = (
+    SELECT COUNT(*)
+    FROM t_televisores AS t
+    WHERE a.Id_ambiente = t.Id_ambiente
+);
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `observacionTelevisor` AFTER UPDATE ON `t_televisores` FOR EACH ROW BEGIN
+    DECLARE nuevaObservacion VARCHAR(500);
+    DECLARE nombreAmbiente VARCHAR(100);
+    SELECT Nombre INTO nombreAmbiente FROM t_ambientes WHERE Id_ambiente = NEW.Id_ambiente;
+    IF (NEW.Observaciones IS NOT NULL AND (OLD.Observaciones != NEW.Observaciones OR OLD.Observaciones is NULL)) THEN
+        SET nuevaObservacion = CONCAT('En el ', nombreAmbiente,'; El Televisor con Número de Serie ', NEW.Serial, ' y Placa de Inventario ', NEW.PlacaInventario, ': ', NEW.Observaciones);
+        INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Observaciones)
+        VALUES (NOW(), NULL, NEW.Id_ambiente, nuevaObservacion);
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -135,65 +953,20 @@ CREATE TABLE `t_reportes` (
 
 CREATE TABLE `t_usuarios` (
   `Id_usuario` int(50) NOT NULL,
-  `Nombres` varchar(250) NOT NULL,
-  `Apellidos` varchar(250) NOT NULL,
-  `Correo` varchar(250) NOT NULL,
+  `Nombres` varchar(100) NOT NULL,
+  `Apellidos` varchar(100) NOT NULL,
   `Clave` int(50) NOT NULL,
-  `Rol` varchar(25) NOT NULL
+  `Rol` enum('Coordinador','Asistente','Instructor') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `t_usuarios`
 --
 
-INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Correo`, `Clave`, `Rol`) VALUES
-(1, 'Daniel', 'Buitrago', 'buitrago@gmail.com', 1234, 'Usuario'),
-(2, 'Juan', 'Martinez', 'juan@example.com', 1234, 'Administrador'),
-(3, 'Maria', 'Gonzalez', 'maria@example.com', 6543, 'Usuario'),
-(4, 'Carlos', 'Lopez', 'carlos@example.com', 9876, 'Usuario'),
-(5, 'Laura', 'Perez', 'laura@example.com', 4567, 'Administrador'),
-(6, 'Pedro', 'Sanchez', 'pedro@example.com', 3216, 'Usuario'),
-(7, 'Ana', 'Rodriguez', 'ana@example.com', 7891, 'Usuario'),
-(8, 'Luis', 'Fernandez', 'luis@example.com', 1593, 'Administrador'),
-(9, 'Elena', 'Garcia', 'elena@example.com', 8529, 'Usuario'),
-(10, 'Sergio', 'Martinez', 'sergio@example.com', 3698, 'Usuario'),
-(11, 'Monica', 'Diaz', 'monica@example.com', 1472, 'Administrador'),
-(12, 'Roberto', 'Alvarez', 'roberto@example.com', 2583, 'Usuario'),
-(13, 'Carmen', 'Romero', 'carmen@example.com', 9638, 'Usuario'),
-(14, 'Daniel', 'Jimenez', 'daniel@example.com', 6547, 'Administrador'),
-(15, 'Sara', 'Moreno', 'sara@example.com', 1237, 'Usuario'),
-(16, 'Pablo', 'Hernandez', 'pablo@example.com', 7896, 'Usuario'),
-(17, 'Eva', 'Torres', 'eva@example.com', 8521, 'Administrador'),
-(18, 'Antonio', 'Ruiz', 'antonio@example.com', 3691, 'Usuario'),
-(19, 'Isabel', 'Gomez', 'isabel@example.com', 1473, 'Usuario'),
-(20, 'Diego', 'Vazquez', 'diego@example.com', 6541, 'Administrador'),
-(21, 'Sonia', 'Serrano', 'sonia@example.com', 3217, 'Usuario'),
-(22, 'Raul', 'Iglesias', 'raul@example.com', 7893, 'Usuario'),
-(23, 'Beatriz', 'Ortega', 'beatriz@example.com', 8523, 'Administrador'),
-(24, 'Marcos', 'Navarro', 'marcos@example.com', 3698, 'Usuario'),
-(25, 'Elena', 'Vidal', 'elena2@example.com', 6547, 'Usuario'),
-(26, 'Javier', 'Molina', 'javier@example.com', 1233, 'Administrador'),
-(27, 'Laura', 'Silva', 'laura2@example.com', 7891, 'Usuario'),
-(28, 'Fernando', 'Gutierrez', 'fernando@example.com', 3216, 'Usuario'),
-(29, 'Lucia', 'Aguilar', 'lucia@example.com', 4567, 'Administrador'),
-(30, 'Adrian', 'Castro', 'adrian@example.com', 9876, 'Usuario'),
-(31, 'Cristina', 'Santos', 'cristina@example.com', 1593, 'Usuario'),
-(32, 'Alejandro', 'Vega', 'alejandro@example.com', 6543, 'Administrador'),
-(33, 'Natalia', 'Blanco', 'natalia@example.com', 8529, 'Usuario'),
-(34, 'Andres', 'Mendez', 'andres@example.com', 3698, 'Usuario'),
-(35, 'Patricia', 'Leon', 'patricia@example.com', 1472, 'Administrador'),
-(36, 'Roberta', 'Cruz', 'roberta@example.com', 2583, 'Usuario'),
-(37, 'Miguel', 'Torres', 'miguel@example.com', 9638, 'Usuario'),
-(38, 'Esther', 'Ramirez', 'esther@example.com', 6547, 'Administrador'),
-(39, 'Jorge', 'Dominguez', 'jorge@example.com', 1237, 'Usuario'),
-(40, 'Gloria', 'Herrera', 'gloria@example.com', 7896, 'Usuario'),
-(41, 'Ivan', 'Castillo', 'ivan@example.com', 8521, 'Administrador'),
-(42, 'Lorena', 'Arias', 'lorena@example.com', 3691, 'Usuario'),
-(43, 'Pilar', 'Montoya', 'pilar@example.com', 1473, 'Usuario'),
-(44, 'Rosa', 'Guerrero', 'rosa@example.com', 6541, 'Administrador'),
-(45, 'Cesar', 'Soto', 'cesar@example.com', 3217, 'Usuario'),
-(46, 'Vanessa', 'Cabrera', 'vanessa@example.com', 7893, 'Usuario'),
-(47, 'Oscar', 'Calvo', 'oscar@example.com', 8523, 'Administrador');
+INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Clave`, `Rol`) VALUES
+(3, 'Juan', 'Preciado', 1234, 'Instructor'),
+(4, 'Marcos', 'Pinto', 9876, 'Coordinador'),
+(5, 'Martha', 'García', 2468, 'Instructor');
 
 --
 -- Índices para tablas volcadas
@@ -213,12 +986,54 @@ ALTER TABLE `t_computadores`
   ADD KEY `FK_computadotes_ambientes` (`Id_ambiente`);
 
 --
+-- Indices de la tabla `t_infraestructura`
+--
+ALTER TABLE `t_infraestructura`
+  ADD PRIMARY KEY (`Id_infraestructura`),
+  ADD UNIQUE KEY `Id_ambiente` (`Id_ambiente`);
+
+--
+-- Indices de la tabla `t_mesas`
+--
+ALTER TABLE `t_mesas`
+  ADD PRIMARY KEY (`Id_mesa`),
+  ADD KEY `FK_mesas_ambientes` (`Id_ambiente`);
+
+--
+-- Indices de la tabla `t_nineras`
+--
+ALTER TABLE `t_nineras`
+  ADD PRIMARY KEY (`Id_ninera`),
+  ADD KEY `FK_nineras_ambientes` (`Id_ambiente`);
+
+--
 -- Indices de la tabla `t_reportes`
 --
 ALTER TABLE `t_reportes`
   ADD PRIMARY KEY (`Id_reporte`),
   ADD KEY `FK_reportes_usuarios` (`Id_usuario`),
-  ADD KEY `Id_ambiente` (`Id_ambiente`);
+  ADD KEY `FK_reportes_ambientes` (`Id_ambiente`);
+
+--
+-- Indices de la tabla `t_sillas`
+--
+ALTER TABLE `t_sillas`
+  ADD PRIMARY KEY (`Id_silla`),
+  ADD KEY `FK_sillas_ambientes` (`Id_ambiente`);
+
+--
+-- Indices de la tabla `t_tableros`
+--
+ALTER TABLE `t_tableros`
+  ADD PRIMARY KEY (`Id_tablero`),
+  ADD KEY `FK_tableros_ambientes` (`Id_ambiente`);
+
+--
+-- Indices de la tabla `t_televisores`
+--
+ALTER TABLE `t_televisores`
+  ADD PRIMARY KEY (`Id_televisor`),
+  ADD KEY `FK_televisores_ambientes` (`Id_ambiente`);
 
 --
 -- Indices de la tabla `t_usuarios`
@@ -234,25 +1049,61 @@ ALTER TABLE `t_usuarios`
 -- AUTO_INCREMENT de la tabla `t_ambientes`
 --
 ALTER TABLE `t_ambientes`
-  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `t_computadores`
 --
 ALTER TABLE `t_computadores`
-  MODIFY `Id_computador` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_computador` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=340;
+
+--
+-- AUTO_INCREMENT de la tabla `t_infraestructura`
+--
+ALTER TABLE `t_infraestructura`
+  MODIFY `Id_infraestructura` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
+-- AUTO_INCREMENT de la tabla `t_mesas`
+--
+ALTER TABLE `t_mesas`
+  MODIFY `Id_mesa` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `t_nineras`
+--
+ALTER TABLE `t_nineras`
+  MODIFY `Id_ninera` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `t_reportes`
 --
 ALTER TABLE `t_reportes`
-  MODIFY `Id_reporte` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_reporte` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+
+--
+-- AUTO_INCREMENT de la tabla `t_sillas`
+--
+ALTER TABLE `t_sillas`
+  MODIFY `Id_silla` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT de la tabla `t_tableros`
+--
+ALTER TABLE `t_tableros`
+  MODIFY `Id_tablero` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `t_televisores`
+--
+ALTER TABLE `t_televisores`
+  MODIFY `Id_televisor` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
-  MODIFY `Id_usuario` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `Id_usuario` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
@@ -265,11 +1116,47 @@ ALTER TABLE `t_computadores`
   ADD CONSTRAINT `FK_computadotes_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
 
 --
+-- Filtros para la tabla `t_infraestructura`
+--
+ALTER TABLE `t_infraestructura`
+  ADD CONSTRAINT `fk_infraestructura_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+
+--
+-- Filtros para la tabla `t_mesas`
+--
+ALTER TABLE `t_mesas`
+  ADD CONSTRAINT `FK_mesas_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+
+--
+-- Filtros para la tabla `t_nineras`
+--
+ALTER TABLE `t_nineras`
+  ADD CONSTRAINT `FK_nineras_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+
+--
 -- Filtros para la tabla `t_reportes`
 --
 ALTER TABLE `t_reportes`
-  ADD CONSTRAINT `FK_reportes_usuarios` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`),
-  ADD CONSTRAINT `t_reportes_ibfk_1` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+  ADD CONSTRAINT `FK_reportes_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`) ON DELETE SET NULL,
+  ADD CONSTRAINT `FK_reportes_usuarios` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`) ON DELETE SET NULL;
+
+--
+-- Filtros para la tabla `t_sillas`
+--
+ALTER TABLE `t_sillas`
+  ADD CONSTRAINT `FK_sillas_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+
+--
+-- Filtros para la tabla `t_tableros`
+--
+ALTER TABLE `t_tableros`
+  ADD CONSTRAINT `FK_tableros_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+
+--
+-- Filtros para la tabla `t_televisores`
+--
+ALTER TABLE `t_televisores`
+  ADD CONSTRAINT `FK_televisores_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

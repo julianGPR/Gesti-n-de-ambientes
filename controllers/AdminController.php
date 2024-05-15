@@ -18,21 +18,29 @@ class AdminController {
     public function createAmbiente() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre = $_POST["nombre"];
+            $torre = $_POST["torre"];
             $computadores = $_POST["computadores"];
-            $tv = $_POST["tv"];
+            $checkPcs = isset($_POST["checkPcs"]) ? 1 : 0;
+            $tvs = $_POST["tvs"];
+            $checkTvs = isset($_POST["checkTvs"]) ? 1 : 0;
             $sillas = $_POST["sillas"];
+            $checkSillas = isset($_POST["checkSillas"]) ? 1 : 0;
             $mesas = $_POST["mesas"];
-            $tablero = $_POST["tablero"];
-            $archivador = $_POST["archivador"];
-            $infraestructura = $_POST["infraestructura"];
-            $observacion = $_POST["observacion"];
+            $checkMesas = isset($_POST["checkMesas"]) ? 1 : 0;
+            $tableros = $_POST["tableros"];
+            $checkTableros = isset($_POST["checkTableros"]) ? 1 : 0;
+            $nineras = $_POST["nineras"];
+            $checkNineras = isset($_POST["checkNineras"]) ? 1 : 0;
+            $checkInfraestructura = isset($_POST["checkInfraestructura"]) ? 1 : 0;
+            $estado = 1; // Por defecto se crea activo
+            $observaciones = $_POST["observaciones"];
 
             $adminModel = new AdminModel();
-            $result = $adminModel->guardarAmbiente($nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
+            $result = $adminModel->guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
 
             if ($result) {
                 // Lógica para generar el contenido del QR
-                $contenido_qr = "Nombre: $nombre\nComputadores: $computadores\nTV: $tv\nSillas: $sillas\nMesas: $mesas\nTablero: $tablero\nArchivador: $archivador\nInfraestructura: $infraestructura\nObservación: $observacion";
+                $contenido_qr = "Nombre: $nombre\nTorre: $torre\nComputadores: $computadores\nTVs: $tvs\nSillas: $sillas\nMesas: $mesas\nTableros: $tableros\nNineras: $nineras\nInfraestructura: $checkInfraestructura\nObservaciones: $observaciones";
 
                 // Lógica para generar el código QR
                 $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr) .'&rand=' . uniqid();
@@ -51,18 +59,26 @@ class AdminController {
     public function updateAmbiente($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre = $_POST["nombre"];
+            $torre = $_POST["torre"];
             $computadores = $_POST["computadores"];
-            $tv = $_POST["tv"];
+            $checkPcs = isset($_POST["checkPcs"]) ? 1 : 0;
+            $tvs = $_POST["tvs"];
+            $checkTvs = isset($_POST["checkTvs"]) ? 1 : 0;
             $sillas = $_POST["sillas"];
+            $checkSillas = isset($_POST["checkSillas"]) ? 1 : 0;
             $mesas = $_POST["mesas"];
-            $tablero = $_POST["tablero"];
-            $archivador = $_POST["archivador"];
-            $infraestructura = $_POST["infraestructura"];
-            $observacion = $_POST["observacion"];
-    
+            $checkMesas = isset($_POST["checkMesas"]) ? 1 : 0;
+            $tableros = $_POST["tableros"];
+            $checkTableros = isset($_POST["checkTableros"]) ? 1 : 0;
+            $nineras = $_POST["nineras"];
+            $checkNineras = isset($_POST["checkNineras"]) ? 1 : 0;
+            $checkInfraestructura = isset($_POST["checkInfraestructura"]) ? 1 : 0;
+            $estado = $_POST["estado"];
+            $observaciones = $_POST["observaciones"];
+
             $adminModel = new AdminModel();
-            $result = $adminModel->modificarAmbiente($id, $nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
-    
+            $result = $adminModel->modificarAmbiente($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
+
             if ($result) {
                 header("Location: ../ambientes");
                 exit();
@@ -104,6 +120,7 @@ class AdminController {
         header("Location: ../ambientes");
         exit();
     }
+
 
     public function createUsuario(){
 
