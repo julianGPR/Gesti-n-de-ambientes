@@ -1,5 +1,42 @@
-/* Estilos generales */
+/* Estilos para el menú desplegable */
+/* Estilos para las opciones del menú */
+.menu-options {
+    display: none;
+    position: absolute;
+    background-color: #fff; /* Color de fondo del menú desplegable */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Sombra del menú desplegable */
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    border-radius: 5%;
+    list-style-type: none;
+    right: 12%; /* Desplazar el menú hacia la derecha */
+    top: calc(25% + 10px); /* Colocar el menú casi debajo de la campana de notificaciones */
+}
 
+
+.menu-options li {
+    padding: 10px 20px; /* Espaciado de las opciones */
+}
+
+.menu-options li a.button-admin {
+    /* Estilos específicos para los enlaces del menú */
+    font-size: 15px;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px; /* Ajusta el espaciado vertical y horizontal */
+}
+/* Mostrar las opciones del menú cuando el menú se despliega */
+.menu-container.active .menu-options {
+    display: block;
+}
+
+/* Cambio de estilo al pasar el mouse sobre los enlaces del menú */
+.menu-options li a.button-admin:hover {
+    color: white; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Estilos generales */
 /* Establecer márgenes y centrar el contenido */
 body {
     margin: 20px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
@@ -13,7 +50,6 @@ body {
 }
 
 /* Estilo del header */
-
 header {
     display: flex;
     flex-direction: column;
@@ -26,7 +62,6 @@ header h1 {
     margin-bottom: 10px;
 }
 
-/* Estilo del logo */
 /* Estilo del logo */
 .logo-container {
     display: flex;
@@ -51,7 +86,6 @@ nav {
     margin-right: auto; /* Centra el nav */
 }
 
-
 nav .filtro {
     margin-right: 20px; /* Espacio entre el filtro y el botón */
 }
@@ -74,11 +108,13 @@ nav ul li a {
     text-decoration: none;
     color: #333;
 }
+
 .datetime {
     display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
     justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor */
     margin-bottom: 0px; /* Ajusta según sea necesario */
 }
+
 .datetime .fecha {
     margin-right: 10px; /* Añade un margen entre la fecha y la hora */
 }
@@ -144,9 +180,11 @@ footer .button:hover {
     justify-content: center;
     gap: 10px;
 }
+
 .button-admin:first-child {
     order: -1; /* Coloca el primer botón al principio del orden de visualización */
 }
+
 .button-admin {
     background-color: #66BB6A;
     color: white;
@@ -156,6 +194,7 @@ footer .button:hover {
     text-decoration: none;
     transition: background-color 0.3s;
 }
+
 .button-admin:hover {
     background-color: #45a049;
 }
@@ -167,10 +206,8 @@ footer .button:hover {
     border-radius: 10px;
     margin: 0px;
     margin-bottom: 80px;
-
     max-width: 1200px; /* Establecer un ancho máximo */
 }
-
 
 /* Estilo para el subtítulo de la sección Ambiente */
 .subtitulo-ambiente {
@@ -184,7 +221,6 @@ footer .button:hover {
     margin-bottom: 20px;
 }
 
-/* Estilo para la tabla de ambientes */
 /* Estilo para la tabla de ambientes */
 .tabla-ambientes {
     max-height: 400px;
@@ -217,7 +253,6 @@ footer .button:hover {
     background-color: #ddd; /* Color de fondo al pasar el mouse sobre la fila */
 }
 
-
 /* Estilo para los botones de la sección Ambiente */
 .boton-modificar,
 .boton-generar-qr,
@@ -239,6 +274,7 @@ footer .button:hover {
 .boton-centrado:hover {
     background-color: #45a049;
 }
+
 /*botonse que son generales para la web*/
 /*Salir*/
 .salir {
@@ -247,6 +283,7 @@ footer .button:hover {
     right: 20px; /* Coloca el botón a 20px desde el lado derecho */
     z-index: 1; /* Asegura que el botón esté por encima de otros elementos, como el footer */
 }
+
 #btn_salir {
     background-color: #dc3545;
     color: white;
@@ -256,9 +293,10 @@ footer .button:hover {
     cursor: pointer;
 }
 
-#btn_salir:hover{
+#btn_salir:hover {
     background-color: #c82333;
 }
+
 /*Regresar*/
 .regresar {
     position: fixed; /* Fija el botón en una posición específica en la ventana del navegador */
@@ -266,6 +304,7 @@ footer .button:hover {
     left: 20px; /* Coloca el botón a 20px desde el lado derecho */
     z-index: 1; /* Asegura que el botón esté por encima de otros elementos, como el footer */
 }
+
 /*filtro - crear*/
 .filtro-y-crear {
     display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
@@ -282,6 +321,7 @@ footer .button:hover {
 .filtro {
     margin-right: 10px; /* Añade un margen entre el filtro y el botón */
 }
+
 #filtro_ambiente {
     padding: 8px; /* Espaciado interno */
     border: 1px solid #ccc; /* Borde */
@@ -415,7 +455,7 @@ footer .button:hover {
     margin-top: 10px;
 }
 
-.notification-bell button{
+.notification-bell button {
     background-color: white;
     border: none;
 }
@@ -464,6 +504,7 @@ footer .button:hover {
     right: 10px;
     cursor: pointer;
 }
+
 .notification-counter {
     position: absolute;
     top: -5px;

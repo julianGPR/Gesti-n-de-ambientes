@@ -11,7 +11,7 @@ $db = Database::connect();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <script src="../assets/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -37,7 +37,27 @@ $db = Database::connect();
             </span>
         </div>
     </button>
-
+    <div class="menu-container">
+        <img class="menu-toggle" src="../assets/menu.svg" alt="Icono del menú">
+            <ul class="menu-options" id="menuOptions">
+                <?php
+                    $url_computadores = '/dashboard/gestion%20de%20ambientes/admin/computadores' ; //construcción de la URL
+                    $url_tvs = '/dashboard/gestion%20de%20ambientes/admin/tvs' ; //construcción de la URL
+                    $url_sillas = '/dashboard/gestion%20de%20ambientes/admin/sillas' ; //construcción de la URL
+                    $url_mesas = '/dashboard/gestion%20de%20ambientes/admin/mesas' ; //construcción de la URL
+                    $url_tableros = '/dashboard/gestion%20de%20ambientes/admin/tableros' ; //construcción de la URL
+                    $url_nineras = '/dashboard/gestion%20de%20ambientes/admin/nineras' ; //construcción de la URL
+                ?>
+                    <li><a href="<?php echo $url_computadores; ?>" class="button-admin" id="btn-computadores">Computadores</a></li>
+                    <li><a href="<?php echo $url_tvs; ?>" class="button-admin" id="btn-tvs">Televisores(tvs)</a></li>
+                    <li><a href="<?php echo $url_sillas; ?>" class="button-admin" id="btn-sillas">sillas</a></li>
+                    <li><a href="<?php echo $url_mesas; ?>" class="button-admin" id="btn-mesas">mesas</a></li>
+                    <li><a href="<?php echo $url_tableros; ?>" class="button-admin" id="btn-tableros">tableros</a></li>
+                    <li><a href="<?php echo $url_nineras; ?>" class="button-admin" id="btn-nineras">nineras</a></li>
+            </ul>
+    </div>
+            </select>
+        </div>
     <!-- Elemento para la ventana emergente -->
     <div id="popup" class="popup">
     <div class="popup-content">
@@ -123,5 +143,6 @@ $db = Database::connect();
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>
+    <script src="../assets/menu.js"></script>
 </body>
 </html>

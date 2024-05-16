@@ -2,17 +2,16 @@
 
 include_once 'models/AdminModel.php';
 
+// Apartado de controlador para LOGIN------------------------------------------------------------------------
 class AdminController {
     public function home() {
         include 'views/administrador/index.php';
     }
     
+// Apartado de controlador para Ambientes------------------------------------------------------------------------
+
     public function ambientes() {
         include 'views/administrador/ambientes/index.php';
-    }
-
-    public function usuarios() {
-        include 'views/administrador/usuarios/index.php';
     }
 
     public function createAmbiente() {
@@ -77,7 +76,7 @@ class AdminController {
             $observaciones = $_POST["observaciones"];
 
             $adminModel = new AdminModel();
-            $result = $adminModel->modificarAmbiente($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
+            $result = $adminModel->modificarComputador($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
 
             if ($result) {
                 header("Location: ../ambientes");
@@ -120,7 +119,74 @@ class AdminController {
         header("Location: ../ambientes");
         exit();
     }
+// Apartado de controlador para COMPUTADORES------------------------------------------------------------------------
 
+    public function computadores(){
+        require 'views/administrador/computadores/index.php';
+    }
+    public function createComputador() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $tipo = $_POST["tipo"];
+            $marca = $_POST["marca"];
+            $modelo = $_POST["modelo"];
+            $serial = $_POST["serial"];
+            $placaInventario = $_POST["placaInventario"];
+            $id_ambiente = $_POST["id_ambiente"];
+            $checkPc = isset($_POST["checkPc"]) ? 1 : 0;
+            $hardware = isset($_POST["hardware"]) ? 1 : 0;
+            $software = isset($_POST["software"]) ? 1 : 0;
+            $observaciones = $_POST["observaciones"];
+
+            $adminModel = new AdminModel();
+            $result = $adminModel->guardarComputador($tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones);
+
+            if ($result) {
+                header("Location: ../computadores");
+                exit();
+            } else {
+                header("Location: index.php?error=Error al crear el computador");
+                exit();
+            }
+        } else {
+            include 'views/administrador/computadores/create.php';
+        }
+    }
+
+    public function updateComputador($id) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $tipo = $_POST["tipo"];
+            $marca = $_POST["marca"];
+            $modelo = $_POST["modelo"];
+            $serial = $_POST["serial"];
+            $placaInventario = $_POST["placaInventario"];
+            $id_ambiente = $_POST["Id_ambiente"];
+            $checkPc = isset($_POST["checkPc"]) ? 1 : 0;
+            $hardware = isset($_POST["hardware"]) ? 1 : 0;
+            $software = isset($_POST["software"]) ? 1 : 0;
+            $observaciones = $_POST["observaciones"];
+
+            $adminModel = new AdminModel();
+            $result = $adminModel->modificarComputador($id, $tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones);
+
+            if ($result) {
+                header("Location: ../computadores");
+                exit();
+            } else {
+                header("Location: index.php?error=Error al actualizar el computador&id=$id");
+                exit();
+            }
+        } else {
+            $adminModel = new AdminModel();
+            $computador = $adminModel->obtenerComputadorPorId($id);
+            include 'views/administrador/computadores/update.php';
+        }
+    }
+
+// Apartado de controlador para USUARIOS------------------------------------------------------------------------
+
+    public function usuarios() {
+        include 'views/administrador/usuarios/index.php';
+    }
 
     public function createUsuario(){
 
@@ -171,6 +237,7 @@ class AdminController {
             include 'views/administrador/usuarios/update.php';
         }
     }
+// Apartado de controlador para REPORTES------------------------------------------------------------------------
 
 
     public function reportes() {
@@ -223,5 +290,7 @@ class AdminController {
     }
 
 }
+
+
 
 ?>

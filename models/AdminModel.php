@@ -1,6 +1,7 @@
 <?php
 include_once 'config/db.php';
 
+// Apartado de controlador para AMBIENTES------------------------------------------------------------------------
 class AdminModel {
     public function guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones) {
         $conn = Database::connect();
@@ -60,6 +61,50 @@ class AdminModel {
         }
     }
     
+    // Apartado de controlador para COMPUTADORES------------------------------------------------------------------------
+
+    public function guardarComputador($tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones) {
+        $conn = Database::connect();
+    
+        $sql = "INSERT INTO t_computadores (Tipo, Marca, Modelo, Serial, PlacaInventario, Id_ambiente, CheckPc, Hardware, Software, Observaciones)
+        VALUES ('$tipo', '$marca', '$modelo', '$serial', '$placaInventario', '$id_ambiente', $checkPc, $hardware, $software, '$observaciones')";
+
+
+
+
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function modificarComputador($id, $tipo, $marca, $modelo, $serial, $placaInventario, $nuevoIdAmbiente, $checkPc, $hardware, $software, $observaciones) {
+        $conn = Database::connect();
+        $sql = "UPDATE t_computadores SET Tipo='$tipo', Marca='$marca', Modelo='$modelo', Serial='$serial', PlacaInventario='$placaInventario', Id_ambiente='$nuevoIdAmbiente', CheckPc='$checkPc', Hardware='$hardware', Software='$software', Observaciones='$observaciones' WHERE Id_computador='$id'";
+    
+        if ($conn->query($sql) === TRUE) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    
+
+    public function obtenerComputadorPorId($id) {
+        $conn = Database::connect();
+        $sql = "SELECT * FROM t_computadores WHERE Id_computador='$id'";
+        $result = $conn->query($sql);
+    
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
+    // Apartado de controlador para USUARIOS------------------------------------------------------------------------
 
     public function guardarUsuario($nombres, $apellidos, $clave, $rol) {
         $conn = Database::connect();
