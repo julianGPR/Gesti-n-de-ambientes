@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2024 a las 02:08:34
+-- Tiempo de generación: 16-05-2024 a las 23:30:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -58,7 +58,7 @@ CREATE TABLE `t_ambientes` (
   `Nineras` int(50) DEFAULT NULL,
   `CheckNineras` tinyint(1) NOT NULL DEFAULT 1,
   `CheckInfraestructura` tinyint(1) NOT NULL DEFAULT 1,
-  `Estado` tinyint(1) NOT NULL DEFAULT 1,
+  `Estado` varchar(255) DEFAULT NULL,
   `Observaciones` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -67,26 +67,26 @@ CREATE TABLE `t_ambientes` (
 --
 
 INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `CheckPcs`, `Tvs`, `CheckTvs`, `Sillas`, `CheckSillas`, `Mesas`, `CheckMesas`, `Tableros`, `CheckTableros`, `Nineras`, `CheckNineras`, `CheckInfraestructura`, `Estado`, `Observaciones`) VALUES
-(1, 'Ambiente 101', 'Oriental', 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(2, 'Ambiente 104', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(3, 'Ambiente 110', 'Oriental', 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(4, 'Ambiente 114', 'Oriental', 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(5, 'Ambiente 115', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(6, 'Ambiente 116', 'Oriental', 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(7, 'Ambiente 119', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(8, 'Ambiente 122', 'Oriental', 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(9, 'Ambiente 201', 'Oriental', 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(10, 'Ambiente 202', 'Oriental', 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(11, 'Ambiente 203', 'Oriental', 30, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(12, 'Ambiente 204', 'Oriental', 18, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(13, 'Ambiente Festo', 'Oriental', 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(14, 'Ambiente Lego', 'Oriental', 20, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(15, 'Ambiente Órtesis', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(16, 'Ambiente 301', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(17, 'Ambiente 302', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(18, 'Ambiente 303', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(19, 'Ambiente 304', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL),
-(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL);
+(1, 'Ambiente 101', 'Oriental', 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Habilitado', ''),
+(2, 'Ambiente 104', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(3, 'Ambiente 110', 'Oriental', 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(4, 'Ambiente 114', 'Oriental', 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(5, 'Ambiente 115', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(6, 'Ambiente 116', 'Oriental', 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(7, 'Ambiente 119', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(8, 'Ambiente 122', 'Oriental', 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(9, 'Ambiente 201', 'Oriental', 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(10, 'Ambiente 202', 'Oriental', 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(11, 'Ambiente 203', 'Oriental', 30, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(12, 'Ambiente 204', 'Oriental', 18, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(13, 'Ambiente Festo', 'Oriental', 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(14, 'Ambiente Lego', 'Oriental', 20, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(15, 'Ambiente Órtesis', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(16, 'Ambiente 301', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(17, 'Ambiente 302', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(18, 'Ambiente 303', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(19, 'Ambiente 304', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL);
 
 --
 -- Disparadores `t_ambientes`
@@ -480,7 +480,8 @@ INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Seria
 (336, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86L0T13', '9216109240', 20, 1, 1, 1, NULL),
 (337, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86WSS13', '9216109201', 20, 1, 1, 1, NULL),
 (338, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '879SS13', '9216109303', 20, 1, 1, 1, NULL),
-(339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL);
+(339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL),
+(346, 'Desktop', 'MErcedesdsdad', 's', '2d89sa5d6a', 'adsasd5', 1, 0, 1, 1, '');
 
 --
 -- Disparadores `t_computadores`
@@ -746,7 +747,11 @@ INSERT INTO `t_reportes` (`Id_reporte`, `FechaHora`, `Id_usuario`, `Id_ambiente`
 (81, '2024-05-13 19:00:25', NULL, NULL, NULL, 'El Biblioteca: Se requiere instalación de xampp en los equipos'),
 (82, '2024-05-13 19:01:25', NULL, NULL, NULL, 'En el Biblioteca; El computador con número de serie MXL9493MTL y Placa de Inventario 9216108660: El computador no enciende'),
 (83, '2024-05-13 19:02:35', NULL, NULL, NULL, 'La Infraestructura del Biblioteca: El ambiente presenta goteras'),
-(84, '2024-05-13 19:03:28', NULL, NULL, NULL, 'En el Biblioteca; La Silla con Placa de Inventario Silla01: La silla se desoldó');
+(84, '2024-05-13 19:03:28', NULL, NULL, NULL, 'En el Biblioteca; La Silla con Placa de Inventario Silla01: La silla se desoldó'),
+(85, '2024-05-14 21:57:09', NULL, 1, NULL, 'El Ambiente 100: '),
+(86, '2024-05-15 18:06:07', NULL, 1, NULL, 'El Ambiente 101: hola'),
+(87, '2024-05-15 18:06:31', NULL, 1, NULL, 'El Ambiente 101: gfyfjyfjhfgcv gkjhjkgbh hghfhgdfdf hgukglyhi saeasds<szfvbjk khlkhujgjhgc kljhfvhgfc khjkfyjftgh xdgrfxgv knhikgtutiu hgkujhukg'),
+(88, '2024-05-15 18:52:16', NULL, 1, NULL, 'El Ambiente 101: ');
 
 -- --------------------------------------------------------
 
@@ -1055,7 +1060,7 @@ ALTER TABLE `t_ambientes`
 -- AUTO_INCREMENT de la tabla `t_computadores`
 --
 ALTER TABLE `t_computadores`
-  MODIFY `Id_computador` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=340;
+  MODIFY `Id_computador` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=347;
 
 --
 -- AUTO_INCREMENT de la tabla `t_infraestructura`
@@ -1079,7 +1084,7 @@ ALTER TABLE `t_nineras`
 -- AUTO_INCREMENT de la tabla `t_reportes`
 --
 ALTER TABLE `t_reportes`
-  MODIFY `Id_reporte` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `Id_reporte` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT de la tabla `t_sillas`
