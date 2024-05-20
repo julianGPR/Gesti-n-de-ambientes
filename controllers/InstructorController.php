@@ -10,30 +10,56 @@ class InstructorController {
 
     public function readQR($id) {
         $qr_content = $id;
-
-        $instructorModel = new InstructorModel(); // Corregido: 'InstructorModel' en mayúscula
+    
+        $instructorModel = new InstructorModel();
         $result = $instructorModel->leerQR($qr_content);
-
+    
         if ($result) {
-            $nombre = htmlspecialchars($result["Nombre"]);
-            $estado = htmlspecialchars($result["Estado"]);
-            $computadoras = htmlspecialchars($result["Computadores"]);
-            $tv = htmlspecialchars($result["Tv"]);
-            $sillas = htmlspecialchars($result["Sillas"]);
-            $mesas = htmlspecialchars($result["Mesas"]);
-            $tablero = htmlspecialchars($result["Tablero"]);
-            $archivador = htmlspecialchars($result["Archivador"]);
-            $infraestructura = htmlspecialchars($result["Infraestructura"]);
-            $observacion = htmlspecialchars($result["Observacion"]); // Corregido: 'observasion' a 'observacion'
-            
+            $nombre = htmlspecialchars($result[0]["Nombre"]); // Tomamos el nombre del primer resultado
+            $computadores = array_map(function($item) {
+                return [
+                    'Serial' => $item['SerialComputador'],
+                    'Marca' => $item['MarcaComputador'],
+                    'Modelo' => $item['ModeloComputador'],
+                    'CheckPc' => $item['CheckPc']
+                ];
+            }, $result); // Obtenemos un array con los números de serie, la marca, el modelo y el estado de CheckPcs
+
+            $tv = htmlspecialchars($result[0]["Tvs"]);
+            $sillas = htmlspecialchars($result[0]["Sillas"]);
+            $mesas = htmlspecialchars($result[0]["Mesas"]);
+            $tablero = htmlspecialchars($result[0]["Tableros"]);
+            $archivador = htmlspecialchars($result[0]["Nineras"]);
+            $infraestructura = htmlspecialchars($result[0]["CheckInfraestructura"]);
+            $observacion = htmlspecialchars($result[0]["Observaciones"]);
+    
             date_default_timezone_set('America/Bogota');
             $fecha_actual = date("d/m/Y");
             $hora_actual = date("H:i");
-
-            // Incluir la vista
+    
             include 'views/instructor/reportes/index.php';
         } else {
             echo "No se encontró información relacionada para el código QR escaneado.";
+        }
+    }
+
+    public function guardarObservacion() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Obtener la observación y el estado del checkbox del formulario
+            $observaciones = $_POST["observacion"];
+            $estadosCheckbox = $_POST["checkpc"];
+
+            // Llamar al método del modelo para guardar los datos
+            $instructorModel = new InstructorModel();
+            foreach($estadosCheckbox as $serial => $estadoCheckbox) {
+                $observacion = $observaciones[$serial] ?? ''; // Obtener la observación asociada a este checkbox
+                $instructorModel->guardarObservacion($serial, $observacion, $estadoCheckbox);
+            }
+
+            // Redirigir o mostrar un mensaje de éxito
+            // Por ejemplo, redirigir a la página principal
+            header("../home");
+            exit(); // Terminar la ejecución del script
         }
     }
 }

@@ -38,6 +38,14 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex; /* Agregado para centrar los elementos */
+            flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+            align-items: center; /* Centra los elementos horizontalmente */
+            justify-content: center; /* Centra los elementos verticalmente */
+        }
+
+        .sublist {
+            display: none; /* Agregado para ocultar inicialmente el contenido de las listas */
         }
         
         h1 {
@@ -125,96 +133,93 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
+        .expand {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            border: 1px solid #000;
+            margin-right: 5px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <img src="../../assets/Logo-Sena.jpg" alt="logo">
-        <h1>Gestión de Ambientes de Formación</h1>
-    </div>
-    <div class="container">
-        <p class="date-time">Fecha: <?php echo $fecha_actual; ?> Hora: <?php echo $hora_actual; ?></p>
-        <h1 class="titulo">Ambiente <?php echo $nombre; ?></h1>
-        <ul>
-            <li>
-                <span class="label">Computadores:</span>
-                <span class="value"><?php echo $computadoras; ?></span>
-            </li>
-            <li>
-                <span class="label">Televisores:</span>
-                <span class="value"><?php echo $tv; ?></span>
-            </li>
-            <li>
-                <span class="label">Sillas:</span>
-                <span class="value"><?php echo $sillas; ?></span>
-            </li>
-            <li>
-                <span class="label">Mesas:</span>
-                <span class="value"><?php echo $mesas; ?></span>
-            </li>
-            <li>
-                <span class="label">Tablero:</span>
-                <span class="value"><?php echo $tablero; ?></span>
-            </li>
-            <li>
-                <span class="label">Archivador:</span>
-                <span class="value"><?php echo $archivador; ?></span>
-            </li>
-            <li>
-                <span class="label">Infraestructura:</span>
-                <span class="value"><?php echo $infraestructura; ?></span>
-            </li>
-            <li>
-                <span class="label">Observación:</span>
-                <span class="value"><?php echo $observacion; ?></span>
-            </li>
-            <li>
-                <span class="label">Estado:</span>
-                <span class="value"><?php echo $estado; ?></span>
-            </li>
-        </ul>
-
-        <form id="informeForm" action="AdminController.php" method="post">
-    <input type="hidden" name="id_reporte" value="<?php echo $id_reporte; ?>">
-    <input type="text" name="observacion" placeholder="Observación">
-    <input type="submit" value="Enviar">
-</form>
+    <form action="InstructorController.php" method="POST">
+        <div class="header">
+            <img src="../../assets/Logo-Sena.jpg" alt="logo">
+            <h1>Gestión de Ambientes de Formación</h1>
+        </div>
+        <div class="container">
+            <p class="date-time">Fecha: <?php echo $fecha_actual; ?> Hora: <?php echo $hora_actual; ?></p>
+            <h1 class="titulo"> <?php echo $nombre; ?></h1>
+            <ul>
+                <li class="expandable">
+                    <span class="expand" onclick="toggleList(this)">+</span>
+                    <span class="label">Infraestructura:</span>
+                    <ul class="sublist"></ul>
+                </li>
+                <li class="expandable">
+                    <span class="expand" onclick="toggleList(this)">+</span>
+                    <span class="label">Mobiliario:</span>
+                    <ul class="sublist">
+                        <span class="label">Sillas:</span>
+                        <span class="value"><?php echo $sillas; ?></span><br>
+                        <span class="label">Mesas:</span>
+                        <span class="value"><?php echo $mesas; ?></span><br>
+                        <span class="label">Tableros:</span>
+                        <span class="value"><?php echo $tablero; ?></span>
+                    </ul>
+                </li>
+                <li class="expandable">
+                    <span class="expand" onclick="toggleList(this)">+</span>
+                    <span class="label">Software:</span>
+                    <ul class="sublist"></ul>
+                </li>
+                <li class="expandable">
+                    <span class="expand" onclick="toggleList(this)">+</span>
+                    <span class="label">Hardware:</span>
+                    <ul class="sublist">
+                        <?php foreach($computadores as $computador): ?>
+                            <li class="hardware-item">
+                                <input type="checkbox" name="checkpc[]" id="checkpc<?php echo $computador['Serial']; ?>" value="<?php echo $computador['Serial']; ?>" <?php echo ($computador['CheckPc'] == 1) ? 'checked' : ''; ?> onclick="toggleObservationField('checkpc<?php echo $computador['Serial']; ?>', 'observacion<?php echo $computador['Serial']; ?>')">
+                                <span><?php echo htmlspecialchars($computador['Marca']); ?></span>
+                                <span><?php echo htmlspecialchars($computador['Modelo']); ?></span>
+                                <span><?php echo $computador['Serial']; ?></span>
+                                <input type="text" name="observacion" id="observacion<?php echo $computador['Serial']; ?>" placeholder="Novedad encontrada" style="display:<?php echo ($computador['CheckPc'] == 1) ? 'none' : 'block'; ?>">
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+                
+            <div class="submit-btn">
+                <input type="submit" value="Enviar">
+            </div>
+    </form>
 
         <p class="instrucciones">Sr(a) Instructor(a), en caso de evidenciar novedades al interior del ambiente de formación, seleccione el item adecuado y de forma muy concisa detalle la novedad encontrada y presiona ENVIAR</p>
         <p class="instrucciones">En caso contrario solo presione ENVIAR</p>
     </div>
-    <div class="popup" id="mensajePopup">
-        <p>¡Informe enviado correctamente!</p>
-    </div>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var form = document.getElementById("informeForm");
+        function toggleList(element) {
+            var sublist = element.parentElement.querySelector(".sublist");
+            sublist.style.display = sublist.style.display === "none" ? "block" : "none";
+            element.innerText = sublist.style.display === "none" ? "+" : "-";
+        }
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
+        function toggleObservationField(checkboxId, observationId) {
+            var checkbox = document.getElementById(checkboxId);
+            var observation = document.getElementById(observationId);
+            observation.style.display = checkbox.checked ? "none" : "block";
+        }
 
-            fetch(form.action, {
-                method: form.method,
-                body: new FormData(form)
-            })
-            .then(function(response) {
-                if (response.ok) {
-                    document.getElementById("mensajePopup").style.display = "block";
-                    setTimeout(function() {
-                        window.location.href = "../home"; // Redirigir al instructor
-                    }, 3000);
-                } else {
-                    console.error("Error al enviar el formulario");
-                }
-            })
-            .catch(function(error) {
-                console.error("Error al enviar el formulario:", error);
-            });
+        // Llamar a toggleObservationField para cada checkbox al cargar la página
+        window.addEventListener('load', function() {
+            <?php foreach($computadores as $computador): ?>
+                toggleObservationField('checkpc<?php echo $computador['Serial']; ?>', 'observacion<?php echo $computador['Serial']; ?>');
+            <?php endforeach; ?>
         });
-    });
-</script>
-
-    
+    </script>
 </body>
+
 </html>
