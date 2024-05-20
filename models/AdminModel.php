@@ -1,7 +1,7 @@
 <?php
 include_once 'config/db.php';
 
-// Apartado de controlador para AMBIENTES------------------------------------------------------------------------
+// Apartado de Modelo para AMBIENTES------------------------------------------------------------------------
 class AdminModel {
     public function guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones) {
         $conn = Database::connect();
@@ -61,7 +61,7 @@ class AdminModel {
         }
     }
     
-    // Apartado de controlador para COMPUTADORES------------------------------------------------------------------------
+    // Apartado de Modelo para COMPUTADORES------------------------------------------------------------------------
 
     public function guardarComputador($tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones) {
         $conn = Database::connect();
@@ -104,33 +104,47 @@ class AdminModel {
         }
     }
 
-    // Apartado de controlador para USUARIOS------------------------------------------------------------------------
+    // Apartado de Modelo para USUARIOS------------------------------------------------------------------------
 
-    public function guardarUsuario($nombres, $apellidos, $clave, $rol) {
+    public function guardarUsuario($nombres, $apellidos, $rol) {
         $conn = Database::connect();
-
+    
+        // Generar una clave aleatoria de 4 dígitos
+        $clave = mt_rand(1000, 9999);
+    
+        // Preparar la consulta SQL
         $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Rol)
-                VALUES ('$nombres', '$apellidos', $clave, '$rol')";
-
-        if ($conn->query($sql) === TRUE) {
+                VALUES (?, ?, ?, ?)";
+    
+        // Preparar la declaración
+        $stmt = $conn->prepare($sql);
+    
+        // Vincular los parámetros
+        $stmt->bind_param("ssis", $nombres, $apellidos, $clave, $rol);
+    
+        // Ejecutar la consulta
+        $result = $stmt->execute();
+    
+        // Verificar si la consulta se ejecutó correctamente
+        if ($result) {
             return true;
         } else {
             return false;
         }
     }
-
+    
     public function modificarUsuario($id, $nombres, $apellidos, $clave, $rol) {
         $conn = Database::connect();
-
-        $sql = "UPDATE t_usuarios SET Nombres='$nombres', Apellidos='$apellidos', Clave=$clave, Rol='$rol' WHERE Id_usuario=$id";
-
+    
+        $sql = "UPDATE t_usuarios SET Nombres='$nombres', Apellidos='$apellidos', Clave='$clave', Rol='$rol' WHERE Id_usuario=$id";
+    
         if ($conn->query($sql) === TRUE) {
             return true;
         } else {
             return false;
         }
     }
-
+    
     public function obtenerUsuarioPorId($id) {
         $conn = Database::connect();
         $sql = "SELECT * FROM t_usuarios WHERE Id_usuario=$id";
@@ -142,6 +156,9 @@ class AdminModel {
             return null;
         }
     }
+    
+// Apartado de Modelo para Reportes------------------------------------------------------------------------
+
 
     public function insertarReporte($observacion, $id_usuario, $id_ambiente) {
         $conn = Database::connect();

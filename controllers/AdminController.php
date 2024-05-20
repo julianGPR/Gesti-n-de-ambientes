@@ -184,59 +184,64 @@ class AdminController {
 
 // Apartado de controlador para USUARIOS------------------------------------------------------------------------
 
-    public function usuarios() {
-        include 'views/administrador/usuarios/index.php';
-    }
+// Método para mostrar la lista de usuarios
+public function usuarios() {
+    include 'views/administrador/usuarios/index.php';
+}
 
-    public function createUsuario(){
+// Método para crear un nuevo usuario
+public function createUsuario() {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombres = $_POST["nombres"];
+        $apellidos = $_POST["apellidos"];
+        $rol = $_POST["rol"];
+        
+        // Generar contraseña aleatoria de 4 dígitos
+        $clave = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombres = $_POST["nombres"];
-            $apellidos = $_POST["apellidos"];
-            $correo = $_POST["correo"];
-            $pin = $_POST["pin"];
-            $rol = $_POST["Rol"];
+        // Encriptar la contraseña
+        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
 
-            $adminModel = new AdminModel();
-            $result = $adminModel->guardarUsuario($nombres, $apellidos, $correo, $pin, $rol);
+        $adminModel = new AdminModel();
+        $result = $adminModel->guardarUsuario($nombres, $apellidos, $claveEncriptada, $rol);
 
-            if ($result) {
-                header("Location: ../usuarios");
-                exit();
-            } else {
-                header("Location: index.php?error=Error al crear el usuario");
-                exit();
-            }
+        if ($result) {
+            // Redirigir al usuario a la lista de usuarios
+            header("Location: ../usuarios");
+            exit();
         } else {
-            include 'views/administrador/usuarios/create.php';
+            header("Location: index.php?error=Error al crear el usuario");
+            exit();
         }
-
+    } else {
+        include 'views/administrador/usuarios/create.php';
     }
+}
+// Método para actualizar un usuario existente
+public function updateUsuario($id) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombres = $_POST["nombres"];
+        $apellidos = $_POST["apellidos"];
+        $clave = $_POST["clave"];
+        $rol = $_POST["rol"];
 
-    public function updateUsuario($id) {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombres = $_POST["nombres"];
-            $apellidos = $_POST["apellidos"];
-            $correo = $_POST["correo"];
-            $pin = $_POST["pin"];
-            $rol = $_POST["Rol"];
-    
-            $adminModel = new AdminModel();
-            $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $correo, $pin, $rol);
-    
-            if ($result) {
-                header("Location: ../usuarios");
-                exit();
-            } else {
-                header("Location: index.php?error=Error al actualizar el usuario&id=$id");
-                exit();
-            }
+        $adminModel = new AdminModel();
+        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $clave, $rol);
+
+        if ($result) {
+            header("Location: ../usuarios");
+            exit();
         } else {
-            $adminModel = new AdminModel();
-            $usuario = $adminModel->obtenerUsuarioPorId($id);
-            include 'views/administrador/usuarios/update.php';
+            header("Location: index.php?error=Error al actualizar el usuario&id=$id");
+            exit();
         }
+    } else {
+        $adminModel = new AdminModel();
+        $usuario = $adminModel->obtenerUsuarioPorId($id);
+        include 'views/administrador/usuarios/update.php';
     }
+}
+
 // Apartado de controlador para REPORTES------------------------------------------------------------------------
 
 
