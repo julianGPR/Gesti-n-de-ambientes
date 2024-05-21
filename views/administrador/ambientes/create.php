@@ -44,41 +44,20 @@
         <label for="computadores">Computadores:</label><br>
         <input type="number" id="computadores" name="computadores"><br><br>
 
-        <label for="check_pcs">Check PCs:</label><br>
-        <input type="checkbox" id="check_pcs" name="check_pcs" checked><br><br>
-
         <label for="tvs">TVs:</label><br>
         <input type="number" id="tvs" name="tvs"><br><br>
-
-        <label for="check_tvs">Check TVs:</label><br>
-        <input type="checkbox" id="check_tvs" name="check_tvs" checked><br><br>
 
         <label for="sillas">Sillas:</label><br>
         <input type="number" id="sillas" name="sillas"><br><br>
 
-        <label for="check_sillas">Check Sillas:</label><br>
-        <input type="checkbox" id="check_sillas" name="check_sillas" checked><br><br>
-
         <label for="mesas">Mesas:</label><br>
         <input type="number" id="mesas" name="mesas"><br><br>
-
-        <label for="check_mesas">Check Mesas:</label><br>
-        <input type="checkbox" id="check_mesas" name="check_mesas" checked><br><br>
 
         <label for="tableros">Tableros:</label><br>
         <input type="number" id="tableros" name="tableros"><br><br>
 
-        <label for="check_tableros">Check Tableros:</label><br>
-        <input type="checkbox" id="check_tableros" name="check_tableros" checked><br><br>
-
         <label for="nineras">Niñeras:</label><br>
         <input type="number" id="nineras" name="nineras"><br><br>
-
-        <label for="check_nineras">Check Niñeras:</label><br>
-        <input type="checkbox" id="check_nineras" name="check_nineras" checked><br><br>
-
-        <label for="check_infraestructura">Check Infraestructura:</label><br>
-        <input type="checkbox" id="check_infraestructura" name="check_infraestructura" checked><br><br>
 
         <label for="estado">Estado:</label><br>
         <input type="text" id="estado" name="estado" value="Habilitado"><br><br>

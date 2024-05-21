@@ -38,18 +38,15 @@
         <label for="apellidos">Apellidos del usuario:</label><br>
         <input type="text" id="apellidos" name="apellidos" required><br><br>
 
-        <label for="correo">Correo del usuario:</label><br>
-        <input type="email" id="correo" name="correo" required><br><br>
-
-        <label for="pin">Pin del usuario:</label><br>
-        <input type="number" id="pin" name="pin" required><br><br>
+        <label for="clave">Contraseña:</label><br>
+        <input type="text" id="clave" name="clave" readonly><br><br>
+        <button type="button" id="generarClave">Generar Contraseña</button>
 
         <label for="rol">Rol:</label><br>
         <select id="rol" name="rol" required>
             <option value="Administrador">Administrador</option>
             <option value="Instructor">Instructor</option>
         </select><br><br>
-
         <button type="submit">Crear Usuario</button>
     </form>
 </section>
@@ -65,5 +62,14 @@
 <div class="salir">
     <button id="btn_salir">Salir</button>
 </div>
+<script>
+document.getElementById("generarClave").addEventListener("click", function() {
+    // Generar una contraseña aleatoria de 4 dígitos
+    var claveGenerada = Math.floor(Math.random() * 10000).toString().padStart(4, "0");
+    
+    // Mostrar la contraseña en el campo de entrada
+    document.getElementById("clave").value = claveGenerada;
+});
+</script>
 </body>
 </html>

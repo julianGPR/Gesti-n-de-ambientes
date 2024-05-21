@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2024 a las 23:30:55
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: localhost
+-- Tiempo de generación: 21-05-2024 a las 22:15:31
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,20 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `reportesambientes`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-CREATE DEFINER=`root`@`localhost` PROCEDURE `validarUsuario` (IN `claveDigitada` INT(50))   BEGIN
-    IF EXISTS(SELECT * FROM t_usuarios WHERE Clave = claveDigitada) THEN
-        SELECT Nombres, Apellidos, Rol FROM t_usuarios WHERE Clave = claveDigitada;
-    ELSE
-        SELECT null;
-    END IF;
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -67,7 +53,7 @@ CREATE TABLE `t_ambientes` (
 --
 
 INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `CheckPcs`, `Tvs`, `CheckTvs`, `Sillas`, `CheckSillas`, `Mesas`, `CheckMesas`, `Tableros`, `CheckTableros`, `Nineras`, `CheckNineras`, `CheckInfraestructura`, `Estado`, `Observaciones`) VALUES
-(1, 'Ambiente 101', 'Oriental', 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Habilitado', ''),
+(1, 'Ambiente 101', 'Occidental', 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Habilitado', ''),
 (2, 'Ambiente 104', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (3, 'Ambiente 110', 'Oriental', 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (4, 'Ambiente 114', 'Oriental', 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
@@ -86,7 +72,10 @@ INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `Ch
 (17, 'Ambiente 302', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (18, 'Ambiente 303', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (19, 'Ambiente 304', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
-(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL);
+(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(38, 'julian2.0', 'Occidental', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', ''),
+(39, 'cdac', 'Occidental', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', ''),
+(40, 'dsaasd', 'Occidental', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '');
 
 --
 -- Disparadores `t_ambientes`
@@ -124,7 +113,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `t_computadores` (
-  `Id_computador` int(50) NOT NULL,
+  `Id_computador` int(11) NOT NULL,
   `Tipo` enum('Laptop','Desktop') NOT NULL,
   `Marca` varchar(100) NOT NULL,
   `Modelo` varchar(100) NOT NULL,
@@ -481,7 +470,8 @@ INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Seria
 (337, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86WSS13', '9216109201', 20, 1, 1, 1, NULL),
 (338, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '879SS13', '9216109303', 20, 1, 1, 1, NULL),
 (339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL),
-(346, 'Desktop', 'MErcedesdsdad', 's', '2d89sa5d6a', 'adsasd5', 1, 0, 1, 1, '');
+(346, 'Desktop', 'MErcedesdsdad', 's', '2d89sa5d6a', 'adsasd5', 1, 0, 1, 1, ''),
+(347, 'Laptop', 'cdafa', 'csaasc', 'sad33', 'sadsa', 1, 0, 1, 1, '');
 
 --
 -- Disparadores `t_computadores`
@@ -574,7 +564,10 @@ INSERT INTO `t_infraestructura` (`Id_infraestructura`, `Id_ambiente`, `CheckPiso
 (17, 17, 1, 1, 1, 1, 1, NULL),
 (18, 18, 1, 1, 1, 1, 1, NULL),
 (19, 19, 1, 1, 1, 1, 1, NULL),
-(20, 20, 1, 1, 1, 1, 1, NULL);
+(20, 20, 1, 1, 1, 1, 1, NULL),
+(36, 38, 1, 1, 1, 1, 1, NULL),
+(0, 39, 1, 1, 1, 1, 1, NULL),
+(0, 40, 1, 1, 1, 1, 1, NULL);
 
 --
 -- Disparadores `t_infraestructura`
@@ -734,7 +727,7 @@ CREATE TABLE `t_reportes` (
   `FechaHora` datetime NOT NULL,
   `Id_usuario` int(50) DEFAULT NULL,
   `Id_ambiente` int(50) DEFAULT NULL,
-  `Estado` tinyint(1) DEFAULT NULL,
+  `Estado` varchar(255) DEFAULT NULL,
   `Observaciones` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -957,11 +950,11 @@ DELIMITER ;
 --
 
 CREATE TABLE `t_usuarios` (
-  `Id_usuario` int(50) NOT NULL,
+  `Id_usuario` int(11) NOT NULL,
   `Nombres` varchar(100) NOT NULL,
   `Apellidos` varchar(100) NOT NULL,
-  `Clave` int(50) NOT NULL,
-  `Rol` enum('Coordinador','Asistente','Instructor') NOT NULL
+  `Clave` varchar(255) DEFAULT NULL,
+  `Rol` enum('Administrador','Instructor') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -969,9 +962,20 @@ CREATE TABLE `t_usuarios` (
 --
 
 INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Clave`, `Rol`) VALUES
-(3, 'Juan', 'Preciado', 1234, 'Instructor'),
-(4, 'Marcos', 'Pinto', 9876, 'Coordinador'),
-(5, 'Martha', 'García', 2468, 'Instructor');
+(3, 'Juan', 'Preciado', '1234', 'Instructor'),
+(4, 'Marcos', 'Pinto', '9876', ''),
+(5, 'Martha', 'García', '2468', 'Instructor'),
+(6, 'Daniel', 'Buitrago', '7961', ''),
+(7, 'Daniel', 'ggg', '9288', ''),
+(8, 'Daniel', 'Buitrago', '8877', 'Administrador'),
+(9, 'jose', 'perez', '0', 'Administrador'),
+(10, 'jose', 'perez', '0', 'Administrador'),
+(11, 'jose', 'perez', '0', 'Administrador'),
+(12, 'jose', 'dsad', '0', 'Administrador'),
+(13, 'ds', 'dsad', '$2y$10$uFydrSl.cyY1nyKTp288A.Jn1zwefyBzZ3dBLseYatxc1FbYtuEXi', 'Instructor'),
+(14, 'CSAC', 'CAS', '$2y$10$XtjepMG1SkWVV.aA3YEbGeAnoY5R5sKkuNUkWGgALPjNfI9n4qtQ.', 'Administrador'),
+(15, 'ds', 'DSADAS', '$2y$10$NqxHmI4pBHien1GGO6XnpemDsUuhXSirQbsqR5N2wh4VGoJLmBQ62', 'Instructor'),
+(16, 'jose', 'sadasd', '$2y$10$X7iSaWgokz957H3wjOl87ONoNMeQxh91b5t7B.2GP7d1K/PqR.yMu', 'Administrador');
 
 --
 -- Índices para tablas volcadas
@@ -987,58 +991,7 @@ ALTER TABLE `t_ambientes`
 -- Indices de la tabla `t_computadores`
 --
 ALTER TABLE `t_computadores`
-  ADD PRIMARY KEY (`Id_computador`),
-  ADD KEY `FK_computadotes_ambientes` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_infraestructura`
---
-ALTER TABLE `t_infraestructura`
-  ADD PRIMARY KEY (`Id_infraestructura`),
-  ADD UNIQUE KEY `Id_ambiente` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_mesas`
---
-ALTER TABLE `t_mesas`
-  ADD PRIMARY KEY (`Id_mesa`),
-  ADD KEY `FK_mesas_ambientes` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_nineras`
---
-ALTER TABLE `t_nineras`
-  ADD PRIMARY KEY (`Id_ninera`),
-  ADD KEY `FK_nineras_ambientes` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_reportes`
---
-ALTER TABLE `t_reportes`
-  ADD PRIMARY KEY (`Id_reporte`),
-  ADD KEY `FK_reportes_usuarios` (`Id_usuario`),
-  ADD KEY `FK_reportes_ambientes` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_sillas`
---
-ALTER TABLE `t_sillas`
-  ADD PRIMARY KEY (`Id_silla`),
-  ADD KEY `FK_sillas_ambientes` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_tableros`
---
-ALTER TABLE `t_tableros`
-  ADD PRIMARY KEY (`Id_tablero`),
-  ADD KEY `FK_tableros_ambientes` (`Id_ambiente`);
-
---
--- Indices de la tabla `t_televisores`
---
-ALTER TABLE `t_televisores`
-  ADD PRIMARY KEY (`Id_televisor`),
-  ADD KEY `FK_televisores_ambientes` (`Id_ambiente`);
+  ADD PRIMARY KEY (`Id_computador`);
 
 --
 -- Indices de la tabla `t_usuarios`
@@ -1054,114 +1007,19 @@ ALTER TABLE `t_usuarios`
 -- AUTO_INCREMENT de la tabla `t_ambientes`
 --
 ALTER TABLE `t_ambientes`
-  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `t_computadores`
 --
 ALTER TABLE `t_computadores`
-  MODIFY `Id_computador` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=347;
-
---
--- AUTO_INCREMENT de la tabla `t_infraestructura`
---
-ALTER TABLE `t_infraestructura`
-  MODIFY `Id_infraestructura` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT de la tabla `t_mesas`
---
-ALTER TABLE `t_mesas`
-  MODIFY `Id_mesa` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT de la tabla `t_nineras`
---
-ALTER TABLE `t_nineras`
-  MODIFY `Id_ninera` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `t_reportes`
---
-ALTER TABLE `t_reportes`
-  MODIFY `Id_reporte` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
-
---
--- AUTO_INCREMENT de la tabla `t_sillas`
---
-ALTER TABLE `t_sillas`
-  MODIFY `Id_silla` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT de la tabla `t_tableros`
---
-ALTER TABLE `t_tableros`
-  MODIFY `Id_tablero` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de la tabla `t_televisores`
---
-ALTER TABLE `t_televisores`
-  MODIFY `Id_televisor` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_computador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
 
 --
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
-  MODIFY `Id_usuario` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `t_computadores`
---
-ALTER TABLE `t_computadores`
-  ADD CONSTRAINT `FK_computadotes_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
---
--- Filtros para la tabla `t_infraestructura`
---
-ALTER TABLE `t_infraestructura`
-  ADD CONSTRAINT `fk_infraestructura_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
---
--- Filtros para la tabla `t_mesas`
---
-ALTER TABLE `t_mesas`
-  ADD CONSTRAINT `FK_mesas_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
---
--- Filtros para la tabla `t_nineras`
---
-ALTER TABLE `t_nineras`
-  ADD CONSTRAINT `FK_nineras_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
---
--- Filtros para la tabla `t_reportes`
---
-ALTER TABLE `t_reportes`
-  ADD CONSTRAINT `FK_reportes_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`) ON DELETE SET NULL,
-  ADD CONSTRAINT `FK_reportes_usuarios` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`) ON DELETE SET NULL;
-
---
--- Filtros para la tabla `t_sillas`
---
-ALTER TABLE `t_sillas`
-  ADD CONSTRAINT `FK_sillas_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
---
--- Filtros para la tabla `t_tableros`
---
-ALTER TABLE `t_tableros`
-  ADD CONSTRAINT `FK_tableros_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
---
--- Filtros para la tabla `t_televisores`
---
-ALTER TABLE `t_televisores`
-  ADD CONSTRAINT `FK_televisores_ambientes` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

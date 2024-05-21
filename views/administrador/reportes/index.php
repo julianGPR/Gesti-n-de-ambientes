@@ -11,6 +11,7 @@ $db = Database::connect();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
 <body>
     <header>
@@ -37,62 +38,50 @@ $db = Database::connect();
         </div>
     </header>
     <nav>
-        <div class="filtro-y-crear">
-        <div class="container-fluid">
-                <form class="d-flex">
-                    <input class="form-control me-2 light-table-filter" data-table="table_id" type="text" placeholder="Buscar por Nombre">
-                </form>
-            </div>
-            <div class="crear-ambiente">
-            </div>
+    </nav>
+    <section class="ambiente" id="section-ambiente">
+        <div class="subtitulo-ambiente">
+            <h2>Ambientes</h2>
         </div>
-    </nav>  
-    <section class="reporte" id="section-reporte">
-        <div class="subtitulo-reporte">
-            <h2>Reportes</h2>
-        </div>
-        <div class="descripcion-reporte">
+        <div class="descripcion-ambiente">
             <p>Gestión de ambientes de formación</p>
         </div>
         <div class="tabla-ambientes tabla-scroll">
-            <table border="1" >
+            <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Fecha y Hora</th>
                         <th>Id usuario</th>
                         <th>Id ambiente</th>
-                        <th>Estado</th>
                         <th>Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
-// Consulta SQL para seleccionar todos los registros de la tabla t_ambientes
-$query = "SELECT * FROM t_reportes";
-$result = $db->query($query);
+                // Consulta SQL para seleccionar todos los registros de la tabla t_reportes
+                $query = "SELECT * FROM t_reportes";
+                $result = $db->query($query);
 
-if ($result->num_rows > 0) {
-    // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row['Id_reporte'] . "</td>";
-        echo "<td>" . $row['FechaHora'] . "</td>";
-        echo "<td>" . $row['Id_usuario'] . "</td>";
-        echo "<td>" . $row['Id_ambiente'] . "</td>";
-        echo "<td>" . $row['Estado'] . "</td>";
-        echo "<td>" . $row['Observaciones'] . "</td>";
-        echo "<td>";
-    }
-} else {
-    // Si no hay filas en el resultado, mostrar un mensaje de que no hay registros
-    echo "<tr><td colspan='10'>No hay registros</td></tr>";
-}
+                if ($result->num_rows > 0) {
+                    // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>";
+                        echo "<td>" . $row['Id_reporte'] . "</td>";
+                        echo "<td>" . $row['FechaHora'] . "</td>";
+                        echo "<td>" . $row['Id_usuario'] . "</td>";
+                        echo "<td>" . $row['Id_ambiente'] . "</td>";
+                        echo "<td>" . $row['Observaciones'] . "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    // Si no hay filas en el resultado, mostrar un mensaje de que no hay registros
+                    echo "<tr><td colspan='5'>No hay registros</td></tr>";
+                }
 
-// Cerrar la conexión a la base de datos
-$db->close();
-?>
-
+                // Cerrar la conexión a la base de datos
+                $db->close();
+                ?>
                 </tbody>
             </table>
         </div>
@@ -106,12 +95,18 @@ $db->close();
             <button id="btn_salir">Salir</button>
         </div>
     </section>
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script src="../assets/buscador.js"></script>
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tabla-ambientes').DataTable({
+                "paging": true,
+                "pageLength": 10 // Mostrar 10 registros por página
+            });
+        });
+    </script>
 </body>
 </html>
