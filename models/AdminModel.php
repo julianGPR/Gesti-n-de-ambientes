@@ -78,22 +78,31 @@ public function guardarComputador($tipo, $marca, $modelo, $serial, $placaInventa
 public function modificarComputador($id, $tipo, $marca, $modelo, $serial, $placaInventario, $nuevoIdAmbiente, $checkPc, $hardware, $software, $observaciones) {
     $conn = Database::connect();
 
-    // Verificar la existencia del nuevo ID de ambiente
-    $verificarExistencia = $conn->query("SELECT Id_ambiente FROM t_ambientes WHERE Id_ambiente = '$nuevoIdAmbiente'");
-    if ($verificarExistencia->num_rows > 0) {
-        // Si el nuevo ID de ambiente existe, proceder con la actualización del computador
-        $sql = "UPDATE t_computadores SET Tipo='$tipo', Marca='$marca', Modelo='$modelo', Serial='$serial', PlacaInventario='$placaInventario', Id_ambiente='$nuevoIdAmbiente', CheckPc='$checkPc', Hardware='$hardware', Software='$software', Observaciones='$observaciones' WHERE Id_computador='$id'";
+    // Verificar la existencia del nuevo ID de ambiente solo si se proporciona
+    if ($nuevoIdAmbiente !== null) {
+        $verificarExistencia = $conn->query("SELECT Id_ambiente FROM t_ambientes WHERE Id_ambiente = '$nuevoIdAmbiente'");
+        if ($verificarExistencia->num_rows > 0) {
+            // Si el nuevo ID de ambiente existe, proceder con la actualización del computador
+            $sql = "UPDATE t_computadores SET Tipo='$tipo', Marca='$marca', Modelo='$modelo', Serial='$serial', PlacaInventario='$placaInventario', Id_ambiente='$nuevoIdAmbiente', CheckPc='$checkPc', Hardware='$hardware', Software='$software', Observaciones='$observaciones' WHERE Id_computador='$id'";
+            if ($conn->query($sql) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            // Si el nuevo ID de ambiente no existe, manejar el error o devolver false según sea necesario
+            return false;
+        }
+    } else {
+        // Si no se proporciona un nuevo ID de ambiente, actualizar el computador sin verificar la existencia
+        $sql = "UPDATE t_computadores SET Tipo='$tipo', Marca='$marca', Modelo='$modelo', Serial='$serial', PlacaInventario='$placaInventario', Id_ambiente=NULL, CheckPc='$checkPc', Hardware='$hardware', Software='$software', Observaciones='$observaciones' WHERE Id_computador='$id'";
         if ($conn->query($sql) === TRUE) {
             return true;
         } else {
             return false;
         }
-    } else {
-        // Si el nuevo ID de ambiente no existe, manejar el error o devolver false según sea necesario
-        return false;
     }
 }
-
 
 public function obtenerComputadorPorId($id) {
     $conn = Database::connect();
@@ -130,7 +139,7 @@ public function obtenerComputadorPorId($id) {
 public function modificarUsuario($id, $nombres, $apellidos, $clave, $rol) {
     $conn = Database::connect();
 
-    $sql = "UPDATE t_usuarios SET Nombres=?, Apellidos=?, Clave=?, Rol=? WHERE Id_usuario=?";
+    $sql = "UPDATE t_computadores SET Nombres=$nombre, Apellidos=$apellidos, Clave=$clave, Rol=$rol WHERE Id_usuario='$id'";
 
     // Preparar la declaración
     $stmt = $conn->prepare($sql);

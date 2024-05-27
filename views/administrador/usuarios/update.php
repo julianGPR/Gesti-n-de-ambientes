@@ -48,7 +48,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
             <input type="text" id="apellidos" name="apellidos" value="<?php echo isset($usuario['Apellidos']) ? $usuario['Apellidos'] : ''; ?>" required><br><br>
 
             <label for="clave">Clave:</label><br>
-            <input type="number" id="clave" name="clave" value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>" required><br><br>
+                <input type="password" id="clave" name="clave" value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>" required>
+                <button type="button" id="mostrarClave">Mostrar Clave</button><br><br>
 
             <label for="rol">Rol:</label><br>
             <select id="rol" name="rol" required>
@@ -59,6 +60,20 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
             <button type="submit">Guardar Cambios</button>
         </form>
     </section>
+
+    <script>
+    document.getElementById('mostrarClave').addEventListener('click', function() {
+        var claveInput = document.getElementById('clave');
+        if (claveInput.type === "password") {
+            claveInput.type = "text";
+            this.textContent = "Ocultar Clave";
+        } else {
+            claveInput.type = "password";
+            this.textContent = "Mostrar Clave";
+        }
+    });
+</script>
+
 
     <footer>
         <p>Sena todos los derechos reservados</p>
