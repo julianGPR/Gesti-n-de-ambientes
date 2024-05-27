@@ -11,6 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
 </head>
 <body>
     <header>
@@ -38,11 +42,6 @@
     </header>
     <nav>
         <div class="filtro-y-crear">
-            <div class="container-fluid">
-                <form class="d-flex">
-                    <input class="form-control me-2 light-table-filter" data-table="table_id" type="text" placeholder="Buscar por Nombre">
-                </form>
-            </div>
             <div class="crear-ambiente">
                 <?php
                 // Construir la URL adecuada para el botón de "Gestión de Ambientes"
@@ -134,6 +133,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script src="../assets/buscador.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#tabla-ambientes').DataTable({
+            "paging": true,
+            "pageLength": 10 // Mostrar 10 registros por página
+        });
+    });
+</script>
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>
