@@ -37,7 +37,7 @@
             margin-top: 10px;
         }
 
-        .escan{
+        .escan {
             background-color: #138d75;
             padding: 10px;
             color: white;
@@ -105,7 +105,12 @@
             });
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
-                    scanner.start(cameras[0]);
+                    let rearCamera = cameras.find(camera => camera.name.toLowerCase().includes('back'));
+                    if (rearCamera) {
+                        scanner.start(rearCamera);
+                    } else {
+                        scanner.start(cameras[0]);
+                    }
                 } else {
                     console.error('No se encontraron cámaras disponibles.');
                     alert('No se encontraron cámaras disponibles.');

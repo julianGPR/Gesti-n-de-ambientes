@@ -11,10 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-
 </head>
 <body>
     <header>
@@ -42,20 +38,25 @@
     </header>
     <nav>
         <div class="filtro-y-crear">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    <input class="form-control me-2 light-table-filter" data-table="table_id" type="text" placeholder="Buscar por Nombre">
+                </form>
+            </div>
             <div class="crear-ambiente">
                 <?php
                 // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createAmbiente/';
+                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createComputador/';
                 ?>
                 <ul>
-                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Ambiente</a></li>
+                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Computador</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <section class="ambiente" id="section-ambiente">
         <div class="subtitulo-ambiente">
-            <h2>Ambientes</h2>
+            <h2>Administracion de Computadores</h2>
         </div>
         <div class="descripcion-ambiente">
             <p>Gestión de ambientes de formación</p>
@@ -65,14 +66,14 @@
                 <thead>
                     <tr>
                     <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Torre</th>
-                    <th>Computadores</th>
-                    <th>Tvs</th>
-                    <th>Sillas</th>
-                    <th>Mesas</th>
-                    <th>Tableros</th>
-                    <th>Nineras</th>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Serial</th>
+                    <th>Placa de Inventario</th>
+                    <th>Id ambiente</th>
+                    <th>Hardware</th>
+                    <th>Softaware</th>
                     <th>Observaciones</th>
                     <th>Acción</th>
                     </tr>
@@ -80,7 +81,13 @@
                 <tbody>
                     <?php
                     // Consulta SQL base
-                    $query = "SELECT * FROM t_ambientes";
+                    $query = "SELECT c.Id_computador, c.Tipo, c.Marca, c.Modelo, c.Serial, c.PlacaInventario, a.Nombre,
+                            CASE c.Hardware WHEN 1 THEN 'Funcional' ELSE 'No Funcional' END AS EstadoHardware,
+                            CASE c.Software WHEN 1 THEN 'Funcional' ELSE 'No Funcional' END AS EstadoSoftware,
+                            c.Observaciones
+                            FROM t_computadores AS c
+                            INNER JOIN t_ambientes AS a ON c.Id_ambiente = a.Id_ambiente";
+
 
                     if (!empty($filtros)) {
                         $query .= " WHERE " . implode(" AND ", $filtros);
@@ -93,30 +100,19 @@
                         // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . $row['Id_ambiente'] . "</td>";
+                            echo "<td>" . $row['Id_computador'] . "</td>";
+                            echo "<td>" . $row['Tipo'] . "</td>";
+                            echo "<td>" . $row['Marca'] . "</td>";
+                            echo "<td>" . $row['Modelo'] . "</td>";
+                            echo "<td>" . $row['Serial'] . "</td>";
+                            echo "<td>" . $row['PlacaInventario'] . "</td>";
                             echo "<td>" . $row['Nombre'] . "</td>";
-                            echo "<td>" . $row['Torre'] . "</td>";
-                            echo "<td>" . $row['Computadores'] . "</td>";
-                            echo "<td>" . $row['Tvs'] . "</td>";
-                            echo "<td>" . $row['Sillas'] . "</td>";
-                            echo "<td>" . $row['Mesas'] . "</td>";
-                            echo "<td>" . $row['Tableros'] . "</td>";
-                            echo "<td>" . $row['Nineras'] . "</td>";
+                            echo "<td>" . $row['EstadoHardware'] . "</td>";
+                            echo "<td>" . $row['EstadoSoftware'] . "</td>";
                             echo "<td>" . $row['Observaciones'] . "</td>";
                             echo "<td>";
-                            if ($row['Estado'] !== 'Inhabilitado') {
-                                $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAmbiente/';
-                                echo "<a href='" . $url_update . $row['Id_ambiente'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
-
-                                $url_update = '/dashboard/gestion%20de%20ambientes/admin/generateQR/';
-                                echo "<a href='" . $url_update . $row['Id_ambiente'] . "' class='boton-generar-qr' boton-accion ><img src='../assets/qr-code.svg'></a>";
-                            } else {
-                                // Si el ambiente está inhabilitado, mostrar el botón de habilitar
-                                echo "<a href='#' onclick='confirmarHabilitar(" . $row['Id_ambiente'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
-                            }
-                            if ($row['Estado'] !== 'Inhabilitado') {
-                                echo "<a href='#' onclick='confirmarInhabilitar(" . $row['Id_ambiente'] . ")' class='boton-inhabilitar boton-accion'><img src='../assets/inhabilitar1.svg'></a>";
-                            }
+                            $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateComputador/';
+                                echo "<a href='" . $url_update . $row['Id_computador'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
                             echo "</td>";
                             echo "</tr>";
                         }
@@ -141,30 +137,9 @@
             <button id="btn_salir">Salir</button>
         </div>
     </section>
-    <script>
-        function confirmarInhabilitar(id) {
-            if (confirm("¿Estás seguro de que deseas inhabilitar este ambiente?")) {
-                window.location.href = "inhabilitarAmbiente/" + id;
-            }
-        }
-        function confirmarHabilitar(id) {
-            if (confirm("¿Estás seguro de que deseas habilitar este ambiente?")) {
-                window.location.href = "habilitarAmbiente/" + id;
-            }
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     <script src="../assets/buscador.js"></script>
-    <script>
-    $(document).ready(function() {
-        $('#tabla-ambientes').DataTable({
-            "paging": true,
-            "pageLength": 10 // Mostrar 10 registros por página
-        });
-    });
-</script>
-
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>

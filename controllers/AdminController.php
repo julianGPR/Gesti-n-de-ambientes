@@ -2,158 +2,261 @@
 
 include_once 'models/AdminModel.php';
 
+// Apartado de controlador para LOGIN------------------------------------------------------------------------
 class AdminController {
     public function home() {
         include 'views/administrador/index.php';
     }
     
-    public function ambientes() {
-        include 'views/administrador/ambientes/index.php';
-    }
+// Apartado de controlador para Ambientes------------------------------------------------------------------------
 
-    public function usuarios() {
-        include 'views/administrador/usuarios/index.php';
-    }
+public function ambientes() {
+    include 'views/administrador/ambientes/index.php';
+}
 
-    public function createAmbiente() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = $_POST["nombre"];
-            $computadores = $_POST["computadores"];
-            $tv = $_POST["tv"];
-            $sillas = $_POST["sillas"];
-            $mesas = $_POST["mesas"];
-            $tablero = $_POST["tablero"];
-            $archivador = $_POST["archivador"];
-            $infraestructura = $_POST["infraestructura"];
-            $observacion = $_POST["observacion"];
+public function createAmbiente() {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombre = $_POST["nombre"];
+        $torre = $_POST["torre"];
+        $computadores = $_POST["computadores"];
+        $checkPcs = isset($_POST["checkPcs"]) ? 1 : 0;
+        $tvs = $_POST["tvs"];
+        $checkTvs = isset($_POST["checkTvs"]) ? 1 : 0;
+        $sillas = $_POST["sillas"];
+        $checkSillas = isset($_POST["checkSillas"]) ? 1 : 0;
+        $mesas = $_POST["mesas"];
+        $checkMesas = isset($_POST["checkMesas"]) ? 1 : 0;
+        $tableros = $_POST["tableros"];
+        $checkTableros = isset($_POST["checkTableros"]) ? 1 : 0;
+        $nineras = $_POST["nineras"];
+        $checkNineras = isset($_POST["checkNineras"]) ? 1 : 0;
+        $checkInfraestructura = isset($_POST["checkInfraestructura"]) ? 1 : 0;
+        $estado = 1; // Por defecto se crea activo
+        $observaciones = $_POST["observaciones"];
 
-            $adminModel = new AdminModel();
-            $result = $adminModel->guardarAmbiente($nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
+        $adminModel = new AdminModel();
+        $result = $adminModel->guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
 
-            if ($result) {
-                // Lógica para generar el contenido del QR
-                $contenido_qr = "Nombre: $nombre\nComputadores: $computadores\nTV: $tv\nSillas: $sillas\nMesas: $mesas\nTablero: $tablero\nArchivador: $archivador\nInfraestructura: $infraestructura\nObservación: $observacion";
+        if ($result) {
+            // Lógica para generar el contenido del QR
+            $contenido_qr = "Nombre: $nombre\nTorre: $torre\nComputadores: $computadores\nTVs: $tvs\nSillas: $sillas\nMesas: $mesas\nTableros: $tableros\nNineras: $nineras\nInfraestructura: $checkInfraestructura\nObservaciones: $observaciones";
 
-                // Lógica para generar el código QR
-                $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr) .'&rand=' . uniqid();
+            // Lógica para generar el código QR
+            $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr) .'&rand=' . uniqid();
 
-                header("Location: ../ambientes");
-                exit();
-            } else {
-                header("Location: index.php?error=Error al crear el ambiente");
-                exit();
-            }
+            header("Location: ../ambientes");
+            exit();
         } else {
-            include 'views/administrador/ambientes/create.php';
+            header("Location: index.php?error=Error al crear el ambiente");
+            exit();
         }
+    } else {
+        include 'views/administrador/ambientes/create.php';
     }
+}
 
-    public function updateAmbiente($id) {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = $_POST["nombre"];
-            $computadores = $_POST["computadores"];
-            $tv = $_POST["tv"];
-            $sillas = $_POST["sillas"];
-            $mesas = $_POST["mesas"];
-            $tablero = $_POST["tablero"];
-            $archivador = $_POST["archivador"];
-            $infraestructura = $_POST["infraestructura"];
-            $observacion = $_POST["observacion"];
-    
-            $adminModel = new AdminModel();
-            $result = $adminModel->modificarAmbiente($id, $nombre, $computadores, $tv, $sillas, $mesas, $tablero, $archivador, $infraestructura, $observacion);
-    
-            if ($result) {
-                header("Location: ../ambientes");
-                exit();
-            } else {
-                header("Location: index.php?error=Error al actualizar el ambiente&id=$id");
-                exit();
-            }
+public function updateAmbiente($id) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombre = $_POST["nombre"];
+        $torre = $_POST["torre"];
+        $computadores = $_POST["computadores"];
+        $checkPcs = isset($_POST["checkPcs"]) ? 1 : 0;
+        $tvs = $_POST["tvs"];
+        $checkTvs = isset($_POST["checkTvs"]) ? 1 : 0;
+        $sillas = $_POST["sillas"];
+        $checkSillas = isset($_POST["checkSillas"]) ? 1 : 0;
+        $mesas = $_POST["mesas"];
+        $checkMesas = isset($_POST["checkMesas"]) ? 1 : 0;
+        $tableros = $_POST["tableros"];
+        $checkTableros = isset($_POST["checkTableros"]) ? 1 : 0;
+        $nineras = $_POST["nineras"];
+        $checkNineras = isset($_POST["checkNineras"]) ? 1 : 0;
+        $checkInfraestructura = isset($_POST["checkInfraestructura"]) ? 1 : 0;
+        $estado = isset($_POST["estado"]) ? $_POST["estado"] : '';
+        $observaciones = $_POST["observaciones"];
+
+        $adminModel = new AdminModel();
+        $result = $adminModel->modificarComputador($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
+
+        if ($result) {
+            header("Location: ../ambientes");
+            exit();
         } else {
-            $adminModel = new AdminModel();
-            $ambiente = $adminModel->obtenerAmbientePorId($id);
+            header("Location: index.php?error=Error al actualizar el ambiente&id=$id");
+            exit();
+        }
+    } else {
+        $adminModel = new AdminModel();
+        $ambiente = $adminModel->obtenerAmbientePorId($id);
+        include 'views/administrador/ambientes/update.php';
+    }
+}
+
+public function inhabilitarAmbiente($id) {
+    $adminModel = new AdminModel();
+    $result = $adminModel->inhabilitarAmbiente($id);
+
+    if ($result) {
+        echo "<script>alert('Ambiente inhabilitado exitosamente');</script>";
+    } else {
+        echo "<script>alert('Error al inhabilitar el ambiente');</script>";
+    }
+    
+    header("Location: ../ambientes");
+    exit();
+}
+
+public function habilitarAmbiente($id) {
+    $adminModel = new AdminModel();
+    $result = $adminModel->habilitarAmbiente($id);
+
+    if ($result) {
+        echo "<script>alert('Ambiente habilitado exitosamente');</script>";
+    } else {
+        echo "<script>alert('Error al habilitar el ambiente');</script>";
+    }
+    
+    header("Location: ../ambientes");
+    exit();
+}
+// Apartado de controlador para COMPUTADORES------------------------------------------------------------------------
+
+public function computadores(){
+    require 'views/administrador/computadores/index.php';
+}
+public function createComputador() {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $tipo = $_POST["tipo"];
+        $marca = $_POST["marca"];
+        $modelo = $_POST["modelo"];
+        $serial = $_POST["serial"];
+        $placaInventario = $_POST["placaInventario"];
+        $id_ambiente = $_POST["id_ambiente"];
+        $checkPc = isset($_POST["checkPc"]) ? 1 : 0;
+        $hardware = isset($_POST["hardware"]) ? 1 : 0;
+        $software = isset($_POST["software"]) ? 1 : 0;
+        $observaciones = $_POST["observaciones"];
+
+        $adminModel = new AdminModel();
+        $result = $adminModel->guardarComputador($tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones);
+
+        if ($result) {
+            header("Location: ../computadores");
+            exit();
+        } else {
+            header("Location: index.php?error=Error al crear el computador");
+            exit();
+        }
+    } else {
+        include 'views/administrador/computadores/create.php';
+    }
+}
+
+public function updateComputador($id) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $tipo = $_POST["tipo"];
+        $marca = $_POST["marca"];
+        $modelo = $_POST["modelo"];
+        $serial = $_POST["serial"];
+        $placaInventario = $_POST["placaInventario"];
+        $id_ambiente = $_POST["Id_ambiente"];
+        $checkPc = isset($_POST["checkPc"]) ? 1 : 0;
+        $hardware = isset($_POST["hardware"]) ? 1 : 0;
+        $software = isset($_POST["software"]) ? 1 : 0;
+        $observaciones = $_POST["observaciones"];
+
+        $adminModel = new AdminModel();
+        $result = $adminModel->modificarComputador($id, $tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones);
+
+        if ($result) {
+            // Redirigir a la lista de ambientes si la actualización fue exitosa
+            header("Location: ../ambientes");
+            exit();
+        } else {
+            // Manejar el caso en que ocurra un error al actualizar el ambiente
+            header("Location: index.php?error=Error al actualizar el ambiente&id=$id");
+            exit();
+        }
+    } else {
+        // Obtener los datos del ambiente existente
+        $adminModel = new AdminModel();
+        $ambiente = $adminModel->obtenerAmbientePorId($id);
+
+        if ($ambiente) {
+            // Renderizar el formulario de actualización con los datos del ambiente
             include 'views/administrador/ambientes/update.php';
+        } else {
+            // Manejar el caso en que el ambiente no existe
+            echo "Error: El ambiente especificado no existe.";
         }
     }
+}
 
-    public function inhabilitarAmbiente($id) {
+// Apartado de controlador para USUARIOS------------------------------------------------------------------------
+
+// Método para mostrar la lista de usuarios
+public function usuarios() {
+    include 'views/administrador/usuarios/index.php';
+}
+
+// Método para crear un nuevo usuario
+public function createUsuario() {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombres = $_POST["nombres"];
+        $apellidos = $_POST["apellidos"];
+        $rol = $_POST["rol"];
+        
+        // Generar contraseña aleatoria de 4 dígitos
+        $clave = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+
+        // Encriptar la contraseña
+        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
+
         $adminModel = new AdminModel();
-        $result = $adminModel->inhabilitarAmbiente($id);
+        $result = $adminModel->guardarUsuario($nombres, $apellidos, $claveEncriptada, $rol);
 
         if ($result) {
-            echo "<script>alert('Ambiente inhabilitado exitosamente');</script>";
+            // Redirigir al usuario a la lista de usuarios
+            header("Location: ../usuarios");
+            exit();
         } else {
-            echo "<script>alert('Error al inhabilitar el ambiente');</script>";
+            header("Location: index.php?error=Error al crear el usuario");
+            exit();
         }
-        
-        header("Location: ../ambientes");
-        exit();
+    } else {
+        include 'views/administrador/usuarios/create.php';
     }
+}
 
-    public function habilitarAmbiente($id) {
+// Método para actualizar un usuario existente
+public function updateUsuario($id) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $nombres = $_POST["nombres"];
+        $apellidos = $_POST["apellidos"];
+        $clave = $_POST["clave"];
+        $rol = $_POST["rol"];
+
+        // Encriptar la nueva contraseña
+        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
+
         $adminModel = new AdminModel();
-        $result = $adminModel->habilitarAmbiente($id);
-    
+        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $claveEncriptada, $rol);
+
         if ($result) {
-            echo "<script>alert('Ambiente habilitado exitosamente');</script>";
+            header("Location: ../usuarios");
+            exit();
         } else {
-            echo "<script>alert('Error al habilitar el ambiente');</script>";
+            header("Location: index.php?error=Error al actualizar el usuario&id=$id");
+            exit();
         }
-        
-        header("Location: ../ambientes");
-        exit();
+    } else {
+        $adminModel = new AdminModel();
+        $usuario = $adminModel->obtenerUsuarioPorId($id);
+        include 'views/administrador/usuarios/update.php';
     }
+}
 
-    public function createUsuario(){
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombres = $_POST["nombres"];
-            $apellidos = $_POST["apellidos"];
-            $correo = $_POST["correo"];
-            $pin = $_POST["pin"];
-            $rol = $_POST["Rol"];
-
-            $adminModel = new AdminModel();
-            $result = $adminModel->guardarUsuario($nombres, $apellidos, $correo, $pin, $rol);
-
-            if ($result) {
-                header("Location: ../usuarios");
-                exit();
-            } else {
-                header("Location: index.php?error=Error al crear el usuario");
-                exit();
-            }
-        } else {
-            include 'views/administrador/usuarios/create.php';
-        }
-
-    }
-
-    public function updateUsuario($id) {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombres = $_POST["nombres"];
-            $apellidos = $_POST["apellidos"];
-            $correo = $_POST["correo"];
-            $pin = $_POST["pin"];
-            $rol = $_POST["Rol"];
-    
-            $adminModel = new AdminModel();
-            $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $correo, $pin, $rol);
-    
-            if ($result) {
-                header("Location: ../usuarios");
-                exit();
-            } else {
-                header("Location: index.php?error=Error al actualizar el usuario&id=$id");
-                exit();
-            }
-        } else {
-            $adminModel = new AdminModel();
-            $usuario = $adminModel->obtenerUsuarioPorId($id);
-            include 'views/administrador/usuarios/update.php';
-        }
-    }
+// Apartado de controlador para REPORTES------------------------------------------------------------------------
 
 
     public function reportes() {
@@ -204,7 +307,9 @@ class AdminController {
             exit();
         }
     }
-    
+
 }
+
+
 
 ?>

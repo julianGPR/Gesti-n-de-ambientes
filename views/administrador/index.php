@@ -11,12 +11,24 @@ $db = Database::connect();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <script src="https://kit.fontawesome.com/35796e2324.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <style>
-        .notification-bell {
+
+<style>
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.button-admin {
+    flex: 1;
+    margin: 5px;
+    text-align: center;
+}
+
+.notification-bell {
             position: relative;
             margin-left: 700px;
             margin-top: 10px;
@@ -82,8 +94,8 @@ $db = Database::connect();
             font-size: 12px;
         }
 
-    </style>
-    <script>
+</style>
+<script>
 
         function flyBell() {
             var bellImage = document.getElementById("bellImage");
@@ -100,10 +112,8 @@ $db = Database::connect();
             location.reload();
         }
 
-    </script>
-
-
-        <div class="notification-bell">
+</script>
+<div class="notification-bell">
             <button id="bellButton" onclick="flyBellAndShowPopup()">
             <img id="bellImage" src="../assets/campana.png" alt="Icono de la campana">
             <span class="notification-counter">
@@ -125,7 +135,8 @@ $db = Database::connect();
             </span>
         </div>
     </button>
-
+            </select>
+        </div>
     <!-- Elemento para la ventana emergente -->
     <div id="popup" class="popup">
     <div class="popup-content">
@@ -170,9 +181,6 @@ $db = Database::connect();
 </div>
 
 
-
-
-
     <header>
         <div class="logo-container">
             <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
@@ -195,17 +203,34 @@ $db = Database::connect();
         <h2>Administrador</h2>
     </div>
     <div class="botones-admin">
-        <?php
-        // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-        $url_gestion_ambientes = '/dashboard/gestion%20de%20ambientes/admin/ambientes' ; // Corregir la construcción de la URL
-        $url_gestion_usuarios = '/dashboard/gestion%20de%20ambientes/admin/usuarios';
-        $url_gestion_reportes = '/dashboard/gestion%20de%20ambientes/admin/reportes';
-        ?>
-        <a href="<?php echo $url_gestion_ambientes; ?>" class="button-admin" id="btn-ambientes">Gestión de Ambientes</a>
-        <a href="<?php echo $url_gestion_usuarios; ?>" class="button-admin" id="btn-ambientes">Gestión de Usuarios</a>
-        <a href="<?php echo $url_gestion_reportes; ?>" class="button-admin" id="btn-ambientes">Gestión de Reportes</a>
+    <?php
+    // Construir la URL adecuada para los botones
+    $urls = [
+        '/dashboard/gestion%20de%20ambientes/admin/ambientes' => 'Gestión de Ambientes',
+        '/dashboard/gestion%20de%20ambientes/admin/usuarios' => 'Gestión de Usuarios',
+        '/dashboard/gestion%20de%20ambientes/admin/reportes' => 'Gestión de Reportes',
+        '/dashboard/gestion%20de%20ambientes/admin/computadores' => 'Computadores',
+        '/dashboard/gestion%20de%20ambientes/admin/tvs' => 'Televisores(tvs)',
+        '/dashboard/gestion%20de%20ambientes/admin/sillas' => 'Sillas',
+        '/dashboard/gestion%20de%20ambientes/admin/mesas' => 'Mesas',
+        '/dashboard/gestion%20de%20ambientes/admin/tableros' => 'Tableros',
+        '/dashboard/gestion%20de%20ambientes/admin/nineras' => 'Niñeras',
+    ];
 
-    </div>
+    $i = 0;
+    foreach ($urls as $url => $label) {
+        if ($i % 3 == 0) {
+            if ($i > 0) echo '</div>';
+            echo '<div class="button-row">';
+        }
+        echo '<a href="' . $url . '" class="button-admin">' . $label . '</a>';
+        $i++;
+    }
+    if ($i % 3 != 0) {
+        echo '</div>';
+    }
+    ?>
+</div>
     </section>
     <div class="salir">
         <button id="btn_salir">Salir</button>
@@ -214,5 +239,6 @@ $db = Database::connect();
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>
+    <script src="../assets/menu.js"></script>
 </body>
 </html>
