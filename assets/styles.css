@@ -199,6 +199,21 @@ footer .button:hover {
 .button-admin:hover {
     background-color: #45a049;
 }
+/* Estilos personalizados para el botón de confirmación en SweetAlert2 */
+.custom-btn-class {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Borde */
+    border-radius: 4px; /* Borde redondeado */
+    cursor: pointer; /* Cursor al pasar sobre el botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    transition: background-color 0.3s ease; /* Transición de color de fondo */
+}
+
+.custom-btn-class:hover {
+    background-color: #45a049; /* Color de fondo al pasar sobre el botón */
+}
 
 /*section del index de ambientes*/
 .ambiente {

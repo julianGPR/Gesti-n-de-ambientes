@@ -1,10 +1,4 @@
-<?php
-    // Verificar si la actualización fue exitosa mediante el parámetro GET 'success'
-    if(isset($_GET['success']) && $_GET['success'] === 'true'): ?>
-        <script>
-            alert("Ambiente actualizado exitosamente");
-        </script>
-<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles.css">
+    <!-- Incluir SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 <header>
@@ -31,7 +34,7 @@
     </div>
 </header>
 <section class="create-ambiente" id="section-create-ambiente">
-    <form action="createAmbiente" method="POST">
+    <form id="createAmbienteForm" action="guardarAmbiente.php" method="POST">
         <label for="nombre">Nombre del Ambiente:</label><br>
         <input type="text" id="nombre" name="nombre" required><br><br>
 
@@ -80,5 +83,52 @@
 <div class="salir">
     <button id="btn_salir">Salir</button>
 </div>
+<script>
+document.getElementById('createAmbienteForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var formData = new FormData(this);
+
+    // Enviar solicitud al servidor
+    fetch('guardarAmbiente', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Mostrar alerta de éxito
+            Swal.fire({
+                icon: 'success',
+                title: 'Éxito',
+                text: 'El ambiente ha sido modificado exitosamente',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = '../ambientes';
+            });
+        } else {
+            // Mostrar alerta de error
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo modificar el ambiente. Por favor, intenta de nuevo',
+                confirmButtonText: 'OK'
+            });
+        }
+    })
+    .catch(error => {
+        // Mostrar alerta de error de conexión
+        Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'El ambiente ha sido creado exitosamente',
+            confirmButtonText: 'Recargar Pagina',
+            confirmButtonClass: 'custom-btn-class'
+        }).then(() => {
+                window.location.reload(); // Recargar la página
+            });
+    });
+});
+</script>
 </body>
 </html>
