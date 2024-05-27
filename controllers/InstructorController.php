@@ -42,26 +42,7 @@ class InstructorController {
             echo "No se encontró información relacionada para el código QR escaneado.";
         }
     }
-
-    public function guardarObservacion() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Obtener la observación y el estado del checkbox del formulario
-            $observaciones = $_POST["observacion"];
-            $estadosCheckbox = $_POST["checkpc"];
-
-            // Llamar al método del modelo para guardar los datos
-            $instructorModel = new InstructorModel();
-            foreach($estadosCheckbox as $serial => $estadoCheckbox) {
-                $observacion = $observaciones[$serial] ?? ''; // Obtener la observación asociada a este checkbox
-                $instructorModel->guardarObservacion($serial, $observacion, $estadoCheckbox);
-            }
-
-            // Redirigir o mostrar un mensaje de éxito
-            // Por ejemplo, redirigir a la página principal
-            header("../home");
-            exit(); // Terminar la ejecución del script
-        }
+    
     }
-}
 
 ?>

@@ -52,20 +52,9 @@ class instructorModel {
         return $ambientes;
     }
 
-    public function guardarObservacion($serial, $observacion, $estadoCheckbox) {
-        $conn = Database::connect();
-        $observacion = $conn->real_escape_string($observacion); // Escapar la observación para evitar problemas de seguridad
-        $estadoCheckbox = $estadoCheckbox == 'on' ? 1 : 0; // Convertir el estado del checkbox a un valor booleano
     
-        $sql = "UPDATE t_computadores SET Observacion = '$observacion', CheckPc = $estadoCheckbox WHERE Serial = '$serial'";
-        
-        if ($conn->query($sql) === TRUE) {
-            echo "Observación guardada correctamente.";
-        } else {
-            echo "Error al guardar la observación: " . $conn->error;
-        }
     
-        $conn->close();
-    }
+    
 }
+
 ?>

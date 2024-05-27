@@ -15,9 +15,107 @@ $db = Database::connect();
 </head>
 <body>
 
+<style>
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.button-admin {
+    flex: 1;
+    margin: 5px;
+    text-align: center;
+}
+
+.notification-bell {
+            position: relative;
+            margin-left: 700px;
+            margin-top: 10px;
+        }
+
+        .notification-bell button{
+            background-color: white;
+            border: none;
+        }
+
+        .notification-bell img {
+            transition: transform 0.8s ease-in-out;
+            width: 50px;
+        }
+
+        .flying {
+            animation: fly 1s ease-in-out forwards;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translate(0);
+            }
+            50% {
+                transform: translate(20px, -20px) rotate(-45deg);
+            }
+            100% {
+                transform: translate(0);
+            }
+        }
+        /* Estilos para la ventana emergente */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-content {
+            text-align: center;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .notification-counter {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 8px;
+            font-size: 12px;
+        }
+
+</style>
+<script>
+
+        function flyBell() {
+            var bellImage = document.getElementById("bellImage");
+            bellImage.classList.add("flying");
+        }
+        function flyBellAndShowPopup() {
+            var bellImage = document.getElementById("bellImage");
+            bellImage.classList.add("flying");
+            document.getElementById("popup").style.display = "block"; // Muestra la ventana emergente
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+            location.reload();
+        }
+
+</script>
 <div class="notification-bell">
             <button id="bellButton" onclick="flyBellAndShowPopup()">
-            <img id="bellImage" src="../assets/alerta.svg" alt="Icono de la campana">
+            <img id="bellImage" src="../assets/campana.png" alt="Icono de la campana">
             <span class="notification-counter">
                 <?php
                 $conn = Database::connect();
@@ -37,25 +135,6 @@ $db = Database::connect();
             </span>
         </div>
     </button>
-    <div class="menu-container">
-        <img class="menu-toggle" src="../assets/menu.svg" alt="Icono del menú">
-            <ul class="menu-options" id="menuOptions">
-                <?php
-                    $url_computadores = '/dashboard/gestion%20de%20ambientes/admin/computadores' ; //construcción de la URL
-                    $url_tvs = '/dashboard/gestion%20de%20ambientes/admin/tvs' ; //construcción de la URL
-                    $url_sillas = '/dashboard/gestion%20de%20ambientes/admin/sillas' ; //construcción de la URL
-                    $url_mesas = '/dashboard/gestion%20de%20ambientes/admin/mesas' ; //construcción de la URL
-                    $url_tableros = '/dashboard/gestion%20de%20ambientes/admin/tableros' ; //construcción de la URL
-                    $url_nineras = '/dashboard/gestion%20de%20ambientes/admin/nineras' ; //construcción de la URL
-                ?>
-                    <li><a href="<?php echo $url_computadores; ?>" class="button-admin" id="btn-computadores">Computadores</a></li>
-                    <li><a href="<?php echo $url_tvs; ?>" class="button-admin" id="btn-tvs">Televisores(tvs)</a></li>
-                    <li><a href="<?php echo $url_sillas; ?>" class="button-admin" id="btn-sillas">sillas</a></li>
-                    <li><a href="<?php echo $url_mesas; ?>" class="button-admin" id="btn-mesas">mesas</a></li>
-                    <li><a href="<?php echo $url_tableros; ?>" class="button-admin" id="btn-tableros">tableros</a></li>
-                    <li><a href="<?php echo $url_nineras; ?>" class="button-admin" id="btn-nineras">nineras</a></li>
-            </ul>
-    </div>
             </select>
         </div>
     <!-- Elemento para la ventana emergente -->
@@ -124,17 +203,34 @@ $db = Database::connect();
         <h2>Administrador</h2>
     </div>
     <div class="botones-admin">
-        <?php
-        // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-        $url_gestion_ambientes = '/dashboard/gestion%20de%20ambientes/admin/ambientes' ; // Corregir la construcción de la URL
-        $url_gestion_usuarios = '/dashboard/gestion%20de%20ambientes/admin/usuarios';
-        $url_gestion_reportes = '/dashboard/gestion%20de%20ambientes/admin/reportes';
-        ?>
-        <a href="<?php echo $url_gestion_ambientes; ?>" class="button-admin" id="btn-ambientes">Gestión de Ambientes</a>
-        <a href="<?php echo $url_gestion_usuarios; ?>" class="button-admin" id="btn-ambientes">Gestión de Usuarios</a>
-        <a href="<?php echo $url_gestion_reportes; ?>" class="button-admin" id="btn-ambientes">Gestión de Reportes</a>
+    <?php
+    // Construir la URL adecuada para los botones
+    $urls = [
+        '/dashboard/gestion%20de%20ambientes/admin/ambientes' => 'Gestión de Ambientes',
+        '/dashboard/gestion%20de%20ambientes/admin/usuarios' => 'Gestión de Usuarios',
+        '/dashboard/gestion%20de%20ambientes/admin/reportes' => 'Gestión de Reportes',
+        '/dashboard/gestion%20de%20ambientes/admin/computadores' => 'Computadores',
+        '/dashboard/gestion%20de%20ambientes/admin/tvs' => 'Televisores(tvs)',
+        '/dashboard/gestion%20de%20ambientes/admin/sillas' => 'Sillas',
+        '/dashboard/gestion%20de%20ambientes/admin/mesas' => 'Mesas',
+        '/dashboard/gestion%20de%20ambientes/admin/tableros' => 'Tableros',
+        '/dashboard/gestion%20de%20ambientes/admin/nineras' => 'Niñeras',
+    ];
 
-    </div>
+    $i = 0;
+    foreach ($urls as $url => $label) {
+        if ($i % 3 == 0) {
+            if ($i > 0) echo '</div>';
+            echo '<div class="button-row">';
+        }
+        echo '<a href="' . $url . '" class="button-admin">' . $label . '</a>';
+        $i++;
+    }
+    if ($i % 3 != 0) {
+        echo '</div>';
+    }
+    ?>
+</div>
     </section>
     <div class="salir">
         <button id="btn_salir">Salir</button>

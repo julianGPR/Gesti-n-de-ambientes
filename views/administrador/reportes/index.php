@@ -60,7 +60,11 @@ $db = Database::connect();
                 <tbody>
                 <?php
                 // Consulta SQL para seleccionar todos los registros de la tabla t_reportes
-                $query = "SELECT * FROM t_reportes";
+                $query = "SELECT r.Id_reporte, r.Observaciones, r.FechaHora, CONCAT(u.Nombres, ' ', u.Apellidos) AS NombreCompleto, a.Nombre AS ambiente
+                        FROM t_reportes AS r
+                        INNER JOIN t_usuarios AS u ON r.Id_usuario = u.Id_usuario
+                        INNER JOIN t_ambientes AS a ON r.Id_ambiente = a.Id_ambiente";
+                        
                 $result = $db->query($query);
 
                 if ($result->num_rows > 0) {
@@ -69,8 +73,8 @@ $db = Database::connect();
                         echo "<tr>";
                         echo "<td>" . $row['Id_reporte'] . "</td>";
                         echo "<td>" . $row['FechaHora'] . "</td>";
-                        echo "<td>" . $row['Id_usuario'] . "</td>";
-                        echo "<td>" . $row['Id_ambiente'] . "</td>";
+                        echo "<td>" . $row['NombreCompleto'] . "</td>";
+                        echo "<td>" . $row['ambiente'] . "</td>";
                         echo "<td>" . $row['Observaciones'] . "</td>";
                         echo "</tr>";
                     }

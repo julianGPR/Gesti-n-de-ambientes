@@ -39,7 +39,7 @@
 /* Estilos generales */
 /* Establecer márgenes y centrar el contenido */
 body {
-    margin: 20px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
+    margin: 15px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -167,7 +167,7 @@ footer .button:hover {
     padding: 20px;
     border-radius: 10px;
     margin: 20px;
-    height: 250px;
+    min-height: 250px; /* Asegura un mínimo de altura */
 }
 
 .subtitulo-admin {
@@ -177,6 +177,7 @@ footer .button:hover {
 
 .botones-admin {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 10px;
 }

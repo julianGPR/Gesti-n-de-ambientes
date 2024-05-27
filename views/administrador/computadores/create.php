@@ -1,3 +1,8 @@
+<?php
+    // Conectar a la base de datos
+    require_once 'config/db.php';
+    $db = Database::connect();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -53,13 +58,37 @@
         <input type="text" id="placaInventario" name="placaInventario"><br><br>
 
         <label for="id_ambiente">Id ambiente:</label><br>
-        <input type="number" id="id_ambiente" name="id_ambiente"><br><br>
+        <select id="id_ambiente" name="id_ambiente">
+            <option value="">Seleccione...</option>
+            <?php
+            
+            $sql = "SELECT Id_ambiente, Nombre FROM t_ambientes";
+            $resultado = $db->query($sql);
+            if ($resultado->num_rows > 0) {
+                // Iterar sobre los resultados y generar opciones para el menú desplegable
+                while ($fila = $resultado->fetch_assoc()) {
+                    echo '<option value="' . $fila['Id_ambiente'] . '">' . $fila['Nombre'] . '</option>';
+                }
+            } else {
+                echo '<option value="">No se encontraron ambientes disponibles</option>';
+            }
+
+            ?>
+        </select><br><br>
 
         <label for="hardware">Hardware:</label><br>
-        <input type="number" id="hardware" name="hardware"><br><br>
+        <select id="hardware" name="hardware">
+            <option value="">Seleccione...</option>
+            <option value="1">Funcional</option>
+            <option value="0">No Funcional</option>
+        </select><br><br>
 
         <label for="software">Software:</label><br>
-        <input type="number" id="software" name="software"><br><br>
+        <select id="software" name="software">
+            <option value="">Seleccione...</option>
+            <option value="1">Funcional</option>
+            <option value="0">No Funcional</option>
+        </select><br><br>
 
         <label for="observaciones">Observaciones:</label><br>
         <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea><br><br>

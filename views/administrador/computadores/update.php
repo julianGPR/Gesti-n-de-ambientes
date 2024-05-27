@@ -66,7 +66,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
 
     <div class="regresar">
         <?php
-        $url_regresar = '../usuarios';
+        $url_regresar = '../computador';
         ?>
         <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
     </div>

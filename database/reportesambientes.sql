@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 21-05-2024 a las 22:15:31
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 27-05-2024 a las 03:02:58
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -56,7 +56,7 @@ INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `Ch
 (1, 'Ambiente 101', 'Occidental', 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Habilitado', ''),
 (2, 'Ambiente 104', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (3, 'Ambiente 110', 'Oriental', 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
-(4, 'Ambiente 114', 'Oriental', 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(4, 'Ambiente 114', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (5, 'Ambiente 115', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (6, 'Ambiente 116', 'Oriental', 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (7, 'Ambiente 119', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
@@ -471,7 +471,8 @@ INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Seria
 (338, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '879SS13', '9216109303', 20, 1, 1, 1, NULL),
 (339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL),
 (346, 'Desktop', 'MErcedesdsdad', 's', '2d89sa5d6a', 'adsasd5', 1, 0, 1, 1, ''),
-(347, 'Laptop', 'cdafa', 'csaasc', 'sad33', 'sadsa', 1, 0, 1, 1, '');
+(347, 'Laptop', 'cdafa', 'csaasc', 'sad33', 'sadsa', 1, 0, 1, 1, ''),
+(348, 'Desktop', 'DELL', 'prueba ', 'prueba', '121212', 4, 0, 1, 1, 'No tiene xammp');
 
 --
 -- Disparadores `t_computadores`
@@ -723,12 +724,12 @@ DELIMITER ;
 --
 
 CREATE TABLE `t_reportes` (
-  `Id_reporte` int(50) NOT NULL,
-  `FechaHora` datetime NOT NULL,
-  `Id_usuario` int(50) DEFAULT NULL,
-  `Id_ambiente` int(50) DEFAULT NULL,
-  `Estado` varchar(255) DEFAULT NULL,
-  `Observaciones` varchar(1000) NOT NULL
+  `Id_reporte` int(4) NOT NULL,
+  `FechaHora` datetime DEFAULT NULL,
+  `Id_usuario` int(2) DEFAULT NULL,
+  `Id_ambiente` int(2) DEFAULT NULL,
+  `Estado` varchar(1) DEFAULT NULL,
+  `Observaciones` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -736,15 +737,12 @@ CREATE TABLE `t_reportes` (
 --
 
 INSERT INTO `t_reportes` (`Id_reporte`, `FechaHora`, `Id_usuario`, `Id_ambiente`, `Estado`, `Observaciones`) VALUES
-(80, '2024-05-13 18:59:08', NULL, NULL, NULL, 'El Biblioteca: El ambiente se encontraba desordenado y sucio'),
-(81, '2024-05-13 19:00:25', NULL, NULL, NULL, 'El Biblioteca: Se requiere instalación de xampp en los equipos'),
-(82, '2024-05-13 19:01:25', NULL, NULL, NULL, 'En el Biblioteca; El computador con número de serie MXL9493MTL y Placa de Inventario 9216108660: El computador no enciende'),
-(83, '2024-05-13 19:02:35', NULL, NULL, NULL, 'La Infraestructura del Biblioteca: El ambiente presenta goteras'),
-(84, '2024-05-13 19:03:28', NULL, NULL, NULL, 'En el Biblioteca; La Silla con Placa de Inventario Silla01: La silla se desoldó'),
-(85, '2024-05-14 21:57:09', NULL, 1, NULL, 'El Ambiente 100: '),
-(86, '2024-05-15 18:06:07', NULL, 1, NULL, 'El Ambiente 101: hola'),
-(87, '2024-05-15 18:06:31', NULL, 1, NULL, 'El Ambiente 101: gfyfjyfjhfgcv gkjhjkgbh hghfhgdfdf hgukglyhi saeasds<szfvbjk khlkhujgjhgc kljhfvhgfc khjkfyjftgh xdgrfxgv knhikgtutiu hgkujhukg'),
-(88, '2024-05-15 18:52:16', NULL, 1, NULL, 'El Ambiente 101: ');
+(1, '2024-05-22 08:45:17', 7, 11, '2', 'Se perdieron 2 computadores'),
+(2, '2024-05-22 08:45:17', 3, 15, '2', 'Ambiente no se encuentra'),
+(6, '2024-05-26 14:18:35', 7, 13, '2', '33PYS13: computador malo'),
+(7, '2024-05-26 14:18:38', 7, 13, '2', '33PYS13: computador malo'),
+(8, '2024-05-26 14:24:49', 7, 13, '2', '33PYS13: computador malo; 65QZS13: Extraviado; 69RRS13: Extraviado; 85MYS13: Extraviado'),
+(9, '2024-05-26 19:42:01', 7, 13, '2', '373WS13: Perdieron; 65QWS13: Perdieron; 696ZS13: Perdieron');
 
 -- --------------------------------------------------------
 
@@ -975,7 +973,8 @@ INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Clave`, `Rol`) 
 (13, 'ds', 'dsad', '$2y$10$uFydrSl.cyY1nyKTp288A.Jn1zwefyBzZ3dBLseYatxc1FbYtuEXi', 'Instructor'),
 (14, 'CSAC', 'CAS', '$2y$10$XtjepMG1SkWVV.aA3YEbGeAnoY5R5sKkuNUkWGgALPjNfI9n4qtQ.', 'Administrador'),
 (15, 'ds', 'DSADAS', '$2y$10$NqxHmI4pBHien1GGO6XnpemDsUuhXSirQbsqR5N2wh4VGoJLmBQ62', 'Instructor'),
-(16, 'jose', 'sadasd', '$2y$10$X7iSaWgokz957H3wjOl87ONoNMeQxh91b5t7B.2GP7d1K/PqR.yMu', 'Administrador');
+(16, 'jose', 'sadasd', '$2y$10$X7iSaWgokz957H3wjOl87ONoNMeQxh91b5t7B.2GP7d1K/PqR.yMu', 'Administrador'),
+(17, 'Pepe Enrique', 'Bravo Medina', '$2y$10$aRgdbnjMQ3guA8X99rF8HOVAPwuOh7YIJMOP2m9wrbqO8HBASzCny', 'Instructor');
 
 --
 -- Índices para tablas volcadas
@@ -992,6 +991,14 @@ ALTER TABLE `t_ambientes`
 --
 ALTER TABLE `t_computadores`
   ADD PRIMARY KEY (`Id_computador`);
+
+--
+-- Indices de la tabla `t_reportes`
+--
+ALTER TABLE `t_reportes`
+  ADD PRIMARY KEY (`Id_reporte`),
+  ADD KEY `Id_usuario` (`Id_usuario`),
+  ADD KEY `Id_ambiente` (`Id_ambiente`);
 
 --
 -- Indices de la tabla `t_usuarios`
@@ -1013,13 +1020,30 @@ ALTER TABLE `t_ambientes`
 -- AUTO_INCREMENT de la tabla `t_computadores`
 --
 ALTER TABLE `t_computadores`
-  MODIFY `Id_computador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=348;
+  MODIFY `Id_computador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
+
+--
+-- AUTO_INCREMENT de la tabla `t_reportes`
+--
+ALTER TABLE `t_reportes`
+  MODIFY `Id_reporte` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
-  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `t_reportes`
+--
+ALTER TABLE `t_reportes`
+  ADD CONSTRAINT `t_reportes_ibfk_1` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`),
+  ADD CONSTRAINT `t_reportes_ibfk_2` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
