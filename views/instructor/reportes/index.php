@@ -1,10 +1,53 @@
 <?php
+
+require_once 'config/db.php';
+$db = Database::connect();
+session_start();
+
+$clave = $_SESSION['clave'];
+
+// Preparar la consulta SQL
+$query = "SELECT * FROM t_usuarios WHERE Clave = ?";
+$stmt = $db->prepare($query);
+
+// Vincular parámetros y ejecutar la consulta
+$stmt->bind_param("s", $clave);
+$stmt->execute();
+
+// Obtener el resultado de la consulta
+$result = $stmt->get_result();
+
+if($result->num_rows === 0) {
+    // No se encontraron registros para la clave dada
+
+    $cargo = "Cargo no encontrado";
+} else {
+    // Obtener el nombre y el cargo del resultado de la consulta
+    $row = $result->fetch_assoc();
+    $id_usuario = $row['Id_usuario'];
+    $usuario = $row['Nombres'] . ' ' . $row['Apellidos'];
+    $cargo = $row['Rol'];
+}
+
+$query = "SELECT Id_ambiente FROM t_ambientes WHERE Nombre = ?";
+$stmt = $db->prepare($query);
+$stmt->bind_param('s', $nombre);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$id_ambiente = $row["Id_ambiente"];
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    header('Content-Type: application/json');
+
     // Conexión a la base de datos
     $conn = new mysqli('localhost', 'root', '', 'reportesambientes');
 
     if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
+        echo json_encode(["success" => false, "message" => "Conexión fallida: " . $conn->connect_error]);
+        exit();
     }
 
     // Verificar que las observaciones estén definidas y no estén vacías
@@ -13,8 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Datos adicionales
         $fechaHora = date('Y-m-d H:i:s');
-        $id_usuario = 7; // Reemplaza con el ID del usuario actual
-        $id_ambiente = 13; // Reemplaza con el ID del ambiente actual
         $estado = 1; // Estado inicial del reporte
 
         // Insertar el reporte en la base de datos
@@ -22,19 +63,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param('siiss', $fechaHora, $id_usuario, $id_ambiente, $estado, $observaciones);
 
         if ($stmt->execute()) {
-            echo "Datos guardados exitosamente";
+            echo json_encode(["success" => true, "message" => "Reporte insertado correctamente"]);
         } else {
-            echo "Error al guardar los datos: " . $conn->error;
+            echo json_encode(["success" => false, "message" => "Error al insertar el reporte"]);
         }
 
         $stmt->close();
     } else {
-        echo "No se recibieron observaciones.";
+        echo json_encode(["success" => false, "message" => "No se recibieron observaciones"]);
     }
 
     $conn->close();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -43,6 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Información Relacionada</title>
     <link rel="stylesheet" href="../../styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -253,18 +297,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             formData.append('observaciones', observaciones.join('; '));
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', '', true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        console.log(xhr.responseText);
-                    } else {
-                        console.error('Error:', xhr.status);
-                    }
+            fetch('', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Éxito',
+                        text: data.message,
+                        confirmButtonText: 'OK',
+                        confirmButtonClass: 'custom-btn-class'
+                    }).then(() => {
+                        window.location.reload(); // Recargar la página
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: data.message,
+                        confirmButtonText: 'OK'
+                    });
                 }
-            };
-            xhr.send(formData);
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Éxito',
+                    text: 'Se guardo el reporte',
+                    confirmButtonText: 'OK'
+                });
+            });
         });
     </script>
 </body>

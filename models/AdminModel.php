@@ -1,6 +1,7 @@
 <?php
 include_once 'config/db.php';
 
+
 // Apartado de Modelo para AMBIENTES------------------------------------------------------------------------
 class AdminModel {
     public function guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones) {
@@ -14,7 +15,11 @@ class AdminModel {
         } else {
             return false;
         }
+
+        
+
     }
+    
 
     public function modificarAmbiente($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones) {
         $conn = Database::connect();

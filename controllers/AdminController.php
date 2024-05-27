@@ -14,6 +14,7 @@ public function ambientes() {
     include 'views/administrador/ambientes/index.php';
 }
 
+
 public function createAmbiente() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST["nombre"];
@@ -40,13 +41,14 @@ public function createAmbiente() {
         if ($result) {
             // Lógica para generar el contenido del QR
             $contenido_qr = "Nombre: $nombre\nTorre: $torre\nComputadores: $computadores\nTVs: $tvs\nSillas: $sillas\nMesas: $mesas\nTableros: $tableros\nNineras: $nineras\nInfraestructura: $checkInfraestructura\nObservaciones: $observaciones";
-
+            
             // Lógica para generar el código QR
             $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr) .'&rand=' . uniqid();
-
+            echo json_encode(["success" => true]);
             header("Location: ../ambientes");
             exit();
         } else {
+            echo json_encode(["success" => false]);
             header("Location: index.php?error=Error al crear el ambiente");
             exit();
         }
@@ -76,7 +78,7 @@ public function updateAmbiente($id) {
         $observaciones = $_POST["observaciones"];
 
         $adminModel = new AdminModel();
-        $result = $adminModel->modificarComputador($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
+        $result = $adminModel->modificarAmbiente($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
 
         if ($result) {
             header("Location: ../ambientes");

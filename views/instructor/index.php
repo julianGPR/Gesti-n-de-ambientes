@@ -1,3 +1,38 @@
+<?php
+require_once 'config/db.php';
+$db = Database::connect();
+session_start();
+
+$clave = $_SESSION['clave'];
+
+// Preparar la consulta SQL
+$query = "SELECT * FROM t_usuarios WHERE Clave = ?";
+$stmt = $db->prepare($query);
+
+// Vincular parámetros y ejecutar la consulta
+$stmt->bind_param("s", $clave);
+$stmt->execute();
+
+// Obtener el resultado de la consulta
+$result = $stmt->get_result();
+
+if($result->num_rows === 0) {
+    // No se encontraron registros para la clave dada
+    $nombre = "Nombre no encontrado";
+    $cargo = "Cargo no encontrado";
+} else {
+    // Obtener el nombre y el cargo del resultado de la consulta
+    $row = $result->fetch_assoc();
+    $nombre = $row['Nombres'] . ' ' . $row['Apellidos'];
+    $cargo = $row['Rol'];
+}
+
+// Cerrar la declaración y la conexión a la base de datos
+$stmt->close();
+$db->close();
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,6 +114,9 @@
     <div class="background-animation"></div>
     
     <button onclick="scanQR()">Escanear con cámara</button>
+
+    <h1><?php echo $nombre; ?></h1>
+    <h2><?php echo $cargo?></h2>
 
     <form id="imageForm" action="" method="post" enctype="multipart/form-data" style="display:none;">
         <input type="file" accept="image/*" name="archivo" id="fileInput">

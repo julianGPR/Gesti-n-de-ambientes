@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles.css">
+
 </head>
 <body>
 <header>
@@ -93,20 +94,21 @@
         <label for="observaciones">Observaciones:</label><br>
         <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea><br><br>
 
-        <button type="submit">Guardar Ambiente</button>
+        <button type="submit">Guardar Computador</button>
     </form>
 </section>
 <footer>
     <p>Sena todos los derechos reservados </p>
 </footer>
 <div class="regresar">
-    <?php
-    $url_regresar = '../ambientes';
-    ?>
-    <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
-</div>
+        <?php
+        $url_regresar = '../computador';
+        ?>
+        <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
+    </div>
 <div class="salir">
     <button id="btn_salir">Salir</button>
 </div>
+
 </body>
 </html>
