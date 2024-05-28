@@ -94,19 +94,6 @@ public function updateAmbiente($id) {
     }
 }
 
-public function inhabilitarAmbiente($id) {
-    $adminModel = new AdminModel();
-    $result = $adminModel->inhabilitarAmbiente($id);
-
-    if ($result) {
-        echo "<script>alert('Ambiente inhabilitado exitosamente');</script>";
-    } else {
-        echo "<script>alert('Error al inhabilitar el ambiente');</script>";
-    }
-    
-    header("Location: ../ambientes");
-    exit();
-}
 
 public function habilitarAmbiente($id) {
     $adminModel = new AdminModel();
@@ -161,39 +148,44 @@ public function updateComputador($id) {
         $modelo = $_POST["modelo"];
         $serial = $_POST["serial"];
         $placaInventario = $_POST["placaInventario"];
-        $id_ambiente = $_POST["Id_ambiente"];
+        $nuevoIdAmbiente = isset($_POST["id_ambiente"]) ? $_POST["id_ambiente"] : null; // Corregido para manejar el caso en que id_ambiente no esté definido
         $checkPc = isset($_POST["checkPc"]) ? 1 : 0;
         $hardware = isset($_POST["hardware"]) ? 1 : 0;
         $software = isset($_POST["software"]) ? 1 : 0;
-        $observaciones = $_POST["observaciones"];
+        $observaciones = isset($_POST["observaciones"]) ? $_POST["observaciones"] : ''; // Corregido para manejar el caso en que observaciones no esté definido
 
         $adminModel = new AdminModel();
-        $result = $adminModel->modificarComputador($id, $tipo, $marca, $modelo, $serial, $placaInventario, $id_ambiente, $checkPc, $hardware, $software, $observaciones);
+        $result = $adminModel->modificarComputador($id, $tipo, $marca, $modelo, $serial, $placaInventario, $nuevoIdAmbiente, $checkPc, $hardware, $software, $observaciones);
 
         if ($result) {
-            // Redirigir a la lista de ambientes si la actualización fue exitosa
-            header("Location: ../ambientes");
+            // Redirigir a la lista de computadores si la actualización fue exitosa
+            header("Location: ../computadores");
             exit();
         } else {
-            // Manejar el caso en que ocurra un error al actualizar el ambiente
-            header("Location: index.php?error=Error al actualizar el ambiente&id=$id");
+            // Manejar el caso en que ocurra un error al actualizar el computador
+            header("Location: index.php?error=Error al actualizar el computador&id=$id");
             exit();
         }
     } else {
-        // Obtener los datos del ambiente existente
+        // Obtener los datos del computador existente
         $adminModel = new AdminModel();
-        $ambiente = $adminModel->obtenerAmbientePorId($id);
+        $computador = $adminModel->obtenerComputadorPorId($id);
 
-        if ($ambiente) {
-            // Renderizar el formulario de actualización con los datos del ambiente
-            include 'views/administrador/ambientes/update.php';
+        if ($computador) {
+            // Obtener los datos del ambiente asociado al computador
+            $idAmbiente = $computador['Id_ambiente'];
+    
+            // Obtener los datos del ambiente
+            $ambiente = $adminModel->obtenerAmbientePorId($idAmbiente);
+    
+            // Renderizar el formulario de actualización con los datos del computador y del ambiente
+            include 'views/administrador/computadores/update.php';
         } else {
-            // Manejar el caso en que el ambiente no existe
-            echo "Error: El ambiente especificado no existe.";
+            // Manejar el caso en que el computador no existe
+            echo "Error: El computador especificado no existe.";
         }
     }
 }
-
 // Apartado de controlador para USUARIOS------------------------------------------------------------------------
 
 // Método para mostrar la lista de usuarios
@@ -211,11 +203,8 @@ public function createUsuario() {
         // Generar contraseña aleatoria de 4 dígitos
         $clave = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
 
-        // Encriptar la contraseña
-        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
-
         $adminModel = new AdminModel();
-        $result = $adminModel->guardarUsuario($nombres, $apellidos, $claveEncriptada, $rol);
+        $result = $adminModel->guardarUsuario($nombres, $apellidos, $clave, $rol);
 
         if ($result) {
             // Redirigir al usuario a la lista de usuarios
@@ -238,11 +227,8 @@ public function updateUsuario($id) {
         $clave = $_POST["clave"];
         $rol = $_POST["rol"];
 
-        // Encriptar la nueva contraseña
-        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
-
         $adminModel = new AdminModel();
-        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $claveEncriptada, $rol);
+        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $clave, $rol);
 
         if ($result) {
             header("Location: ../usuarios");

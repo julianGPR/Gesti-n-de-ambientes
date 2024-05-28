@@ -39,7 +39,7 @@
 /* Estilos generales */
 /* Establecer márgenes y centrar el contenido */
 body {
-    margin: 15px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
+    margin: 5px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -365,6 +365,27 @@ footer .button:hover {
 
 .create-ambiente label {
     font-weight: bold;
+}
+
+.section-create-usuario{
+    padding: 10px;
+}
+
+select{
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .create-ambiente input[type="text"],

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingreso de Clave</title>
+    <title>LogIn</title>
     <link rel="stylesheet" href="Estilos/estilos.css">
     <style>
         body {
@@ -12,10 +12,9 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            flex-direction: column;
             margin: 0;
-            padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
         }
 
         .container {
@@ -23,26 +22,41 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
             border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
         }
 
         .login-form {
             text-align: center;
-            margin-top: 20px;
             width: 100%;
+        }
+
+        .login-form h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-form p {
+            font-size: 16px;
+            color: #666;
         }
 
         .add-button {
             background-color: #28c530;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
             font-size: 16px;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 10px;
         }
 
         .add-button:hover {
@@ -51,21 +65,26 @@
 
         #clave {
             width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin: 10px 0 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
 
         #instrucciones, #info-bd {
             margin-top: 30px;
             text-align: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            width: 100%;
         }
 
         #instrucciones h3, #info-bd p {
             font-size: 16px;
             margin: 10px 0;
+            color: #333;
         }
 
         .form-control {
@@ -94,23 +113,29 @@
                 width: 100%;
                 box-shadow: none;
                 background-color: transparent;
+                padding: 20px;
             }
 
-            .login-form h2, #instrucciones h3, #info-bd p {
-                font-size: 14px;
+            .login-form h2 {
+                font-size: 20px;
             }
 
             .add-button {
                 font-size: 14px;
-                padding: 8px 16px;
+                padding: 10px 16px;
             }
 
             #clave {
                 font-size: 14px;
+                padding: 10px;
             }
 
             .logo {
                 width: 80px;
+            }
+
+            #instrucciones h3, #info-bd p {
+                font-size: 14px;
             }
         }
     </style>
@@ -134,7 +159,7 @@
 
     <div id="instrucciones">
         <h3>Instrucciones de Ingreso</h3>
-        <p>Utilice la clave asignada para ingresar al sistema, asegurese de que el aula de formación esté debidamente marcada.</p>
+        <p>Utilice la clave asignada para ingresar al sistema, asegúrese de que el aula de formación esté debidamente marcada.</p>
     </div>
 
     <div id="info-bd">

@@ -115,18 +115,17 @@ $db->close();
     
     <button onclick="scanQR()">Escanear con cámara</button>
 
-    <h1><?php echo $nombre; ?></h1>
-    <h2><?php echo $cargo?></h2>
-
     <form id="imageForm" action="" method="post" enctype="multipart/form-data" style="display:none;">
         <input type="file" accept="image/*" name="archivo" id="fileInput">
         <button type="submit" name="submit">Leer QR desde imagen</button>
     </form>
 
     <canvas id="canvas" style="display:none;"></canvas>
-
-    <div id="fecha-hora"></div>
-
+    <div class="contenedor" id="contenedor">
+        <div id="fecha-hora"></div>
+        <h1><?php echo $nombre; ?></h1>
+        <h2><?php echo $cargo?></h2>
+    </div>
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script>
         let scanner;
@@ -134,6 +133,9 @@ $db->close();
         function scanQR() {
             document.getElementById('preview').style.display = 'block';
             document.getElementById('imageForm').style.display = 'none';
+
+            // Ocultar el div con clase "contenedor"
+            document.getElementById('contenedor').style.display = 'none';
 
             scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
             scanner.addListener('scan', function (content) {

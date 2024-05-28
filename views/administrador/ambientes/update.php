@@ -32,7 +32,7 @@
     </div>
 </header>
 <section class="update-ambiente" id="section-update-ambiente">
-    <form action="../updateAmbiente/<?php echo $ambiente['Id_ambiente']; ?>" method="POST">
+<form action="../updateAmbiente/<?php echo $ambiente['Id_ambiente']; ?>" method="POST">
         
         <label for="nombre">Nombre del Ambiente:</label><br>
         <!-- Mostrar el valor del nombre del ambiente si está definido -->
