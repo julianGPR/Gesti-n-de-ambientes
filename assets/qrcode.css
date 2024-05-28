@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    text-align: center;
+    overflow: hidden; /* Evita que la animación de fondo se desplace */
+}
+
+.cabeza {
+    background-color: white;
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cabeza img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.cabeza h1 {
+    margin: 0;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 20px;
+    color: #333;
+}
+
+#preview {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    border: 10px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label {
+    display: block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+label:hover {
+    background-color: #0056b3;
+}
+
+#imageForm {
+    display: none;
+}
+
+canvas {
+    display: none;
+}
+
+/* Animación de fondo */
+@keyframes scanAnimation {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(270deg, #138d75, #0a5649);
+    animation: scanAnimation 4s linear infinite;
+    z-index: -1; /* Coloca la animación detrás de todo */
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 600px) {
+    .cabeza {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cabeza img {
+        height: 30px;
+        margin-bottom: 10px;
+    }
+
+    .cabeza h1 {
+        font-size: 1em;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    button, label {
+        width: calc(100% - 40px);
+        font-size: 14px;
+    }
+
+    #preview {
+        width: 90%;
+        max-width: 100%;
+        margin: 10px auto;
+        border: 5px solid #ddd;
+    }
+}

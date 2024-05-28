@@ -1,0 +1,554 @@
+/* Estilos para el menú desplegable */
+/* Estilos para las opciones del menú */
+.menu-options {
+    display: none;
+    position: absolute;
+    background-color: #fff; /* Color de fondo del menú desplegable */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Sombra del menú desplegable */
+    z-index: 1;
+    padding: 0;
+    margin: 0;
+    border-radius: 5%;
+    list-style-type: none;
+    right: 12%; /* Desplazar el menú hacia la derecha */
+    top: calc(25% + 10px); /* Colocar el menú casi debajo de la campana de notificaciones */
+}
+
+
+.menu-options li {
+    padding: 10px 20px; /* Espaciado de las opciones */
+}
+
+.menu-options li a.button-admin {
+    /* Estilos específicos para los enlaces del menú */
+    font-size: 15px;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px; /* Ajusta el espaciado vertical y horizontal */
+}
+/* Mostrar las opciones del menú cuando el menú se despliega */
+.menu-container.active .menu-options {
+    display: block;
+}
+
+/* Cambio de estilo al pasar el mouse sobre los enlaces del menú */
+.menu-options li a.button-admin:hover {
+    color: white; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Estilos generales */
+/* Establecer márgenes y centrar el contenido */
+body {
+    margin: 5px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif; /* Cambiar la fuente según necesites */
+}
+
+/* Estilo del header */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Alinea los elementos al extremo izquierdo y derecho */
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+/* Estilo del logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Espacio entre el logo y el título */
+}
+
+.logo {
+    width: 50px; /* Tamaño del logo */
+    height: auto; /* Ajusta automáticamente la altura según el ancho */
+}
+
+/* Estilo para el nav */
+nav {
+    background-color: #f4f4f4;
+    padding: 10px 0;
+    text-align: center;
+    margin-bottom: 20px;
+    width: calc(100% - 40px); /* Ajusta el ancho del nav */
+    max-width: 1200px; /* Establece un ancho máximo */
+    margin-left: auto; /* Centra el nav */
+    margin-right: auto; /* Centra el nav */
+}
+
+nav .filtro {
+    margin-right: 20px; /* Espacio entre el filtro y el botón */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.datetime {
+    display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
+    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor */
+    margin-bottom: 0px; /* Ajusta según sea necesario */
+}
+
+.datetime .fecha {
+    margin-right: 10px; /* Añade un margen entre la fecha y la hora */
+}
+
+/* Estilos para el elemento de hora */
+.datetime .hora {
+    margin-left: 10px; /* Añade un margen entre la fecha y la hora */
+}
+
+/* Estilo de la sección de fecha y hora */
+
+/* Estilo del footer (añade este HTML al final de tu archivo HTML) */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* Estilo de los enlaces dentro del footer */
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Estilo para resaltar enlaces en el hover */
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo de los botones dentro del footer */
+footer .button {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+/* Cambio de estilo al pasar el ratón sobre el botón dentro del footer */
+footer .button:hover {
+    background-color: #45a049; /* Un tono más oscuro de verde */
+}
+
+/*section del index del home administrativo*/
+
+.admin {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    min-height: 250px; /* Asegura un mínimo de altura */
+}
+
+.subtitulo-admin {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.botones-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-admin:first-child {
+    order: -1; /* Coloca el primer botón al principio del orden de visualización */
+}
+
+.button-admin {
+    background-color: #66BB6A;
+    color: white;
+    padding: 50px; /* Ajusta el padding para hacer los botones más cuadrados */
+    border: none;
+    border-radius: 10px; /* Ajusta el radio del borde para hacerlos más cuadrados */
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.button-admin:hover {
+    background-color: #45a049;
+}
+/* Estilos personalizados para el botón de confirmación en SweetAlert2 */
+.custom-btn-class {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Borde */
+    border-radius: 4px; /* Borde redondeado */
+    cursor: pointer; /* Cursor al pasar sobre el botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    transition: background-color 0.3s ease; /* Transición de color de fondo */
+}
+
+.custom-btn-class:hover {
+    background-color: #45a049; /* Color de fondo al pasar sobre el botón */
+}
+
+/*section del index de ambientes*/
+.ambiente {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0px;
+    margin-bottom: 80px;
+    max-width: 1200px; /* Establecer un ancho máximo */
+}
+
+/* Estilo para el subtítulo de la sección Ambiente */
+.subtitulo-ambiente {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para la descripción de la sección Ambiente */
+.descripcion-ambiente {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo para la tabla de ambientes */
+.tabla-ambientes {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 80px; /* Ajusta el margen inferior para que la tabla se eleve más */
+}
+
+.tabla-ambientes table {
+    width: 100%;
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+}
+
+.tabla-ambientes th,
+.tabla-ambientes td {
+    padding: 8px; /* Espaciado interno de las celdas */
+    border: 1px solid #ddd; /* Borde de las celdas */
+    text-align: left; /* Alineación del texto */
+}
+
+.tabla-ambientes th {
+    background-color: #4CAF50; /* Color de fondo del encabezado de la tabla */
+    color: white; /* Color del texto del encabezado */
+}
+
+.tabla-ambientes tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo de las filas pares */
+}
+
+.tabla-ambientes tr:hover {
+    background-color: #ddd; /* Color de fondo al pasar el mouse sobre la fila */
+}
+
+/* Estilo para los botones de la sección Ambiente */
+.boton-modificar,
+.boton-generar-qr,
+.boton-habilitar,
+.boton-inhabilitar,
+.boton-centrado {
+    background-color: #66BB6A;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.boton-modificar:hover,
+.boton-generar-qr:hover,
+.boton-habilitar:hover,
+.boton-inhabilitar:hover,
+.boton-centrado:hover {
+    background-color: #45a049;
+}
+
+/*botonse que son generales para la web*/
+/*Salir*/
+.salir {
+    position: fixed; /* Fija el botón en una posición específica en la ventana del navegador */
+    bottom: 20px; /* Coloca el botón a 20px desde la parte inferior */
+    right: 20px; /* Coloca el botón a 20px desde el lado derecho */
+    z-index: 1; /* Asegura que el botón esté por encima de otros elementos, como el footer */
+}
+
+#btn_salir {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btn_salir:hover {
+    background-color: #c82333;
+}
+
+/*Regresar*/
+.regresar {
+    position: fixed; /* Fija el botón en una posición específica en la ventana del navegador */
+    bottom: 20px; /* Coloca el botón a 60px desde la parte inferior */
+    left: 20px; /* Coloca el botón a 20px desde el lado derecho */
+    z-index: 1; /* Asegura que el botón esté por encima de otros elementos, como el footer */
+}
+
+/*filtro - crear*/
+.filtro-y-crear {
+    display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
+    align-items: center; /* Alinea los elementos verticalmente */
+    justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor */
+    margin-bottom: 20px; /* Espacio inferior */
+    width: calc(100% - 40px); /* Ancho del contenedor */
+    max-width: 1200px; /* Ancho máximo */
+    margin-left: auto; /* Centra el contenedor */
+    margin-right: auto; /* Centra el contenedor */
+}
+
+/* Estilos para el elemento de filtro */
+.filtro {
+    margin-right: 10px; /* Añade un margen entre el filtro y el botón */
+}
+
+#filtro_ambiente {
+    padding: 8px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilos para el elemento de crear ambiente */
+.create-ambiente {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    max-width: 600px; /* Ajusta el ancho máximo del formulario según sea necesario */
+    margin-left: auto; /* Centra el formulario horizontalmente */
+    margin-right: auto; /* Centra el formulario horizontalmente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra al formulario */
+    margin-bottom: 80px;
+}
+
+.create-ambiente form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-ambiente label {
+    font-weight: bold;
+}
+
+.section-create-usuario{
+    padding: 10px;
+}
+
+select{
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-ambiente input[type="text"],
+.create-ambiente input[type="number"],
+.create-ambiente textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.create-ambiente button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-ambiente button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#btn-create {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambio de cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+    margin-left: -20%; /* Desplazamiento hacia la izquierda */
+}
+
+#btn-create:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+}
+/*Estilos para el actualizar ambiente*/
+.update-ambiente {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    max-width: 600px; /* Ajusta el ancho máximo del formulario según sea necesario */
+    margin-left: auto; /* Centra el formulario horizontalmente */
+    margin-right: auto; /* Centra el formulario horizontalmente */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra al formulario */
+    margin-bottom: 80px;
+}
+
+.update-ambiente form {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-ambiente label {
+    font-weight: bold;
+}
+
+.update-ambiente input[type="text"],
+.update-ambiente input[type="number"],
+.update-ambiente textarea {
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.update-ambiente button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.update-ambiente button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+#btn-update {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambio de cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave del color de fondo */
+    margin-left: -20%; /* Desplazamiento hacia la izquierda */
+}
+
+#btn-update:hover {
+    background-color: #45a049; /* Color de fondo al pasar el ratón */
+}
+.notification-bell {
+    position: relative;
+    margin-left: 700px;
+    margin-top: 10px;
+}
+
+.notification-bell button {
+    background-color: white;
+    border: none;
+}
+
+.notification-bell img {
+    transition: transform 0.8s ease-in-out;
+    width: 30px;
+}
+
+.flying {
+    animation: fly 1s ease-in-out forwards;
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(0);
+    }
+    50% {
+        transform: translate(20px, -20px) rotate(-45deg);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+/* Estilos para la ventana emergente */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.notification-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 12px;
+}
