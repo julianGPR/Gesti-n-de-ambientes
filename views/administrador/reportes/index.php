@@ -13,13 +13,14 @@ $db = Database::connect();
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 </head>
+
 <body>
     <header>
         <div class="logo-container">
             <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
         </div>
         <div class="title">
-            <h1>Gestion de Ambientes de formacion</h1>
+            <h1>Gestion de Reportes</h1>
         </div>
         <div class="datetime">
             <?php
@@ -37,14 +38,13 @@ $db = Database::connect();
             </div>
         </div>
     </header>
-    <nav>
-    </nav>
+
     <section class="ambiente" id="section-ambiente">
         <div class="subtitulo-ambiente">
-            <h2>Ambientes</h2>
+            <h2>Reportes</h2>
         </div>
         <div class="descripcion-ambiente">
-            <p>Gestión de ambientes de formación</p>
+            <p>Reportes por Instructor de cada Ambiente</p>
         </div>
         <div class="tabla-ambientes tabla-scroll">
             <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
@@ -52,8 +52,8 @@ $db = Database::connect();
                     <tr>
                         <th>Id</th>
                         <th>Fecha y Hora</th>
-                        <th>Id usuario</th>
-                        <th>Id ambiente</th>
+                        <th>Instructor</th>
+                        <th>Ambiente</th>
                         <th>Observaciones</th>
                     </tr>
                 </thead>

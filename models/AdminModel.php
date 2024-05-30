@@ -144,10 +144,15 @@ public function obtenerComputadorPorId($id) {
 public function modificarUsuario($id, $nombres, $apellidos, $clave, $rol) {
     $conn = Database::connect();
 
-    $sql = "UPDATE t_computadores SET Nombres=$nombre, Apellidos=$apellidos, Clave=$clave, Rol=$rol WHERE Id_usuario='$id'";
+    $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Rol = ? WHERE Id_usuario = ?";
 
     // Preparar la declaración
     $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        // Error al preparar la declaración
+        return false;
+    }
 
     // Vincular los parámetros
     $stmt->bind_param("ssisi", $nombres, $apellidos, $clave, $rol, $id);
@@ -161,7 +166,14 @@ public function modificarUsuario($id, $nombres, $apellidos, $clave, $rol) {
     } else {
         return false;
     }
+
+    // Cerrar la declaración
+    $stmt->close();
+
+    // Cerrar la conexión
+    $conn->close();
 }
+
 
 public function obtenerUsuarioPorId($id) {
     $conn = Database::connect();

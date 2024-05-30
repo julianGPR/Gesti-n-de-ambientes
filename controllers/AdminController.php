@@ -203,11 +203,8 @@ public function createUsuario() {
         // Generar contraseña aleatoria de 4 dígitos
         $clave = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
 
-        // Encriptar la contraseña
-        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
-
         $adminModel = new AdminModel();
-        $result = $adminModel->guardarUsuario($nombres, $apellidos, $claveEncriptada, $rol);
+        $result = $adminModel->guardarUsuario($nombres, $apellidos, $clave, $rol);
 
         if ($result) {
             // Redirigir al usuario a la lista de usuarios
@@ -230,11 +227,8 @@ public function updateUsuario($id) {
         $clave = $_POST["clave"];
         $rol = $_POST["rol"];
 
-        // Encriptar la nueva contraseña
-        $claveEncriptada = password_hash($clave, PASSWORD_DEFAULT);
-
         $adminModel = new AdminModel();
-        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $claveEncriptada, $rol);
+        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $clave, $rol);
 
         if ($result) {
             header("Location: ../usuarios");

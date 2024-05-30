@@ -53,7 +53,6 @@ CREATE TABLE `t_ambientes` (
 --
 
 INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `CheckPcs`, `Tvs`, `CheckTvs`, `Sillas`, `CheckSillas`, `Mesas`, `CheckMesas`, `Tableros`, `CheckTableros`, `Nineras`, `CheckNineras`, `CheckInfraestructura`, `Estado`, `Observaciones`) VALUES
-(1, 'Ambiente 101', 'Occidental', 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Habilitado', ''),
 (2, 'Ambiente 104', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (3, 'Ambiente 110', 'Oriental', 3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (4, 'Ambiente 114', 'Oriental', 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
@@ -70,12 +69,9 @@ INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Computadores`, `Ch
 (15, 'Ambiente Órtesis', 'Oriental', 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (16, 'Ambiente 301', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (17, 'Ambiente 302', 'Occidental', 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
-(18, 'Ambiente 303', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
+(18, 'Ambiente 303', 'Occidental', 26, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
 (19, 'Ambiente 304', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
-(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL),
-(38, 'julian2.0', 'Occidental', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', ''),
-(39, 'cdac', 'Occidental', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', ''),
-(40, 'dsaasd', 'Occidental', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '');
+(20, 'Ambiente 305', 'Occidental', 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, '1', NULL);
 
 --
 -- Disparadores `t_ambientes`
@@ -132,7 +128,7 @@ CREATE TABLE `t_computadores` (
 
 INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Serial`, `PlacaInventario`, `Id_ambiente`, `CheckPc`, `Hardware`, `Software`, `Observaciones`) VALUES
 (1, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MTL', '9216108660', 1, 0, 1, 1, 'El computador no enciende'),
-(2, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5M', '9216108724', 1, 1, 1, 1, ''),
+(2, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5M', '9216108724', 18, 0, 1, 1, ''),
 (3, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '33PYS13', '9216108838', 2, 1, 1, 1, NULL),
 (4, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '373WS13', '9216109087', 2, 1, 1, 1, NULL),
 (5, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65GWS13', '9216108934', 2, 1, 1, 1, NULL),
@@ -546,9 +542,7 @@ CREATE TABLE `t_infraestructura` (
 --
 
 INSERT INTO `t_infraestructura` (`Id_infraestructura`, `Id_ambiente`, `CheckPisos`, `CheckTechos`, `CheckParedes`, `CheckVentaneria`, `CheckLuz`, `Observaciones`) VALUES
-(1, 1, 1, 1, 1, 1, 1, NULL),
 (2, 2, 1, 1, 1, 1, 1, NULL),
-(3, 3, 1, 1, 1, 1, 1, NULL),
 (4, 4, 1, 1, 1, 1, 1, NULL),
 (5, 5, 1, 1, 1, 1, 1, NULL),
 (6, 6, 1, 1, 1, 1, 1, NULL),
@@ -565,10 +559,7 @@ INSERT INTO `t_infraestructura` (`Id_infraestructura`, `Id_ambiente`, `CheckPiso
 (17, 17, 1, 1, 1, 1, 1, NULL),
 (18, 18, 1, 1, 1, 1, 1, NULL),
 (19, 19, 1, 1, 1, 1, 1, NULL),
-(20, 20, 1, 1, 1, 1, 1, NULL),
-(36, 38, 1, 1, 1, 1, 1, NULL),
-(0, 39, 1, 1, 1, 1, 1, NULL),
-(0, 40, 1, 1, 1, 1, 1, NULL);
+(20, 20, 1, 1, 1, 1, 1, NULL);
 
 --
 -- Disparadores `t_infraestructura`
@@ -960,8 +951,8 @@ CREATE TABLE `t_usuarios` (
 --
 
 INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Clave`, `Rol`) VALUES
-(3, 'Juan', 'Preciado', '1234', 'Instructor'),
-(4, 'Marcos', 'Pinto', '9876', ''),
+(3, 'Yuan', 'Preciado', '1234', 'Instructor'),
+(4, 'Maia', 'Sanchez', '1111', 'Administrador'),
 (5, 'Martha', 'García', '2468', 'Instructor'),
 (6, 'Daniel', 'Buitrago', '7961', ''),
 (7, 'Daniel', 'ggg', '9288', ''),

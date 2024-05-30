@@ -36,11 +36,12 @@
         <input type="text" id="nombres" name="nombres" required><br><br>
 
         <label for="apellidos">Apellidos del usuario:</label><br>
-        <input type="text" id="apellidos" name="apellidos" required><br><br>
+        <input type="text" id="apellidos" name="apellidos" required><br>
 
         <label for="clave">Contraseña:</label><br>
-        <input type="text" id="clave" name="clave" readonly><br><br>
+        <input type="text" id="clave" name="clave" readonly><br>
         <button type="button" id="generarClave">Generar Contraseña</button>
+        <br><br>
 
         <label for="rol">Rol:</label><br>
         <select id="rol" name="rol" required>

@@ -89,6 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <style>
         body {
+<<<<<<< HEAD
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -210,13 +211,148 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border: 1px solid #000;
             margin-right: 5px;
         }
+=======
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: white;
+    color: #333; /* Cambiado el color del texto para mayor contraste */
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregado un sombreado sutíl */
+}
+
+.header img {
+    height: 40px; /* Ajusta la altura del logo según sea necesario */
+    margin-right: 10px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.container {
+    max-width: 100%;
+    margin: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sublist {
+    display: none;
+}
+
+h1 {
+    color: #333; /* Cambiado el color del texto para mayor contraste */
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    margin-left: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 10px;
+    }
+    h1 {
+        font-size: 1.2em;
+    }
+}
+
+.date-time {
+    margin: 20px 20; 
+    text-align: center;
+}
+
+.titulo {
+    text-align: center;
+    padding: 10px;
+}
+
+.instrucciones {
+    padding: 15px;
+    font-size: 0.9em;
+}
+
+.submit-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.submit-btn input[type='submit'] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn input[type='submit']:hover {
+    background-color: #45a049;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.expand {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #000;
+    margin-right: 5px;
+}
+
+>>>>>>> devJuan
     </style>
 </head>
 <body>
     <form id="observacionForm" action="" method="POST">
         <div class="header">
             <img src="../../assets/Logo-Sena.jpg" alt="logo">
-            <h1>Gestión de Ambientes de Formación</h1>
+            <h1>Gestión de Ambiente</h1>
         </div>
         <div class="container">
             <p class="date-time">Fecha: <?php echo $fecha_actual; ?> Hora: <?php echo $hora_actual; ?></p>
@@ -334,8 +470,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     title: 'Éxito',
                     text: 'Se guardo el reporte',
                     confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
                 });
             });
+
         });
     </script>
 </body>

@@ -40,7 +40,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
     </header>
 
     <section class="update-ambiente" id="section-update-usuario">
-        <form action="../updateUsuario.php?id=<?php echo $usuario['Id_usuario']; ?>" method="POST">
+        <form action="../updateUsuario/<?php echo $usuario['Id_usuario']; ?>" method="POST">
             <label for="nombres">Nombre del Usuario:</label><br>
             <input type="text" id="nombres" name="nombres" value="<?php echo isset($usuario['Nombres']) ? $usuario['Nombres'] : ''; ?>" required><br><br>
 
