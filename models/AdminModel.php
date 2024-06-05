@@ -165,7 +165,6 @@ public function modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $ro
     $conn->close();
 }
 
-
 public function obtenerUsuarioPorId($id) {
     $conn = Database::connect();
     $sql = "SELECT * FROM t_usuarios WHERE Id_usuario=?";
