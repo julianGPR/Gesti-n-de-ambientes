@@ -11,9 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 </head>
 <body>
     <header>
@@ -40,17 +45,16 @@
         </div>
     </header>
     <nav>
-        <div class="filtro-y-crear">
-
-            <div class="crear-ambiente">
-                <?php
-                // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createComputador/';
-                ?>
-                <ul>
-                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Computador</a></li>
-                </ul>
-            </div>
+    <div class="column-toggle-buttons">
+            <button class="toggle-vis" data-column="0">Tipo</button>
+            <button class="toggle-vis" data-column="1">Marca</button>
+            <button class="toggle-vis" data-column="2">Modelo</button>
+            <button class="toggle-vis" data-column="3">Serial</button>
+            <button class="toggle-vis" data-column="4">Placa de Inventario</button>
+            <button class="toggle-vis" data-column="5">Id ambiente</button>
+            <button class="toggle-vis" data-column="6">Hardware</button>
+            <button class="toggle-vis" data-column="7">Software</button>
+            <button class="toggle-vis" data-column="8">Acción</button>
         </div>
     </nav>
     <section class="ambiente" id="section-ambiente">
@@ -64,17 +68,15 @@
             <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
                 <thead>
                     <tr>
-                    <th>ID</th>
-                    <th>Tipo</th>
-                    <th>Marca</th>
-                    <th>Modelo</th>
-                    <th>Serial</th>
-                    <th>Placa de Inventario</th>
-                    <th>Id ambiente</th>
-                    <th>Hardware</th>
-                    <th>Softaware</th>
-                    <th>Observaciones</th>
-                    <th>Acción</th>
+                        <th>Tipo</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Serial</th>
+                        <th>Placa de Inventario</th>
+                        <th>Id ambiente</th>
+                        <th>Hardware</th>
+                        <th>Software</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,7 +101,6 @@
                         // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-                            echo "<td>" . $row['Id_computador'] . "</td>";
                             echo "<td>" . $row['Tipo'] . "</td>";
                             echo "<td>" . $row['Marca'] . "</td>";
                             echo "<td>" . $row['Modelo'] . "</td>";
@@ -108,16 +109,15 @@
                             echo "<td>" . $row['Nombre'] . "</td>";
                             echo "<td>" . $row['EstadoHardware'] . "</td>";
                             echo "<td>" . $row['EstadoSoftware'] . "</td>";
-                            echo "<td>" . $row['Observaciones'] . "</td>";
                             echo "<td>";
                             $url_update_c = '/dashboard/gestion%20de%20ambientes/admin/updateComputador/';
-                                echo "<a href='" . $url_update_c . $row['Id_computador'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
+                            echo "<a href='" . $url_update_c . $row['Id_computador'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
                             echo "</td>";
                             echo "</tr>";
                         }
                     } else {
                         // Si no hay filas en el resultado, mostrar un mensaje de que no hay registros
-                        echo "<tr><td colspan='11'>No hay registros</td></tr>";
+                        echo "<tr><td colspan='9'>No hay registros</td></tr>";
                     }
 
                     // Cerrar la conexión a la base de datos
@@ -125,6 +125,17 @@
                     ?>
                 </tbody>
             </table>
+        </div>
+        <div class="filtro-y-crear">
+            <div class="crear-ambiente">
+                <?php
+                // Construir la URL adecuada para el botón de "Gestión de Ambientes"
+                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createComputador/';
+                ?>
+                <ul>
+                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Computador</a></li>
+                </ul>
+            </div>
         </div>
         <div class="regresar">
             <?php
@@ -136,17 +147,28 @@
             <button id="btn_salir">Salir</button>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script src="../assets/buscador.js"></script>
     <script>
-    $(document).ready(function() {
-        $('#tabla-ambientes').DataTable({
-            "paging": true,
-            "pageLength": 10 // Mostrar 10 registros por página
+        $(document).ready(function() {
+            var table = $('#tabla-ambientes').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                paging: true,
+                pageLength: 10 // Mostrar 10 registros por página
+            });
+
+            // Configuración de los botones para mostrar/ocultar columnas
+            $('.toggle-vis').on('click', function(e) {
+                e.preventDefault();
+
+                // Obtenemos el índice de la columna correspondiente al botón
+                var columnIdx = parseInt($(this).attr('data-column'));
+
+                // Obtenemos el estado de visibilidad de la columna y lo invertimos
+                var column = table.column(columnIdx);
+                column.visible(!column.visible());
+            });
         });
-    });
-</script>
+    </script>
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>

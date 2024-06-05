@@ -76,8 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conn->close();
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -89,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <style>
         body {
-<<<<<<< HEAD
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -97,18 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         .header {
             background-color: white;
-            color: #fff;
+            color: #333; /* Cambiado el color del texto para mayor contraste */
             padding: 10px 20px;
             display: flex;
             align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregado un sombreado sutíl */
         }
         .header img {
-            height: 50px;
+            height: 40px; /* Ajusta la altura del logo según sea necesario */
             margin-right: 10px;
         }
         .header h1 {
             margin: 0;
-            font-size: 1em;
+            font-size: 1.2em;
         }
         .container {
             max-width: 100%;
@@ -117,16 +115,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
         .sublist {
             display: none;
         }
         h1 {
-            color: black;
+            color: #333; /* Cambiado el color del texto para mayor contraste */
             margin-top: 0;
             font-size: 1.5em;
         }
@@ -182,14 +176,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 16px;
             transition: background-color 0.3s ease;
         }
-<<<<<<< HEAD
-        
-        .submit-btn input[type='submit']:hover {
-            background-color: #45a049; /* Verde más oscuro al pasar el ratón */
-=======
         .submit-btn input[type='submit']:hover {
             background-color: #45a049;
->>>>>>> devJuan
         }
         .popup {
             display: none;
@@ -211,141 +199,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border: 1px solid #000;
             margin-right: 5px;
         }
-=======
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-.header {
-    background-color: white;
-    color: #333; /* Cambiado el color del texto para mayor contraste */
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Agregado un sombreado sutíl */
-}
-
-.header img {
-    height: 40px; /* Ajusta la altura del logo según sea necesario */
-    margin-right: 10px;
-}
-
-.header h1 {
-    margin: 0;
-    font-size: 1.2em;
-}
-
-.container {
-    max-width: 100%;
-    margin: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.sublist {
-    display: none;
-}
-
-h1 {
-    color: #333; /* Cambiado el color del texto para mayor contraste */
-    margin-top: 0;
-    font-size: 1.5em;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-li:last-child {
-    border-bottom: none;
-}
-
-.label {
-    font-weight: bold;
-}
-
-.value {
-    margin-left: 10px;
-}
-
-@media only screen and (max-width: 600px) {
-    .container {
-        margin: 10px;
-        padding: 10px;
-    }
-    h1 {
-        font-size: 1.2em;
-    }
-}
-
-.date-time {
-    margin: 20px 20; 
-    text-align: center;
-}
-
-.titulo {
-    text-align: center;
-    padding: 10px;
-}
-
-.instrucciones {
-    padding: 15px;
-    font-size: 0.9em;
-}
-
-.submit-btn {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.submit-btn input[type='submit'] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn input[type='submit']:hover {
-    background-color: #45a049;
-}
-
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 2px solid #000;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.expand {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    border: 1px solid #000;
-    margin-right: 5px;
-}
-
->>>>>>> devJuan
     </style>
 </head>
 <body>
@@ -383,7 +236,8 @@ li:last-child {
                 <li class="expandable">
                     <span class="expand" onclick="toggleList(this)">+</span>
                     <span class="label">Hardware:</span>
-                    <ul class="sublist">
+                    <input type="text" onkeyup="filterList(this, 'hardware-list')" placeholder="Filtrar por placa...">
+                    <ul class="sublist hardware-list">
                         <?php foreach($computadores as $computador): ?>
                             <li class="hardware-item">
                                 <input type="checkbox" name="checkpc[]" id="checkpc<?php echo $computador['Serial']; ?>" value="<?php echo $computador['Serial']; ?>" <?php echo ($computador['CheckPc'] == 1) ? 'checked' : ''; ?> onclick="toggleObservationField('checkpc<?php echo $computador['Serial']; ?>', 'observacion<?php echo $computador['Serial']; ?>')">
@@ -414,6 +268,21 @@ li:last-child {
             var checkbox = document.getElementById(checkboxId);
             var observationField = document.getElementById(observationId);
             observationField.style.display = checkbox.checked ? "none" : "block";
+        }
+
+        function filterList(input, listClassName) {
+            var filter = input.value.toUpperCase();
+            var ul = document.getElementsByClassName(listClassName)[0];
+            var li = ul.getElementsByTagName('li');
+            for (var i = 0; i < li.length; i++) {
+                var span = li[i].getElementsByTagName("span")[2];
+                var txtValue = span.textContent || span.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
         }
 
         // Llamar a toggleObservationField para cada checkbox al cargar la página
@@ -481,3 +350,5 @@ li:last-child {
     </script>
 </body>
 </html>
+
+
