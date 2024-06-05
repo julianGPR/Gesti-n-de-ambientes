@@ -121,7 +121,7 @@ public function obtenerComputadorPorId($id) {
     }
 }
  // Apartado de Modelo para USUARIOS------------------------------------------------------------------------
- public function guardarUsuario($nombres, $apellidos, $clave, $rol) {
+public function guardarUsuario($nombres, $apellidos, $clave, $rol) {
     $conn = Database::connect();
 
     $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Rol)

@@ -17,9 +17,8 @@ $stmt->execute();
 // Obtener el resultado de la consulta
 $result = $stmt->get_result();
 
-if($result->num_rows === 0) {
+if ($result->num_rows === 0) {
     // No se encontraron registros para la clave dada
-
     $cargo = "Cargo no encontrado";
 } else {
     // Obtener el nombre y el cargo del resultado de la consulta
@@ -37,18 +36,9 @@ $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 $id_ambiente = $row["Id_ambiente"];
 
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
     header('Content-Type: application/json');
-
-    // Conexión a la base de datos
-    $conn = new mysqli('localhost', 'root', '', 'reportesambientes');
-
-    if ($conn->connect_error) {
-        echo json_encode(["success" => false, "message" => "Conexión fallida: " . $conn->connect_error]);
-        exit();
-    }
 
     // Verificar que las observaciones estén definidas y no estén vacías
     if (isset($_POST['observaciones'])) {
@@ -59,11 +49,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $estado = 1; // Estado inicial del reporte
 
         // Insertar el reporte en la base de datos
-        $stmt = $conn->prepare("INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Estado, Observaciones) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Estado, Observaciones) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param('siiss', $fechaHora, $id_usuario, $id_ambiente, $estado, $observaciones);
 
         if ($stmt->execute()) {
-            echo json_encode(["success" => true, "message" => "Reporte insertado correctamente"]);
+            // Aquí se asume que $observaciones es un array con las observaciones y sus respectivos seriales
+            foreach ($_POST['observacion'] as $serial => $observacion) {
+                if (!empty($observacion)) {
+                    // Actualizar la observación en la tabla t_computadores
+                    $updateStmt = $db->prepare("UPDATE t_computadores SET Observaciones = ? WHERE Serial = ?");
+                    $updateStmt->bind_param('ss', $observacion, $serial);
+                    $updateStmt->execute();
+                    $updateStmt->close();
+                }
+            }
+
+            echo json_encode(["success" => true, "message" => "Reporte insertado correctamente y observaciones actualizadas"]);
         } else {
             echo json_encode(["success" => false, "message" => "Error al insertar el reporte"]);
         }
@@ -72,9 +73,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo json_encode(["success" => false, "message" => "No se recibieron observaciones"]);
     }
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['historial'])) {
 
-    $conn->close();
+    header('Content-Type: application/json');
+
+    // Obtener el historial de observaciones
+    $query = "SELECT Serial, Observaciones FROM t_computadores WHERE id_ambiente = ? AND Observaciones IS NOT NULL";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('i', $id_ambiente);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $observaciones = [];
+    while ($row = $result->fetch_assoc()) {
+        $observaciones[] = $row['Serial'] . ': ' . $row['Observaciones'];
+    }
+
+    echo json_encode(["success" => true, "observaciones" => $observaciones]);
+    exit();
 }
+
 ?>
 
 
@@ -200,6 +218,22 @@ li:last-child {
     background-color: #45a049;
 }
 
+.submit-btn button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn button:hover {
+    background-color: #45a049;
+}
+
+
 .popup {
     display: none;
     position: fixed;
@@ -211,6 +245,20 @@ li:last-child {
     border: 2px solid #000;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+.close-btn:before {
+    content: '✖';
 }
 
 .expand {
@@ -230,6 +278,7 @@ li:last-child {
             <img src="../../assets/Logo-Sena.jpg" alt="logo">
             <h1>Gestión de Ambiente</h1>
         </div>
+        
         <div class="container">
             <p class="date-time">Fecha: <?php echo $fecha_actual; ?> Hora: <?php echo $hora_actual; ?></p>
             <h1 class="titulo"> <?php echo $nombre; ?></h1>
@@ -266,9 +315,10 @@ li:last-child {
                                 <span><?php echo htmlspecialchars($computador['Marca']); ?></span>
                                 <span><?php echo htmlspecialchars($computador['Modelo']); ?></span>
                                 <span><?php echo $computador['Serial']; ?></span>
-                                <input type="text" name="observacion[<?php echo $computador['Serial']; ?>]" id="observacion<?php echo $computador['Serial']; ?>" placeholder="Novedad encontrada" style="display:<?php echo ($computador['CheckPc'] == 1) ? 'none' : 'block'; ?>">
+                                <textarea name="observacion[<?php echo $computador['Serial']; ?>]" id="observacion<?php echo $computador['Serial']; ?>" placeholder="Novedad encontrada" style="display:<?php echo ($computador['CheckPc'] == 1) ? 'none' : 'block'; ?>"></textarea>
                             </li>
                         <?php endforeach; ?>
+
                     </ul>
                 </li>
             </ul>
@@ -278,8 +328,62 @@ li:last-child {
     </form>
         <p class="instrucciones">Sr(a) Instructor(a), en caso de evidenciar novedades al interior del ambiente de formación, seleccione el item adecuado y de forma muy concisa detalle la novedad encontrada y presiona ENVIAR</p>
         <p class="instrucciones">En caso contrario solo presione ENVIAR</p>
+
+    </div>
+
+    <div class="submit-btn">
+            <button onclick="mostrarHistorial()">Historial de Observaciones</button>
+        </div>
+
+    <!-- Popup para mostrar el historial -->
+    <div class="popup" id="historialPopup">
+        <div class="popup-content">
+            <button class="close-btn" onclick="cerrarPopup()"></button>
+            <h2>Historial de Observaciones</h2>
+            <ul id="historialList">
+                <!-- Aquí se mostrará el historial de observaciones -->
+            </ul>
+        </div>
     </div>
     <script>
+
+    function mostrarHistorial() {
+            // Hacer una solicitud AJAX para obtener el historial de observaciones
+            fetch('?historial=1')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Construir la lista de observaciones
+                        const historialList = document.getElementById('historialList');
+                        historialList.innerHTML = ''; // Limpiar la lista antes de agregar nuevas observaciones
+                        data.observaciones.forEach(observation => {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = observation;
+                            historialList.appendChild(listItem);
+                        });
+                        // Mostrar el popup
+                        const historialPopup = document.getElementById('historialPopup');
+                        historialPopup.style.display = 'block';
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message,
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener el historial:', error);
+                });
+        }
+
+        // Función para cerrar el popup
+        function cerrarPopup() {
+            const historialPopup = document.getElementById('historialPopup');
+            historialPopup.style.display = 'none';
+        }
+                
         function toggleList(element) {
             var sublist = element.parentElement.querySelector(".sublist");
             sublist.style.display = sublist.style.display === "none" ? "block" : "none";
@@ -355,5 +459,6 @@ li:last-child {
 
         });
     </script>
+
 </body>
 </html>
