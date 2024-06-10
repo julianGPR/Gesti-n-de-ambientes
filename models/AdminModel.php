@@ -121,15 +121,15 @@ public function obtenerComputadorPorId($id) {
     }
 }
  // Apartado de Modelo para USUARIOS------------------------------------------------------------------------
-public function guardarUsuario($nombres, $apellidos, $clave, $rol) {
+ public function guardarUsuario($nombres, $apellidos, $clave, $correo, $rol) {
     $conn = Database::connect();
 
-    $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Rol)
-            VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Correo, Rol)
+            VALUES (?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
 
-    $stmt->bind_param("ssss", $nombres, $apellidos, $clave, $rol); // Cambiado "is" a "ssss" para indicar que todos los parámetros son cadenas de caracteres
+    $stmt->bind_param("sssss", $nombres, $apellidos, $clave, $correo, $rol);
 
     $result = $stmt->execute();
 
@@ -140,40 +140,30 @@ public function guardarUsuario($nombres, $apellidos, $clave, $rol) {
     }
 }
 
-
-public function modificarUsuario($id, $nombres, $apellidos, $clave, $rol) {
+public function modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol) {
     $conn = Database::connect();
 
-    $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Rol = ? WHERE Id_usuario = ?";
+    $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Correo = ?, Rol = ? WHERE Id_usuario = ?";
 
-    // Preparar la declaración
     $stmt = $conn->prepare($sql);
 
     if ($stmt === false) {
-        // Error al preparar la declaración
         return false;
     }
 
-    // Vincular los parámetros
-    $stmt->bind_param("ssisi", $nombres, $apellidos, $clave, $rol, $id);
+    $stmt->bind_param("sssssi", $nombres, $apellidos, $clave, $correo, $rol, $id);
 
-    // Ejecutar la consulta
     $result = $stmt->execute();
 
-    // Verificar si la consulta se ejecutó correctamente
     if ($result) {
         return true;
     } else {
         return false;
     }
 
-    // Cerrar la declaración
     $stmt->close();
-
-    // Cerrar la conexión
     $conn->close();
 }
-
 
 public function obtenerUsuarioPorId($id) {
     $conn = Database::connect();
@@ -197,6 +187,38 @@ public function obtenerUsuarioPorId($id) {
         return null;
     }
 }
+public function inhabilitarUsuario($id) {
+    $conn = Database::connect();
+    $sql = "UPDATE t_usuarios SET Estado = 'Inhabilitado' WHERE Id_usuario = ?";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    
+    $result = $stmt->execute();
+    
+    if ($result) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+public function habilitarUsuario($id) {
+    $conn = Database::connect();
+    $sql = "UPDATE t_usuarios SET Estado = 'Habilitado' WHERE Id_usuario = ?";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    
+    $result = $stmt->execute();
+    
+    if ($result) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 // Apartado de Modelo para Reportes------------------------------------------------------------------------
 
 

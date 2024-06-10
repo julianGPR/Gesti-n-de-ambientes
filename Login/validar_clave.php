@@ -28,6 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo json_encode(["success" => true, "redirect" => "../admin/home"]);
                 } elseif ($row['Rol'] == 'Instructor') {
                     echo json_encode(["success" => true, "redirect" => "../instructor/home"]);
+                }elseif ($row['Rol'] == 'Encargado') {
+                    echo json_encode(["success" => true, "redirect" => "../encargado/home"]);
                 } else {
                     echo json_encode(["success" => false, "message" => "Rol no reconocido."]);
                 }
