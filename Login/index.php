@@ -63,7 +63,7 @@
             background-color: #4caf50;
         }
 
-        #clave {
+        #clave, #correo {
             width: 100%;
             padding: 12px;
             margin: 10px 0 20px;
@@ -104,6 +104,19 @@
             margin-bottom: 20px;
         }
 
+        .forgot-password {
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -125,7 +138,7 @@
                 padding: 10px 16px;
             }
 
-            #clave {
+            #clave, #correo {
                 font-size: 14px;
                 padding: 10px;
             }
@@ -146,8 +159,13 @@
     <img src="Imagenes/logoSena1.png" alt="Logo" class="logo">
     <div class="login-form">
         <h2>Bienvenido al Sistema de Gestión y Control de Ambientes de Formación CDM</h2>
-        <p>Por favor, ingrese su clave para acceder al sistema.</p>
+        <p>Por favor, ingrese su correo y clave para acceder al sistema.</p>
         <form method="post" action="validar_clave.php" id="form-ingreso">
+            <label for="correo">Correo:</label>
+            <div class="form-control">
+                <input type="email" name="correo" id="correo" required>
+                <p></p>
+            </div>
             <label for="clave">Clave:</label>
             <div class="form-control">
                 <input type="password" name="clave" id="clave" required>
@@ -155,6 +173,9 @@
             </div>
             <input type="button" value="Ingresar" class="add-button" id="ingresar">
         </form>
+        <div class="forgot-password">
+            <a href="recuperar_contraseña.html">¿Olvidó su contraseña?</a>
+        </div>
     </div>
 
     <div id="instrucciones">
@@ -169,19 +190,21 @@
 
 <script>
     window.addEventListener('load', () => {
+        const correoInput = document.getElementById('correo');
         const claveInput = document.getElementById('clave');
         const ingresarButton = document.getElementById('ingresar');
         const form = document.getElementById('form-ingreso');
 
         ingresarButton.addEventListener('click', (e) => {
             e.preventDefault();
-            validaClave();
+            validaIngreso();
         });
 
-        const validaClave = () => {
+        const validaIngreso = () => {
+            const correoValor = correoInput.value.trim();
             const claveValor = claveInput.value.trim();
 
-            if (claveValor !== "") {
+            if (correoValor !== "" && claveValor !== "") {
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', 'validar_clave.php', true);
                 xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -189,19 +212,22 @@
                     if (xhr.status == 200) {
                         const response = JSON.parse(xhr.responseText);
                         if (response.success) {
+                            validaOk(correoInput);
                             validaOk(claveInput);
-                            alert("Clave correcta. ¡Bienvenido al sistema!");
+                            alert("Ingreso correcto. ¡Bienvenido al sistema!");
 
                             const redirectUrl = response.redirect ? response.redirect : 'index.php';
                             window.location.href = redirectUrl;
                         } else {
+                            validaFalla(correoInput, response.message);
                             validaFalla(claveInput, response.message);
                         }
                     }
                 };
-                xhr.send('clave=' + claveValor);
+                xhr.send('correo=' + correoValor + '&clave=' + claveValor);
             } else {
-                validaFalla(claveInput, 'Ingrese una clave');
+                validaFalla(correoInput, 'Ingrese su correo');
+                validaFalla(claveInput, 'Ingrese su clave');
             }
         }
 
