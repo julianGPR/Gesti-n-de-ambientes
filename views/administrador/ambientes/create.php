@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,22 +44,22 @@
         </select><br><br>
 
         <label for="computadores">Computadores:</label><br>
-        <input type="number" id="computadores" name="computadores"><br><br>
+<input type="number" id="computadores" name="computadores" value="0" readonly><br><br>
 
-        <label for="tvs">TVs:</label><br>
-        <input type="number" id="tvs" name="tvs"><br><br>
+<label for="tvs">TVs:</label><br>
+<input type="number" id="tvs" name="tvs" value="0" readonly><br><br>
 
-        <label for="sillas">Sillas:</label><br>
-        <input type="number" id="sillas" name="sillas"><br><br>
+<label for="sillas">Sillas:</label><br>
+<input type="number" id="sillas" name="sillas" value="0" readonly><br><br>
 
-        <label for="mesas">Mesas:</label><br>
-        <input type="number" id="mesas" name="mesas"><br><br>
+<label for="mesas">Mesas:</label><br>
+<input type="number" id="mesas" name="mesas" value="0" readonly><br><br>
 
-        <label for="tableros">Tableros:</label><br>
-        <input type="number" id="tableros" name="tableros"><br><br>
+<label for="tableros">Tableros:</label><br>
+<input type="number" id="tableros" name="tableros" value="0" readonly><br><br>
 
-        <label for="nineras">Niñeras:</label><br>
-        <input type="number" id="nineras" name="nineras"><br><br>
+<label for="nineras">Niñeras:</label><br>
+<input type="number" id="nineras" name="nineras" value="0" readonly><br><br>
 
         <label for="estado">Estado:</label><br>
         <input type="text" id="estado" name="estado" value="Habilitado"><br><br>
@@ -125,8 +124,8 @@ document.getElementById('createAmbienteForm').addEventListener('submit', functio
             confirmButtonText: 'Recargar Pagina',
             confirmButtonClass: 'custom-btn-class'
         }).then(() => {
-                window.location.reload(); // Recargar la página
-            });
+            window.location.href = '../ambientes';
+        });
     });
 });
 </script>

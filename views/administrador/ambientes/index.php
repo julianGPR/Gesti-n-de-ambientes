@@ -46,6 +46,7 @@
     </header>
     <nav>
     <div>
+        <button class="toggle-vis" data-column="0">Id</button>
         <button class="toggle-vis" data-column="0">Nombre</button>
         <button class="toggle-vis" data-column="1">Torre</button>
         <button class="toggle-vis" data-column="2">Computadores</button>
@@ -68,6 +69,7 @@
     <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
                 <thead>
                     <tr>
+                    <th>Id</th>
                     <th>Nombre</th>
                     <th>Torre</th>
                     <th>Computadores</th>
@@ -92,6 +94,7 @@
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
+                            echo "<td>" . $row['Id_ambiente'] . "</td>";
                             echo "<td>" . $row['Nombre'] . "</td>";
                             echo "<td>" . $row['Torre'] . "</td>";
                             echo "<td>" . $row['Computadores'] . "</td>";

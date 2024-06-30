@@ -38,6 +38,9 @@
         <label for="apellidos">Apellidos del usuario:</label><br>
         <input type="text" id="apellidos" name="apellidos" required><br>
 
+        <label for="correo">Correo del usuario:</label><br>
+        <input type="text" id="correo" name="correo" required><br>
+
         <label for="clave">Contraseña:</label><br>
         <input type="text" id="clave" name="clave" readonly><br>
         <button type="button" id="generarClave">Generar Contraseña</button>

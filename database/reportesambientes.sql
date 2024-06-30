@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2024 a las 03:01:22
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: localhost
+-- Tiempo de generación: 30-06-2024 a las 03:52:22
+-- Versión del servidor: 10.4.28-MariaDB
+-- Versión de PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,7 @@ CREATE TABLE `t_ambientes` (
   `Nineras` int(50) DEFAULT NULL,
   `CheckNineras` tinyint(1) NOT NULL DEFAULT 1,
   `CheckInfraestructura` tinyint(1) NOT NULL DEFAULT 1,
-  `Estado` tinyint(1) NOT NULL DEFAULT 1,
+  `Estado` varchar(255) NOT NULL DEFAULT 'Habilitado',
   `Observaciones` varchar(500) DEFAULT NULL,
   `Estado_Ambiente` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -55,24 +55,43 @@ CREATE TABLE `t_ambientes` (
 --
 
 INSERT INTO `t_ambientes` (`Id_ambiente`, `Nombre`, `Torre`, `Especialidad`, `Computadores`, `CheckPcs`, `Tvs`, `CheckTvs`, `Sillas`, `CheckSillas`, `Mesas`, `CheckMesas`, `Tableros`, `CheckTableros`, `Nineras`, `CheckNineras`, `CheckInfraestructura`, `Estado`, `Observaciones`, `Estado_Ambiente`) VALUES
-(2, 'Ambiente 104', 'Oriental', NULL, 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(4, 'Ambiente 114', 'Oriental', NULL, 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(5, 'Ambiente 115', 'Oriental', NULL, 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(6, 'Ambiente 116', 'Oriental', NULL, 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(7, 'Ambiente 119', 'Oriental', NULL, 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(8, 'Ambiente 122', 'Oriental', NULL, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(9, 'Ambiente 201', 'Oriental', NULL, 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(10, 'Ambiente 202', 'Oriental', NULL, 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(11, 'Ambiente 203', 'Oriental', NULL, 30, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(12, 'Ambiente 204', 'Oriental', NULL, 18, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(13, 'Ambiente Festo', 'Oriental', NULL, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(14, 'Ambiente Lego', 'Oriental', NULL, 20, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(15, 'Ambiente Órtesis', 'Oriental', NULL, 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(16, 'Ambiente 301', 'Occidental', NULL, 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(17, 'Ambiente 302', 'Occidental', NULL, 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(18, 'Ambiente 303', 'Occidental', NULL, 26, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(19, 'Ambiente 304', 'Occidental', NULL, 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1),
-(20, 'Ambiente 305', 'Occidental', NULL, 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, NULL, 1);
+(1, 'Bodega', 'Occidental', NULL, 2, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, NULL, 1, 1, 'Habilitado', NULL, NULL),
+(2, 'Ambiente 104', 'Oriental', NULL, 18, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(4, 'Ambiente 114', 'Oriental', NULL, 16, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(5, 'Ambiente 115', 'Oriental', NULL, 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(6, 'Ambiente 116', 'Oriental', NULL, 15, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(7, 'Ambiente 119', 'Oriental', NULL, 17, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(8, 'Ambiente 122', 'Oriental', NULL, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(9, 'Ambiente 201', 'Oriental', NULL, 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(10, 'Ambiente 202', 'Oriental', NULL, 21, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(11, 'Ambiente 203', 'Oriental', NULL, 30, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(12, 'Ambiente 204', 'Oriental', NULL, 18, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(13, 'Ambiente Festo', 'Oriental', NULL, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(14, 'Ambiente Lego', 'Oriental', NULL, 20, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(15, 'Ambiente Órtesis', 'Oriental', NULL, 19, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(16, 'Ambiente 301', 'Occidental', NULL, 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(17, 'Ambiente 302', 'Occidental', NULL, 22, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(18, 'Ambiente 303', 'Occidental', NULL, 26, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(19, 'Ambiente 304', 'Occidental', NULL, 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(20, 'Ambiente 305', 'Occidental', NULL, 25, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', NULL, 1),
+(41, 'ejemplo1', 'Oriental', NULL, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', NULL),
+(42, 'ejemplo1', 'Oriental', NULL, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '0', '0', NULL),
+(43, 'ejemplo1', 'Oriental', NULL, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, '0', '0', NULL),
+(44, 'ejemplo1', 'Oriental', NULL, NULL, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 'Habilitado', '', NULL),
+(45, 'ejemplo1', 'Oriental', NULL, NULL, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', '', NULL),
+(46, 'ejemplo1', 'Occidental', NULL, NULL, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 'Habilitado', '', NULL),
+(47, 'ejemplo1', 'Occidental', NULL, NULL, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 'Habilitado', '', NULL),
+(48, 'ejemplo1', 'Oriental', NULL, NULL, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 'Habilitado', '', NULL),
+(49, 'Julian David Garcia Piñeros', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(50, 'cdscsdcsd', 'Occidental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(51, 'ejemplo1rweqrwqerq', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(52, 'pollos', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(53, 'Diego', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(54, 'cqsceqqw', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(55, 'cqsceqqw', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(56, 'sdasdjiuoend', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(57, 'sdasdas f ', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL),
+(58, 'mdiashdnnnn...', 'Oriental', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '1', '', NULL);
 
 --
 -- Disparadores `t_ambientes`
@@ -129,7 +148,7 @@ CREATE TABLE `t_computadores` (
 --
 
 INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Serial`, `PlacaInventario`, `Id_ambiente`, `CheckPc`, `Hardware`, `Software`, `Observaciones`, `Estado_PC`) VALUES
-(1, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MTL', '9216108660', 1, 1, 1, 1, 'El computador no enciende', 0),
+(1, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MTL', '9216108660', 2, 0, 1, 1, '', 0),
 (2, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493T5M', '9216108724', 18, 1, 1, 1, '', 0),
 (3, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '33PYS13', '9216108838', 2, 1, 1, 1, NULL, 1),
 (4, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '373WS13', '9216109087', 2, 1, 1, 1, NULL, 1),
@@ -203,7 +222,7 @@ INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Seria
 (72, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BBV', '9216109849', 6, 1, 1, 1, NULL, 1),
 (73, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '33KWS13', '9216108871', 7, 1, 1, 1, NULL, 1),
 (74, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '4GFWS13', '9216108913', 7, 1, 1, 1, NULL, 1),
-(75, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65GVS13', '9216108928', 7, 1, 1, 1, NULL, 1),
+(75, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '65GVS13', '9216108928', 7, 1, 1, 1, 'dañado', 1),
 (76, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '68WWS13', '9216108778', 7, 1, 1, 1, NULL, 1),
 (77, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '6971T13', '9216108772', 7, 1, 1, 1, NULL, 1),
 (78, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '69Q0T13', '9216108868', 7, 1, 1, 1, NULL, 1),
@@ -291,7 +310,7 @@ INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Seria
 (160, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD9485BJH', '9216109841', 11, 1, 1, 1, NULL, 1),
 (161, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94860LT', '9216109857', 11, 1, 1, 1, NULL, 1),
 (162, 'Laptop', 'HEWLETT_PACKARD', 'HP PROBOOK445R G6', '5CD94862Q8', '9216109862', 11, 1, 1, 1, NULL, 1),
-(163, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MC1', '9216108636', 12, 1, 1, 1, NULL, 1),
+(163, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MC1', '9216108636', 12, 1, 1, 1, 'Dañado', 1),
 (164, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MD5', '9216108640', 12, 1, 1, 1, NULL, 1),
 (165, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MF9', '9216108644', 12, 1, 1, 1, NULL, 1),
 (166, 'Desktop', 'HEWLETT_PACKARD', 'HP Z4 G4 WORKSTATION', 'MXL9493MMW', '9216108652', 12, 1, 1, 1, NULL, 1),
@@ -467,7 +486,9 @@ INSERT INTO `t_computadores` (`Id_computador`, `Tipo`, `Marca`, `Modelo`, `Seria
 (336, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86L0T13', '9216109240', 20, 1, 1, 1, NULL, 1),
 (337, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '86WSS13', '9216109201', 20, 1, 1, 1, NULL, 1),
 (338, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '879SS13', '9216109303', 20, 1, 1, 1, NULL, 1),
-(339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL, 1);
+(339, 'Desktop', 'DELL', 'AIO OPTIPLEX 7470', '850WS13', '9216109285', 20, 1, 1, 1, NULL, 1),
+(349, 'Desktop', 'ejemplo1', 'ejemplo1', 'ejemplo1', 'ejemplo1', 1, 0, 1, 1, '', 1),
+(350, 'Laptop', 'ejemplo2', 'ejemplo2', 'ejemplo2', 'ejemplo2', 1, 0, 1, 1, '', 1);
 
 --
 -- Disparadores `t_computadores`
@@ -558,7 +579,26 @@ INSERT INTO `t_infraestructura` (`Id_infraestructura`, `Id_ambiente`, `CheckPiso
 (17, 17, 1, 1, 1, 1, 1, NULL),
 (18, 18, 1, 1, 1, 1, 1, NULL),
 (19, 19, 1, 1, 1, 1, 1, NULL),
-(20, 20, 1, 1, 1, 1, 1, NULL);
+(20, 20, 1, 1, 1, 1, 1, NULL),
+(0, 1, 1, 1, 1, 1, 1, NULL),
+(0, 41, 1, 1, 1, 1, 1, NULL),
+(0, 42, 1, 1, 1, 1, 1, NULL),
+(0, 43, 1, 1, 1, 1, 1, NULL),
+(0, 44, 1, 1, 1, 1, 1, NULL),
+(0, 45, 1, 1, 1, 1, 1, NULL),
+(0, 46, 1, 1, 1, 1, 1, NULL),
+(0, 47, 1, 1, 1, 1, 1, NULL),
+(0, 48, 1, 1, 1, 1, 1, NULL),
+(0, 49, 1, 1, 1, 1, 1, NULL),
+(0, 50, 1, 1, 1, 1, 1, NULL),
+(0, 51, 1, 1, 1, 1, 1, NULL),
+(0, 52, 1, 1, 1, 1, 1, NULL),
+(0, 53, 1, 1, 1, 1, 1, NULL),
+(0, 54, 1, 1, 1, 1, 1, NULL),
+(0, 55, 1, 1, 1, 1, 1, NULL),
+(0, 56, 1, 1, 1, 1, 1, NULL),
+(0, 57, 1, 1, 1, 1, 1, NULL),
+(0, 58, 1, 1, 1, 1, 1, NULL);
 
 --
 -- Disparadores `t_infraestructura`
@@ -734,7 +774,12 @@ INSERT INTO `t_reportes` (`Id_reporte`, `FechaHora`, `Id_usuario`, `Id_ambiente`
 (17, '2024-05-27 11:27:36', 34, 15, '2', 1, '2024-05-31 01:24:04', '5CD94860LK: Computador Extraviado.'),
 (18, '2024-05-27 12:21:35', 42, 15, '2', 0, NULL, '5CD94860LY: Perdido'),
 (19, '2024-02-29 19:11:43', 1, 2, '0', 1, '2024-03-01 00:00:00', NULL),
-(20, '2024-03-01 19:11:43', 1, 2, '0', 1, '2024-03-02 00:00:00', NULL);
+(20, '2024-03-01 19:11:43', 1, 2, '0', 1, '2024-03-02 00:00:00', NULL),
+(21, '2024-06-10 11:41:35', 2, 12, '2', 0, NULL, 'MXL9493MC1: Dañado'),
+(22, '2024-06-10 11:41:35', NULL, 12, NULL, 0, NULL, 'En el Ambiente 204; El computador con número de serie MXL9493MC1 y Placa de Inventario 9216108636: Dañado'),
+(23, '2024-06-10 12:08:26', 5, 7, '2', 0, NULL, '65GVS13: dañado'),
+(24, '2024-06-10 12:08:26', NULL, 7, NULL, 0, NULL, 'En el Ambiente 119; El computador con número de serie 65GVS13 y Placa de Inventario 9216108928: dañado'),
+(25, '2024-06-19 20:20:00', NULL, 2, NULL, 0, NULL, 'En el Ambiente 104; El computador con número de serie MXL9493MTL y Placa de Inventario 9216108660: ');
 
 --
 -- Disparadores `t_reportes`
@@ -964,117 +1009,119 @@ CREATE TABLE `t_usuarios` (
   `Clave` varchar(255) DEFAULT NULL,
   `Rol` enum('Administrador','Instructor','Encargado') NOT NULL,
   `Especialidad` varchar(100) DEFAULT NULL,
-  `Estado_Usuario` tinyint(1) NOT NULL DEFAULT 1
+  `Estado` varchar(255) NOT NULL DEFAULT 'Habilitado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `t_usuarios`
 --
 
-INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Correo`, `Clave`, `Rol`, `Especialidad`, `Estado_Usuario`) VALUES
-(1, 'ALVARO', 'BUSTOS JEREZ', 'abustosj@sena.edu.co', '4720', 'Instructor', NULL, 1),
-(2, 'CARLOS ANDRES', 'INFANTE NIÑO', 'cinfante@sena.edu.co', '8877', 'Instructor', NULL, 1),
-(3, 'DEIVYS GUILLERMO', 'MORALES URIBE', 'dmorales@sena.edu.co', '3652', 'Instructor', NULL, 1),
-(4, 'EDGAR AURELIO', 'GELVES ALBARRACIN', 'egelvesa@sena.edu.co', '2017', 'Administrador', NULL, 1),
-(5, 'EDGAR', 'MORALES CORTES', 'emoralesc@sena.edu.co', '1901', 'Administrador', NULL, 1),
-(6, 'EDGAR', 'RAMOS PERILLA', 'edramosp@sena.edu.co', '9064', 'Instructor', NULL, 1),
-(7, 'FRAN EDWARD', 'PEREZ ORTIZ', 'frperezo@sena.edu.co', '7670', 'Instructor', NULL, 1),
-(8, 'GABRIEL RAMIRO', 'DELGADO CAVIATIVA', 'delgadoc@sena.edu.co', '8406', 'Instructor', NULL, 1),
-(9, 'GLORIA STELLA', 'MORA GUTIERREZ', 'gmora@sena.edu.co', '7153', 'Instructor', NULL, 1),
-(10, 'HUGO ALEXANDER', 'MEDINA ULLOA', 'hmedinau@sena.edu.co', '3346', 'Instructor', NULL, 1),
-(11, 'IVAN', 'MARTINEZ MORA', 'imartinezm@sena.edu.co', '1399', 'Instructor', NULL, 1),
-(12, 'IVAN RAMIRO', 'RODRIGUEZ CAMACHO', 'irrodriguez@sena.edu.co', '2758', 'Instructor', NULL, 1),
-(13, 'JHON JAIRO', 'RODRIGUEZ TORRES', 'jjrodriguezt@sena.edu.co', '8950', 'Instructor', NULL, 1),
-(14, 'JOSÉ MANUEL', 'PERILLA', 'jperillar@sena.edu.co', '9192', 'Instructor', NULL, 1),
-(15, 'JULIAN CAMILO', 'CELIS FISCAL', 'jccelis@sena.edu.co', '3165', 'Instructor', NULL, 1),
-(16, 'JULIO GREGORIO', 'BLANCO BELTRAN', 'jublancob@sena.edu.co', '9505', 'Instructor', NULL, 1),
-(17, 'LINA MARCELA', 'FLOREZ BOTERO', 'lflorezb@sena.edu.co', '2958', 'Instructor', NULL, 1),
-(18, 'LUIS ANTONIO', 'MORENO', 'lamorenom@sena.edu.co', '8078', 'Instructor', NULL, 1),
-(19, 'LUIS HERNANDO', 'PRIETO OLIVARES', 'lhprieto@sena.edu.co', '1659', 'Instructor', NULL, 1),
-(20, 'MARIA CAROLINA', 'MARTINEZ REYES', 'mcmartinezr@sena.edu.co', '6440', 'Instructor', NULL, 1),
-(21, 'MIGUEL ANTONIO', 'MORALES HIGUERA', 'mamoralesh@sena.edu.co', '5994', 'Instructor', NULL, 1),
-(22, 'NANCY CONSTANZA', 'ROMERO', 'ncromero@sena.edu.co', '4048', 'Instructor', NULL, 1),
-(23, 'NELSON IGNACIO', 'CORREA DIAZ', 'ncorread@sena.edu.co', '7616', 'Instructor', NULL, 1),
-(24, 'ORLANDO IGNACIO', 'MORALES MORALES', 'oimoralesm@sena.edu.co', '5668', 'Instructor', NULL, 1),
-(25, 'OSCAR RICARDO', 'RIVEROS AGUIRRE', 'oriverosa@sena.edu.co', '3723', 'Instructor', NULL, 1),
-(26, 'OSWALDO ENRIQUE', 'VERGARA PEREZ', 'oevergarap@sena.edu.co', '4633', 'Instructor', NULL, 1),
-(27, 'PEDRO ELADIO', 'GARCIA BENAVIDES', 'pegarcia@sena.edu.co', '9103', 'Instructor', NULL, 1),
-(28, 'SANDRA VIANEY', 'VEGA VEGA', 'svegav@sena.edu.co', '9288', 'Instructor', NULL, 1),
-(29, 'SANDRA YANNETH', 'RODRIGUEZ RODRIGUEZ', 'syrodriguezr@sena.edu.co', '9096', 'Instructor', NULL, 1),
-(30, 'SAÚL', 'SANTAMARÍA GUTIÉRREZ', 'ssantamariag@sena.edu.co', '9196', 'Instructor', NULL, 1),
-(31, 'WILLIAM DAVID', 'VARGAS', 'wvargasp@sena.edu.co', '3569', 'Instructor', NULL, 1),
-(32, 'ABRAHAM JOSE', 'DE LA BARRERA GUTIERREZ', 'jadelabarrera@sena.edu.co', '5533', 'Instructor', NULL, 1),
-(33, 'ADRIAN ORLANDO', 'CLAVIJO ROMERO', 'aoclavijo@sena.edu.co', '8356', 'Instructor', NULL, 1),
-(34, 'ALBA ISABEL', 'LOPEZ RUBIANO', 'ailopez@sena.edu.co', '8482', 'Instructor', NULL, 1),
-(35, 'ALEX ALBERTO', 'ALZATE JAIMES', 'aalzatej@sena.edu.co', '8702', 'Instructor', NULL, 1),
-(36, 'AMILCAR', 'PALACIO MOSQUERA', 'apalacios@sena.edu.co', '9462', 'Instructor', NULL, 1),
-(37, 'ANDRÉS EDUARDO', 'CHÁVEZ GUARDO', 'aechavez@sena.edu.co', '2000', 'Instructor', NULL, 1),
-(38, 'ANGÉLICA MARÍA', 'TRIANA GUARNIZO', 'atrianag@sena.edu.co', '1598', 'Instructor', NULL, 1),
-(39, 'ASTRID', 'SEGURA', 'astrid.segura@sena.edu.co', '4092', 'Instructor', NULL, 1),
-(40, 'BLANCA ESTRELLA', 'MENDIETA BAUTISTA', 'blmendietaes@sena.edu.co', '5052', 'Instructor', NULL, 1),
-(41, 'CARLOS ANDRES', 'ECHE LOPEZ', 'cechel@sena.edu.co', '8617', 'Instructor', NULL, 1),
-(42, 'CARLOS HUMBERTO', 'OLIVELLA ZULETA', 'cholivella@sena.edu.co', '3244', 'Instructor', NULL, 1),
-(43, 'CAROLINA', 'MENDOZA VIVAS', 'cmendozav@sena.edu.co', '6210', 'Instructor', NULL, 1),
-(44, 'CESAR AUGUSTO', 'PEÑA MATEUS', 'capena@sena.edu.co', '4542', 'Instructor', NULL, 1),
-(45, 'CESAR AUGUSTO', 'SUAREZ BUITRAGO', 'casuarezb@sena.edu.co', '3574', 'Instructor', NULL, 1),
-(46, 'CLAUDIA', 'CLAUDIA BELTRAN RODRIGUEZ', 'clbeltran@sena.edu.co', '9094', 'Instructor', NULL, 1),
-(47, 'CLAUDIA CATHERINE', 'GARZÓN ORJUELA', 'ccgarzon@sena.edu.co', '5799', 'Instructor', NULL, 1),
-(48, 'DANIEL ALFONSO', 'ORJUELA DIAZ', 'dorjuela@sena.edu.co', '1469', 'Instructor', NULL, 1),
-(49, 'DEIVID ENRIQUE', 'TRIVIÑO', 'dtrivinolo@sena.edu.co', '6052', 'Instructor', NULL, 1),
-(50, 'DIANA ROCIO', 'DELGADO QUINTERO', 'drdelgado@sena.edu.co', '6243', 'Instructor', NULL, 1),
-(51, 'DOMINIQUE DIDYME', 'DOME FUENTES', 'dddome@sena.edu.co', '7115', 'Instructor', NULL, 1),
-(52, 'EDWIN ALEXANDER', 'DURAN GARCIA', 'eaduran@sena.edu.co', '1011', 'Instructor', NULL, 1),
-(53, 'FABIAN RICARDO', 'MESTRE SOCARRAS', 'frmestre@sena.edu.co', '6697', 'Instructor', NULL, 1),
-(54, 'FABIO HERNAN', 'ESPEJO COBOS', 'fespejoc@sena.edu.co', '2587', 'Instructor', NULL, 1),
-(55, 'FERNANDO ANDRES', 'SALGUERO CRUZ', 'fsalgueroc@sena.edu.co', '4888', 'Instructor', NULL, 1),
-(56, 'FERNELLY', 'ROJAS CHIA', 'frojasch@sena.edu.co', '5825', 'Instructor', NULL, 1),
-(57, 'GEORGE ANTONY', 'SUARIQUE ARENAS', 'gasuarique@sena.edu.co', '3878', 'Instructor', NULL, 1),
-(58, 'GERMAN DARIO', 'ROJAS FRANCO', 'grojas@sena.edu.co', '5966', 'Instructor', NULL, 1),
-(59, 'GIOVANNI ESTEBAN', 'OSPINA ROJAS', 'geospinar@sena.edu.co', '6865', 'Instructor', NULL, 1),
-(60, 'GUILLERMO', 'SANCHEZ ISAZA', 'gsanchezis@sena.edu.co', '9160', 'Instructor', NULL, 1),
-(61, 'ISAI ANDRES', 'DOCTOR', 'itorresd@sena.edu.co', '5283', 'Instructor', NULL, 1),
-(62, 'JAIME', 'MOGOLLON RODRIGUEZ', 'jamogollon@sena.edu.co', '4057', 'Instructor', NULL, 1),
-(63, 'JAIME ALEJANDRO', 'GAMBA REYES', 'jagamba@sena.edu.co', '7641', 'Instructor', NULL, 1),
-(64, 'JAIME HERNANDO', 'TORRES VASQUEZ', 'jtorresva@sena.edu.co', '3878', 'Instructor', NULL, 1),
-(65, 'JAIRO ALBERTO', 'ROMERO GUTIERREZ', 'jromerog@sena.edu.co', '6286', 'Instructor', NULL, 1),
-(66, 'JANNEZ MILSON', 'URREGO', 'jurregoq@sena.edu.co', '2210', 'Instructor', NULL, 1),
-(67, 'JAVIER LEONARDO', 'CHAPARRO PESCA', 'jchaparrop@sena.edu.co', '7411', 'Instructor', NULL, 1),
-(68, 'JAVIER ORLANDO', 'RODRIGUEZ RODRIGUEZ', 'javrodriguez@sena.edu.co', '1515', 'Instructor', NULL, 1),
-(69, 'JESÚS ANTONIO', 'MORENO HERRERA', 'jmorenoh@sena.edu.co', '2384', 'Instructor', NULL, 1),
-(70, 'JHON ALBERTO', 'ALTAMAR RENDON', 'jaaltamar@sena.edu.co', '4827', 'Instructor', NULL, 1),
-(71, 'JOHN HAROLD', 'PEREZ CALDERON', 'jharoldperez@sena.edu.co', '7017', 'Instructor', NULL, 1),
-(72, 'JOHN JAIME', 'RUIZ GUZMAN', 'jjruizg@sena.edu.co', '9735', 'Instructor', NULL, 1),
-(73, 'JORGE LUIS', 'URIBE PARRA', 'joluribep@sena.edu.co', '1725', 'Instructor', NULL, 1),
-(74, 'JOSE ANDRES', 'ZAMBRANO DIAZ', 'jazambrano@sena.edu.co', '3844', 'Instructor', NULL, 1),
-(75, 'JOSE MIGUEL', 'GOMEZ HURTADO', 'jmgomezh@sena.edu.co', '3126', 'Instructor', NULL, 1),
-(76, 'JUAN CARLOS', 'HERNÁNDEZ PRIETO', 'jchernandezp@sena.edu.co', '1651', 'Instructor', NULL, 1),
-(77, 'JUAN JOSÉ', 'BOTELLO CASTELLANOS', 'jbotelloc@sena.edu.co', '2850', 'Instructor', NULL, 1),
-(78, 'JULIO ROBERTO', 'GALVIS CARDOZO', 'jgalvisc@sena.edu.co', '3527', 'Instructor', NULL, 1),
-(79, 'LEIDY MARCELA', 'MANRIQUE OBREGON', 'lmmanriqueo@sena.edu.co', '9833', 'Instructor', NULL, 1),
-(80, 'LEONARDO', 'LASTRA SALGUERO', 'llastras@sena.edu.co', '5971', 'Instructor', NULL, 1),
-(81, 'LIBARDO', 'GÓMEZ DÍAZ', 'lgomezd@sena.edu.co', '8851', 'Instructor', NULL, 1),
-(82, 'LUIS ENRIQUE', 'ARIAS CHAVARRO', 'learias@sena.edu.co', '2807', 'Instructor', NULL, 1),
-(83, 'LUIS FELIPE', 'RESTREPO  ARGUELLO', 'lfrestrepo@sena.edu.co', '9578', 'Instructor', NULL, 1),
-(84, 'LUIS GABRIEL', 'NOREÑA TRIGOS', 'lgnorena@sena.edu.co', '4291', 'Instructor', NULL, 1),
-(85, 'LUISA FERNANDA', 'ROSAS CARDENAS', 'lfrosas@sena.edu.co', '2863', 'Instructor', NULL, 1),
-(86, 'LUZ MIRIAM', 'GARCIA QUIVANO', 'lmgarciaq@sena.edu.co', '8308', 'Instructor', NULL, 1),
-(87, 'LYDA PATRICIA', 'CAICEDO MONROY', 'lpcaicedo@sena.edu.co', '5420', 'Instructor', NULL, 1),
-(88, 'MAURICIO ANDRES', 'UMBARILA FIGUEROA', 'mumbarilaf@sena.edu.co', '2207', 'Instructor', NULL, 1),
-(89, 'MILCON', 'MONTENEGRO GAMBA', 'mmontenegrog@sena.edu.co', '2819', 'Instructor', NULL, 1),
-(90, 'NESTOR GUILLERMO', 'MONTAÑO GOMEZ', 'ngmontano@sena.edu.co', '9418', 'Instructor', NULL, 1),
-(91, 'OMAR OSWALDO', 'ZAMBRANO AREVALO', 'oozambrano@sena.edu.co', '7790', 'Instructor', NULL, 1),
-(92, 'OSCAR HELI', 'BEJARANO', 'obejarano@sena.edu.co', '7119', 'Instructor', NULL, 1),
-(93, 'RAMON EMILIO', 'GONZALEZ RODRIGUEZ', 'regonzalezr@sena.edu.co', '9380', 'Instructor', NULL, 1),
-(94, 'ROBINSON LEONARDO', 'PIMIENTO', 'rpimiento@sena.edu.co', '2866', 'Instructor', NULL, 1),
-(95, 'SANDRA AYDEE', 'LOPEZ CONTOR', 'slopezc@sena.edu.co', '1887', 'Instructor', NULL, 1),
-(96, 'VICTOR DANIEL', 'LOPEZ MUÑOZ', 'vdlpez@sena.edu.co', '2298', 'Instructor', NULL, 1),
-(97, 'VICTOR JULIO', 'RODRIGUEZ PRADA', 'vrodriguezp@sena.edu.co', '1419', 'Instructor', NULL, 1),
-(98, 'WASHINGTON', 'NIETO ARCE', 'wnieto@sena.edu.co', '6091', 'Instructor', NULL, 1),
-(99, 'WILLIAM', 'MAYORGA GARZON', 'wmayorgag@sena.edu.co', '4862', 'Instructor', NULL, 1),
-(100, 'YUDI', 'TIMANA CELIS', 'ytimanace@sena.edu.co', '6930', 'Instructor', NULL, 1),
-(101, 'YULIETH FERNANDA', 'GUTIÉRREZ LEÓN', 'yfgutierrez@sena.edu.co', '8278', 'Instructor', NULL, 1),
-(102, 'ALFONSO', 'VARGAS', NULL, '1799', 'Instructor', NULL, 1),
-(103, 'JUAN DAVID', 'VASQUEZ VILLALBA', NULL, '6432', 'Instructor', NULL, 1);
+INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Correo`, `Clave`, `Rol`, `Especialidad`, `Estado`) VALUES
+(1, 'ALVARO', 'BUSTOS JEREZ', 'abustosj@sena.edu.co', '4720', 'Instructor', NULL, 'Habilitado'),
+(2, 'CARLOS ANDRES', 'INFANTE NIÑO', 'cinfante@sena.edu.co', '8877', 'Instructor', NULL, 'Habilitado'),
+(3, 'DEIVYS GUILLERMO', 'MORALES URIBE', 'dmorales@sena.edu.co', '3652', 'Instructor', NULL, 'Habilitado'),
+(4, 'EDGAR AURELIO', 'GELVES ALBARRACIN', 'egelvesa@sena.edu.co', '2017', 'Administrador', NULL, 'Habilitado'),
+(5, 'EDGAR', 'MORALES CORTES', 'emoralesc@sena.edu.co', '1901', 'Encargado', NULL, 'Habilitado'),
+(6, 'EDGAR', 'RAMOS PERILLA', 'edramosp@sena.edu.co', '9064', 'Instructor', NULL, 'Habilitado'),
+(7, 'FRAN EDWARD', 'PEREZ ORTIZ', 'frperezo@sena.edu.co', '7670', 'Instructor', NULL, 'Habilitado'),
+(8, 'GABRIEL RAMIRO', 'DELGADO CAVIATIVA', 'delgadoc@sena.edu.co', '8406', 'Instructor', NULL, 'Habilitado'),
+(9, 'GLORIA STELLA', 'MORA GUTIERREZ', 'gmora@sena.edu.co', '7153', 'Instructor', NULL, 'Habilitado'),
+(10, 'HUGO ALEXANDER', 'MEDINA ULLOA', 'hmedinau@sena.edu.co', '3346', 'Instructor', NULL, 'Habilitado'),
+(11, 'IVAN', 'MARTINEZ MORA', 'imartinezm@sena.edu.co', '1399', 'Instructor', NULL, 'Habilitado'),
+(12, 'IVAN RAMIRO', 'RODRIGUEZ CAMACHO', 'irrodriguez@sena.edu.co', '2758', 'Instructor', NULL, 'Habilitado'),
+(13, 'JHON JAIRO', 'RODRIGUEZ TORRES', 'jjrodriguezt@sena.edu.co', '8950', 'Instructor', NULL, 'Habilitado'),
+(14, 'JOSÉ MANUEL', 'PERILLA', 'jperillar@sena.edu.co', '9192', 'Instructor', NULL, 'Habilitado'),
+(15, 'JULIAN CAMILO', 'CELIS FISCAL', 'jccelis@sena.edu.co', '3165', 'Instructor', NULL, 'Habilitado'),
+(16, 'JULIO GREGORIO', 'BLANCO BELTRAN', 'jublancob@sena.edu.co', '9505', 'Instructor', NULL, 'Habilitado'),
+(17, 'LINA MARCELA', 'FLOREZ BOTERO', 'lflorezb@sena.edu.co', '2958', 'Instructor', NULL, 'Habilitado'),
+(18, 'LUIS ANTONIO', 'MORENO', 'lamorenom@sena.edu.co', '8078', 'Instructor', NULL, 'Habilitado'),
+(19, 'LUIS HERNANDO', 'PRIETO OLIVARES', 'lhprieto@sena.edu.co', '1659', 'Instructor', NULL, 'Habilitado'),
+(20, 'MARIA CAROLINA', 'MARTINEZ REYES', 'mcmartinezr@sena.edu.co', '6440', 'Instructor', NULL, 'Habilitado'),
+(21, 'MIGUEL ANTONIO', 'MORALES HIGUERA', 'mamoralesh@sena.edu.co', '5994', 'Instructor', NULL, 'Habilitado'),
+(22, 'NANCY CONSTANZA', 'ROMERO', 'ncromero@sena.edu.co', '4048', 'Instructor', NULL, 'Habilitado'),
+(23, 'NELSON IGNACIO', 'CORREA DIAZ', 'ncorread@sena.edu.co', '7616', 'Instructor', NULL, 'Habilitado'),
+(24, 'ORLANDO IGNACIO', 'MORALES MORALES', 'oimoralesm@sena.edu.co', '5668', 'Instructor', NULL, 'Habilitado'),
+(25, 'OSCAR RICARDO', 'RIVEROS AGUIRRE', 'oriverosa@sena.edu.co', '3723', 'Instructor', NULL, 'Habilitado'),
+(26, 'OSWALDO ENRIQUE', 'VERGARA PEREZ', 'oevergarap@sena.edu.co', '4633', 'Instructor', NULL, 'Habilitado'),
+(27, 'PEDRO ELADIO', 'GARCIA BENAVIDES', 'pegarcia@sena.edu.co', '9103', 'Instructor', NULL, 'Habilitado'),
+(28, 'SANDRA VIANEY', 'VEGA VEGA', 'svegav@sena.edu.co', '9288', 'Instructor', NULL, 'Habilitado'),
+(29, 'SANDRA YANNETH', 'RODRIGUEZ RODRIGUEZ', 'syrodriguezr@sena.edu.co', '9096', 'Instructor', NULL, 'Habilitado'),
+(30, 'SAÚL', 'SANTAMARÍA GUTIÉRREZ', 'ssantamariag@sena.edu.co', '9196', 'Instructor', NULL, 'Habilitado'),
+(31, 'WILLIAM DAVID', 'VARGAS', 'wvargasp@sena.edu.co', '3569', 'Instructor', NULL, 'Habilitado'),
+(32, 'ABRAHAM JOSE', 'DE LA BARRERA GUTIERREZ', 'jadelabarrera@sena.edu.co', '5533', 'Instructor', NULL, 'Habilitado'),
+(33, 'ADRIAN ORLANDO', 'CLAVIJO ROMERO', 'aoclavijo@sena.edu.co', '8356', 'Instructor', NULL, 'Habilitado'),
+(34, 'ALBA ISABEL', 'LOPEZ RUBIANO', 'ailopez@sena.edu.co', '8482', 'Instructor', NULL, 'Habilitado'),
+(35, 'ALEX ALBERTO', 'ALZATE JAIMES', 'aalzatej@sena.edu.co', '8702', 'Instructor', NULL, 'Habilitado'),
+(36, 'AMILCAR', 'PALACIO MOSQUERA', 'apalacios@sena.edu.co', '9462', 'Instructor', NULL, 'Habilitado'),
+(37, 'ANDRÉS EDUARDO', 'CHÁVEZ GUARDO', 'aechavez@sena.edu.co', '2000', 'Instructor', NULL, 'Habilitado'),
+(38, 'ANGÉLICA MARÍA', 'TRIANA GUARNIZO', 'atrianag@sena.edu.co', '1598', 'Instructor', NULL, 'Habilitado'),
+(39, 'ASTRID', 'SEGURA', 'astrid.segura@sena.edu.co', '4092', 'Instructor', NULL, 'Habilitado'),
+(40, 'BLANCA ESTRELLA', 'MENDIETA BAUTISTA', 'blmendietaes@sena.edu.co', '5052', 'Instructor', NULL, 'Habilitado'),
+(41, 'CARLOS ANDRES', 'ECHE LOPEZ', 'cechel@sena.edu.co', '8617', 'Instructor', NULL, 'Habilitado'),
+(42, 'CARLOS HUMBERTO', 'OLIVELLA ZULETA', 'cholivella@sena.edu.co', '3244', 'Instructor', NULL, 'Habilitado'),
+(43, 'CAROLINA', 'MENDOZA VIVAS', 'cmendozav@sena.edu.co', '6210', 'Instructor', NULL, 'Habilitado'),
+(44, 'CESAR AUGUSTO', 'PEÑA MATEUS', 'capena@sena.edu.co', '4542', 'Instructor', NULL, 'Habilitado'),
+(45, 'CESAR AUGUSTO', 'SUAREZ BUITRAGO', 'casuarezb@sena.edu.co', '3574', 'Instructor', NULL, 'Habilitado'),
+(46, 'CLAUDIA', 'CLAUDIA BELTRAN RODRIGUEZ', 'clbeltran@sena.edu.co', '9094', 'Instructor', NULL, 'Habilitado'),
+(47, 'CLAUDIA CATHERINE', 'GARZÓN ORJUELA', 'ccgarzon@sena.edu.co', '5799', 'Instructor', NULL, 'Habilitado'),
+(48, 'DANIEL ALFONSO', 'ORJUELA DIAZ', 'dorjuela@sena.edu.co', '1469', 'Instructor', NULL, 'Habilitado'),
+(49, 'DEIVID ENRIQUE', 'TRIVIÑO', 'dtrivinolo@sena.edu.co', '6052', 'Instructor', NULL, 'Habilitado'),
+(50, 'DIANA ROCIO', 'DELGADO QUINTERO', 'drdelgado@sena.edu.co', '6243', 'Instructor', NULL, 'Habilitado'),
+(51, 'DOMINIQUE DIDYME', 'DOME FUENTES', 'dddome@sena.edu.co', '7115', 'Instructor', NULL, 'Habilitado'),
+(52, 'EDWIN ALEXANDER', 'DURAN GARCIA', 'eaduran@sena.edu.co', '1011', 'Instructor', NULL, 'Habilitado'),
+(53, 'FABIAN RICARDO', 'MESTRE SOCARRAS', 'frmestre@sena.edu.co', '6697', 'Instructor', NULL, 'Habilitado'),
+(54, 'FABIO HERNAN', 'ESPEJO COBOS', 'fespejoc@sena.edu.co', '2587', 'Instructor', NULL, 'Habilitado'),
+(55, 'FERNANDO ANDRES', 'SALGUERO CRUZ', 'fsalgueroc@sena.edu.co', '4888', 'Instructor', NULL, 'Habilitado'),
+(56, 'FERNELLY', 'ROJAS CHIA', 'frojasch@sena.edu.co', '5825', 'Instructor', NULL, 'Habilitado'),
+(57, 'GEORGE ANTONY', 'SUARIQUE ARENAS', 'gasuarique@sena.edu.co', '3878', 'Instructor', NULL, 'Habilitado'),
+(58, 'GERMAN DARIO', 'ROJAS FRANCO', 'grojas@sena.edu.co', '5966', 'Instructor', NULL, 'Habilitado'),
+(59, 'GIOVANNI ESTEBAN', 'OSPINA ROJAS', 'geospinar@sena.edu.co', '6865', 'Instructor', NULL, 'Habilitado'),
+(60, 'GUILLERMO', 'SANCHEZ ISAZA', 'gsanchezis@sena.edu.co', '9160', 'Instructor', NULL, 'Habilitado'),
+(61, 'ISAI ANDRES', 'DOCTOR', 'itorresd@sena.edu.co', '5283', 'Instructor', NULL, 'Habilitado'),
+(62, 'JAIME', 'MOGOLLON RODRIGUEZ', 'jamogollon@sena.edu.co', '4057', 'Instructor', NULL, 'Habilitado'),
+(63, 'JAIME ALEJANDRO', 'GAMBA REYES', 'jagamba@sena.edu.co', '7641', 'Instructor', NULL, 'Habilitado'),
+(64, 'JAIME HERNANDO', 'TORRES VASQUEZ', 'jtorresva@sena.edu.co', '3878', 'Instructor', NULL, 'Habilitado'),
+(65, 'JAIRO ALBERTO', 'ROMERO GUTIERREZ', 'jromerog@sena.edu.co', '6286', 'Instructor', NULL, 'Habilitado'),
+(66, 'JANNEZ MILSON', 'URREGO', 'jurregoq@sena.edu.co', '2210', 'Instructor', NULL, 'Habilitado'),
+(67, 'JAVIER LEONARDO', 'CHAPARRO PESCA', 'jchaparrop@sena.edu.co', '7411', 'Instructor', NULL, 'Habilitado'),
+(68, 'JAVIER ORLANDO', 'RODRIGUEZ RODRIGUEZ', 'javrodriguez@sena.edu.co', '1515', 'Instructor', NULL, 'Habilitado'),
+(69, 'JESÚS ANTONIO', 'MORENO HERRERA', 'jmorenoh@sena.edu.co', '2384', 'Instructor', NULL, 'Habilitado'),
+(70, 'JHON ALBERTO', 'ALTAMAR RENDON', 'jaaltamar@sena.edu.co', '4827', 'Instructor', NULL, 'Habilitado'),
+(71, 'JOHN HAROLD', 'PEREZ CALDERON', 'jharoldperez@sena.edu.co', '7017', 'Instructor', NULL, 'Habilitado'),
+(72, 'JOHN JAIME', 'RUIZ GUZMAN', 'jjruizg@sena.edu.co', '9735', 'Instructor', NULL, 'Habilitado'),
+(73, 'JORGE LUIS', 'URIBE PARRA', 'joluribep@sena.edu.co', '1725', 'Instructor', NULL, 'Habilitado'),
+(74, 'JOSE ANDRES', 'ZAMBRANO DIAZ', 'jazambrano@sena.edu.co', '3844', 'Instructor', NULL, 'Habilitado'),
+(75, 'JOSE MIGUEL', 'GOMEZ HURTADO', 'jmgomezh@sena.edu.co', '3126', 'Instructor', NULL, 'Habilitado'),
+(76, 'JUAN CARLOS', 'HERNÁNDEZ PRIETO', 'jchernandezp@sena.edu.co', '1651', 'Instructor', NULL, 'Habilitado'),
+(77, 'JUAN JOSÉ', 'BOTELLO CASTELLANOS', 'jbotelloc@sena.edu.co', '2850', 'Instructor', NULL, 'Habilitado'),
+(78, 'JULIO ROBERTO', 'GALVIS CARDOZO', 'jgalvisc@sena.edu.co', '3527', 'Instructor', NULL, 'Habilitado'),
+(79, 'LEIDY MARCELA', 'MANRIQUE OBREGON', 'lmmanriqueo@sena.edu.co', '9833', 'Instructor', NULL, 'Habilitado'),
+(80, 'LEONARDO', 'LASTRA SALGUERO', 'llastras@sena.edu.co', '5971', 'Instructor', NULL, 'Habilitado'),
+(81, 'LIBARDO', 'GÓMEZ DÍAZ', 'lgomezd@sena.edu.co', '8851', 'Instructor', NULL, 'Habilitado'),
+(82, 'LUIS ENRIQUE', 'ARIAS CHAVARRO', 'learias@sena.edu.co', '2807', 'Instructor', NULL, 'Habilitado'),
+(83, 'LUIS FELIPE', 'RESTREPO  ARGUELLO', 'lfrestrepo@sena.edu.co', '9578', 'Instructor', NULL, 'Habilitado'),
+(84, 'LUIS GABRIEL', 'NOREÑA TRIGOS', 'lgnorena@sena.edu.co', '4291', 'Instructor', NULL, 'Habilitado'),
+(85, 'LUISA FERNANDA', 'ROSAS CARDENAS', 'lfrosas@sena.edu.co', '2863', 'Instructor', NULL, 'Habilitado'),
+(86, 'LUZ MIRIAM', 'GARCIA QUIVANO', 'lmgarciaq@sena.edu.co', '8308', 'Instructor', NULL, 'Habilitado'),
+(87, 'LYDA PATRICIA', 'CAICEDO MONROY', 'lpcaicedo@sena.edu.co', '5420', 'Instructor', NULL, 'Habilitado'),
+(88, 'MAURICIO ANDRES', 'UMBARILA FIGUEROA', 'mumbarilaf@sena.edu.co', '2207', 'Instructor', NULL, 'Habilitado'),
+(89, 'MILCON', 'MONTENEGRO GAMBA', 'mmontenegrog@sena.edu.co', '2819', 'Instructor', NULL, 'Habilitado'),
+(90, 'NESTOR GUILLERMO', 'MONTAÑO GOMEZ', 'ngmontano@sena.edu.co', '9418', 'Instructor', NULL, 'Habilitado'),
+(91, 'OMAR OSWALDO', 'ZAMBRANO AREVALO', 'oozambrano@sena.edu.co', '7790', 'Instructor', NULL, 'Habilitado'),
+(92, 'OSCAR HELI', 'BEJARANO', 'obejarano@sena.edu.co', '7119', 'Instructor', NULL, 'Habilitado'),
+(93, 'RAMON EMILIO', 'GONZALEZ RODRIGUEZ', 'regonzalezr@sena.edu.co', '9380', 'Instructor', NULL, 'Habilitado'),
+(94, 'ROBINSON LEONARDO', 'PIMIENTO', 'rpimiento@sena.edu.co', '2866', 'Instructor', NULL, 'Habilitado'),
+(95, 'SANDRA AYDEE', 'LOPEZ CONTOR', 'slopezc@sena.edu.co', '1887', 'Instructor', NULL, 'Habilitado'),
+(96, 'VICTOR DANIEL', 'LOPEZ MUÑOZ', 'vdlpez@sena.edu.co', '2298', 'Instructor', NULL, 'Habilitado'),
+(97, 'VICTOR JULIO', 'RODRIGUEZ PRADA', 'vrodriguezp@sena.edu.co', '1419', 'Instructor', NULL, 'Habilitado'),
+(98, 'WASHINGTON', 'NIETO ARCE', 'wnieto@sena.edu.co', '6091', 'Instructor', NULL, 'Habilitado'),
+(99, 'WILLIAM', 'MAYORGA GARZON', 'wmayorgag@sena.edu.co', '4862', 'Instructor', NULL, 'Habilitado'),
+(100, 'YUDI', 'TIMANA CELIS', 'ytimanace@sena.edu.co', '6930', 'Instructor', NULL, 'Habilitado'),
+(101, 'YULIETH FERNANDA', 'GUTIÉRREZ LEÓN', 'yfgutierrez@sena.edu.co', '8278', 'Instructor', NULL, 'Habilitado'),
+(102, 'ALFONSO', 'VARGAS', NULL, '1799', 'Instructor', NULL, 'Habilitado'),
+(103, 'JUAN DAVID', 'VASQUEZ VILLALBA', NULL, '6432', 'Instructor', NULL, 'Habilitado'),
+(104, 'Juan Manuel', 'Infante Quiroga', 'juanmainqui123@gmail.com', '1211', 'Administrador', NULL, 'Habilitado'),
+(105, 'julian', 'garcia', 'garciajulian1002@gmail.com', '9608', 'Administrador', NULL, 'Habilitado');
 
 --
 -- Índices para tablas volcadas
@@ -1114,25 +1161,25 @@ ALTER TABLE `t_usuarios`
 -- AUTO_INCREMENT de la tabla `t_ambientes`
 --
 ALTER TABLE `t_ambientes`
-  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `Id_ambiente` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `t_computadores`
 --
 ALTER TABLE `t_computadores`
-  MODIFY `Id_computador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=349;
+  MODIFY `Id_computador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=351;
 
 --
 -- AUTO_INCREMENT de la tabla `t_reportes`
 --
 ALTER TABLE `t_reportes`
-  MODIFY `Id_reporte` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `Id_reporte` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
-  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- Restricciones para tablas volcadas
@@ -1144,18 +1191,6 @@ ALTER TABLE `t_usuarios`
 ALTER TABLE `t_reportes`
   ADD CONSTRAINT `t_reportes_ibfk_1` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`),
   ADD CONSTRAINT `t_reportes_ibfk_2` FOREIGN KEY (`Id_ambiente`) REFERENCES `t_ambientes` (`Id_ambiente`);
-
-DELIMITER $$
---
--- Eventos
---
-CREATE DEFINER=`root`@`localhost` EVENT `eliminarReportesAntiguos` ON SCHEDULE EVERY 1 DAY STARTS '2024-05-31 19:10:16' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
-    DELETE FROM t_reportes
-    WHERE Estado_Reporte = TRUE
-      AND Fecha_Solucion < NOW() - INTERVAL 3 MONTH;
-END$$
-
-DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

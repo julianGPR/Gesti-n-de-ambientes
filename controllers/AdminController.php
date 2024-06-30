@@ -200,7 +200,7 @@ public function updateComputador($id) {
 }
 // Apartado de controlador para USUARIOS------------------------------------------------------------------------
 
-// Método para mostrar la lista de usuarios
+
 public function usuarios() {
     include 'views/administrador/usuarios/index.php';
 }
@@ -284,6 +284,7 @@ public function habilitarUsuario($id) {
     header("Location: ../usuarios");
     exit();
 }
+
 // Apartado de controlador para REPORTES------------------------------------------------------------------------
 
 
