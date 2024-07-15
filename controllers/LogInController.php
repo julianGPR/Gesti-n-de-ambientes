@@ -1,33 +1,66 @@
 <?php
+require_once 'models/LoginModel.php';
 
-include_once 'models/LoginModel.php';
-
-// Apartado de controlador para LOGIN------------------------------------------------------------------------
 class LoginController {
+    private $loginModel;
+
+    public function __construct() {
+        $this->loginModel = new LoginModel();
+    }
 
     public function home() {
-        include 'views/login/index.php';
+        require_once 'views/login/index.php';
     }
 
-    public function inicioSesion() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $password = $_POST["password"];
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['login'];
+            $password = $_POST['password'];
 
-            $LoginModel = new LoginModel();
-            $login_success = $LoginModel->ingreso($password);
+            $user = $this->loginModel->getUserByEmail($email);
 
-            if ($login_success) {
-                // Inicio de sesión exitoso, redirigir a la página de inicio
-                header("Location: ../administrador");
-                exit();
+            // Verificación temporal de contraseña en texto plano
+            if ($user && $password === $user['Clave']) {
+                // Iniciar sesión y redirigir según el rol
+                session_start();
+                $_SESSION['user'] = $user;
+
+                switch ($user['Rol']) {
+                    case 'Administrador':
+                        header("Location: /dashboard/gestion%20de%20ambientes/admin/home");
+                        exit();
+                    case 'Instructor':
+                        header("Location: /dashboard/gestion%20de%20ambientes/instructor/home");
+                        exit();
+                    case 'Encargado':
+                        header("Location: /dashboard/gestion%20de%20ambientes/encargado/home");
+                        exit();
+                    default:
+                        header("Location: /dashboard/gestion%20de%20ambientes/login");
+                        exit();
+                }
+                
             } else {
-                // Las credenciales son incorrectas, redirigir a la página de inicio de sesión nuevamente
-                header("Location: home"); // Corregir aquí si es necesario
-                exit();
+                echo "Correo o clave incorrecta";
             }
+        } else {
+            header("HTTP/1.0 405 Method Not Allowed");
+            echo "Método no permitido.";
         }
     }
+
+    public function logout() {
+        session_start();
+        session_unset();
+        session_destroy();
+
+        // Headers para deshabilitar la caché
+        header("Cache-Control: no-cache, no-store, must-revalidate");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        header("Location: /dashboard/gestion%20de%20ambientes/login"); // Redirigir al inicio de sesión después de cerrar sesión
+        exit();
+    }
 }
-
-
 ?>
