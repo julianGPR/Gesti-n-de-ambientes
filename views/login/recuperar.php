@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <title>Recuperar Contraseña</title>
     <link rel="stylesheet" href="public/css/login.css">
     <style>
         body, html {
@@ -37,17 +37,6 @@
         .logo {
             width: 80px;
             margin-bottom: 20px;
-        }
-
-        .credit-button {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            border: none;
-            cursor: pointer;
         }
 
         .login-box h2 {
@@ -194,6 +183,10 @@
                 padding: 12px;
             }
 
+            .logo-container {
+                width: 80px;
+            }
+
             .popup {
                 width: 90%;
                 padding: 10px;
@@ -208,31 +201,20 @@
 <body>
 <div class="container">
     <div class="logo-container">
-        <img src = "assets/Logo-Sena.jpg" alt="logo" class="logo">
-        <button class="credit-button" onclick="showPopup()"></button>
+        <img src="Imagenes/logoSena1.png" alt="Logo" class="logo">
     </div>
     <div class="login-box">
-        <h2>Bienvenido al Sistema de Gestión y Control de Ambientes de Formación CDM</h2>
-        <p>Por favor, ingrese su correo y clave para acceder al sistema.</p>
-        <form action="/dashboard/gestion%20de%20ambientes/login/login" method="POST">
-                <div class="textbox">
-                    <input type="text" id="login" name="login" placeholder="Correo" required>
-                </div>
-                <div class="textbox">
-                    <input type="password" id="password" name="password" placeholder="Clave" required>
-                </div>
-                <input type="submit" class="btn" value="Ingresar">
-                <div class="footer">
-                    <a href="#">Recuperar contraseña</a>
-                </div>
-            </form>
-    </div>
-    <div id="instrucciones" style="margin-top: 30px; text-align: center; padding: 10px; background-color: #f9f9f9; border-radius: 10px; width: 100%;">
-        <h3 style="font-size: 16px; margin: 10px 0; color: #333;">Instrucciones de Ingreso</h3>
-        <p style="font-size: 16px; color: #333;">Utilice la clave asignada para ingresar al sistema, asegúrese de que el aula de formación esté debidamente marcada.</p>
-    </div>
-    <div id="info-bd" style="margin-top: 20px; text-align: center; padding: 10px; background-color: #f9f9f9; border-radius: 10px; width: 100%;">
-        <p style="font-size: 16px; color: #333;">Contiene información sobre ambientes de formación, computadores y reportes asociados a estos. Recuerde realizar cualquier novedad dentro del aplicativo.</p>
+        <h2>Recuperar Contraseña</h2>
+        <p>Ingrese su correo electrónico para recibir un enlace de recuperación de contraseña.</p>
+        <form action="/recuperar_clave" method="POST" id="form-recuperar">
+            <div class="textbox">
+                <input type="email" id="correo" name="correo" placeholder="Correo" required>
+            </div>
+            <button type="submit" class="btn" id="enviar">Enviar</button>
+        </form>
+        <div class="footer">
+            <a href="login.html">Volver al inicio de sesión</a>
+        </div>
     </div>
 </div>
 
@@ -240,18 +222,14 @@
     <button class="popup-close" onclick="hidePopup()">X</button>
     <h3>Créditos</h3>
     <p>Desarrollado por:</p>
-    <ul>    
-        <li>Carlos Antonio Ortiz - ficha 2562072</li>
-        <li>Juan Infante Quiroga - ficha 2617546</li>
-        <li>Julian Garcia Piñeros - ficha 2617546</li>
-        <li>William Andrés Saavedra - ficha 2562072</li>
-        <li>Fredy Leonardo Tovar - ficha 2562072</li>
-        <li>Luis Enrique Arias - Instructor ADSO</li>
+    <ul>
+        <li>Juan Manuel Infante Quiroga</li>
+        <li>Julian David Garcia Piñeros</li>
+        <li>Luis Enrique Arias</li>
     </ul>
 </div>
 
 <script>
-
     function showPopup() {
         document.getElementById('creditPopup').style.display = 'block';
     }
@@ -262,4 +240,3 @@
 </script>
 </body>
 </html>
-

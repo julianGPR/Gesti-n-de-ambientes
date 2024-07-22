@@ -1001,16 +1001,16 @@ DELIMITER ;
 -- Estructura de tabla para la tabla `t_usuarios`
 --
 
-CREATE TABLE `t_usuarios` (
-  `Id_usuario` int(11) NOT NULL,
-  `Nombres` varchar(100) NOT NULL,
-  `Apellidos` varchar(100) NOT NULL,
-  `Correo` varchar(100) DEFAULT NULL,
-  `Clave` varchar(255) DEFAULT NULL,
-  `Rol` enum('Administrador','Instructor','Encargado') NOT NULL,
-  `Especialidad` varchar(100) DEFAULT NULL,
-  `Estado` varchar(255) NOT NULL DEFAULT 'Habilitado'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CREATE TABLE `t_usuarios` (
+    `Id_usuario` int(11) NOT NULL,
+    `Nombres` varchar(100) NOT NULL,
+    `Apellidos` varchar(100) NOT NULL,
+    `Correo` varchar(100) DEFAULT NULL,
+    `Clave` varchar(255) DEFAULT NULL,
+    `Rol` enum('Administrador','Instructor','Encargado') NOT NULL,
+    `Especialidad` varchar(100) DEFAULT NULL,
+    `Estado` varchar(255) NOT NULL DEFAULT 'Habilitado'
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `t_usuarios`

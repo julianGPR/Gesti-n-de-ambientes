@@ -61,24 +61,10 @@ public function updateAmbiente($id) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST["nombre"];
         $torre = $_POST["torre"];
-        $computadores = $_POST["computadores"];
-        $checkPcs = isset($_POST["checkPcs"]) ? 1 : 0;
-        $tvs = $_POST["tvs"];
-        $checkTvs = isset($_POST["checkTvs"]) ? 1 : 0;
-        $sillas = $_POST["sillas"];
-        $checkSillas = isset($_POST["checkSillas"]) ? 1 : 0;
-        $mesas = $_POST["mesas"];
-        $checkMesas = isset($_POST["checkMesas"]) ? 1 : 0;
-        $tableros = $_POST["tableros"];
-        $checkTableros = isset($_POST["checkTableros"]) ? 1 : 0;
-        $nineras = $_POST["nineras"];
-        $checkNineras = isset($_POST["checkNineras"]) ? 1 : 0;
-        $checkInfraestructura = isset($_POST["checkInfraestructura"]) ? 1 : 0;
-        $estado = isset($_POST["estado"]) ? $_POST["estado"] : '';
         $observaciones = $_POST["observaciones"];
 
         $adminModel = new AdminModel();
-        $result = $adminModel->modificarAmbiente($id, $nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
+        $result = $adminModel->modificarAmbiente($id, $nombre, $torre, $observaciones);
 
         if ($result) {
             header("Location: ../ambientes");
@@ -201,89 +187,6 @@ public function updateComputador($id) {
 // Apartado de controlador para USUARIOS------------------------------------------------------------------------
 
 
-public function usuarios() {
-    include 'views/administrador/usuarios/index.php';
-}
-
-// Método para crear un nuevo usuario
-public function createUsuario() {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombres = $_POST["nombres"];
-        $apellidos = $_POST["apellidos"];
-        $correo = $_POST["correo"];
-        $rol = $_POST["rol"];
-        
-        // Generar contraseña aleatoria de 4 dígitos
-        $clave = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
-
-        $adminModel = new AdminModel();
-        $result = $adminModel->guardarUsuario($nombres, $apellidos, $clave, $correo, $rol);
-
-        if ($result) {
-            // Redirigir al usuario a la lista de usuarios
-            header("Location: ../usuarios");
-            exit();
-        } else {
-            header("Location: index.php?error=Error al crear el usuario");
-            exit();
-        }
-    } else {
-        include 'views/administrador/usuarios/create.php';
-    }
-}
-
-// Método para actualizar un usuario existente
-public function updateUsuario($id) {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombres = $_POST["nombres"];
-        $apellidos = $_POST["apellidos"];
-        $clave = $_POST["clave"];
-        $correo = $_POST["correo"];
-        $rol = $_POST["rol"];
-
-        $adminModel = new AdminModel();
-        $result = $adminModel->modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol);
-
-        if ($result) {
-            header("Location: ../usuarios");
-            exit();
-        } else {
-            header("Location: index.php?error=Error al actualizar el usuario&id=$id");
-            exit();
-        }
-    } else {
-        $adminModel = new AdminModel();
-        $usuario = $adminModel->obtenerUsuarioPorId($id);
-        include 'views/administrador/usuarios/update.php';
-    }
-}
-public function inhabilitarUsuario($id) {
-    $adminModel = new AdminModel();
-    $result = $adminModel->inhabilitarUsuario($id);
-
-    if ($result) {
-        echo "<script>alert('Usuario inhabilitado exitosamente');</script>";
-    } else {
-        echo "<script>alert('Error al inhabilitar el usuario');</script>";
-    }
-    
-    header("Location: ../usuarios");
-    exit();
-}
-
-public function habilitarUsuario($id) {
-    $adminModel = new AdminModel();
-    $result = $adminModel->habilitarUsuario($id);
-
-    if ($result) {
-        echo "<script>alert('Usuario habilitado exitosamente');</script>";
-    } else {
-        echo "<script>alert('Error al habilitar el usuario');</script>";
-    }
-    
-    header("Location: ../usuarios");
-    exit();
-}
 
 // Apartado de controlador para REPORTES------------------------------------------------------------------------
 

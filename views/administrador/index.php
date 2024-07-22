@@ -207,7 +207,7 @@ $db = Database::connect();
     // Construir la URL adecuada para los botones
     $urls = [
         '/dashboard/gestion%20de%20ambientes/admin/ambientes' => 'Gestión de Ambientes',
-        '/dashboard/gestion%20de%20ambientes/admin/usuarios' => 'Gestión de Usuarios',
+        '/dashboard/gestion%20de%20ambientes/usuarios/usuarios' => 'Gestión de Usuarios',
         '/dashboard/gestion%20de%20ambientes/admin/reportes' => 'Gestión de Reportes',
         '/dashboard/gestion%20de%20ambientes/admin/computadores' => 'Computadores',
         '/dashboard/gestion%20de%20ambientes/admin/tvs' => 'Televisores(tvs)',
@@ -233,7 +233,7 @@ $db = Database::connect();
 </div>
     </section>
     <div class="salir">
-        <button id="btn_salir">Salir</button>
+        <a href="/dashboard/gestion%20de%20ambientes/login" id="btn_salir" class="button-admin">Cerrar sesión</a>
     </div>
 
     <footer>

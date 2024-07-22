@@ -88,13 +88,9 @@
                         echo "<td>" . $row["Correo"] . "</td>";
                         echo "<td>" . $row["Rol"] . "</td>";
                         echo "<td>";
-                        if ($row['Estado'] !== 'Inhabilitado') {
-                            $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateUsuario/' . $row['id_usuario'];
+                        
+                            $url_update = '/dashboard/gestion%20de%20ambientes/usuarios/updateUsuario/' . $row['id_usuario'];
                             echo "<a href='" . $url_update . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
-                            echo "<a href='#' onclick='confirmarInhabilitar(" . $row['id_usuario'] . ")' class='boton-inhabilitar boton-accion'><img src='../assets/inhabilitar1.svg'></a>";
-                        } else {
-                            echo "<a href='#' onclick='confirmarHabilitar(" . $row['id_usuario'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
-                        }
                         echo "</td>";
                         echo "</tr>";
                     }
@@ -109,7 +105,7 @@
             <div class="crear-ambiente">
                 <ul>
                     <?php
-                    $url_create = '/dashboard/gestion%20de%20ambientes/admin/createUsuario/';
+                    $url_create = '/dashboard/gestion%20de%20ambientes/usuarios/createUsuario/';
                     ?>
                     <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Usuario</a></li>
                 </ul>
@@ -117,7 +113,7 @@
         </div>
         <div class="regresar">
             <?php
-            $url_regresar = 'home';
+            $url_regresar = '../admin/home';
             ?>
             <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
         </div>
@@ -136,7 +132,7 @@
         });
 
         // Configuración de los botones para mostrar/ocultar columnas
-        $('.toggle-vis').on('click', function(e) {
+        $('.toggle-vis').on('click', function(e) {  
             e.preventDefault();
 
             // Obtenemos el índice de la columna correspondiente al botón
@@ -150,14 +146,12 @@
     
     function confirmarHabilitar(id) {
         if (confirm('¿Está seguro de que desea habilitar este usuario?')) {
-            window.location.href = '/dashboard/gestion%20de%20ambientes/admin/habilitarUsuario/' + id;
-        }
+            window.location.href = "inhabilitarUsuario/" + id;}
     }
 
     function confirmarInhabilitar(id) {
         if (confirm('¿Está seguro de que desea inhabilitar este usuario?')) {
-            window.location.href = '/dashboard/gestion%20de%20ambientes/admin/inhabilitarUsuario/' + id;
-        }
+            window.location.href = "habilitarUsuario/" + id;}
     }
 </script>
 
