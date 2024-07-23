@@ -24,6 +24,7 @@ class LoginController {
                 // Iniciar sesión y redirigir según el rol
                 session_start();
                 $_SESSION['user'] = $user;
+                $_SESSION['clave'] = $password;
 
                 switch ($user['Rol']) {
                     case 'Administrador':
