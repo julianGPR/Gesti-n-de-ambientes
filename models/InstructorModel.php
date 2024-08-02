@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 // instructorModel.php
 
 include_once 'config/db.php';
@@ -58,3 +59,22 @@ class instructorModel {
 }
 
 ?>
+=======
+include_once 'config/db.php';
+
+class instructorModel{
+
+    public function leerQR($qr_content){
+        $conn = Database::connect();
+        $sql = "SELECT * FROM t_ambientes WHERE id_ambiente = '$qr_content'";
+
+        $result = $conn->query($sql);
+    
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+    }
+
+}
+?>
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128

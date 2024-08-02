@@ -9,6 +9,7 @@ body {
 
 .cabeza {
     background-color: white;
+<<<<<<< HEAD
     color: #333;
     padding: 10px 20px;
     display: flex;
@@ -19,13 +20,27 @@ body {
 
 .cabeza img {
     height: 40px;
+=======
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+}
+
+.cabeza img {
+    height: 50px;
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
     margin-right: 10px;
 }
 
 .cabeza h1 {
     margin: 0;
+<<<<<<< HEAD
     font-size: 1.2em;
     text-align: center;
+=======
+    font-size: 1em;
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
 }
 
 h1 {
@@ -53,10 +68,13 @@ button {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 button:hover {
     background-color: #45a049;
 }
 
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
 input[type="file"] {
     display: none;
 }
@@ -73,10 +91,13 @@ label {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 label:hover {
     background-color: #0056b3;
 }
 
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
 #imageForm {
     display: none;
 }
@@ -100,6 +121,7 @@ canvas {
     background-image: linear-gradient(270deg, #138d75, #0a5649);
     animation: scanAnimation 4s linear infinite;
     z-index: -1; /* Coloca la animación detrás de todo */
+<<<<<<< HEAD
 }
 
 /* Media Queries para dispositivos móviles */
@@ -134,3 +156,6 @@ canvas {
         border: 5px solid #ddd;
     }
 }
+=======
+}
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
