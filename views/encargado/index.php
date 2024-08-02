@@ -3,39 +3,35 @@ require_once 'config/db.php';
 $db = Database::connect();
 session_start();
 
-if (isset($_SESSION['clave'])) {
-    $clave = $_SESSION['clave'];
+$clave = $_SESSION['clave'];
 
-    // Preparar la consulta SQL
-    $query = "SELECT * FROM t_usuarios WHERE Clave = ?";
-    $stmt = $db->prepare($query);
+// Preparar la consulta SQL
+$query = "SELECT * FROM t_usuarios WHERE Clave = ?";
+$stmt = $db->prepare($query);
 
-    // Vincular parámetros y ejecutar la consulta
-    $stmt->bind_param("s", $clave);
-    $stmt->execute();
+// Vincular parámetros y ejecutar la consulta
+$stmt->bind_param("s", $clave);
+$stmt->execute();
 
-    // Obtener el resultado de la consulta
-    $result = $stmt->get_result();
+// Obtener el resultado de la consulta
+$result = $stmt->get_result();
 
-    if($result->num_rows === 0) {
-        // No se encontraron registros para la clave dada
-        $nombre = "Nombre no encontrado";
-        $cargo = "Cargo no encontrado";
-    } else {
-        // Obtener el nombre y el cargo del resultado de la consulta
-        $row = $result->fetch_assoc();
-        $nombre = $row['Nombres'] . ' ' . $row['Apellidos'];
-        $cargo = $row['Rol'];
-    }
-
-    // Cerrar la declaración y la conexión a la base de datos
-    $stmt->close();
-    $db->close();
+if($result->num_rows === 0) {
+    // No se encontraron registros para la clave dada
+    $nombre = "Nombre no encontrado";
+    $cargo = "Cargo no encontrado";
 } else {
-    $nombre = "Nombre no proporcionado";
-    $cargo = "Cargo no proporcionado";
+    // Obtener el nombre y el cargo del resultado de la consulta
+    $row = $result->fetch_assoc();
+    $nombre = $row['Nombres'] . ' ' . $row['Apellidos'];
+    $cargo = $row['Rol'];
 }
+
+// Cerrar la declaración y la conexión a la base de datos
+$stmt->close();
+$db->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -104,6 +100,22 @@ if (isset($_SESSION['clave'])) {
         #preview {
             display: none; /* Oculta la vista de la cámara por defecto */
         }
+
+        .botones-admin {
+            margin: 10px;
+            padding: 10px 20px; 
+            color: #fff;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+        }
+
+        .button-admin:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -116,6 +128,30 @@ if (isset($_SESSION['clave'])) {
     <video id="preview" style="width:100%;"></video>
 
     <div class="background-animation"></div>
+
+    <div class="botones-admin">
+    <?php
+    // Construir la URL adecuada para los botones
+    $urls = [
+        '/dashboard/gestion%20de%20ambientes/encargado/reportes' => 'Gestión de Reportes',
+    ];
+
+    $i = 0;
+    foreach ($urls as $url => $label) {
+        if ($i % 3 == 0) {
+            if ($i > 0) echo '</div>';
+            echo '<div class="button-row">';
+        }
+        echo '<a href="' . $url . '" class="button-admin">' . $label . '</a>';
+        $i++;
+    }
+    if ($i % 3 != 0) {
+        echo '</div>';
+    }
+    ?>
+</div>
+
+    
     
     <button onclick="scanQR()">Escanear con cámara</button>
 

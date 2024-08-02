@@ -1,7 +1,7 @@
 <?php
-    // Conectar a la base de datos
-    require_once 'config/db.php';
-    $db = Database::connect();
+// Conectar a la base de datos
+require_once 'config/db.php';
+$db = Database::connect();
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles.css">
-
 </head>
 <body>
 <header>
@@ -22,9 +21,9 @@
     </div>
     <div class="datetime">
         <?php
-            date_default_timezone_set('America/Bogota');
-            $fechaActual = date("d/m/Y");
-            $horaActual = date("h:i a");
+        date_default_timezone_set('America/Bogota');
+        $fechaActual = date("d/m/Y");
+        $horaActual = date("h:i a");
         ?>
         <div class="datetime">
             <div class="fecha">
@@ -39,8 +38,8 @@
 <section class="create-ambiente" id="section-create-ambiente">
     <form action="createComputador" method="POST">
 
-    <label for="tipo">Tipo:</label><br>
-        <select  type="number" id="tipo" name="tipo">
+        <label for="tipo">Tipo:</label><br>
+        <select type="number" id="tipo" name="tipo">
             <option value="">Seleccione...</option>
             <option value="Desktop">Desktop</option>
             <option value="Laptop">Laptop</option>
@@ -53,7 +52,7 @@
         <input type="text" id="modelo" name="modelo"><br><br>
 
         <label for="serial">Serial:</label><br>
-        <input type="text" id="serial" name="serial" ><br><br>
+        <input type="text" id="serial" name="serial"><br><br>
 
         <label for="placaInventario">placa de Inventario:</label><br>
         <input type="text" id="placaInventario" name="placaInventario"><br><br>
@@ -62,8 +61,8 @@
         <select id="id_ambiente" name="id_ambiente">
             <option value="">Seleccione...</option>
             <?php
-            
-            $sql = "SELECT Id_ambiente, Nombre FROM t_ambientes";
+            // Consulta modificada para seleccionar solo el ambiente con Id_ambiente = 1
+            $sql = "SELECT Id_ambiente, Nombre FROM t_ambientes WHERE Id_ambiente = 1";
             $resultado = $db->query($sql);
             if ($resultado->num_rows > 0) {
                 // Iterar sobre los resultados y generar opciones para el menú desplegable
@@ -71,9 +70,8 @@
                     echo '<option value="' . $fila['Id_ambiente'] . '">' . $fila['Nombre'] . '</option>';
                 }
             } else {
-                echo '<option value="">No se encontraron ambientes disponibles</option>';
+                echo '<option value="">No se encontró el ambiente con Id_ambiente = 1</option>';
             }
-
             ?>
         </select><br><br>
 
@@ -98,7 +96,7 @@
     </form>
 </section>
 <footer>
-    <p>Sena todos los derechos reservados </p>
+    <p>Sena todos los derechos reservados</p>
 </footer>
 <div class="regresar">
     <?php
@@ -112,3 +110,8 @@
 
 </body>
 </html>
+
+<?php
+// Cerrar la conexión a la base de datos al finalizar la página
+$db->close();
+?>

@@ -1,39 +1,30 @@
 <?php
-require_once 'config.php'; // Incluir el archivo de configuración donde se define la constante URL
+require_once 'config.php';
 
-class Router{
-    private $controller;
-    private $method;
-    private $params;
+class Router {
+    public function run() {
+        $url = isset($_GET['url']) ? $_GET['url'] : 'login/home';
+        $urlSegments = explode('/', $url);
 
-    public function __construct(){
-        $this->matchRoute();
-    }
+        $controllerName = ucfirst($urlSegments[0]) . 'Controller';
+        $methodName = isset($urlSegments[1]) ? $urlSegments[1] : 'home';
 
-    public function matchRoute(){
-        $url = explode('/', URL);
+        $controllerFile = __DIR__ . '/controllers/' . $controllerName . '.php';
 
-        // Obtener el nombre del controlador desde la URL, si no se proporciona, usar HomeController
-        $this->controller = isset($url[1]) ? ucfirst($url[1]) . 'Controller' : 'HomeController'; 
-        
-        // Si se especifica un método en la URL, usarlo, de lo contrario, usar 'index'
-        $this->method = isset($url[2]) ? $url[2] : 'index'; 
-        
-        // Si hay un tercer segmento en la URL, serán los parámetros
-        $this->params = isset($url[3]) ? array_slice($url, 3) : []; 
-        
-        require_once(__DIR__ .  '/controllers/' . $this->controller . '.php');
-    }
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+            $controller = new $controllerName();
 
-    public function run(){
-        $controller = new $this->controller();
-        $method = $this->method;
-
-        if(method_exists($controller, $method)) {
-            // Llamar al método del controlador con los parámetros si los hay
-            call_user_func_array([$controller, $method], $this->params); 
+            if (method_exists($controller, $methodName)) {
+                $params = array_slice($urlSegments, 2);
+                call_user_func_array([$controller, $methodName], $params);
+            } else {
+                header("HTTP/1.0 404 Not Found");
+                echo "Método $methodName no encontrado en el controlador $controllerName.";
+            }
         } else {
-            echo "Método no encontrado.";
+            header("HTTP/1.0 404 Not Found");
+            echo "Controlador $controllerName no encontrado.";
         }
     }
 }

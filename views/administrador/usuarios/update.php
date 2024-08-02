@@ -47,9 +47,12 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
             <label for="apellidos">Apellidos del Usuario:</label><br>
             <input type="text" id="apellidos" name="apellidos" value="<?php echo isset($usuario['Apellidos']) ? $usuario['Apellidos'] : ''; ?>" required><br><br>
 
+            <label for="correo">Correo del Usuario:</label><br>
+            <input type="email" id="correo" name="correo" value="<?php echo isset($usuario['Correo']) ? $usuario['Correo'] : ''; ?>" required><br><br>
+
             <label for="clave">Clave:</label><br>
-                <input type="password" id="clave" name="clave" value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>" required>
-                <button type="button" id="mostrarClave">Mostrar Clave</button><br><br>
+            <input type="password" id="clave" name="clave" value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>" required>
+            <button type="button" id="mostrarClave">Mostrar Clave</button><br><br>
 
             <label for="rol">Rol:</label><br>
             <select id="rol" name="rol" required>
@@ -72,8 +75,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
             this.textContent = "Mostrar Clave";
         }
     });
-</script>
-
+    </script>
 
     <footer>
         <p>Sena todos los derechos reservados</p>
