@@ -61,7 +61,11 @@ session_destroy();
     <div class="logout-container">
         <h2>Sesión cerrada</h2>
         <p>Has cerrado sesión correctamente.</p>
+<<<<<<< HEAD
         <p><a href="/dashboard/gestion%20de%20ambientes/login">Iniciar sesión nuevamente</a></p>
+=======
+        <p><a href="gestion%20de%20ambientes/">Iniciar sesión nuevamente</a></p>
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     </div>
 </body>
 </html>

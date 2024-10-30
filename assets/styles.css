@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 /* Estilos para el menú desplegable */
 /* Estilos para las opciones del menú */
 .menu-options {
@@ -13,6 +17,8 @@
     right: 12%; /* Desplazar el menú hacia la derecha */
     top: calc(25% + 10px); /* Colocar el menú casi debajo de la campana de notificaciones */
 }
+<<<<<<< HEAD
+=======
 
 
 .menu-options li {
@@ -40,6 +46,41 @@
 /* Establecer márgenes y centrar el contenido */
 body {
     margin: 5px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
+=======
+/* Estilos generales */
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+
+
+.menu-options li {
+    padding: 10px 20px; /* Espaciado de las opciones */
+}
+
+.menu-options li a.button-admin {
+    /* Estilos específicos para los enlaces del menú */
+    font-size: 15px;
+    text-decoration: none;
+    color: #333;
+    padding: 10px 20px; /* Ajusta el espaciado vertical y horizontal */
+}
+/* Mostrar las opciones del menú cuando el menú se despliega */
+.menu-container.active .menu-options {
+    display: block;
+}
+
+/* Cambio de estilo al pasar el mouse sobre los enlaces del menú */
+.menu-options li a.button-admin:hover {
+    color: white; /* Cambia el color del texto al pasar el mouse */
+}
+
+/* Estilos generales */
+/* Establecer márgenes y centrar el contenido */
+body {
+<<<<<<< HEAD
+    margin: 5px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
+=======
+    margin: 20px 0 0 0; /* Sube el cuerpo 20px desde la parte superior */
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -50,6 +91,13 @@ body {
 }
 
 /* Estilo del header */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 header {
     display: flex;
     flex-direction: column;
@@ -63,6 +111,13 @@ header h1 {
 }
 
 /* Estilo del logo */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+/* Estilo del logo */
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .logo-container {
     display: flex;
     align-items: center;
@@ -86,6 +141,13 @@ nav {
     margin-right: auto; /* Centra el nav */
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 nav .filtro {
     margin-right: 20px; /* Espacio entre el filtro y el botón */
 }
@@ -108,13 +170,27 @@ nav ul li a {
     text-decoration: none;
     color: #333;
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .datetime {
     display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
     justify-content: space-between; /* Distribuye los elementos a lo largo del contenedor */
     margin-bottom: 0px; /* Ajusta según sea necesario */
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .datetime .fecha {
     margin-right: 10px; /* Añade un margen entre la fecha y la hora */
 }
@@ -167,7 +243,15 @@ footer .button:hover {
     padding: 20px;
     border-radius: 10px;
     margin: 20px;
+<<<<<<< HEAD
     min-height: 250px; /* Asegura un mínimo de altura */
+=======
+<<<<<<< HEAD
+    min-height: 250px; /* Asegura un mínimo de altura */
+=======
+    height: 250px;
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 }
 
 .subtitulo-admin {
@@ -177,6 +261,10 @@ footer .button:hover {
 
 .botones-admin {
     display: flex;
+<<<<<<< HEAD
+    flex-direction: column;
+=======
+<<<<<<< HEAD
     flex-direction: column;
     justify-content: center;
     gap: 10px;
@@ -186,6 +274,20 @@ footer .button:hover {
     order: -1; /* Coloca el primer botón al principio del orden de visualización */
 }
 
+=======
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+    justify-content: center;
+    gap: 10px;
+}
+
+.button-admin:first-child {
+    order: -1; /* Coloca el primer botón al principio del orden de visualización */
+}
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .button-admin {
     background-color: #66BB6A;
     color: white;
@@ -195,6 +297,10 @@ footer .button:hover {
     text-decoration: none;
     transition: background-color 0.3s;
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
 .button-admin:hover {
     background-color: #45a049;
@@ -214,6 +320,14 @@ footer .button:hover {
 .custom-btn-class:hover {
     background-color: #45a049; /* Color de fondo al pasar sobre el botón */
 }
+<<<<<<< HEAD
+=======
+=======
+.button-admin:hover {
+    background-color: #45a049;
+}
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
 /*section del index de ambientes*/
 .ambiente {
@@ -222,9 +336,23 @@ footer .button:hover {
     border-radius: 10px;
     margin: 0px;
     margin-bottom: 80px;
+<<<<<<< HEAD
     max-width: 1200px; /* Establecer un ancho máximo */
 }
 
+=======
+<<<<<<< HEAD
+    max-width: 1200px; /* Establecer un ancho máximo */
+}
+
+=======
+
+    max-width: 1200px; /* Establecer un ancho máximo */
+}
+
+
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 /* Estilo para el subtítulo de la sección Ambiente */
 .subtitulo-ambiente {
     text-align: center;
@@ -238,6 +366,13 @@ footer .button:hover {
 }
 
 /* Estilo para la tabla de ambientes */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+/* Estilo para la tabla de ambientes */
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .tabla-ambientes {
     max-height: 400px;
     overflow-y: auto;
@@ -269,9 +404,21 @@ footer .button:hover {
     background-color: #ddd; /* Color de fondo al pasar el mouse sobre la fila */
 }
 
+<<<<<<< HEAD
 /* Estilo para los botones de la sección Ambiente */
 .boton-modificar,
 .boton-generar-qr,
+=======
+<<<<<<< HEAD
+/* Estilo para los botones de la sección Ambiente */
+.boton-modificar,
+.boton-generar-qr,
+=======
+
+/* Estilo para los botones de la sección Ambiente */
+.boton-modificar,
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .boton-habilitar,
 .boton-inhabilitar,
 .boton-centrado {
@@ -284,13 +431,27 @@ footer .button:hover {
 }
 
 .boton-modificar:hover,
+<<<<<<< HEAD
 .boton-generar-qr:hover,
+=======
+<<<<<<< HEAD
+.boton-generar-qr:hover,
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .boton-habilitar:hover,
 .boton-inhabilitar:hover,
 .boton-centrado:hover {
     background-color: #45a049;
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 /*botonse que son generales para la web*/
 /*Salir*/
 .salir {
@@ -299,7 +460,14 @@ footer .button:hover {
     right: 20px; /* Coloca el botón a 20px desde el lado derecho */
     z-index: 1; /* Asegura que el botón esté por encima de otros elementos, como el footer */
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 #btn_salir {
     background-color: #dc3545;
     color: white;
@@ -309,10 +477,23 @@ footer .button:hover {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 #btn_salir:hover {
     background-color: #c82333;
 }
 
+=======
+<<<<<<< HEAD
+#btn_salir:hover {
+    background-color: #c82333;
+}
+
+=======
+#btn_salir:hover{
+    background-color: #c82333;
+}
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 /*Regresar*/
 .regresar {
     position: fixed; /* Fija el botón en una posición específica en la ventana del navegador */
@@ -320,7 +501,14 @@ footer .button:hover {
     left: 20px; /* Coloca el botón a 20px desde el lado derecho */
     z-index: 1; /* Asegura que el botón esté por encima de otros elementos, como el footer */
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 /*filtro - crear*/
 .filtro-y-crear {
     display: flex; /* Utiliza flexbox para alinear los elementos horizontalmente */
@@ -337,7 +525,14 @@ footer .button:hover {
 .filtro {
     margin-right: 10px; /* Añade un margen entre el filtro y el botón */
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 #filtro_ambiente {
     padding: 8px; /* Espaciado interno */
     border: 1px solid #ccc; /* Borde */
@@ -367,6 +562,10 @@ footer .button:hover {
     font-weight: bold;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .section-create-usuario{
     padding: 10px;
 }
@@ -388,6 +587,11 @@ button{
     transition: background-color 0.3s;
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .create-ambiente input[type="text"],
 .create-ambiente input[type="number"],
 .create-ambiente textarea {
@@ -486,6 +690,10 @@ button{
 #btn-update:hover {
     background-color: #45a049; /* Color de fondo al pasar el ratón */
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 .notification-bell {
     position: relative;
     margin-left: 700px;
@@ -552,3 +760,8 @@ button{
     padding: 3px 6px;
     font-size: 12px;
 }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06

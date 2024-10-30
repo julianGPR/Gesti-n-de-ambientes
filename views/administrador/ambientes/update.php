@@ -1,5 +1,23 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
+=======
+<<<<<<< HEAD
+
+<!DOCTYPE html>
+<html lang="es">
+=======
+<?php
+    // Verificar si la actualización fue exitosa mediante el parámetro GET 'success'
+    if(isset($_GET['success']) && $_GET['success'] === 'true'): ?>
+        <script>
+            alert("Ambiente actualizado exitosamente");
+        </script>
+<?php endif; ?>
+<!DOCTYPE html>
+<html lang="en">
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +51,35 @@
     </div>
 </header>
 <section class="update-ambiente" id="section-update-ambiente">
+<<<<<<< HEAD
     <form id="updateAmbienteForm" action="../updateAreaTrabajo/<?php echo $areaTrabajo['id_area']; ?>" method="POST">
 
     <fieldset>
             <legend>Editar Área de Trabajo</legend>
+=======
+<<<<<<< HEAD
+<form action="../updateAmbiente/<?php echo $ambiente['Id_ambiente']; ?>" method="POST">
+=======
+    <form action="../updateAmbiente/<?php echo $ambiente['Id_ambiente']; ?>" method="POST">
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+        
+        <label for="nombre">Nombre del Ambiente:</label><br>
+        <!-- Mostrar el valor del nombre del ambiente si está definido -->
+        <input type="text" id="nombre" name="nombre" value="<?php echo isset($ambiente['Nombre']) ? $ambiente['Nombre'] : ''; ?>" required><br><br>
+
+<<<<<<< HEAD
+        <label for="torre">Torre:</label><br>
+        <select id="torre" name="torre" required>
+            <option value="Oriental" <?php if(isset($ambiente['Torre']) && $ambiente['Torre'] === 'Oriental') echo 'selected'; ?>>Oriental</option>
+            <option value="Occidental" <?php if(isset($ambiente['Torre']) && $ambiente['Torre'] === 'Occidental') echo 'selected'; ?>>Occidental</option>
+        </select><br><br>
+        
+        <label for="observaciones">Observaciones:</label><br>
+        <textarea id="observaciones" name="observaciones" rows="4" cols="50"><?php echo isset($ambiente['Observaciones']) ? $ambiente['Observaciones'] : ''; ?></textarea><br><br>
+=======
+        <label for="computadores">Computadores:</label><br>
+        <input type="number" id="computadores" name="computadores" value="<?php echo isset($ambiente['Computadores']) ? $ambiente['Computadores'] : ''; ?>" required><br><br>
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
             <label for="nombre_area">Nombre del Área:</label><br>
             <input type="text" id="nombre_area" name="nombre_area" value="<?php echo isset($ambiente['nombre_area']) ? $ambiente['nombre_area'] : ''; ?>" required><br><br>
@@ -61,8 +104,14 @@
             <label for="equipo_disponible">Equipo Disponible:</label><br>
             <input type="text" id="equipo_disponible" name="equipo_disponible" value="<?php echo isset($ambiente['equipo_disponible']) ? $ambiente['equipo_disponible'] : ''; ?>" required><br><br>
 
+<<<<<<< HEAD
             <label for="estado_area">Estado del Área:</label><br>
             <input type="text" id="estado_area" name="estado_area" value="<?php echo isset($ambiente['estado_area']) ? $ambiente['estado_area'] : ''; ?>" required><br><br>
+=======
+        <label for="observacion">Observación:</label><br>
+        <textarea id="observacion" name="observacion" rows="4" cols="50"><?php echo isset($ambiente['Observacion']) ? $ambiente['Observacion'] : ''; ?></textarea><br><br>
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
             <label for="fecha_creacion">Fecha de Creación:</label><br>
             <input type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo isset($ambiente['fecha_creacion']) ? $ambiente['fecha_creacion'] : ''; ?>"><br><br>
@@ -74,13 +123,29 @@
         </fieldset>
     </form>
 </section>
+<<<<<<< HEAD
+=======
+<footer>
+    <p>Sena todos los derechos reservados </p>
+</footer>
+<<<<<<< HEAD
+<div class="regresar">
+    <?php
+    $url_regresar = '../ambientes';
+=======
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
 <footer>
     <p>Sena todos los derechos reservados</p>
 </footer>
 <div class="regresar">
     <?php
+<<<<<<< HEAD
     $url_regresar = '../areaTrabajo';
+=======
+    $url_regresar = 'admin';
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     ?>
     <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
 </div>
@@ -132,4 +197,12 @@ document.getElementById('updateAmbienteForm').addEventListener('submit', functio
 });
 </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06

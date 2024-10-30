@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 <?php
 require_once 'config/db.php';
 $db = Database::connect();
@@ -37,6 +41,11 @@ if (isset($_SESSION['clave'])) {
 }
 ?>
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -76,7 +85,15 @@ if (isset($_SESSION['clave'])) {
             margin-top: 10px;
         }
 
+<<<<<<< HEAD
         .escan {
+=======
+<<<<<<< HEAD
+        .escan {
+=======
+        .escan{
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
             background-color: #138d75;
             padding: 10px;
             color: white;
@@ -125,11 +142,23 @@ if (isset($_SESSION['clave'])) {
     </form>
 
     <canvas id="canvas" style="display:none;"></canvas>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     <div class="contenedor" id="contenedor">
         <div id="fecha-hora"></div>
         <h1><?php echo $nombre; ?></h1>
         <h2><?php echo $cargo?></h2>
     </div>
+<<<<<<< HEAD
+=======
+=======
+
+    <div id="fecha-hora"></div>
+
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script>
         let scanner;
@@ -138,9 +167,18 @@ if (isset($_SESSION['clave'])) {
             document.getElementById('preview').style.display = 'block';
             document.getElementById('imageForm').style.display = 'none';
 
+<<<<<<< HEAD
             // Ocultar el div con clase "contenedor"
             document.getElementById('contenedor').style.display = 'none';
 
+=======
+<<<<<<< HEAD
+            // Ocultar el div con clase "contenedor"
+            document.getElementById('contenedor').style.display = 'none';
+
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
             scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
             scanner.addListener('scan', function (content) {
                 alert('Escaneado con éxito. Contenido del código QR: ' + content);
@@ -149,12 +187,22 @@ if (isset($_SESSION['clave'])) {
             });
             Instascan.Camera.getCameras().then(function (cameras) {
                 if (cameras.length > 0) {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
                     let rearCamera = cameras.find(camera => camera.name.toLowerCase().includes('back'));
                     if (rearCamera) {
                         scanner.start(rearCamera);
                     } else {
                         scanner.start(cameras[0]);
                     }
+<<<<<<< HEAD
+=======
+=======
+                    scanner.start(cameras[0]);
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
                 } else {
                     console.error('No se encontraron cámaras disponibles.');
                     alert('No se encontraron cámaras disponibles.');
@@ -183,4 +231,12 @@ if (isset($_SESSION['clave'])) {
         setInterval(obtenerFechaHora, 1000);
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06

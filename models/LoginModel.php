@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once 'config/db.php';
 
 class LoginModel {
@@ -25,4 +26,24 @@ class LoginModel {
         }
     }
 }
+=======
+
+include_once 'config/db.php';
+
+class LogInModel {
+
+    public function iniciarSesion($pin){
+
+        $conn = Database::connect();
+        $sql = "SELECT * FROM t_usuario WHERE Clave = $pin";
+        
+        $result = $conn->query($sql);
+    
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        }
+    }
+}
+
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 ?>

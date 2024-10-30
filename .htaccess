@@ -1,7 +1,19 @@
 RewriteEngine On
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 RewriteBase /dashboard/gestion%20de%20ambientes/
 
 # Redirigir todas las solicitudes no existentes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+<<<<<<< HEAD
+=======
+=======
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06

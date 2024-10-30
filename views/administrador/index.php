@@ -11,6 +11,10 @@ $db = Database::connect();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -144,12 +148,20 @@ $db = Database::connect();
         <div class="notificaciones">
         <?php
             // Consulta SQL para seleccionar todos los registros de la tabla t_reportes que no han sido vistos
+<<<<<<< HEAD
             $query = "SELECT r.*, u.Nombres AS nombre_usuario, u.Apellidos AS apellido_usuario, a.nombre_area 
             FROM t_reportes r 
             INNER JOIN t_usuarios u ON r.Id_usuario = u.Id_usuario 
             INNER JOIN AreaTrabajo a ON r.Id_area = a.Id_area 
             WHERE r.estado = 1"; // Notificaciones no vistas
 
+=======
+            $query = "SELECT r.*, u.Nombres AS nombre_usuario, u.Apellidos AS apellido_usuario, a.Nombre AS nombre_ambiente 
+                    FROM t_reportes r 
+                    INNER JOIN t_usuarios u ON r.Id_usuario = u.Id_usuario 
+                    INNER JOIN t_ambientes a ON r.Id_ambiente = a.Id_ambiente 
+                    WHERE r.estado = 1"; // Notificaciones no vistas
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
             $result = $db->query($query);
 
             if ($result->num_rows > 0) {
@@ -157,7 +169,11 @@ $db = Database::connect();
                 while ($row = $result->fetch_assoc()) {
 
                     echo "<div class='notificacion'>";
+<<<<<<< HEAD
                     echo "El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . " envió un nuevo reporte del area " . $row['nombre_area'];
+=======
+                    echo "El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . " envió un nuevo reporte del ambiente " . $row['nombre_ambiente'];
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
                     echo "<br>";
                     echo "<br>";
                     echo "</div>";
@@ -182,6 +198,13 @@ $db = Database::connect();
 </div>
 
 
+<<<<<<< HEAD
+=======
+=======
+</head>
+<body>
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     <header>
         <div class="logo-container">
             <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
@@ -195,8 +218,67 @@ $db = Database::connect();
                 $fechaActual = date("d/m/Y");
                 $horaActual = date("h:i a");
             ?>
+<<<<<<< HEAD
             <p>Fecha actual: <?php echo $fechaActual; ?></p>
             <p>Hora actual: <?php echo $horaActual; ?></p>
+=======
+<<<<<<< HEAD
+            <p>Fecha actual: <?php echo $fechaActual; ?></p>
+            <p>Hora actual: <?php echo $horaActual; ?></p>
+        </div>
+    </header>
+    <section class="admin">
+    <div class="subtitulo-admin">
+        <h2>Administrador</h2>
+    </div>
+    <div class="botones-admin">
+    <?php
+    // Construir la URL adecuada para los botones
+    $urls = [
+        '/dashboard/gestion%20de%20ambientes/admin/ambientes' => 'Gestión de Ambientes',
+        '/dashboard/gestion%20de%20ambientes/usuarios/usuarios' => 'Gestión de Usuarios',
+        '/dashboard/gestion%20de%20ambientes/admin/reportes' => 'Gestión de Reportes',
+        '/dashboard/gestion%20de%20ambientes/admin/computadores' => 'Computadores',
+        '/dashboard/gestion%20de%20ambientes/admin/tvs' => 'Televisores(tvs)',
+        '/dashboard/gestion%20de%20ambientes/admin/sillas' => 'Sillas',
+        '/dashboard/gestion%20de%20ambientes/admin/mesas' => 'Mesas',
+        '/dashboard/gestion%20de%20ambientes/admin/tableros' => 'Tableros',
+        '/dashboard/gestion%20de%20ambientes/admin/nineras' => 'Niñeras',
+    ];
+
+    $i = 0;
+    foreach ($urls as $url => $label) {
+        if ($i % 3 == 0) {
+            if ($i > 0) echo '</div>';
+            echo '<div class="button-row">';
+        }
+        echo '<a href="' . $url . '" class="button-admin">' . $label . '</a>';
+        $i++;
+    }
+    if ($i % 3 != 0) {
+        echo '</div>';
+    }
+    ?>
+</div>
+    </section>
+    <div class="salir">
+        <a href="/dashboard/gestion%20de%20ambientes/login" id="btn_salir" class="button-admin">Cerrar sesión</a>
+    </div>
+
+    <footer>
+        <p>Sena todos los derechos reservados</p>
+    </footer>
+    <script src="../assets/menu.js"></script>
+=======
+            <div class="datetime">
+                <div class="fecha">
+                    <p>Fecha actual: <?php echo $fechaActual; ?></p>
+                </div>
+                <div class="hora">
+                    <p>Hora actual: <?php echo $horaActual; ?></p>
+                </div>
+            </div>
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
         </div>
     </header>
     <section class="admin">
@@ -239,6 +321,10 @@ $db = Database::connect();
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>
+<<<<<<< HEAD
     <script src="../assets/menu.js"></script>
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 </body>
 </html>

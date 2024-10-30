@@ -28,13 +28,21 @@ if ($result->num_rows === 0) {
     $cargo = $row['Rol'];
 }
 
+<<<<<<< HEAD
 $query = "SELECT id_area FROM AreaTrabajo WHERE nombre_area = ?";
+=======
+$query = "SELECT Id_ambiente FROM t_ambientes WHERE Nombre = ?";
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 $stmt = $db->prepare($query);
 $stmt->bind_param('s', $nombre);
 $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
+<<<<<<< HEAD
 $id_area = $row["id_area"];
+=======
+$id_ambiente = $row["Id_ambiente"];
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -49,8 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $estado = 1; // Estado inicial del reporte
 
         // Insertar el reporte en la base de datos
+<<<<<<< HEAD
         $stmt = $db->prepare("INSERT INTO t_reportes (FechaHora, Id_usuario, id_area, Estado, Observaciones) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param('siiss', $fechaHora, $id_usuario, $id_area, $estado, $observaciones);
+=======
+        $stmt = $db->prepare("INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Estado, Observaciones) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param('siiss', $fechaHora, $id_usuario, $id_ambiente, $estado, $observaciones);
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 
         if ($stmt->execute()) {
             // Aquí se asume que $observaciones es un array con las observaciones y sus respectivos seriales
@@ -78,15 +91,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json');
 
     // Obtener el historial de observaciones
+<<<<<<< HEAD
     $query = "SELECT Serial, Observaciones FROM t_computadores WHERE id_area = ? AND Observaciones IS NOT NULL";
     $stmt = $db->prepare($query);
     $stmt->bind_param('i', $id_area);
+=======
+    $query = "SELECT Serial, Observaciones FROM t_computadores WHERE id_ambiente = ? AND Observaciones IS NOT NULL";
+    $stmt = $db->prepare($query);
+    $stmt->bind_param('i', $id_ambiente);
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     $stmt->execute();
     $result = $stmt->get_result();
 
     $observaciones = [];
     while ($row = $result->fetch_assoc()) {
+<<<<<<< HEAD
         $observaciones[] = $row['Observaciones'];
+=======
+        $observaciones[] = $row['Serial'] . ': ' . $row['Observaciones'];
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     }
 
     echo json_encode(["success" => true, "observaciones" => $observaciones]);
@@ -305,7 +328,11 @@ li:last-child {
                 </li>
                 <li class="expandable">
                     <span class="expand" onclick="toggleList(this)">+</span>
+<<<<<<< HEAD
                     <span class="label">Computadores del area de trabajo:</span>
+=======
+                    <span class="label">Hardware:</span>
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
                     <input type="text" onkeyup="filterList(this, 'hardware-list')" placeholder="Filtrar por placa...">
                     <ul class="sublist hardware-list">
                         <?php foreach($computadores as $computador): ?>
@@ -313,9 +340,17 @@ li:last-child {
                                 <input type="checkbox" name="checkpc[]" id="checkpc<?php echo $computador['Serial']; ?>" value="<?php echo $computador['Serial']; ?>" <?php echo ($computador['CheckPc'] == 1) ? 'checked' : ''; ?> onclick="toggleObservationField('checkpc<?php echo $computador['Serial']; ?>', 'observacion<?php echo $computador['Serial']; ?>')">
                                 <span><?php echo htmlspecialchars($computador['Marca']); ?></span>
                                 <span><?php echo htmlspecialchars($computador['Modelo']); ?></span>
+<<<<<<< HEAD
                                 <textarea name="observacion[<?php echo $computador['Serial']; ?>]" id="observacion<?php echo $computador['Serial']; ?>" placeholder="Novedad encontrada" style="display:<?php echo ($computador['CheckPc'] == 1) ? 'none' : 'block'; ?>"></textarea>
                             </li>
                         <?php endforeach; ?>
+=======
+                                <span><?php echo $computador['Serial']; ?></span>
+                                <textarea name="observacion[<?php echo $computador['Serial']; ?>]" id="observacion<?php echo $computador['Serial']; ?>" placeholder="Novedad encontrada" style="display:<?php echo ($computador['CheckPc'] == 1) ? 'none' : 'block'; ?>"></textarea>
+                            </li>
+                        <?php endforeach; ?>
+
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
                     </ul>
                 </li>
             </ul>

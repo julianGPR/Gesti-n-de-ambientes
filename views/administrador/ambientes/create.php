@@ -5,8 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrativo</title>
     <link rel="stylesheet" type="text/css" href="../../assets/styles.css">
+<<<<<<< HEAD
     <!-- Incluir SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+=======
+<<<<<<< HEAD
+    <!-- Incluir SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <img src="../../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
+    </div>
+    <div class="title">
+        <h1>Agregar Nuevo Ambiente</h1>
+    </div>
+    <div class="datetime">
+        <?php
+            date_default_timezone_set('America/Bogota');
+            $fechaActual = date("d/m/Y");
+            $horaActual = date("h:i a");
+        ?>
+        <div class="datetime">
+            <div class="fecha">
+                <p>Fecha actual: <?php echo $fechaActual; ?></p>
+            </div>
+            <div class="hora">
+                <p>Hora actual: <?php echo $horaActual; ?></p>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="create-ambiente" id="section-create-ambiente">
+    <form id="createAmbienteForm" action="guardarAmbiente.php" method="POST">
+        <label for="nombre">Nombre del Ambiente:</label><br>
+        <input type="text" id="nombre" name="nombre" required><br><br>
+
+        <label for="torre">Torre:</label><br>
+        <select id="torre" name="torre">
+            <option value="Oriental">Oriental</option>
+            <option value="Occidental">Occidental</option>
+        </select><br><br>
+
+        <label for="computadores">Computadores:</label><br>
+<input type="number" id="computadores" name="computadores" value="0" readonly><br><br>
+
+<label for="tvs">TVs:</label><br>
+<input type="number" id="tvs" name="tvs" value="0" readonly><br><br>
+
+<label for="sillas">Sillas:</label><br>
+<input type="number" id="sillas" name="sillas" value="0" readonly><br><br>
+
+<label for="mesas">Mesas:</label><br>
+<input type="number" id="mesas" name="mesas" value="0" readonly><br><br>
+
+<label for="tableros">Tableros:</label><br>
+<input type="number" id="tableros" name="tableros" value="0" readonly><br><br>
+
+<label for="nineras">Niñeras:</label><br>
+<input type="number" id="nineras" name="nineras" value="0" readonly><br><br>
+
+        <label for="estado">Estado:</label><br>
+        <input type="text" id="estado" name="estado" value="Habilitado"><br><br>
+
+        <label for="observaciones">Observaciones:</label><br>
+        <textarea id="observaciones" name="observaciones" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Guardar Ambiente</button>
+    </form>
+</section>
+<footer>
+    <p>Sena todos los derechos reservados </p>
+</footer>
+<div class="regresar">
+    <?php
+    $url_regresar = '../ambientes';
+=======
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 </head>
 <body>
 <header>
@@ -80,13 +156,19 @@
 </footer>
 <div class="regresar">
     <?php
+<<<<<<< HEAD
     $url_regresar = '../areaTrabajo';
+=======
+    $url_regresar = 'admin';
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     ?>
     <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
 </div>
 <div class="salir">
     <button id="btn_salir">Salir</button>
 </div>
+<<<<<<< HEAD
 <script>
 $(document).ready(function() {
     // Cargar los usuarios en el select
@@ -101,12 +183,21 @@ $(document).ready(function() {
         }
     });
 document.getElementById('createAreaForm').addEventListener('submit', function(event) {
+=======
+<<<<<<< HEAD
+<script>
+document.getElementById('createAmbienteForm').addEventListener('submit', function(event) {
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     event.preventDefault();
 
     var formData = new FormData(this);
 
     // Enviar solicitud al servidor
+<<<<<<< HEAD
     fetch('guardarAreaTrabajo', {
+=======
+    fetch('guardarAmbiente', {
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
         method: 'POST',
         body: formData
     })
@@ -117,17 +208,28 @@ document.getElementById('createAreaForm').addEventListener('submit', function(ev
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
+<<<<<<< HEAD
                 text: 'El Area ha sido modificado exitosamente',
                 confirmButtonText: 'OK'
             }).then(() => {
                 window.location.href = '../areaTrabajo';
+=======
+                text: 'El ambiente ha sido modificado exitosamente',
+                confirmButtonText: 'OK'
+            }).then(() => {
+                window.location.href = '../ambientes';
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
             });
         } else {
             // Mostrar alerta de error
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
+<<<<<<< HEAD
                 text: 'No se pudo modificar el Area. Por favor, intenta de nuevo',
+=======
+                text: 'No se pudo modificar el ambiente. Por favor, intenta de nuevo',
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
                 confirmButtonText: 'OK'
             });
         }
@@ -137,6 +239,7 @@ document.getElementById('createAreaForm').addEventListener('submit', function(ev
         Swal.fire({
             icon: 'success',
             title: 'Éxito',
+<<<<<<< HEAD
             text: 'El area ha sido creado exitosamente',
             confirmButtonText: 'Recargar Pagina',
             confirmButtonClass: 'custom-btn-class'
@@ -149,3 +252,20 @@ document.getElementById('createAreaForm').addEventListener('submit', function(ev
 </script>
 </body>
 </html>
+=======
+            text: 'El ambiente ha sido creado exitosamente',
+            confirmButtonText: 'Recargar Pagina',
+            confirmButtonClass: 'custom-btn-class'
+        }).then(() => {
+            window.location.href = '../ambientes';
+        });
+    });
+});
+</script>
+</body>
+</html>
+=======
+</body>
+</html>
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06

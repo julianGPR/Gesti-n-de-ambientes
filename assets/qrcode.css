@@ -9,6 +9,10 @@ body {
 
 .cabeza {
     background-color: white;
+<<<<<<< HEAD
+    color: #333;
+=======
+<<<<<<< HEAD
     color: #333;
     padding: 10px 20px;
     display: flex;
@@ -19,13 +23,39 @@ body {
 
 .cabeza img {
     height: 40px;
+=======
+    color: #fff;
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cabeza img {
+<<<<<<< HEAD
+    height: 40px;
+=======
+    height: 50px;
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
     margin-right: 10px;
 }
 
 .cabeza h1 {
     margin: 0;
+<<<<<<< HEAD
     font-size: 1.2em;
     text-align: center;
+=======
+<<<<<<< HEAD
+    font-size: 1.2em;
+    text-align: center;
+=======
+    font-size: 1em;
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 }
 
 h1 {
@@ -53,10 +83,19 @@ button {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 button:hover {
     background-color: #45a049;
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 input[type="file"] {
     display: none;
 }
@@ -73,10 +112,19 @@ label {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 label:hover {
     background-color: #0056b3;
 }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 #imageForm {
     display: none;
 }
@@ -100,6 +148,10 @@ canvas {
     background-image: linear-gradient(270deg, #138d75, #0a5649);
     animation: scanAnimation 4s linear infinite;
     z-index: -1; /* Coloca la animación detrás de todo */
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
 }
 
 /* Media Queries para dispositivos móviles */
@@ -134,3 +186,9 @@ canvas {
         border: 5px solid #ddd;
     }
 }
+<<<<<<< HEAD
+=======
+=======
+}
+>>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
+>>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
