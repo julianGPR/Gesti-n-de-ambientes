@@ -103,7 +103,7 @@
         }
 
         .footer a {
-            color: #28a745; /* Verde */
+            color: #092852; /* Verde */
             text-decoration: none;
             font-size: 14px;
             transition: color 0.3s ease;
