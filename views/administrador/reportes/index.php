@@ -152,58 +152,6 @@
                 </ul>
             </div>
         </div>
-<<<<<<< HEAD
-    </header>
-    <nav>
-    <div class="column-toggle-buttons">
-            <button class="toggle-vis" data-column="0">Instructor</button>
-            <button class="toggle-vis" data-column="1">Ambiente</button>
-            <button class="toggle-vis" data-column="2">Observaciones</button>
-            <button class="toggle-vis" data-column="3">Fecha y Hora</button>
-        </div>
-    </nav>
-    <section class="ambiente" id="section-ambiente">
-        <div class="subtitulo-ambiente">
-            <h2>Reportes</h2>
-        </div>
-        <div class="descripcion-ambiente">
-            <p>Reportes por Instructor de cada Ambiente</p>
-        </div>
-        <div class="tabla-ambientes tabla-scroll">
-            <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
-                <thead>
-                    <tr>
-                        <th>Instructor</th>
-                        <th>Ambiente</th>
-                        <th>Observaciones</th>
-                        <th>Fecha y Hora</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <?php
-                // Consulta SQL para seleccionar todos los registros de la tabla t_reportes
-                $query = "SELECT r.Id_reporte, r.Observaciones, r.FechaHora, CONCAT(u.Nombres, ' ', u.Apellidos) AS NombreCompleto, a.Nombre AS ambiente
-                        FROM t_reportes AS r
-                        INNER JOIN t_usuarios AS u ON r.Id_usuario = u.Id_usuario
-                        INNER JOIN t_ambientes AS a ON r.Id_ambiente = a.Id_ambiente";
-                        
-                $result = $db->query($query);
-
-                if ($result->num_rows > 0) {
-                    // Iterar sobre los resultados y mostrar cada registro en una fila de la tabla HTML
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>";
-                        echo "<td>" . $row['NombreCompleto'] . "</td>";
-                        echo "<td>" . $row['ambiente'] . "</td>";
-                        echo "<td>" . $row['Observaciones'] . "</td>";
-                        echo "<td>" . $row['FechaHora'] . "</td>";
-                        echo "</tr>";
-                    }
-                } else {
-                    // Si no hay filas en el resultado, mostrar un mensaje de que no hay registros
-                    echo "<tr><td colspan='4'>No hay registros</td></tr>";
-                }
-=======
     </nav>
 
     <!-- Contenido principal -->
@@ -226,7 +174,6 @@
                 <i class="bi bi-satellite"></i> Satélite
             </a>
         </div>
->>>>>>> actu_encargado
 
         <!-- Botón de regresar -->
         <div class="mt-5">

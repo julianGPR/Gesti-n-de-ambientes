@@ -113,11 +113,7 @@ $db = Database::connect();
                 </thead>
                 <tbody>
                     <?php
-<<<<<<< HEAD
-                    $query = "SELECT * FROM t_ambientes";
-=======
                     $query = "SELECT * FROM AreaTrabajo";
->>>>>>> actu_encargado
 
                     if (!empty($filtros)) {
                         $query .= " WHERE " . implode(" AND ", $filtros);
@@ -128,16 +124,6 @@ $db = Database::connect();
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             echo "<tr>";
-<<<<<<< HEAD
-                            echo "<td>" . $row['Nombre'] . "</td>";
-                            echo "<td>" . $row['Torre'] . "</td>";
-                            echo "<td>" . $row['Computadores'] . "</td>";
-                            echo "<td>" . $row['Tvs'] . "</td>";
-                            echo "<td>" . $row['Sillas'] . "</td>";
-                            echo "<td>" . $row['Mesas'] . "</td>";
-                            echo "<td>" . $row['Tableros'] . "</td>";
-                            echo "<td>" . $row['Nineras'] . "</td>";
-=======
                             echo "<td>" . $row['id_area'] . "</td>";
                             echo "<td>" . $row['nombre_area'] . "</td>";
                             echo "<td>" . $row['capacidad'] . "</td>";
@@ -148,7 +134,6 @@ $db = Database::connect();
                             echo "<td>" . $row['estado_area'] . "</td>";
                             echo "<td>" . $row['fecha_creacion'] . "</td>";
                             echo "<td>" . $row['comentarios'] . "</td>";
->>>>>>> actu_encargado
                             echo "<td>";
                             if ($row['estado_area'] !== 'Inhabilitado') {
                                 $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAreaTrabajo/';
@@ -157,11 +142,7 @@ $db = Database::connect();
                                 $url_update = '/dashboard/gestion%20de%20ambientes/admin/generateQR/';
                                 echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-generar-qr' boton-accion ><img src='../assets/qr-code.svg'></a>";
                             } else {
-<<<<<<< HEAD
-                                echo "<a href='#' onclick='confirmarHabilitar(" . $row['Id_ambiente'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
-=======
                                 echo "<a href='#' onclick='confirmarHabilitar(" . $row['id_area'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
->>>>>>> actu_encargado
                             }
                             if ($row['estado_area'] !== 'Inhabilitado') {
                                 echo "<a href='#' onclick='confirmarInhabilitar(" . $row['id_area'] . ")' class='boton-inhabilitar boton-accion'><img src='../assets/inhabilitar1.svg'></a>";
@@ -179,21 +160,12 @@ $db = Database::connect();
             </table>
         </div>
         <div class="filtro-y-crear">
-<<<<<<< HEAD
-            <div class="crear-ambiente">
-                <?php
-                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createAmbiente/';
-                ?>
-                <ul>
-                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Ambiente</a></li>
-=======
             <div class="crear-area">
                 <?php
                 $url_create = '/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/';
                 ?>
                 <ul>
                     <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nueva area de trabajo</a></li>
->>>>>>> actu_encargado
                 </ul>
             </div>
         </div>
@@ -208,42 +180,6 @@ $db = Database::connect();
         </div>
     </section>
     <script>
-<<<<<<< HEAD
-    $(document).ready(function() {
-        var table = $('#tabla-ambientes').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            paging: true,
-            pageLength: 10
-        });
-
-        // Escuchar eventos de clic en los botones de mostrar/ocultar columnas
-        $('button.toggle-vis').on('click', function(e) {
-            e.preventDefault();
-
-            // Obtener el índice de la columna desde el atributo data-column del botón
-            var columnIdx = $(this).attr('data-column');
-
-            // Alternar la visibilidad de la columna
-            table.column(columnIdx).visible(!table.column(columnIdx).visible());
-        });
-    });
-</script>
- <script>
-    function confirmarInhabilitar(id) {
-        if (confirm("¿Estás seguro de que deseas inhabilitar este ambiente?")) {
-            window.location.href = "inhabilitarAmbiente/" + id;
-        }
-    }
-    function confirmarHabilitar(id) {
-        if (confirm("¿Estás seguro de que deseas habilitar este ambiente?")) {
-            window.location.href = "habilitarAmbiente/" + id;
-        }
-    }
-</script>
-=======
         $(document).ready(function() {
             var table = $('#tabla-ambientes').DataTable({
                 dom: 'Bfrtip',
@@ -279,16 +215,10 @@ $db = Database::connect();
             }
         }
     </script>
->>>>>>> actu_encargado
 
     <footer>
         <p>Sena todos los derechos reservados</p>
     </footer>
 </body>
-<<<<<<< HEAD
-</html>
-
-=======
 
 </html>
->>>>>>> actu_encargado
