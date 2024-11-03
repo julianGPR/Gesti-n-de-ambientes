@@ -57,7 +57,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true') : ?>
             <label for="rol">Rol:</label><br>
             <select id="rol" name="rol" required>
                 <option value="Administrador" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Administrador') ? 'selected' : ''; ?>>Administrador</option>
-                <option value="Instructor" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Instructor') ? 'selected' : ''; ?>>Instructor</option>
+                <option value="Encargado" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Encargado') ? 'selected' : ''; ?>>Encargado</option>
             </select><br><br>
 
             <button type="submit">Guardar Cambios</button>

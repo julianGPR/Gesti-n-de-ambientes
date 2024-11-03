@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportes del Usuario</title>
+    <title>Reportes por Tipo de Área</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
@@ -72,24 +72,6 @@
         .alert {
             margin-top: 20px;
         }
-
-        .btn-create {
-            background-color: #28a745;
-            color: white;
-            font-size: 1.2rem;
-            padding: 12px 24px;
-            margin-bottom: 20px;
-        }
-
-        .btn-create:hover {
-            background-color: #218838;
-            color: #f8f9fa;
-        }
-
-        .btn-actions {
-            font-size: 0.9rem;
-            padding: 8px 12px;
-        }
     </style>
 </head>
 <body class="fade-in">
@@ -103,27 +85,22 @@
 
     <!-- Contenido principal -->
     <div class="container">
-        <h1 class="mb-4 text-center">Reportes del Usuario</h1>
-
-        <!-- Botón para crear un nuevo reporte -->
-        <div class="text-center mb-4">
-            <a href="/dashboard/gestion%20de%20ambientes/reporte/createReporte" class="btn btn-create">
-                <i class="bi bi-plus-circle"></i> Crear Reporte
-            </a>
-        </div>
+        <h1 class="mb-4 text-center">Reportes de Área: <span class="text-primary"><?php echo htmlspecialchars($tipo_area); ?></span></h1>
 
         <?php if (!empty($reportes)): ?>
+            <!-- Tabla de reportes con DataTables -->
             <div class="table-responsive">
                 <table id="tablaReportes" class="table table-bordered table-hover align-middle">
                     <thead class="table-primary">
                         <tr>
-                            <th>ID Reporte</th>
-                            <th>Fecha y Hora</th>
-                            <th>ID Área</th>
-                            <th>Estado</th>
-                            <th>Estado Reporte</th>
-                            <th>Fecha Solución</th>
-                            <th>Observaciones</th>
+                            <th scope="col">ID Reporte</th>
+                            <th scope="col">Fecha y Hora</th>
+                            <th scope="col">ID Usuario</th>
+                            <th scope="col">ID Área</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Estado Reporte</th>
+                            <th scope="col">Fecha Solución</th>
+                            <th scope="col">Observaciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -131,6 +108,7 @@
                             <tr>
                                 <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
                                 <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['Id_usuario']); ?></td>
                                 <td><?php echo htmlspecialchars($reporte['Id_area']); ?></td>
                                 <td>
                                     <?php echo htmlspecialchars($reporte['Estado']); ?>
@@ -140,7 +118,7 @@
                                         <i class="bi bi-circle-fill text-secondary"></i>
                                     <?php endif; ?>
                                 </td>
-                                <td><?php echo htmlspecialchars($reporte['Estado_Reporte']) == 1 ? 'Confirmado' : 'Pendiente'; ?></td>
+                                <td><?php echo htmlspecialchars($reporte['Estado_Reporte']); ?></td>
                                 <td><?php echo htmlspecialchars($reporte['Fecha_Solucion']); ?></td>
                                 <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
                             </tr>
@@ -150,13 +128,14 @@
             </div>
         <?php else: ?>
             <div class="alert alert-warning text-center mt-4" role="alert">
-                <i class="bi bi-exclamation-triangle-fill"></i> No hay reportes disponibles.
+                <i class="bi bi-exclamation-triangle-fill"></i> No hay reportes para el tipo de área seleccionado.
             </div>
         <?php endif; ?>
         
         <div class="text-center mt-5">
-        <a href="../../encargado/home/" class="btn btn-secondary btn-lg">
-        <i class="bi bi-arrow-left-circle"></i> Regresar
+            <?php $url_regresar = '../reportes'; ?>
+            <a href="<?php echo $url_regresar; ?>" class="btn btn-secondary btn-lg">
+                <i class="bi bi-arrow-left-circle"></i> Regresar
             </a>
         </div>
     </div>

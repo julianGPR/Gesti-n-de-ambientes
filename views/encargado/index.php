@@ -1,222 +1,143 @@
 <?php
-require_once 'config/db.php';
-$db = Database::connect();
 session_start();
 
-$clave = $_SESSION['clave'];
-
-// Preparar la consulta SQL
-$query = "SELECT * FROM t_usuarios WHERE Clave = ?";
-$stmt = $db->prepare($query);
-
-// Vincular parámetros y ejecutar la consulta
-$stmt->bind_param("s", $clave);
-$stmt->execute();
-
-// Obtener el resultado de la consulta
-$result = $stmt->get_result();
-
-if($result->num_rows === 0) {
-    // No se encontraron registros para la clave dada
-    $nombre = "Nombre no encontrado";
-    $cargo = "Cargo no encontrado";
-} else {
-    // Obtener el nombre y el cargo del resultado de la consulta
-    $row = $result->fetch_assoc();
-    $nombre = $row['Nombres'] . ' ' . $row['Apellidos'];
-    $cargo = $row['Rol'];
+// Comprobar si el usuario está autenticado
+if (!isset($_SESSION['Id_usuario'])) {
+    header("Location: /dashboard/gestion%20de%20ambientes/login");
+    exit();
 }
-
-// Cerrar la declaración y la conexión a la base de datos
-$stmt->close();
-$db->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lector de Código QR</title>
-    <link rel="stylesheet" href="../assets/qrcode.css">
+    <title>Home Encargado</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+    <!-- Custom CSS -->
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Evita que la animación de fondo se desplace */
+            background-color: #f3f5f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #343a40;
+            margin: 0; /* Eliminar márgenes por defecto */
+            padding-top: 70px; /* Espacio para el navbar */
+            padding-bottom: 70px; /* Espacio para el footer */
+            position: relative; /* Necesario para el footer */
         }
 
-        .cabeza {
-            background-color: white;
-            color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
+        .navbar {
+            position: fixed; /* Fijar el navbar en la parte superior */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000; /* Asegura que el navbar esté por encima del contenido */
+            background-color: #007bff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .cabeza img {
-            height: 40px; /* Ajusta la altura del logo según sea necesario */
-            margin-right: 10px;
+        .navbar-brand {
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
-        .cabeza h1 {
-            margin: 0;
-            font-size: 1.2em;
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #343a40;
+            margin-top: 20px;
         }
 
-        #fecha-hora {
-            text-align: center;
-            margin-top: 10px;
+        .btn-custom {
+            width: 250px;
+            padding: 20px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
         }
 
-        .escan {
-            background-color: #138d75;
-            padding: 10px;
-            color: white;
+        .btn-custom:hover {
+            color: #ffffff;
+            background-color: #0056b3;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 123, 255, 0.5);
         }
 
-        /* Animación de fondo */
-        @keyframes scanAnimation {
-            0% { background-position: -100% 50%; } /* Cambia la posición inicial */
-            100% { background-position: 200% 50%; } /* Cambia la posición final */
+        .container {
+            max-width: 900px;
         }
 
-        .background-animation {
-            position: fixed;
-            top: 500px;
-            left: 50px;
-            width: 80%;
-            height: 50%;
-            background-image: url(https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3g0bDM0ZzZndnBsb2M5aGc5bnM5MDM2NnBkdGducno5c2x1Y3kyZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/taVCVuunNzQjBKTrYn/giphy.gif);
-            animation: scanAnimation 4s linear infinite;
-            background-size: cover; /* Ajusta el tamaño de la animación para cubrir todo el fondo */
-            background-repeat: no-repeat; /* Evita la repetición del fondo */
-            background-position: center; /* Centra la animación en el fondo */
+        footer {
+        margin-top: 50px; /* Ajusta el valor según el espacio que desees */
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
         }
 
-        #preview {
-            display: none; /* Oculta la vista de la cámara por defecto */
-        }
-
-        .botones-admin {
-            margin: 10px;
-            padding: 10px 20px; 
-            color: #fff;
-            background-color: #4CAF50;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
+        footer a {
+            color: #f8f9fa;
             text-decoration: none;
-            border: none;
+            transition: color 0.2s;
         }
 
-        .button-admin:hover {
-            background-color: #45a049;
+        footer a:hover {
+            color: #007bff;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
         }
     </style>
 </head>
-<body>
-    <div class="cabeza">
-        <img src='../assets/Logo-Sena.jpg' alt='logo'>
-        <h1>Gestión de Ambientes de Formación</h1>
+<body class="fade-in">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Panel de Encargado</a>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container text-center mt-5">
+        <h1>Selecciona una opción</h1>
+        <p class="lead text-muted mb-4">Elige la acción que deseas realizar.</p>
+
+        <!-- Botones de acción -->
+        <div class="d-flex flex-wrap justify-content-center gap-4">
+            <!-- Botón de Reportes -->
+            <a href="/dashboard/gestion%20de%20ambientes/reporte/verReportesPorUsuario/" class="btn btn-outline-primary btn-lg btn-custom">
+                <i class="bi bi-file-earmark-text"></i> Reportes
+            </a>
+            <!-- Botón de Inventario -->
+            <a href="/dashboard/gestion%20de%20ambientes/inventario/" class="btn btn-outline-primary btn-lg btn-custom">
+                <i class="bi bi-box-seam"></i> Inventario
+            </a>
+        </div>
     </div>
-    <h1 class="escan">Escaneando</h1>
 
-    <video id="preview" style="width:100%;"></video>
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <p class="mb-0">© 2024 Gestión de Encargados. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
-    <div class="background-animation"></div>
-
-    <div class="botones-admin">
-    <?php
-    // Construir la URL adecuada para los botones
-    $urls = [
-        '/dashboard/gestion%20de%20ambientes/encargado/reportes' => 'Gestión de Reportes',
-    ];
-
-    $i = 0;
-    foreach ($urls as $url => $label) {
-        if ($i % 3 == 0) {
-            if ($i > 0) echo '</div>';
-            echo '<div class="button-row">';
-        }
-        echo '<a href="' . $url . '" class="button-admin">' . $label . '</a>';
-        $i++;
-    }
-    if ($i % 3 != 0) {
-        echo '</div>';
-    }
-    ?>
-</div>
-
-    
-    
-    <button onclick="scanQR()">Escanear con cámara</button>
-
-    <form id="imageForm" action="" method="post" enctype="multipart/form-data" style="display:none;">
-        <input type="file" accept="image/*" name="archivo" id="fileInput">
-        <button type="submit" name="submit">Leer QR desde imagen</button>
-    </form>
-
-    <canvas id="canvas" style="display:none;"></canvas>
-    <div class="contenedor" id="contenedor">
-        <div id="fecha-hora"></div>
-        <h1><?php echo $nombre; ?></h1>
-        <h2><?php echo $cargo?></h2>
-    </div>
-    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
-    <script>
-        let scanner;
-
-        function scanQR() {
-            document.getElementById('preview').style.display = 'block';
-            document.getElementById('imageForm').style.display = 'none';
-
-            // Ocultar el div con clase "contenedor"
-            document.getElementById('contenedor').style.display = 'none';
-
-            scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
-            scanner.addListener('scan', function (content) {
-                alert('Escaneado con éxito. Contenido del código QR: ' + content);
-
-                window.location.href = '/dashboard/gestion%20de%20ambientes/instructor/readQR/' + encodeURIComponent(content);
-            });
-            Instascan.Camera.getCameras().then(function (cameras) {
-                if (cameras.length > 0) {
-                    let rearCamera = cameras.find(camera => camera.name.toLowerCase().includes('back'));
-                    if (rearCamera) {
-                        scanner.start(rearCamera);
-                    } else {
-                        scanner.start(cameras[0]);
-                    }
-                } else {
-                    console.error('No se encontraron cámaras disponibles.');
-                    alert('No se encontraron cámaras disponibles.');
-                }
-            }).catch(function (e) {
-                console.error('Error al acceder a las cámaras:', e);
-                alert('Error al acceder a las cámaras. Asegúrate de que tienes permiso para acceder a la cámara y de que estás utilizando un dispositivo compatible.');
-            });
-        }
-
-        function loadImage() {
-            document.getElementById('preview').style.display = 'none';
-            document.getElementById('imageForm').style.display = 'block';
-        }
-
-        // Obtener la fecha y hora actual del dispositivo
-        function obtenerFechaHora() {
-            let fechaHora = new Date();
-            let fecha = fechaHora.toLocaleDateString();
-            let hora = fechaHora.toLocaleTimeString();
-            document.getElementById('fecha-hora').innerText = `Fecha: ${fecha}, Hora: ${hora}`;
-        }
-
-        // Llamar a la función obtenerFechaHora cada segundo para actualizar la fecha y hora
-        obtenerFechaHora();
-        setInterval(obtenerFechaHora, 1000);
-    </script>
+    <!-- Bootstrap JS y dependencias de Iconos -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

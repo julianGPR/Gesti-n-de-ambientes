@@ -33,42 +33,55 @@
     </div>
 </header>
 <section class="update-ambiente" id="section-update-ambiente">
-    <form id="updateAmbienteForm" action="../updateAreaTrabajo/<?php echo $ambiente['id_area']; ?>" method="POST">
+    <form id="createAreaTrabajoForm" action="createAreaTrabajo<?php echo $areaTrabajo['id_area']; ?>" method="POST">
         <fieldset>
             <legend>Agregar Área de Trabajo</legend>
 
             <label for="nombre_area">Nombre del Área:</label><br>
-            <input type="text" id="nombre_area" name="nombre_area" value="<?php echo isset($ambiente['Nombre']) ? $ambiente['Nombre'] : ''; ?>" required><br><br>
+            <input type="text" id="nombre_area" name="nombre_area" value="<?php echo isset($areaTrabajo['nombre_area']) ? $areaTrabajo['nombre_area'] : ''; ?>" required><br><br>
 
             <label for="capacidad">Capacidad:</label><br>
-            <input type="number" id="capacidad" name="capacidad" value="<?php echo isset($ambiente['Capacidad']) ? $ambiente['Capacidad'] : ''; ?>" required><br><br>
+            <input type="number" id="capacidad" name="capacidad" value="<?php echo isset($areaTrabajo['capacidad']) ? $areaTrabajo['capacidad'] : ''; ?>" required><br><br>
+
+
+            <label for="ubicacion">Ubicacion:</label><br>
+            <input type="text" id="ubicacion" name="ubicacion" value=" <?php echo isset($areaTrabajo['ubicacion']) ? $areaTrabajo['ubicacion'] : '';?>" require><br><br>
+
+            <label for="responsable">Responsable:</label><br>
             <select id="responsable" name="responsable" required>
                 <option value="">Seleccionar un responsable</option>
+                <?php foreach ($usuarios as $usuario): ?>
+                    <option value="<?php echo $usuario['Id_usuario']; ?>" 
+                        <?php echo (isset($areaTrabajo['responsable']) && $areaTrabajo['responsable'] == $usuario['Id_usuario']) ? 'selected' : ''; ?>>
+                        <?php echo $usuario['Nombres']; ?>
+                    </option>
+                <?php endforeach; ?>
             </select><br><br>
+
 
             <label for="tipo_area">Tipo de Área:</label><br>
             <select id="tipo_area" name="tipo_area" required>
-                <option value="Tuberia" <?php if(isset($ambiente['Tipo']) && $ambiente['Tipo'] === 'Tuberia') echo 'selected'; ?>>Tubería</option>
-                <option value="Ensamble" <?php if(isset($ambiente['Tipo']) && $ambiente['Tipo'] === 'Ensamble') echo 'selected'; ?>>Ensamble</option>
-                <option value="Corte" <?php if(isset($ambiente['Tipo']) && $ambiente['Tipo'] === 'Corte') echo 'selected'; ?>>Corte</option>
-                <option value="Satelite" <?php if(isset($ambiente['Tipo']) && $ambiente['Tipo'] === 'Satelite') echo 'selected'; ?>>Satélite</option>
+                <option value="Tuberia" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Tuberia') echo 'selected'; ?>>Tubería</option>
+                <option value="Ensamble" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Ensamble') echo 'selected'; ?>>Ensamble</option>
+                <option value="Corte" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Corte') echo 'selected'; ?>>Corte</option>
+                <option value="Satelite" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Satelite') echo 'selected'; ?>>Satélite</option>
             </select><br><br>
 
             <label for="equipo_disponible">Equipo Disponible:</label><br>
-            <input type="text" id="equipo_disponible" name="equipo_disponible" value="<?php echo isset($ambiente['Equipo_disponible']) ? $ambiente['Equipo_disponible'] : ''; ?>" required><br><br>
+            <input type="text" id="equipo_disponible" name="equipo_disponible" value="<?php echo isset($areaTrabajo['Equipo_disponible']) ? $areaTrabajo['Equipo_disponible'] : ''; ?>" required><br><br>
 
             <label for="estado_area">Estado del Área:</label><br>
             <select id="estado_area" name="estado_area" required>
-                <option value="Disponible" <?php if(isset($ambiente['Estado']) && $ambiente['Estado'] === 'Disponible') echo 'selected'; ?>>Disponible</option>
-                <option value="Ocupada" <?php if(isset($ambiente['Estado']) && $ambiente['Estado'] === 'Ocupada') echo 'selected'; ?>>Ocupada</option>
-                <option value="En mantenimiento" <?php if(isset($ambiente['Estado']) && $ambiente['Estado'] === 'En mantenimiento') echo 'selected'; ?>>En mantenimiento</option>
+                <option value="">Estado</option>
+                <option value="Habilitado" <?php if(isset($areaTrabajo['estado_area']) && $areaTrabajo['estado_area'] === 'Habilitado') echo 'selected'; ?>>Habilitado</option>
+                <option value="Deshabilitado" <?php if(isset($areaTrabajo['estado_area']) && $areaTrabajo['estado_area'] === 'Deshabilitado') echo 'selected'; ?>>Deshabilitado</option>
             </select><br><br>
 
             <label for="fecha_creacion">Fecha de Creación:</label><br>
-            <input type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo isset($ambiente['Fecha_creacion']) ? $ambiente['Fecha_creacion'] : ''; ?>"><br><br>
+            <input type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo isset($areaTrabajo['Fecha_creacion']) ? $areaTrabajo['Fecha_creacion'] : ''; ?>"><br><br>
 
             <label for="comentarios">Comentarios:</label><br>
-            <textarea id="comentarios" name="comentarios" rows="4" cols="50"><?php echo isset($ambiente['Comentarios']) ? $ambiente['Comentarios'] : ''; ?></textarea><br><br>
+            <textarea id="comentarios" name="comentarios" rows="4" cols="50"><?php echo isset($areaTrabajo['Comentarios']) ? $areaTrabajo['Comentarios'] : ''; ?></textarea><br><br>
 
             <button type="submit">Guardar Cambios</button>
         </fieldset>
@@ -88,7 +101,7 @@
     <button id="btn_salir">Salir</button>
 </div>
 <script>
-$(document).ready(function() {
+/*$(document).ready(function() {
     // Cargar los usuarios en el select
     $.ajax({
         url: 'get_usuarios.php',
@@ -99,8 +112,8 @@ $(document).ready(function() {
                 select.append($('<option>').val(usuario.id).text(usuario.nombre));
             });
         }
-    });
-document.getElementById('createAreaForm').addEventListener('submit', function(event) {
+    });*/
+    document.getElementById('createAreaTrabajoForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     var formData = new FormData(this);
@@ -113,39 +126,33 @@ document.getElementById('createAreaForm').addEventListener('submit', function(ev
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Mostrar alerta de éxito
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
-                text: 'El Area ha sido modificado exitosamente',
+                text: 'El Área ha sido creada exitosamente',
                 confirmButtonText: 'OK'
             }).then(() => {
                 window.location.href = '../areaTrabajo';
             });
         } else {
-            // Mostrar alerta de error
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No se pudo modificar el Area. Por favor, intenta de nuevo',
+                text: 'No se pudo crear el Área. Por favor, intenta de nuevo',
                 confirmButtonText: 'OK'
             });
         }
     })
     .catch(error => {
-        // Mostrar alerta de error de conexión
         Swal.fire({
-            icon: 'success',
-            title: 'Éxito',
-            text: 'El area ha sido creado exitosamente',
-            confirmButtonText: 'Recargar Pagina',
-            confirmButtonClass: 'custom-btn-class'
-        }).then(() => {
-            window.location.href = '../areaTrabajo';
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un problema de conexión. Por favor, intenta de nuevo',
+            confirmButtonText: 'OK'
         });
     });
 });
-});
+//});
 </script>
 </body>
 </html>

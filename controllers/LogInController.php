@@ -16,22 +16,19 @@ class LoginController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['login'];
             $password = $_POST['password'];
-
+    
             $user = $this->loginModel->getUserByEmail($email);
-
+    
             // Verificación temporal de contraseña en texto plano
             if ($user && $password === $user['Clave']) {
                 // Iniciar sesión y redirigir según el rol
                 session_start();
-                $_SESSION['user'] = $user;
-                $_SESSION['clave'] = $password;
-
+                $_SESSION['user'] = $user; // Guarda toda la información del usuario
+                $_SESSION['Id_usuario'] = $user['Id_usuario']; // Guarda el Id_usuario específicamente
+    
                 switch ($user['Rol']) {
                     case 'Administrador':
                         header("Location: /dashboard/gestion%20de%20ambientes/admin/home");
-                        exit();
-                    case 'Instructor':
-                        header("Location: /dashboard/gestion%20de%20ambientes/instructor/home");
                         exit();
                     case 'Encargado':
                         header("Location: /dashboard/gestion%20de%20ambientes/encargado/home");
@@ -49,7 +46,6 @@ class LoginController {
             echo "Método no permitido.";
         }
     }
-
     public function logout() {
         session_start();
         session_unset();
