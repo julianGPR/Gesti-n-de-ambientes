@@ -1,4 +1,7 @@
 RewriteEngine On
+RewriteBase /dashboard/gestion%20de%20ambientes/
+
+# Redirigir todas las solicitudes no existentes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

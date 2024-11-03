@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <title>Proveedores</title>
     <link rel="stylesheet" type="text/css" href="../assets/styles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
@@ -25,7 +25,7 @@
         <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
     </div>
     <div class="title">
-        <h1>Gestion de Ambientes de formacion</h1>
+        <h1>Gestion de inventarios Gafra</h1>
     </div>
     <div class="datetime">
         <?php
@@ -44,73 +44,55 @@
     </div>
 </header>
 <nav>
-<<<<<<< HEAD
-<div class="column-toggle-buttons">
-=======
     <div class="column-toggle-buttons">
->>>>>>> actu_encargado
         <button class="toggle-vis" data-column="0">ID</button>
-        <button class="toggle-vis" data-column="1">Nombres</button>
-        <button class="toggle-vis" data-column="2">Apellidos</button>
-        <button class="toggle-vis" data-column="3">Correo</button>
-        <button class="toggle-vis" data-column="4">Rol</button>
-        <button class="toggle-vis" data-column="5">Acciones</button>
+        <button class="toggle-vis" data-column="1">Nombre</button>
+        <button class="toggle-vis" data-column="2">Direccion</button>
+        <button class="toggle-vis" data-column="3">Teléfono</button>
+        <button class="toggle-vis" data-column="4">Email</button>
+        <button class="toggle-vis" data-column="5">Accion</button>
+
+
     </div>
 </nav>  
 <section class="ambiente" id="section-ambiente">
     <div class="subtitulo-ambiente">
-        <h2>Usuarios</h2>
+        <h2>Proveedores</h2>
     </div>
     <div class="descripcion-ambiente">
-        <p>Gestión de Usuarios</p>
+        <p>Gestión de Proveedores</p>
     </div>
     <div class="tabla-ambientes tabla-scroll">
         <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Email</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                // Consulta para obtener los datos
-<<<<<<< HEAD
-                $query = "SELECT id_usuario, Nombres, Apellidos, Correo, Rol FROM t_usuarios";
-=======
-                $query = "SELECT id_usuario, Nombres, Apellidos, Correo, Rol, Estado FROM t_usuarios";
->>>>>>> actu_encargado
+                // Consulta para obtener los datos de proveedores
+                $query = "SELECT id_proveedor, nombre_proveedor, direccion, telefono, email FROM proveedores";
                 $result = $db->query($query);
 
                 // Mostrar los datos en la tabla
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . $row["id_usuario"] . "</td>";
-                        echo "<td>" . $row["Nombres"] . "</td>";
-                        echo "<td>" . $row["Apellidos"] . "</td>";
-                        echo "<td>" . $row["Correo"] . "</td>";
-                        echo "<td>" . $row["Rol"] . "</td>";
+                        echo "<td>" . $row["id_proveedor"] . "</td>";
+                        echo "<td>" . $row["nombre_proveedor"] . "</td>";
+                        echo "<td>" . $row["direccion"] . "</td>";
+                        echo "<td>" . $row["telefono"] . "</td>";
+                        echo "<td>" . $row["email"] . "</td>";
                         echo "<td>";
-<<<<<<< HEAD
-                        if ($row['Estado'] !== 'Inhabilitado') {
-                            $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateUsuario/';
-                            echo "<a href='" . $url_update . $row['Id_usuario'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
-                        } else {
-                            echo "<a href='#' onclick='confirmarHabilitar(" . $row['Id_usaurio'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
-                        }
-                        if ($row['Estado'] !== 'Inhabilitado') {
-                            echo "<a href='#' onclick='confirmarInhabilitar(" . $row['Id_usuario'] . ")' class='boton-inhabilitar boton-accion'><img src='../assets/inhabilitar1.svg'></a>";
-                        }
-=======
                         
-                            $url_update = '/dashboard/gestion%20de%20ambientes/usuarios/updateUsuario/' . $row['id_usuario'];
+                            $url_update = '/dashboard/gestion%20de%20ambientes/proveedores/updateProveedor/' . $row['id_proveedor'];
                             echo "<a href='" . $url_update . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
->>>>>>> actu_encargado
                         echo "</td>";
                         echo "</tr>";
                     }
@@ -121,28 +103,17 @@
                 ?>
             </tbody>
         </table>
+
         <div class="filtro-y-crear">
-<<<<<<< HEAD
-        <div class="crear-ambiente">
-            <ul>
-                <?php
-                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createUsuario/';
-                ?>
-                <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Usuario</a></li>
-            </ul>
-        </div>
-    </div>
-=======
             <div class="crear-ambiente">
                 <ul>
                     <?php
-                    $url_create = '/dashboard/gestion%20de%20ambientes/usuarios/createUsuario/';
+                    $url_create = '/dashboard/gestion%20de%20ambientes/proveedores/createProveedor/';
                     ?>
-                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Usuario</a></li>
+                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Nuevo</a></li>
                 </ul>
             </div>
         </div>
->>>>>>> actu_encargado
         <div class="regresar">
             <?php
             $url_regresar = '../admin/home';
@@ -164,11 +135,7 @@
         });
 
         // Configuración de los botones para mostrar/ocultar columnas
-<<<<<<< HEAD
-        $('.toggle-vis').on('click', function(e) {
-=======
         $('.toggle-vis').on('click', function(e) {  
->>>>>>> actu_encargado
             e.preventDefault();
 
             // Obtenemos el índice de la columna correspondiente al botón
@@ -179,19 +146,6 @@
             column.visible(!column.visible());
         });
     });
-<<<<<<< HEAD
-    function confirmarHabilitar(id) {
-    if (confirm('¿Está seguro de que desea habilitar este usuario?')) {
-        window.location.href = '/dashboard/gestion%20de%20ambientes/admin/usuarios';
-    }
-}
-
-function confirmarInhabilitar(id) {
-    if (confirm('¿Está seguro de que desea inhabilitar este usuario?')) {
-        window.location.href = '/dashboard/gestion%20de%20ambientes/admin/usuarios/';
-    }
-}
-=======
     
     function confirmarHabilitar(id) {
         if (confirm('¿Está seguro de que desea habilitar este usuario?')) {
@@ -202,7 +156,6 @@ function confirmarInhabilitar(id) {
         if (confirm('¿Está seguro de que desea inhabilitar este usuario?')) {
             window.location.href = "habilitarUsuario/" + id;}
     }
->>>>>>> actu_encargado
 </script>
 
 <footer>

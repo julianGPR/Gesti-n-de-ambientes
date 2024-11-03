@@ -1,33 +1,28 @@
 <?php
-include_once 'config/db.php';
+require_once 'config/db.php';
 
 class LoginModel {
+    private $db;
 
-    public function ingreso($password){
-        $conn = Database::connect();
-        $sql = "SELECT * FROM t_usuarios WHERE clave = ? LIMIT 1";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $password); // Corregir aquí
-        $stmt->execute();
-        $result = $stmt->get_result();
+    public function __construct() {
+        $this->db = Database::connect();
+    }
 
-        if ($result->num_rows === 1) {
-            $row = $result->fetch_assoc();
-            // Verificar la contraseña (puedes utilizar una función de hash como password_verify())
-            if (password_verify($password, $row['clave'])) {
-                // Inicio de sesión exitoso
-                return true;
-            } else {
-                // Las credenciales son incorrectas
-                return false;
-            }
+    public function getUserByEmail($email) {
+        $stmt = $this->db->prepare("SELECT * FROM t_usuarios WHERE Correo = ?");
+        if ($stmt) {
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
+            $stmt->close();
+            
+            return $user;
         } else {
-            // El usuario no existe
-            return false;
+            // Depuración
+            echo "Error en la preparación de la consulta: " . $this->db->error;
+            return null;
         }
     }
 }
-
-
-
 ?>

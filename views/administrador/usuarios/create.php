@@ -31,12 +31,15 @@
     </div>
 </header>
 <section class="create-ambiente" id="section-create-usuario">
-    <form action="createAmbiente" method="POST">
+    <form action="createUsuario" method="POST">
         <label for="nombres">Nombre del usuario:</label><br>
         <input type="text" id="nombres" name="nombres" required><br><br>
 
         <label for="apellidos">Apellidos del usuario:</label><br>
         <input type="text" id="apellidos" name="apellidos" required><br>
+
+        <label for="correo">Correo del usuario:</label><br>
+        <input type="text" id="correo" name="correo" required><br>
 
         <label for="clave">Contraseña:</label><br>
         <input type="text" id="clave" name="clave" readonly><br>
@@ -46,7 +49,7 @@
         <label for="rol">Rol:</label><br>
         <select id="rol" name="rol" required>
             <option value="Administrador">Administrador</option>
-            <option value="Instructor">Instructor</option>
+            <option value="Encargado">Encargado</option>
         </select><br><br>
         <button type="submit">Crear Usuario</button>
     </form>

@@ -144,11 +144,12 @@ $db = Database::connect();
         <div class="notificaciones">
         <?php
             // Consulta SQL para seleccionar todos los registros de la tabla t_reportes que no han sido vistos
-            $query = "SELECT r.*, u.Nombres AS nombre_usuario, u.Apellidos AS apellido_usuario, a.Nombre AS nombre_ambiente 
-                    FROM t_reportes r 
-                    INNER JOIN t_usuarios u ON r.Id_usuario = u.Id_usuario 
-                    INNER JOIN t_ambientes a ON r.Id_ambiente = a.Id_ambiente 
-                    WHERE r.estado = 1"; // Notificaciones no vistas
+            $query = "SELECT r.*, u.Nombres AS nombre_usuario, u.Apellidos AS apellido_usuario, a.nombre_area 
+            FROM t_reportes r 
+            INNER JOIN t_usuarios u ON r.Id_usuario = u.Id_usuario 
+            INNER JOIN AreaTrabajo a ON r.Id_area = a.Id_area 
+            WHERE r.estado = 1"; // Notificaciones no vistas
+
             $result = $db->query($query);
 
             if ($result->num_rows > 0) {
@@ -156,7 +157,7 @@ $db = Database::connect();
                 while ($row = $result->fetch_assoc()) {
 
                     echo "<div class='notificacion'>";
-                    echo "El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . " envió un nuevo reporte del ambiente " . $row['nombre_ambiente'];
+                    echo "El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] . " envió un nuevo reporte del area " . $row['nombre_area'];
                     echo "<br>";
                     echo "<br>";
                     echo "</div>";
@@ -202,19 +203,18 @@ $db = Database::connect();
     <div class="subtitulo-admin">
         <h2>Administrador</h2>
     </div>
-    <div class="botones-admin">
+    <div class="button-admin">
     <?php
     // Construir la URL adecuada para los botones
     $urls = [
-        '/dashboard/gestion%20de%20ambientes/admin/ambientes' => 'Gestión de Ambientes',
-        '/dashboard/gestion%20de%20ambientes/admin/usuarios' => 'Gestión de Usuarios',
-        '/dashboard/gestion%20de%20ambientes/admin/reportes' => 'Gestión de Reportes',
+        '/dashboard/gestion%20de%20ambientes/admin/areaTrabajo' => 'Gestión de Areas de trabajo',
+        '/dashboard/gestion%20de%20ambientes/usuarios/usuarios' => 'Gestión de Usuarios',
+        '/dashboard/gestion%20de%20ambientes/reporte/reportes' => 'Gestión de Reportes',
         '/dashboard/gestion%20de%20ambientes/admin/computadores' => 'Computadores',
-        '/dashboard/gestion%20de%20ambientes/admin/tvs' => 'Televisores(tvs)',
-        '/dashboard/gestion%20de%20ambientes/admin/sillas' => 'Sillas',
-        '/dashboard/gestion%20de%20ambientes/admin/mesas' => 'Mesas',
-        '/dashboard/gestion%20de%20ambientes/admin/tableros' => 'Tableros',
-        '/dashboard/gestion%20de%20ambientes/admin/nineras' => 'Niñeras',
+        '/dashboard/gestion%20de%20ambientes/proveedores/proveedores' => 'Proveedores',
+        '/dashboard/gestion%20de%20ambientes/Producto/listarProductos' => 'Productos',
+
+
     ];
 
     $i = 0;
@@ -233,7 +233,7 @@ $db = Database::connect();
 </div>
     </section>
     <div class="salir">
-        <button id="btn_salir">Salir</button>
+        <a href="/dashboard/gestion%20de%20ambientes/login" id="btn_salir" class="button-admin">Cerrar sesión</a>
     </div>
 
     <footer>
