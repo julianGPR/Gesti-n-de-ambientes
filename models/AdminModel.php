@@ -30,128 +30,6 @@ include_once 'config/db.php';
                 return false;
             }
         }
-<<<<<<< HEAD
-    }
-}
-
-public function obtenerComputadorPorId($id) {
-    $conn = Database::connect();
-    $sql = "SELECT * FROM t_computadores WHERE Id_computador='$id'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        return $result->fetch_assoc();
-    } else {
-        return null;
-    }
-}
- // Apartado de Modelo para USUARIOS------------------------------------------------------------------------
- public function guardarUsuario($nombres, $apellidos, $clave, $correo, $rol) {
-    $conn = Database::connect();
-
-    $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Correo, Rol)
-            VALUES (?, ?, ?, ?, ?)";
-
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bind_param("sssss", $nombres, $apellidos, $clave, $correo, $rol);
-
-    $result = $stmt->execute();
-
-    if ($result) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-public function modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol) {
-    $conn = Database::connect();
-
-    $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Correo = ?, Rol = ? WHERE Id_usuario = ?";
-
-    $stmt = $conn->prepare($sql);
-
-    if ($stmt === false) {
-        return false;
-    }
-
-    $stmt->bind_param("sssssi", $nombres, $apellidos, $clave, $correo, $rol, $id);
-
-    $result = $stmt->execute();
-
-    if ($result) {
-        return true;
-    } else {
-        return false;
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-
-public function obtenerUsuarioPorId($id) {
-    $conn = Database::connect();
-    $sql = "SELECT * FROM t_usuarios WHERE Id_usuario=?";
-
-    // Preparar la declaración
-    $stmt = $conn->prepare($sql);
-
-    // Vincular los parámetros
-    $stmt->bind_param("i", $id);
-
-    // Ejecutar la consulta
-    $stmt->execute();
-
-    // Obtener el resultado
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        return $result->fetch_assoc();
-    } else {
-        return null;
-    }
-}
-public function inhabilitarUsuario($id) {
-    $conn = Database::connect();
-    $sql = "UPDATE t_usuarios SET Estado = 'Inhabilitado' WHERE Id_usuario = ?";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    
-    $result = $stmt->execute();
-    
-    if ($result) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-public function habilitarUsuario($id) {
-    $conn = Database::connect();
-    $sql = "UPDATE t_usuarios SET Estado = 'Habilitado' WHERE Id_usuario = ?";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    
-    $result = $stmt->execute();
-    
-    if ($result) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
-// Apartado de Modelo para Reportes------------------------------------------------------------------------
-
-
-    public function insertarReporte($observacion, $id_usuario, $id_ambiente) {
-        $conn = Database::connect();
-        $conn = Database::connect();
-        $fechaHora = date("Y-m-d H:i:s"); // Obtenemos la fecha y hora actual
-=======
     
         public function inhabilitarAreaTrabajo($id) {
             $conn = Database::connect();
@@ -179,7 +57,6 @@ public function habilitarUsuario($id) {
             $conn = Database::connect();
             $sql = "SELECT * FROM AreaTrabajo WHERE id_area='$id'";
             $result = $conn->query($sql);
->>>>>>> actu_encargado
         
             if ($result->num_rows > 0) {
                 return $result->fetch_assoc();

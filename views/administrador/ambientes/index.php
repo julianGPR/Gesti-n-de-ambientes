@@ -47,19 +47,6 @@ $db = Database::connect();
         </div>
     </header>
     <nav>
-<<<<<<< HEAD
-    <div>
-        <button class="toggle-vis" data-column="0">Nombre</button>
-        <button class="toggle-vis" data-column="1">Torre</button>
-        <button class="toggle-vis" data-column="2">Computadores</button>
-        <button class="toggle-vis" data-column="3">Tvs</button>
-        <button class="toggle-vis" data-column="4">Sillas</button>
-        <button class="toggle-vis" data-column="5">Mesas</button>
-        <button class="toggle-vis" data-column="6">Tableros</button>
-        <button class="toggle-vis" data-column="7">Niñeras</button>
-        <button class="toggle-vis" data-column="8">Accion</button>
-    </div>
-=======
         <div>
             <button class="toggle-vis" data-column="0">Id</button>
             <button class="toggle-vis" data-column="1">Nombre</button>
@@ -73,7 +60,6 @@ $db = Database::connect();
             <button class="toggle-vis" data-column="9">Comentarios</button>
             <button class="toggle-vis" data-column="10">Accion</button>
         </div>
->>>>>>> actu_encargado
     </nav>
     <section class="ambiente" id="section-ambiente">
         <div class="subtitulo-ambiente">
@@ -86,17 +72,6 @@ $db = Database::connect();
     <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
                 <thead>
                     <tr>
-<<<<<<< HEAD
-                    <th>Nombre</th>
-                    <th>Torre</th>
-                    <th>Computadores</th>
-                    <th>Tvs</th>
-                    <th>Sillas</th>
-                    <th>Mesas</th>
-                    <th>Tableros</th>
-                    <th>Niñeras</th>
-                    <th>Acción</th>
-=======
                         <th>Id</th>
                         <th>Nombre</th>
                         <th>Capacidad</th>
@@ -108,7 +83,6 @@ $db = Database::connect();
                         <th>Fecha de creacion</th>
                         <th>Comentarios</th>
                         <th>Accion</th>
->>>>>>> actu_encargado
                     </tr>
                 </thead>
                 <tbody>

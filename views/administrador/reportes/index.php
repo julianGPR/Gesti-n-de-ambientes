@@ -4,18 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Panel Administrativo</title>
-    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
-=======
     <title>Reportes por Tipo de Área</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -122,7 +110,6 @@
             }
         }
     </style>
->>>>>>> actu_encargado
 </head>
 
 <body class="fade-in">
@@ -190,38 +177,10 @@
             <p class="mb-0">© 2024 Gestión de Reportes. Todos los derechos reservados.</p>
         </div>
     </footer>
-<<<<<<< HEAD
-    <script>
-        $(document).ready(function() {
-            var table = $('#tabla-ambientes').DataTable({
-                dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                paging: true,
-                pageLength: 10
-            });
-
-            // Configuración de los botones para mostrar/ocultar columnas
-            $('.toggle-vis').on('click', function(e) {
-                e.preventDefault();
-
-                // Obtenemos el índice de la columna correspondiente al botón
-                var columnIdx = parseInt($(this).attr('data-column'));
-
-                // Obtenemos el estado de visibilidad de la columna y lo invertimos
-                var column = table.column(columnIdx);
-                column.visible(!column.visible());
-            });
-        });
-    </script>
-=======
 
     <!-- Bootstrap JS y dependencias de Iconos -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
->>>>>>> actu_encargado
+
 </body>
-=======
-    </body>
->>>>>>> actu_encargado
 
 </html>
