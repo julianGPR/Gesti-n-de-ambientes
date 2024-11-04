@@ -155,8 +155,8 @@
         <?php endif; ?>
         
         <div class="text-center mt-5">
-        <a href="../../encargado/home/" class="btn btn-secondary btn-lg">
-        <i class="bi bi-arrow-left-circle"></i> Regresar
+            <a href="../../encargado/home/" class="btn btn-secondary btn-lg">
+                <i class="bi bi-arrow-left-circle"></i> Regresar
             </a>
         </div>
     </div>

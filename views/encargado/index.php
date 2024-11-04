@@ -124,9 +124,9 @@ if (!isset($_SESSION['Id_usuario'])) {
                 <i class="bi bi-file-earmark-text"></i> Reportes
             </a>
             <!-- Botón de Inventario -->
-            <a href="/dashboard/gestion%20de%20ambientes/inventario/" class="btn btn-outline-primary btn-lg btn-custom">
-                <i class="bi bi-box-seam"></i> Inventario
-            </a>
+            <a href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradas" class="btn btn-outline-primary btn-lg btn-custom">
+    <i class="bi bi-box-seam"></i> Inventario
+</a>
         </div>
     </div>
 

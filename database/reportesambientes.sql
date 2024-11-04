@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-11-2024 a las 08:14:33
+-- Tiempo de generación: 04-11-2024 a las 07:14:23
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -110,13 +110,24 @@ CREATE TABLE `facturas` (
 
 CREATE TABLE `inventario_entrada` (
   `id_entrada` int(11) NOT NULL,
-  `fecha_entrada` date DEFAULT NULL,
-  `producto_id` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `proveedor_id` int(11) DEFAULT NULL,
-  `usuario_registro` int(11) DEFAULT NULL,
-  `observaciones` text DEFAULT NULL
+  `proveedor_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) DEFAULT NULL,
+  `unidad_medida` varchar(50) DEFAULT NULL,
+  `ubicacion` varchar(100) DEFAULT NULL,
+  `fecha_entrada` date NOT NULL,
+  `observaciones` text DEFAULT NULL,
+  `Id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inventario_entrada`
+--
+
+INSERT INTO `inventario_entrada` (`id_entrada`, `proveedor_id`, `cantidad`, `precio_unitario`, `unidad_medida`, `ubicacion`, `fecha_entrada`, `observaciones`, `Id_usuario`) VALUES
+(1, 1, 1000, 10000.00, 'unitario', ' Bogota', '2024-11-03', 'nada', 112),
+(2, 2, 500, 100.00, 'millares', 'Medellin', '2024-11-03', 'nada', 113),
+(3, 2, 27, 1000.00, 'unitario', ' Bogota', '2024-11-04', 'nada', 112);
 
 -- --------------------------------------------------------
 
@@ -334,7 +345,7 @@ ALTER TABLE `facturas`
 ALTER TABLE `inventario_entrada`
   ADD PRIMARY KEY (`id_entrada`),
   ADD KEY `proveedor_id` (`proveedor_id`),
-  ADD KEY `usuario_registro` (`usuario_registro`);
+  ADD KEY `fk_usuario_modificacion` (`Id_usuario`);
 
 --
 -- Indices de la tabla `inventario_salida`
@@ -408,7 +419,7 @@ ALTER TABLE `facturas`
 -- AUTO_INCREMENT de la tabla `inventario_entrada`
 --
 ALTER TABLE `inventario_entrada`
-  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario_salida`
@@ -467,9 +478,8 @@ ALTER TABLE `facturas`
 -- Filtros para la tabla `inventario_entrada`
 --
 ALTER TABLE `inventario_entrada`
-  ADD CONSTRAINT `inventario_entrada_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id_producto`),
-  ADD CONSTRAINT `inventario_entrada_ibfk_2` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`id_proveedor`),
-  ADD CONSTRAINT `inventario_entrada_ibfk_3` FOREIGN KEY (`usuario_registro`) REFERENCES `t_usuarios` (`Id_usuario`);
+  ADD CONSTRAINT `fk_usuario_modificacion` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`),
+  ADD CONSTRAINT `inventario_entrada_ibfk_1` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`id_proveedor`);
 
 --
 -- Filtros para la tabla `inventario_salida`
