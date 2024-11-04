@@ -206,60 +206,104 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="logo-container">
-        <img src = "assets/Logo-Sena.jpg" alt="logo" class="logo">
-        <button class="credit-button" onclick="showPopup()"></button>
-    </div>
-    <div class="login-box">
-        <h2>Bienvenido al Sistema de Gestión y Control de Ambientes de Formación CDM</h2>
-        <p>Por favor, ingrese su correo y clave para acceder al sistema.</p>
-        <form action="/dashboard/gestion%20de%20ambientes/login/login" method="POST">
-                <div class="textbox">
-                    <input type="text" id="login" name="login" placeholder="Correo" required>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="assets\style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <header class="header-container">
+        <a href="#" class="header-logo">Gafra</a>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icons">
+            <i class='bx bx-menu' id="open-menu-icon"></i>
+            <i class='bx bx-x' id="close-menu-icon"></i>
+        </label>
+        <nav class="nav-links">
+            <a href="#" style="--i:0;">Inicio</a>
+            <a href="#" style="--i:1;">Servicios</a>
+            <a href="#" style="--i:2;">Contáctanos</a>
+            <a href="#" style="--i:3;">Acerca de</a>
+        </nav>
+    </header>
+
+    <div class="container-form register">
+        <div class="information">
+            <div class="info-childs">
+                <img src="assets\Logo-Sena.jpg" alt="Logo de la empresa">
+                <p>Te damos la bienvenida a nuestra plataforma, donde podrás explorar todos los detalles de nuestra
+                    empresa. Descubre nuestra visión y misión para conocer más sobre nosotros.</p>
+                <input type="button" value="Iniciar Sesión" id="sign-in">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>GAFRA</h2>
+                <div class="vision">
+                    <h3>Visión</h3>
+                    <p>Ser la marca líder global en la fabricación de productos innovadores y de alta calidad para
+                        bebés, reconocidos por nuestra excelencia en diseño, seguridad y cuidado del medio ambiente.</p>
                 </div>
-                <div class="textbox">
-                    <input type="password" id="password" name="password" placeholder="Clave" required>
+                <div class="mission">
+                    <h3>Misión</h3>
+                    <p>Comprometernos a diseñar y fabricar productos seguros, cómodos y funcionales que mejoren la vida
+                        de los bebés y sus familias, manteniendo altos estándares de calidad, seguridad y
+                        sostenibilidad, mientras inspiramos confianza en nuestros clientes y facilitamos el desarrollo
+                        saludable de los más pequeños.</p>
                 </div>
-                <input type="submit" class="btn" value="Ingresar">
-                <div class="footer">
-                    <a href="#">Recuperar contraseña</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-form login hide">
+        <div class="information">
+            <div class="info-childs">
+                <img src="assets\Logo-Sena.jpg" alt="Logo de la empresa">
+                <p> Bienvenido a nuestra plataforma de gestión de inventario. Optimiza tu almacenamiento y control de
+                    productos hoy mismo.</p>
+                <input type="button" value="Conocer más" id="sign-up">
+            </div>
+        </div>
+        <div class="form-information">
+            <div class="form-information-childs">
+                <h2>Iniciar Sesión</h2>
+                <div class="icons">
+                    <i class='bx bxs-book-bookmark'></i>
                 </div>
-            </form>
+                <p>¿Necesitas ayuda?</p>
+                <form action="/dashboard/gestion%20de%20ambientes/login/login" method="POST" class="form">
+                    <div>
+                        <label>
+                            <i class='bx bx-envelope'></i>
+                            <input type="text" id="login" name="login" placeholder="Correo" required>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <i class='bx bx-lock-alt'></i>
+                            <input type="password" id="password" name="password" placeholder="Clave" required>
+                        </label>
+                    </div>
+                    <input type="submit" value="Iniciar Sesión">
+                    <div class="alerta-error">Todos los campos son obligatorios</div>
+                    <div class="alerta-exito">Te registraste correctamente</div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div id="instrucciones" style="margin-top: 30px; text-align: center; padding: 10px; background-color: #f9f9f9; border-radius: 10px; width: 100%;">
-        <h3 style="font-size: 16px; margin: 10px 0; color: #333;">Instrucciones de Ingreso</h3>
-        <p style="font-size: 16px; color: #333;">Utilice la clave asignada para ingresar al sistema, asegúrese de que el aula de formación esté debidamente marcada.</p>
-    </div>
-    <div id="info-bd" style="margin-top: 20px; text-align: center; padding: 10px; background-color: #f9f9f9; border-radius: 10px; width: 100%;">
-        <p style="font-size: 16px; color: #333;">Contiene información sobre ambientes de formación, computadores y reportes asociados a estos. Recuerde realizar cualquier novedad dentro del aplicativo.</p>
-    </div>
-</div>
-
-<div class="popup" id="creditPopup">
-    <button class="popup-close" onclick="hidePopup()">X</button>
-    <h3>Créditos</h3>
-    <p>Desarrollado por:</p>
-    <ul>    
-        <li>Carlos Antonio Ortiz - ficha 2562072</li>
-        <li>Juan Infante Quiroga - ficha 2617546</li>
-        <li>Julian Garcia Piñeros - ficha 2617546</li>
-        <li>William Andrés Saavedra - ficha 2562072</li>
-        <li>Fredy Leonardo Tovar - ficha 2562072</li>
-        <li>Luis Enrique Arias - Instructor ADSO</li>
-    </ul>
-</div>
-
-<script>
-
-    function showPopup() {
-        document.getElementById('creditPopup').style.display = 'block';
-    }
-
-    function hidePopup() {
-        document.getElementById('creditPopup').style.display = 'none';
-    }
-</script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/register.js"></script>
+    <script src="assets/js/login.js"></script>
+</body>
 </body>
 </html>
 
