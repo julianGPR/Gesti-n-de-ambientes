@@ -3,6 +3,11 @@
     require_once 'config/db.php';
     $db = Database::connect();
 ?>
+<?php require_once "views/administrador/Vista/parte_superior.php" ?> 
+<!-- nicio del contenido principal -->
+    <div class="container">
+        <h1>Contenido principal</h1>
+    </div>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,11 +123,6 @@
             <?php
             $url_regresar = '../admin/home';
             ?>
-            <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
-        </div>
-        <div class="salir">
-            <button id="btn_salir">Salir</button>
-        </div>
     </div>
 </section>
 <script>
@@ -158,8 +158,7 @@
     }
 </script>
 
-<footer>
-    <p>Sena todos los derechos reservados</p>
-</footer>
 </body>
 </html>
+<!-- fin del contenido principal -->
+<?php require_once "views/administrador/Vista/parte_inferior.php" ?> 
