@@ -19,10 +19,10 @@ $db = Database::connect();
                 </ul>
             </div>
         </div>
-        <div class="tabla-ambientes tabla-scroll">
-        <table class="table table-striped table-hover">
-  <thead>
-    <tr>
+       <div class="tabla-ambientes tabla-scroll" style="max-width: 950px; overflow-x: auto; margin: 0 auto;">
+    <table class="table table-striped table-hover table-bordered" style="width: 100%;">
+  <thead class="table-dark">
+    <tr> 
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Capacidad</th>
