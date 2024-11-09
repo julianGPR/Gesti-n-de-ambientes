@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
     <style>
         body {
             background-color: #f3f5f7;
@@ -47,8 +46,11 @@
         <h1 class="mb-4 text-center">Crear Nueva Entrada de Inventario</h1>
         
         <form id="crearEntradaForm" action="crearEntrada" method="POST">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" id="nombre" class="form-control" required>
+            </div>
 
-            <!-- Selección de Proveedor -->
             <div class="mb-3">
                 <label for="proveedor_id" class="form-label">Proveedor</label>
                 <select name="proveedor_id" id="proveedor_id" class="form-select" required>
@@ -61,43 +63,49 @@
                 </select>
             </div>
 
-            <!-- Campo de Cantidad -->
+            <div class="mb-3">
+    <!-- Selección de Tipo de Área -->
+<div class="mb-3">
+    <label for="tipo_area" class="form-label">Área de Trabajo</label>
+    <select name="tipo_area" id="tipo_area" class="form-select" required>
+        <option value="">Seleccione un área de trabajo</option>
+        <?php foreach ($tiposDeArea as $tipo): ?>
+            <option value="<?= htmlspecialchars($tipo) ?>"><?= htmlspecialchars($tipo) ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+
             <div class="mb-3">
                 <label for="cantidad" class="form-label">Cantidad</label>
                 <input type="number" name="cantidad" id="cantidad" class="form-control" required>
             </div>
 
-            <!-- Campo de Precio Unitario -->
             <div class="mb-3">
                 <label for="precio_unitario" class="form-label">Precio Unitario</label>
                 <input type="number" step="0.01" name="precio_unitario" id="precio_unitario" class="form-control" required>
             </div>
 
-            <!-- Campo de Unidad de Medida -->
             <div class="mb-3">
                 <label for="unidad_medida" class="form-label">Unidad de Medida</label>
                 <input type="text" name="unidad_medida" id="unidad_medida" class="form-control" required>
             </div>
 
-            <!-- Campo de Ubicación -->
             <div class="mb-3">
                 <label for="ubicacion" class="form-label">Ubicación</label>
                 <input type="text" name="ubicacion" id="ubicacion" class="form-control" required>
             </div>
 
-            <!-- Campo de Fecha de Entrada -->
             <div class="mb-3">
                 <label for="fecha_entrada" class="form-label">Fecha de Entrada</label>
                 <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control" required>
             </div>
 
-            <!-- Campo de Observaciones -->
             <div class="mb-3">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <textarea name="observaciones" id="observaciones" class="form-control" rows="3"></textarea>
             </div>
 
-            <!-- Botones de acción -->
             <div class="text-center">
                 <button type="submit" class="btn btn-success btn-lg">
                     <i class="bi bi-check-circle"></i> Guardar Entrada

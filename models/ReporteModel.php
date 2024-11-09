@@ -1,5 +1,7 @@
 <?php
 require_once 'config/db.php';
+date_default_timezone_set('America/Bogota'); // Ajusta a la zona horaria correcta
+
 
 class ReporteModel {
     private $db;
@@ -24,33 +26,30 @@ class ReporteModel {
     public function guardarReporte($id_area, $fechaHora, $id_usuario, $estado, $estado_reporte, $fecha_solucion, $observaciones) {
         $sql = "INSERT INTO t_reportes (Id_area, FechaHora, Id_usuario, Estado, Estado_Reporte, Fecha_Solucion, Observaciones) 
                 VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    
         $stmt = $this->db->prepare($sql);
         if (!$stmt) {
             throw new Exception("Error en la preparación de la consulta: " . $this->db->error);
         }
-
-        // Depuración: Mostrar los valores que se pasarán a la consulta
-        echo "<pre>Valores a insertar:\n";
-        var_dump($id_area, $fechaHora, $id_usuario, $estado, $estado_reporte, $fecha_solucion, $observaciones);
-        echo "</pre>";
-
+    
         $stmt->bind_param("isissss", $id_area, $fechaHora, $id_usuario, $estado, $estado_reporte, $fecha_solucion, $observaciones);
         $resultado = $stmt->execute();
-
+    
         if (!$resultado) {
             throw new Exception("Error en la ejecución de la consulta: " . $stmt->error);
         }
-
+    
         $stmt->close();
         return $resultado;
     }
+    
 
     public function obtenerReportesPorUsuario($id_usuario) {
-        $sql = "SELECT t_reportes.*, AreaTrabajo.nombre_area 
+        $sql = "SELECT t_reportes.*, AreaTrabajo.nombre_area, t_usuarios.Nombres, t_usuarios.Apellidos 
                 FROM t_reportes 
                 JOIN AreaTrabajo ON t_reportes.Id_area = AreaTrabajo.id_area 
-                WHERE Id_usuario = ?";
+                JOIN t_usuarios ON t_reportes.Id_usuario = t_usuarios.id_usuario 
+                WHERE t_reportes.Id_usuario = ?";
 
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param("i", $id_usuario);
@@ -67,10 +66,12 @@ class ReporteModel {
         $stmt->close();
         return $reportes;
     }
+
     public function obtenerReportePorArea($id_area) {
-        $sql = "SELECT t_reportes.*, AreaTrabajo.nombre_area 
+        $sql = "SELECT t_reportes.*, AreaTrabajo.nombre_area, t_usuarios.Nombres, t_usuarios.Apellidos
                 FROM t_reportes 
                 JOIN AreaTrabajo ON t_reportes.Id_area = AreaTrabajo.id_area 
+                JOIN t_usuarios ON t_reportes.Id_usuario = t_usuarios.id_usuario 
                 WHERE t_reportes.Id_area = ?";
 
         $stmt = $this->db->prepare($sql);
@@ -87,15 +88,14 @@ class ReporteModel {
         }
         
         $stmt->close();
-
         return $reportes;
     }
 
-    // Obtener reportes por tipo de área para el administrador
     public function obtenerReportePorTipoArea($tipo_area) {
-        $sql = "SELECT t_reportes.*, AreaTrabajo.nombre_area 
+        $sql = "SELECT t_reportes.*, AreaTrabajo.nombre_area, t_usuarios.Nombres, t_usuarios.Apellidos 
                 FROM t_reportes 
                 JOIN AreaTrabajo ON t_reportes.Id_area = AreaTrabajo.id_area 
+                JOIN t_usuarios ON t_reportes.Id_usuario = t_usuarios.id_usuario 
                 WHERE AreaTrabajo.tipo_area = ?";
 
         $stmt = $this->db->prepare($sql);
@@ -112,8 +112,34 @@ class ReporteModel {
         }
 
         $stmt->close();
-
         return $reportes;
     }
+
+    // Método para actualizar el estado del reporte y la fecha de solución
+    public function actualizarEstadoReporte($id_reporte, $estado_reporte, $fecha_solucion = null) {
+        $sql = "UPDATE t_reportes SET Estado_Reporte = ?, Fecha_Solucion = ? WHERE Id_reporte = ?";
+        $stmt = $this->db->prepare($sql);
+    
+        if (!$stmt) {
+            throw new Exception("Error en la preparación de la consulta: " . $this->db->error);
+        }
+    
+        // Si el estado del reporte es '2' (aprobado), asignamos la fecha actual.
+        if ($estado_reporte == '2') {
+            $fecha_solucion = date('Y-m-d H:i:s'); // Fecha y hora actuales
+        }
+    
+        $stmt->bind_param("isi", $estado_reporte, $fecha_solucion, $id_reporte);
+        $result = $stmt->execute();
+    
+        if (!$result) {
+            throw new Exception("Error en la ejecución de la consulta: " . $stmt->error);
+        }
+    
+        $stmt->close();
+        return $result;
+    }
+    
+    
 }
 ?>

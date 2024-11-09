@@ -210,9 +210,9 @@ $db = Database::connect();
         '/dashboard/gestion%20de%20ambientes/admin/areaTrabajo' => 'Gestión de Areas de trabajo',
         '/dashboard/gestion%20de%20ambientes/usuarios/usuarios' => 'Gestión de Usuarios',
         '/dashboard/gestion%20de%20ambientes/reporte/reportes' => 'Gestión de Reportes',
-        '/dashboard/gestion%20de%20ambientes/admin/computadores' => 'Computadores',
         '/dashboard/gestion%20de%20ambientes/proveedores/proveedores' => 'Proveedores',
-        '/dashboard/gestion%20de%20ambientes/Producto/listarProductos' => 'Productos',
+        '/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador' => 'Invetario Insumos',
+        '/dashboard/gestion%20de%20ambientes/producto/listarProductos' => 'Productos',
 
 
     ];

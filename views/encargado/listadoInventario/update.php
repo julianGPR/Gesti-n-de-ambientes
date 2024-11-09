@@ -6,7 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
 
-    <!-- Custom CSS -->
     <style>
         body {
             background-color: #f8f9fa;
@@ -23,7 +22,6 @@
             color: #333;
         }
 
-        /* Estilo de botón personalizado con efecto hover */
         .btn-custom {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -39,44 +37,73 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">Editar Entrada de Inventario</h1>
+        <h1 class="mb-4 text-center">Editar Entrada de Inventario</h1>
+
         <form action="../editarEntrada/<?= $entrada['id_entrada'] ?>" method="POST">
-            <div class="mb-3">
-                <label for="fecha_entrada" class="form-label">Fecha de Entrada</label>
-                <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control" value="<?= htmlspecialchars($entrada['fecha_entrada']) ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="proveedor_id" class="form-label">Proveedor</label>
-                <select name="proveedor_id" id="proveedor_id" class="form-select" required>
-                    <?php foreach ($proveedores as $proveedor): ?>
-                        <option value="<?= $proveedor['id_proveedor'] ?>" <?= $entrada['proveedor_id'] == $proveedor['id_proveedor'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($proveedor['nombre_proveedor']) ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="cantidad" class="form-label">Cantidad</label>
-                <input type="number" name="cantidad" id="cantidad" class="form-control" value="<?= htmlspecialchars($entrada['cantidad']) ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="precio_unitario" class="form-label">Precio Unitario</label>
-                <input type="number" step="0.01" name="precio_unitario" id="precio_unitario" class="form-control" value="<?= htmlspecialchars($entrada['precio_unitario']) ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="unidad_medida" class="form-label">Unidad de Medida</label>
-                <input type="text" name="unidad_medida" id="unidad_medida" class="form-control" value="<?= htmlspecialchars($entrada['unidad_medida']) ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="ubicacion" class="form-label">Ubicación</label>
-                <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="<?= htmlspecialchars($entrada['ubicacion']) ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="observaciones" class="form-label">Observaciones</label>
-                <textarea name="observaciones" id="observaciones" class="form-control"><?= htmlspecialchars($entrada['observaciones']) ?></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-custom">Guardar Cambios</button>
-        </form>
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" name="nombre" id="nombre" class="form-control" value="<?= htmlspecialchars($entrada['nombre']) ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="proveedor_id" class="form-label">Proveedor</label>
+        <select name="proveedor_id" id="proveedor_id" class="form-select" required>
+            <?php foreach ($proveedores as $proveedor): ?>
+                <option value="<?= $proveedor['id_proveedor'] ?>" <?= $entrada['proveedor_id'] == $proveedor['id_proveedor'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($proveedor['nombre_proveedor']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <!-- Campo de Fecha de Entrada -->
+    <div class="mb-3">
+        <label for="fecha_entrada" class="form-label">Fecha de Entrada</label>
+        <input type="date" name="fecha_entrada" id="fecha_entrada" class="form-control" value="<?= htmlspecialchars($entrada['fecha_entrada']) ?>" required>
+    </div>
+
+    <div class="mb-3">
+    <label for="tipo_area" class="form-label">Área de Trabajo</label>
+    <select name="tipo_area" id="tipo_area" class="form-select" required>
+        <option value="">Seleccione un área de trabajo</option>
+        <?php foreach ($tiposDeArea as $area): ?>
+            <option value="<?= htmlspecialchars($area) ?>" <?= ($entrada['tipo_area'] === $area) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($area) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+
+    <div class="mb-3">
+        <label for="cantidad" class="form-label">Cantidad</label>
+        <input type="number" name="cantidad" id="cantidad" class="form-control" value="<?= htmlspecialchars($entrada['cantidad']) ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="precio_unitario" class="form-label">Precio Unitario</label>
+        <input type="number" step="0.01" name="precio_unitario" id="precio_unitario" class="form-control" value="<?= htmlspecialchars($entrada['precio_unitario']) ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+        <input type="text" name="unidad_medida" id="unidad_medida" class="form-control" value="<?= htmlspecialchars($entrada['unidad_medida']) ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="ubicacion" class="form-label">Ubicación</label>
+        <input type="text" name="ubicacion" id="ubicacion" class="form-control" value="<?= htmlspecialchars($entrada['ubicacion']) ?>" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="observaciones" class="form-label">Observaciones</label>
+        <textarea name="observaciones" id="observaciones" class="form-control"><?= htmlspecialchars($entrada['observaciones']) ?></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-custom">Guardar Cambios</button>
+</form>
+
+        
         <div class="text-center mt-5">
             <a href="../listarEntradas" class="btn btn-secondary btn-lg btn-custom">
                 <i class="bi bi-arrow-left-circle"></i> Regresar

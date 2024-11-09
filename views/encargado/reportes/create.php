@@ -50,6 +50,7 @@
         <h1 class="mb-4 text-center">Crear Nuevo Reporte</h1>
 
         <form id="createReporteform" action="createReporte" method="POST">
+            <!-- Selección de Área -->
             <div class="mb-4">
                 <label for="id_area" class="form-label">Área</label>
                 <select name="id_area" id="id_area" class="form-select" required aria-label="Seleccionar área">
@@ -62,33 +63,24 @@
                 </select>
             </div>
 
+            <!-- Fecha de Creación -->
             <div class="mb-4">
-                <label for="estado" class="form-label">Estado</label>
-                <input type="text" name="estado" id="estado" class="form-control" required placeholder="Ingrese el estado del área">
+                <label for="FechaHora" class="form-label">Fecha de Creación</label>
+                <input type="datetime-local" name="FechaHora" id="FechaHora" class="form-control" placeholder="Seleccione la fecha de creación">
+                <small class="text-muted">Si no se selecciona, se usará la fecha y hora actual.</small>
             </div>
 
-            <div class="mb-4">
-                <label for="estado_reporte" class="form-label">Estado Reporte</label>
-                <select name="estado_reporte" id="estado_reporte" class="form-select" required>
-                    <option value="1">Activo</option>
-                    <option value="0">Inactivo</option>
-                </select>
-            </div>
-
-            <div class="mb-4">
-                <label for="fecha_solucion" class="form-label">Fecha Solución</label>
-                <input type="datetime-local" name="fecha_solucion" id="fecha_solucion" class="form-control">
-                <small class="text-muted">Opcional: seleccione la fecha de solución si está disponible.</small>
-            </div>
-
+            <!-- Observaciones -->
             <div class="mb-4">
                 <label for="observaciones" class="form-label">Observaciones</label>
                 <textarea name="observaciones" id="observaciones" class="form-control" rows="3" required placeholder="Escriba cualquier observación relevante"></textarea>
             </div>
 
+            <!-- Botón para Guardar Reporte -->
             <button type="submit" class="btn btn-success w-100">Guardar Reporte</button>
         </form>
 
+        <!-- Botón para Regresar -->
         <div class="text-center mt-5">
             <a href="../reporte/verReportesPorUsuario/" class="btn btn-secondary">
                 <i class="bi bi-arrow-left-circle"></i> Regresar

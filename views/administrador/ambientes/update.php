@@ -3,113 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Area</title>
-    <link rel="stylesheet" type="text/css" href="../../assets/styles.css">
-    <!-- Incluir SweetAlert2 -->
+    <title>Agregar Nueva Área de Trabajo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-<header>
-    <div class="logo-container">
-        <img src="../../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
-    </div>
-    <div class="title">
-        <h1>Editar Area</h1>
-    </div>
-    <div class="datetime">
-        <?php
-            date_default_timezone_set('America/Bogota');
-            $fechaActual = date("d/m/Y");
-            $horaActual = date("h:i a");
-        ?>
-        <div class="datetime">
-            <div class="fecha">
-                <p>Fecha actual: <?php echo $fechaActual; ?></p>
-            </div>
-            <div class="hora">
-                <p>Hora actual: <?php echo $horaActual; ?></p>
-            </div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Agregar Nueva Área de Trabajo</h1>
+    <form id="createAreaTrabajoForm" action="createAreaTrabajo" method="POST">
+        <div class="mb-3">
+            <label for="nombre_area" class="form-label">Nombre del Área</label>
+            <input type="text" id="nombre_area" name="nombre_area" class="form-control" required>
         </div>
-    </div>
-</header>
-<section class="update-ambiente" id="section-update-ambiente">
-    <form id="updateAreaTrabajoForm" action="updateAreaTrabajo<?php echo $areaTrabajo['id_area']; ?>" method="POST">
-    <fieldset>
-            <legend>Editar Área de Trabajo</legend>
 
-            <label for="nombre_area">Nombre del area:</label><br>
-            <input type="text" name="nombre_area" id="nombre_area" value="<?= $areaTrabajo['nombre_area'] ?>" required><br><br>
+        <div class="mb-3">
+            <label for="capacidad" class="form-label">Capacidad</label>
+            <input type="number" id="capacidad" name="capacidad" class="form-control" required>
+        </div>
 
-            <label for="capacidad">Capacidad:</label><br>
-            <input type="number" id="capacidad" name="capacidad" value="<?php echo isset($areaTrabajo['capacidad']) ? $areaTrabajo['capacidad'] : ''; ?>" required><br><br>
+        <div class="mb-3">
+            <label for="ubicacion" class="form-label">Ubicación</label>
+            <input type="text" id="ubicacion" name="ubicacion" class="form-control" required>
+        </div>
 
-            <label for="ubicacion">Ubicación:</label><br>
-            <input type="text" id="ubicacion" name="ubicacion" value="<?php echo isset($areaTrabajo['ubicacion']) ? $areaTrabajo['ubicacion'] : ''; ?>" required><br><br>
-
-            <label for="responsable">Responsable:</label>
-            <select name="responsable" required>
-                <option value="">Selecciona un responsable</option>
+        <div class="mb-3">
+            <label for="responsable" class="form-label">Responsable</label>
+            <select id="responsable" name="responsable" class="form-select" required>
+                <option value="">Seleccionar un responsable</option>
                 <?php foreach ($usuarios as $usuario): ?>
-                    <option value="<?= $usuario['Id_usuario'] ?>"><?= htmlspecialchars($usuario['Nombres']) ?></option>
+                    <option value="<?= htmlspecialchars($usuario['Id_usuario']) ?>">
+                        <?= htmlspecialchars($usuario['Nombres']) ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
+        </div>
 
+        <div class="mb-3">
+            <label for="tipo_area" class="form-label">Tipo de Área</label>
+            <select id="tipo_area" name="tipo_area" class="form-select" required>
+                <option value="">Seleccione un tipo de área</option>
+                <?php foreach ($tiposDeArea as $tipo): ?>
+                    <option value="<?= htmlspecialchars($tipo) ?>"><?= htmlspecialchars($tipo) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-            <label for="tipo_area">Tipo de Área:</label><br>
-            <select id="tipo_area" name="tipo_area" required>
-                <option value="Tuberia" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Tuberia') echo 'selected'; ?>>Tubería</option>
-                <option value="Ensamble" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Ensamble') echo 'selected'; ?>>Ensamble</option>
-                <option value="Corte" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Corte') echo 'selected'; ?>>Corte</option>
-                <option value="Satelite" <?php if(isset($areaTrabajo['tipo_area']) && $areaTrabajo['tipo_area'] === 'Satelite') echo 'selected'; ?>>Satélite</option>
-            </select><br><br>
+        <div class="mb-3">
+            <label for="equipo_disponible" class="form-label">Equipo Disponible</label>
+            <input type="text" id="equipo_disponible" name="equipo_disponible" class="form-control" required>
+        </div>
 
-            <label for="equipo_disponible">Equipo Disponible:</label><br>
-            <input type="text" id="equipo_disponible" name="equipo_disponible" value="<?php echo isset($areaTrabajo['equipo_disponible']) ? $areaTrabajo['equipo_disponible'] : ''; ?>" required><br><br>
+        <div class="mb-3">
+            <label for="estado_area" class="form-label">Estado del Área</label>
+            <select id="estado_area" name="estado_area" class="form-select" required>
+                <option value="Habilitado">Habilitado</option>
+                <option value="Deshabilitado">Deshabilitado</option>
+            </select>
+        </div>
 
-            <label for="estado_area">Estado del Área:</label><br>
-            <input type="text" id="estado_area" name="estado_area" value="<?php echo isset($areaTrabajo['estado_area']) ? $areaTrabajo['estado_area'] : ''; ?>" required><br><br>
+        <div class="mb-3">
+            <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+            <input type="date" id="fecha_creacion" name="fecha_creacion" class="form-control" required>
+        </div>
 
-            <label for="fecha_creacion">Fecha de Creación:</label><br>
-            <input type="date" id="fecha_creacion" name="fecha_creacion" value="<?php echo isset($areaTrabajo['fecha_creacion']) ? $areaTrabajo['fecha_creacion'] : ''; ?>"><br><br>
+        <div class="mb-3">
+            <label for="comentarios" class="form-label">Comentarios</label>
+            <textarea id="comentarios" name="comentarios" class="form-control" rows="4"></textarea>
+        </div>
 
-            <label for="comentarios">Comentarios:</label><br>
-            <textarea id="comentarios" name="comentarios" rows="4" cols="50"><?php echo isset($areaTrabajo['comentarios']) ? $areaTrabajo['comentarios'] : ''; ?></textarea><br><br>
-
-            <button type="submit">Guardar Cambios</button>
-        </fieldset>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
     </form>
-</section>
 
-<footer>
-    <p>Sena todos los derechos reservados</p>
-</footer>
-<div class="regresar">
-    <?php
-    $url_regresar = '../areaTrabajo';
-    ?>
-    <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
+    <div class="text-center mt-4">
+        <a href="../areaTrabajo" class="btn btn-secondary">Regresar</a>
+    </div>
 </div>
-<div class="salir">
-    <button id="btn_salir">Salir</button>
-</div>
+
 <script>
-document.getElementById('updateAreaTrabajoForm').addEventListener('submit', function(event) {
+document.getElementById('createAreaTrabajoForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
     var formData = new FormData(this);
 
-    // Enviar solicitud al servidor
-    fetch('guardarAreaTrabajo', {
+    fetch('createAreaTrabajo', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('La respuesta no es válida');
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             Swal.fire({
                 icon: 'success',
                 title: 'Éxito',
-                text: 'El Área ha sido actualizada exitosamente',
+                text: 'El Área ha sido creada exitosamente',
                 confirmButtonText: 'OK'
             }).then(() => {
                 window.location.href = '../areaTrabajo';
@@ -118,7 +111,7 @@ document.getElementById('updateAreaTrabajoForm').addEventListener('submit', func
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'No se pudo actualizar el Área. Por favor, intenta de nuevo',
+                text: data.error || 'No se pudo crear el Área. Por favor, intenta de nuevo',
                 confirmButtonText: 'OK'
             });
         }
@@ -127,9 +120,10 @@ document.getElementById('updateAreaTrabajoForm').addEventListener('submit', func
         Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: 'Hubo un problema de conexión. Por favor, intenta de nuevo',
+            text: 'Hubo un problema de conexión o la respuesta no es válida. Por favor, intenta de nuevo',
             confirmButtonText: 'OK'
         });
+        console.error('Error:', error);
     });
 });
 </script>

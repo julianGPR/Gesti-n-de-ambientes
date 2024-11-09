@@ -16,18 +16,16 @@
             background-color: #f3f5f7;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #343a40;
-            margin: 0; /* Eliminar márgenes por defecto */
-            padding-top: 70px; /* Espacio para el navbar */
-            padding-bottom: 70px; /* Espacio para el footer */
-            position: relative; /* Necesario para el footer */
+            padding-top: 70px;
+            padding-bottom: 70px;
         }
 
         .navbar {
-            position: fixed; /* Fijar el navbar en la parte superior */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000; /* Asegura que el navbar esté por encima del contenido */
+            z-index: 1000;
             background-color: #007bff;
             box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
         }
@@ -35,6 +33,7 @@
         .navbar-brand {
             font-weight: 600;
             letter-spacing: 1px;
+            color: #fff;
         }
 
         h1 {
@@ -44,12 +43,29 @@
             margin-top: 20px;
         }
 
-        .table-responsive {
-            margin-top: 20px;
+        .table-container {
+            margin-top: 30px;
+        }
+
+        .table {
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .table th, .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table thead th {
+            background-color: #007bff;
+            color: #ffffff;
         }
 
         footer {
-            position: fixed; /* Fijar el footer en la parte inferior */
+            position: fixed;
             left: 0;
             bottom: 0;
             right: 0;
@@ -68,34 +84,12 @@
         footer a:hover {
             color: #007bff;
         }
-
-        .alert {
-            margin-top: 20px;
-        }
-
-        .btn-create {
-            background-color: #28a745;
-            color: white;
-            font-size: 1.2rem;
-            padding: 12px 24px;
-            margin-bottom: 20px;
-        }
-
-        .btn-create:hover {
-            background-color: #218838;
-            color: #f8f9fa;
-        }
-
-        .btn-actions {
-            font-size: 0.9rem;
-            padding: 8px 12px;
-        }
     </style>
 </head>
-<body class="fade-in">
+<body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="#">Gestión de Reportes</a>
         </div>
@@ -107,7 +101,7 @@
 
         <!-- Botón para crear un nuevo reporte -->
         <div class="text-center mb-4">
-            <a href="/dashboard/gestion%20de%20ambientes/reporte/createReporte" class="btn btn-create">
+            <a href="/dashboard/gestion%20de%20ambientes/reporte/createReporte" class="btn btn-success">
                 <i class="bi bi-plus-circle"></i> Crear Reporte
             </a>
         </div>
@@ -119,8 +113,7 @@
                         <tr>
                             <th>ID Reporte</th>
                             <th>Fecha y Hora</th>
-                            <th>ID Área</th>
-                            <th>Estado</th>
+                            <th>Área</th>
                             <th>Estado Reporte</th>
                             <th>Fecha Solución</th>
                             <th>Observaciones</th>
@@ -131,17 +124,10 @@
                             <tr>
                                 <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
                                 <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
-                                <td><?php echo htmlspecialchars($reporte['Id_area']); ?></td>
-                                <td>
-                                    <?php echo htmlspecialchars($reporte['Estado']); ?>
-                                    <?php if ($reporte['Estado'] === 'Activo'): ?>
-                                        <i class="bi bi-circle-fill text-success"></i>
-                                    <?php elseif ($reporte['Estado'] === 'Inactivo'): ?>
-                                        <i class="bi bi-circle-fill text-secondary"></i>
-                                    <?php endif; ?>
-                                </td>
-                                <td><?php echo htmlspecialchars($reporte['Estado_Reporte']) == 1 ? 'Confirmado' : 'Pendiente'; ?></td>
-                                <td><?php echo htmlspecialchars($reporte['Fecha_Solucion']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['nombre_area']); ?></td>
+                                <td><?php echo $reporte['Estado_Reporte'] == 2 ? 'Confirmado' : 'Pendiente'; ?></td>
+                                <td><?php echo !empty($reporte['Fecha_Solucion']) ? htmlspecialchars($reporte['Fecha_Solucion']) : 'Sin aprobar'; ?></td>
+
                                 <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
                             </tr>
                         <?php endforeach; ?>
@@ -187,7 +173,7 @@
                     'copy', 'csv', 'excel', 'print'
                 ],
                 language: {
-                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" // Traducción al español
+                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
                 }
             });
         });
