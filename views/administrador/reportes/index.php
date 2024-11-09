@@ -1,3 +1,14 @@
+<?php
+// Conectar a la base de datos
+require_once 'config/db.php';
+$db = Database::connect();
+?>
+<?php require_once "views/administrador/Vista/parte_superior.php" ?> 
+<!-- nicio del contenido principal -->
+    <div class="container">
+        <h1>Contenido principal</h1>
+    </div>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -184,3 +195,5 @@
 </body>
 
 </html>
+<!-- fin del contenido principal -->
+<?php require_once "views/administrador/Vista/parte_inferior.php" ?> 
