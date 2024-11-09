@@ -4,11 +4,11 @@ include_once 'config/db.php';
 
 // Apartado de Modelo para AMBIENTES-----------------------------------------------------------------------
     class AdminModel {
-        public function guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones) {
+        public function guardarAreaTrabajo($nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $fecha_creacion, $comentarios) {
             $conn = Database::connect(); // Conectar a la base de datos
     
-            $sql = "INSERT INTO t_ambientes (Nombre, Torre, Computadores, CheckPcs, Tvs, CheckTvs, Sillas, CheckSillas, Mesas, CheckMesas, Tableros, CheckTableros, Nineras, CheckNineras, CheckInfraestructura, Estado, Observaciones)
-                    VALUES ('$nombre', '$torre', $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, '$estado', '$observaciones')";
+            $sql = "INSERT INTO AreaTrabajo (nombre_area, capacidad, ubicacion, responsable, tipo_area, equipo_disponible, estado_area, fecha_creacion, comentarios)
+            VALUES ('$nombre_area', $capacidad, '$ubicacion', '$responsable', '$tipo_area', '$equipo_disponible', '$estado_area', '$fecha_creacion', '$comentarios')";  
     
             if ($conn->query($sql) === TRUE) {
                 return true;
@@ -16,22 +16,22 @@ include_once 'config/db.php';
                 return false;
             }
         }
+    
+        public function modificarAreaTrabajo($id, $nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $comentarios) {
+            $conn = Database::connect();
+            $stmt = $conn->prepare("UPDATE AreaTrabajo SET nombre_area=?, capacidad=?, ubicacion=?, responsable=?, tipo_area=?, equipo_disponible=?, estado_area=?, comentarios=? WHERE id_area=?");
+            $stmt->bind_param("sissssssi", $nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $comentarios, $id);
         
-    
-        public function modificarAmbiente($id, $nombre, $torre, $observaciones) {
-            $conn = Database::connect();
-            $sql = "UPDATE t_ambientes SET Nombre='$nombre', Torre='$torre', Observaciones='$observaciones' WHERE Id_ambiente=$id";
-    
-            if ($conn->query($sql) === TRUE) {
+            if ($stmt->execute()) {
                 return true;
             } else {
                 return false;
             }
         }
     
-        public function inhabilitarAmbiente($id) {
+        public function inhabilitarAreaTrabajo($id) {
             $conn = Database::connect();
-            $sql = "UPDATE t_ambientes SET Estado = 'Inhabilitado' WHERE Id_ambiente='$id'";
+            $sql = "UPDATE AreaTrabajo SET estado_area = 'Inhabilitado' WHERE Id_area='$id'";
             
             if ($conn->query($sql) === TRUE) {
                 return true;
@@ -40,9 +40,9 @@ include_once 'config/db.php';
             }
         }
     
-        public function habilitarAmbiente($id) {
+        public function habilitarAreaTrabajo($id) {
             $conn = Database::connect();
-            $sql = "UPDATE t_ambientes SET Estado = 'Habilitado' WHERE Id_ambiente='$id'";
+            $sql = "UPDATE AreaTrabajo SET estado_area = 'Habilitado' WHERE Id_area='$id'";
             
             if ($conn->query($sql) === TRUE) {
                 return true;
@@ -51,9 +51,9 @@ include_once 'config/db.php';
             }
         }
     
-        public function obtenerAmbientePorId($id) {
+        public function obtenerAreaTrabajoPorId($id) {
             $conn = Database::connect();
-            $sql = "SELECT * FROM t_ambientes WHERE Id_ambiente='$id'";
+            $sql = "SELECT * FROM AreaTrabajo WHERE id_area='$id'";
             $result = $conn->query($sql);
         
             if ($result->num_rows > 0) {
@@ -62,6 +62,9 @@ include_once 'config/db.php';
                 return null;
             }
         }
+
+        
+    
         
 // Apartado de Modelo para COMPUTADORES------------------------------------------------------------------------
 
@@ -121,13 +124,13 @@ public function obtenerComputadorPorId($id) {
 // Apartado de Modelo para Reportes------------------------------------------------------------------------
 
 
-    public function insertarReporte($observacion, $id_usuario, $id_ambiente) {
+    public function insertarReporte($observacion, $id_usuario, $id_area) {
         $conn = Database::connect();
         $conn = Database::connect();
         $fechaHora = date("Y-m-d H:i:s"); // Obtenemos la fecha y hora actual
         
         // Insertar la observación en la tabla de reportes
-        $query = "INSERT INTO t_reportes (FechaHora, Id_usuario, Id_ambiente, Estado, Observaciones) VALUES ('$fechaHora', '$id_usuario', '$id_ambiente', 'Pendiente', '$observacion')";
+        $query = "INSERT INTO t_reportes (FechaHora, Id_usuario, Id_area, Estado, Observaciones) VALUES ('$fechaHora', '$id_usuario', '$id_area', 'Pendiente', '$observacion')";
         $result = $conn->query($query);
         $conn->close();
         $result = $conn->query($query);

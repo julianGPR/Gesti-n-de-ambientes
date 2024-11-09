@@ -3,48 +3,40 @@
 require_once 'config/db.php';
 $db = Database::connect();
 ?>
+<?php require_once "views/administrador/Vista/parte_superior.php" ?> 
+<!-- nicio del contenido principal -->
+    <div class="container">
+        <h1>Contenido principal</h1>
+    </div>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrativo</title>
-    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
+    <title>Panel   
+ Administrativo</title>
+    <link rel="stylesheet"   
+ type="text/css" href="../assets/styles.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.dataTables.min.css">   
+
+    <script   
+ src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>   
+
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>   
+
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.   
+js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>   
+
 </head>
 
 <body>
     <header>
-        <div class="logo-container">
-            <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
-        </div>
-        <div class="title">
-            <h1>Gestion de Reportes</h1>
-        </div>
-        <div class="datetime">
-            <?php
-                date_default_timezone_set('America/Bogota');
-                $fechaActual = date("d/m/Y");
-                $horaActual = date("h:i a");
-            ?>
-            <div class="datetime">
-                <div class="fecha">
-                    <p>Fecha actual: <?php echo $fechaActual; ?></p>
-                </div>
-                <div class="hora">
-                    <p>Hora actual: <?php echo $horaActual; ?></p>
-                </div>
-            </div>
-        </div>
-    </header>
+        </header>
     <nav>
     <div class="column-toggle-buttons">
             <button class="toggle-vis" data-column="0">Instructor</button>
@@ -58,7 +50,7 @@ $db = Database::connect();
             <h2>Reportes</h2>
         </div>
         <div class="descripcion-ambiente">
-            <p>Reportes por Instructor de cada Ambiente</p>
+            <p>Reportes por</p>
         </div>
         <div class="tabla-ambientes tabla-scroll">
             <table class="table table-striped table-dark table_id" border="1" id="tabla-ambientes">
@@ -73,10 +65,12 @@ $db = Database::connect();
                 <tbody>
                 <?php
                 // Consulta SQL para seleccionar todos los registros de la tabla t_reportes
-                $query = "SELECT r.Id_reporte, r.Observaciones, r.FechaHora, CONCAT(u.Nombres, ' ', u.Apellidos) AS NombreCompleto, a.Nombre AS ambiente
-                        FROM t_reportes AS r
-                        INNER JOIN t_usuarios AS u ON r.Id_usuario = u.Id_usuario
-                        INNER JOIN t_ambientes AS a ON r.Id_ambiente = a.Id_ambiente";
+                $query = "SELECT r.Id_reporte, r.Observaciones, r.FechaHora,
+                        CONCAT(u.Nombres, ' ', u.Apellidos) AS NombreCompleto,
+                        a.nombre_area AS area
+                            FROM t_reportes AS r
+                            INNER JOIN t_usuarios AS u ON r.Id_usuario = u.Id_usuario
+                            INNER JOIN AreaTrabajo AS a ON r.id_area = a.id_area";
                         
                 $result = $db->query($query);
 
@@ -85,7 +79,7 @@ $db = Database::connect();
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $row['NombreCompleto'] . "</td>";
-                        echo "<td>" . $row['ambiente'] . "</td>";
+                        echo "<td>" . $row['area'] . "</td>";
                         echo "<td>" . $row['Observaciones'] . "</td>";
                         echo "<td>" . $row['FechaHora'] . "</td>";
                         echo "</tr>";
@@ -138,3 +132,5 @@ $db = Database::connect();
     </script>
 </body>
 </html>
+<!-- fin del contenido principal -->
+<?php require_once "views/administrador/Vista/parte_inferior.php" ?> 

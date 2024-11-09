@@ -10,46 +10,38 @@ class AdminController {
     
 // Apartado de controlador para Ambientes------------------------------------------------------------------------
 
-public function ambientes() {
+public function areaTrabajo() {
     include 'views/administrador/ambientes/index.php';
 }
 
 
-public function createAmbiente() {
+public function createAreaTrabajo() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = $_POST["nombre"];
-        $torre = $_POST["torre"];
-        $computadores = $_POST["computadores"];
-        $checkPcs = isset($_POST["checkPcs"]) ? 1 : 0;
-        $tvs = $_POST["tvs"];
-        $checkTvs = isset($_POST["checkTvs"]) ? 1 : 0;
-        $sillas = $_POST["sillas"];
-        $checkSillas = isset($_POST["checkSillas"]) ? 1 : 0;
-        $mesas = $_POST["mesas"];
-        $checkMesas = isset($_POST["checkMesas"]) ? 1 : 0;
-        $tableros = $_POST["tableros"];
-        $checkTableros = isset($_POST["checkTableros"]) ? 1 : 0;
-        $nineras = $_POST["nineras"];
-        $checkNineras = isset($_POST["checkNineras"]) ? 1 : 0;
-        $checkInfraestructura = isset($_POST["checkInfraestructura"]) ? 1 : 0;
-        $estado = 1; // Por defecto se crea activo
-        $observaciones = $_POST["observaciones"];
+        $nombre_area = $_POST["nombre_area"];
+        $capacidad = $_POST["capacidad"];
+        $ubicacion = $_POST["ubicacion"];
+        $responsable = $_POST["responsable"];
+        $tipo_area = $_POST["tipo_area"];
+        $equipo_disponible = $_POST["equipo_disponible"];
+        $estado_area = $_POST["estado_area"];
+        $fecha_creacion = $_POST["fecha_creacion"];
+        $comentarios = $_POST["comentarios"];
 
         $adminModel = new AdminModel();
-        $result = $adminModel->guardarAmbiente($nombre, $torre, $computadores, $checkPcs, $tvs, $checkTvs, $sillas, $checkSillas, $mesas, $checkMesas, $tableros, $checkTableros, $nineras, $checkNineras, $checkInfraestructura, $estado, $observaciones);
+        $result = $adminModel->guardarAreaTrabajo($nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $fecha_creacion, $comentarios);
 
         if ($result) {
-            // Lógica para generar el contenido del QR
-            $contenido_qr = "Nombre: $nombre\nTorre: $torre\nComputadores: $computadores\nTVs: $tvs\nSillas: $sillas\nMesas: $mesas\nTableros: $tableros\nNineras: $nineras\nInfraestructura: $checkInfraestructura\nObservaciones: $observaciones";
+            // Generar el contenido del QR
+            $contenido_qr = "Nombre del Área: $nombre_area\nCapacidad: $capacidad\nUbicación: $ubicacion\nResponsable: $responsable\nTipo de Área: $tipo_area\nEstado: $estado_area\nComentarios: $comentarios";
             
-            // Lógica para generar el código QR
+            // Generar el código QR
             $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr) .'&rand=' . uniqid();
             echo json_encode(["success" => true]);
-            header("Location: ../ambientes");
+            header("Location: ../areaTrabajo");
             exit();
         } else {
             echo json_encode(["success" => false]);
-            header("Location: index.php?error=Error al crear el ambiente");
+            header("Location: index.php?error=Error al crear el área de trabajo");
             exit();
         }
     } else {
@@ -57,53 +49,72 @@ public function createAmbiente() {
     }
 }
 
-public function updateAmbiente($id) {
+
+public function updateAreaTrabajo($id) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $nombre = $_POST["nombre"];
-        $torre = $_POST["torre"];
-        $observaciones = $_POST["observaciones"];
+        $nombre_area = $_POST["nombre_area"];
+        $capacidad = $_POST["capacidad"];
+        $ubicacion = $_POST["ubicacion"];
+        $responsable = $_POST["responsable"];
+        $tipo_area = $_POST["tipo_area"];
+        $equipo_disponible = $_POST["equipo_disponible"];
+        $estado_area = $_POST["estado_area"];
+        $comentarios = $_POST["comentarios"];
 
         $adminModel = new AdminModel();
-        $result = $adminModel->modificarAmbiente($id, $nombre, $torre, $observaciones);
+        $result = $adminModel->modificarAreaTrabajo($id, $nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $comentarios);
 
         if ($result) {
-            header("Location: ../ambientes");
+            // Reemplazamos la URL por la ruta completa de redirección
+            echo "
+                <script>
+                    alert('Editado con éxito');
+                    window.location.href = '/dashboard/gestion%20de%20ambientes/admin/areaTrabajo';
+                </script>
+            ";
             exit();
         } else {
-            header("Location: index.php?error=Error al actualizar el ambiente&id=$id");
+            // Mostrar una alerta de error y volver a la página anterior
+            echo "
+                <script>
+                    alert('Error al actualizar el área de trabajo');
+                    window.history.back();
+                </script>
+            ";
             exit();
         }
     } else {
         $adminModel = new AdminModel();
-        $ambiente = $adminModel->obtenerAmbientePorId($id);
+        $areaTrabajo = $adminModel->obtenerAreaTrabajoPorId($id);
         include 'views/administrador/ambientes/update.php';
     }
 }
-public function inhabilitarAmbiente($id) {
+
+public function inhabilitarAreaTrabajo($id) {
     $adminModel = new AdminModel();
-    $result = $adminModel->inhabilitarAmbiente($id);
+    $result = $adminModel->inhabilitarAreaTrabajo($id);
 
     if ($result) {
-        echo "<script>alert('Ambiente inhabilitado exitosamente');</script>";
+        echo "<script>alert('Area inhabilitada exitosamente');</script>";
     } else {
-        echo "<script>alert('Error al inhabilitar el ambiente');</script>";
+        echo "<script>alert('Error al inhabilitar el area');</script>";
     }
     
-    header("Location: ../ambientes");
+    header("Location: ../areaTrabajo");
     exit();
 }
 
-public function habilitarAmbiente($id) {
+public function habilitarAreaTrabajo($id) {
     $adminModel = new AdminModel();
-    $result = $adminModel->habilitarAmbiente($id);
+    $result = $adminModel->habilitarAreaTrabajo($id);
 
     if ($result) {
-        echo "<script>alert('Ambiente habilitado exitosamente');</script>";
+        echo "<script>alert('Area habilitada exitosamente');</script>";
     } else {
-        echo "<script>alert('Error al habilitar el ambiente');</script>";
+        echo "<script>alert('Error al habilitar el area');</script>";
     }
     
-    header("Location: ../ambientes");
+    header("Location: ../areaTrabajo");
     exit();
 }
 // Apartado de controlador para COMPUTADORES------------------------------------------------------------------------
@@ -174,7 +185,7 @@ public function updateComputador($id) {
             $idAmbiente = $computador['Id_ambiente'];
     
             // Obtener los datos del ambiente
-            $ambiente = $adminModel->obtenerAmbientePorId($idAmbiente);
+            $ambiente = $adminModel->obtenerAreaTrabajoPorId($idAmbiente);
     
             // Renderizar el formulario de actualización con los datos del computador y del ambiente
             include 'views/administrador/computadores/update.php';
@@ -196,9 +207,9 @@ public function updateComputador($id) {
     }
 
     public function generateQR($id) {
-        $id_ambiente = $id;
+        $id_area = $id;
 
-        $contenido_qr = $id_ambiente;
+        $contenido_qr = $id_area;
 
         $qrCodeAPIURL = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' . urlencode($contenido_qr);
 
@@ -213,10 +224,10 @@ public function updateComputador($id) {
             // Obtener los datos del formulario
             $observacion = $_POST["observacion"];
             $id_usuario = $_SESSION["id_usuario"]; // Obtener el ID del usuario de la sesión
-            $id_ambiente = $_POST["id_ambiente"]; // Obtener el ID del ambiente del formulario
+            $id_area = $_POST["id_area"]; // Obtener el ID del ambiente del formulario
     
             // Llamar al método para agregar el informe en el modelo
-            $this->agregarReporte($observacion, $id_usuario, $id_ambiente);
+            $this->agregarReporte($observacion, $id_usuario, $id_area);
             // Redirigir al instructor a alguna página
             header("Location: ../home");
             exit();
@@ -226,9 +237,9 @@ public function updateComputador($id) {
         }
     }
     
-    public function agregarReporte($observacion, $id_usuario, $id_ambiente) {
+    public function agregarReporte($observacion, $id_usuario, $id_area) {
         $adminModel = new AdminModel();
-        $result = $adminModel->insertarReporte($observacion, $id_usuario, $id_ambiente);
+        $result = $adminModel->insertarReporte($observacion, $id_usuario, $id_area);
         if ($result) {
             // Redireccionar de vuelta a la página de reportes del instructor
             header("Location: ../reportes");
