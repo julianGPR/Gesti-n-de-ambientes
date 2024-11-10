@@ -116,27 +116,6 @@ $db = Database::connect();
                                 <table class="table table-bordered" id="tabla-ambientes" id="dataTable" width="100%"
                                     cellspacing="0">
                                     <thead>
-
-                                     <!-- Botón para mostrar/ocultar el menú de filtros -->
-                                     <button class="filter-button" onclick="toggleFilterMenu()">Mostrar
-                                            Filtros</button>
-
-                                        <!-- Menú de filtros lateral -->
-                                        <div class="filter-menu" id="filterMenu" style="display:none;">
-                                            <h3>Filtrar Columnas</h3>
-                                            <button class="toggle-vis" data-column="0">Id</button>
-                                            <button class="toggle-vis" data-column="1">Nombre</button>
-                                            <button class="toggle-vis" data-column="2">Capacidad</button>
-                                            <button class="toggle-vis" data-column="3">Ubicacion</button>
-                                            <button class="toggle-vis" data-column="4">Responsable</button>
-                                            <button class="toggle-vis" data-column="5">Tipo area</button>
-                                            <button class="toggle-vis" data-column="6">Equipo disponible</button>
-                                            <button class="toggle-vis" data-column="7">Estado area</button>
-                                            <button class="toggle-vis" data-column="8">Fecha creacion</button>
-                                            <button class="toggle-vis" data-column="9">Comentarios</button>
-                                            <button class="toggle-vis" data-column="10">Accion</button>
-                                        </div>
-
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre</th>
@@ -216,18 +195,6 @@ $db = Database::connect();
                 paging: true,
                 pageLength: 5
             });
-        
-        // Configuración de los botones para mostrar/ocultar columnas
-        $('.toggle-vis').on('click', function(e) {  
-            e.preventDefault();
-
-            // Obtenemos el índice de la columna correspondiente al botón
-            var columnIdx = parseInt($(this).attr('data-column'));
-
-            // Obtenemos el estado de visibilidad de la columna y lo invertimos
-            var column = table.column(columnIdx);
-            column.visible(!column.visible());
-        });
     });
 
         function confirmarInhabilitar(id) {
@@ -240,12 +207,6 @@ $db = Database::connect();
             if (confirm("¿Estás seguro de que deseas habilitar esta área?")) {
                 window.location.href = "habilitarAreaTrabajo/" + id;
             }
-        }
-
-        // Función para mostrar/ocultar el menú de filtros
-        function toggleFilterMenu() {
-            var menu = document.getElementById("filterMenu");
-            menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
         }
     </script>
 </body>
