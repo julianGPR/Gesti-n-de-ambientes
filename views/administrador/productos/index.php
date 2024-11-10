@@ -5,11 +5,7 @@ $db = Database::connect();
 
 // Suponiendo que ya tienes la variable $productos definida
 ?>
-<?php require_once "views/administrador/Vista/parte_superior.php" ?> 
-<!-- nicio del contenido principal -->
-    <div class="container">
-        <h1>Contenido principal</h1>
-    </div>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -103,5 +99,4 @@ $db = Database::connect();
     </footer>
 </body>
 </html>
-<!-- fin del contenido principal -->
-<?php require_once "views/administrador/Vista/parte_inferior.php" ?> 
+
