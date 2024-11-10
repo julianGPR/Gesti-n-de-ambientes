@@ -131,6 +131,7 @@ $db = Database::connect();
                                             <button class="toggle-vis" data-column="4">Rol</button>
                                             <button class="toggle-vis" data-column="5">Acciones</button>
                                         </div>
+                                        
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombres</th>

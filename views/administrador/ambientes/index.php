@@ -63,7 +63,7 @@ $db = Database::connect();
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gestión de Reportes
                         </a>
-                        
+
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/admin/computadores'>
@@ -113,7 +113,7 @@ $db = Database::connect();
                         <div class="card-header"><i class="fas fa-table mr-1"></i>Area de trabajo</div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="tabla-reportes" id="dataTable" width="100%"
+                                <table class="table table-bordered" id="tabla-ambientes" id="dataTable" width="100%"
                                     cellspacing="0">
                                     <thead>
                                         <!-- Botón para mostrar/ocultar el menú de filtros -->
@@ -123,14 +123,20 @@ $db = Database::connect();
                                         <!-- Menú de filtros lateral -->
                                         <div class="filter-menu" id="filterMenu" style="display:none;">
                                             <h3>Filtrar Columnas</h3>
-                                            <button class="toggle-vis" data-column="0">ID Reporte</button>
-                                            <button class="toggle-vis" data-column="1">Fecha y Hora</button>
-                                            <button class="toggle-vis" data-column="2">Usuario</button>
-                                            <button class="toggle-vis" data-column="3">Área</button>
-                                            <button class="toggle-vis" data-column="4">Estado Reporte</button>
-                                            <button class="toggle-vis" data-column="5">Fecha Solución</button>
-                                            <button class="toggle-vis" data-column="6">Observaciones</button>
+                                            <button class="toggle-vis" data-column="0">Id</button>
+                                            <button class="toggle-vis" data-column="1">Nombre</button>
+                                            <button class="toggle-vis" data-column="2">Capacidad</button>
+                                            <button class="toggle-vis" data-column="3">Ubicacion</button>
+                                            <button class="toggle-vis" data-column="4">Responsable</button>
+                                            <button class="toggle-vis" data-column="5">Tipo area</button>
+                                            <button class="toggle-vis" data-column="6">Equipo disponible</button>
+                                            <button class="toggle-vis" data-column="7">Estado area</button>
+                                            <button class="toggle-vis" data-column="8">Fecha creacion</button>
+                                            <button class="toggle-vis" data-column="9">Comentarios</button>
+                                            <button class="toggle-vis" data-column="10">Accion</button>
                                         </div>
+
+
                                         <tr>
                                             <th>Id</th>
                                             <th>Nombre</th>
@@ -152,47 +158,6 @@ $db = Database::connect();
                                             $query .= " WHERE " . implode(" AND ", $filtros);
                                         }
 
-<<<<<<< HEAD
-                    if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row['id_area'] . "</td>";
-                            echo "<td>" . $row['nombre_area'] . "</td>";
-                            echo "<td>" . $row['capacidad'] . "</td>";
-                            echo "<td>" . $row['ubicacion'] . "</td>";
-                            echo "<td>" . $row['nombre_responsable'] . "</td>"; // Muestra el nombre del responsable
-                            echo "<td>" . $row['tipo_area'] . "</td>";
-                            echo "<td>" . $row['equipo_disponible'] . "</td>";
-                            echo "<td>" . $row['estado_area'] . "</td>";
-                            echo "<td>" . $row['fecha_creacion'] . "</td>";
-                            echo "<td>" . $row['comentarios'] . "</td>";
-                            echo "<td>";
-                            if ($row['estado_area'] !== 'Inhabilitado') {
-                                $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAreaTrabajo/';
-                                echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
-                            } else {
-                                echo "<a href='#' onclick='confirmarHabilitar(" . $row['id_area'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
-                            }
-                            if ($row['estado_area'] !== 'Inhabilitado') {
-                                echo "<a href='#' onclick='confirmarInhabilitar(" . $row['id_area'] . ")' class='boton-inhabilitar boton-accion'><img src='../assets/inhabilitar1.svg'></a>";
-                            }
-                            echo "</td>";
-                            echo "</tr>";
-                        }
-                    } else {
-                        echo "<tr><td colspan='11'>No hay registros</td></tr>";
-                    }
-
-                    $db->close();
-                    ?>
-  </tbody>
-</table>
-    
-    </section>
-    <script>
-        $(document).ready(function() {
-            $('#tabla-ambientes').DataTable({
-=======
                                         $result = $db->query($query);
 
                                         if ($result->num_rows > 0) {
@@ -232,26 +197,9 @@ $db = Database::connect();
                                         ?>
                                     </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+
+                                </section>
+                                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
     <script src="../assets/Js/scripts.js"></script>
@@ -261,7 +209,8 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
-    <script>    $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
             // Inicializar DataTable con opciones
             var table = $('#tabla-reportes').DataTable({
                 dom: 'Bfrtip',
@@ -269,18 +218,6 @@ $db = Database::connect();
                 paging: true,
                 pageLength: 5
             });
-        });
-
-        function confirmarInhabilitar(id) {
-            if (confirm("¿Estás seguro de que deseas inhabilitar esta área?")) {
-                window.location.href = "inhabilitarAreaTrabajo/" + id;
-            }
-        }
-
-        function confirmarHabilitar(id) {
-            if (confirm("¿Estás seguro de que deseas habilitar esta área?")) {
-                window.location.href = "habilitarAreaTrabajo/" + id;
-            }
 
             // Evento para mostrar/ocultar columnas al hacer clic en los botones de filtro
             $('button.toggle-vis').on('click', function (e) {
@@ -294,7 +231,6 @@ $db = Database::connect();
         function toggleFilterMenu() {
             var menu = document.getElementById("filterMenu");
             menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
->>>>>>> devjeffreyInicio
         }
     </script>
 </body>
