@@ -189,7 +189,6 @@ $db = Database::connect();
 </table>
     
     </section>
-
     <script>
         $(document).ready(function() {
             $('#tabla-ambientes').DataTable({
@@ -265,13 +264,11 @@ $db = Database::connect();
     <script>    $(document).ready(function () {
             // Inicializar DataTable con opciones
             var table = $('#tabla-reportes').DataTable({
->>>>>>> devjeffreyInicio
                 dom: 'Bfrtip',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 paging: true,
                 pageLength: 5
             });
-<<<<<<< HEAD
         });
 
         function confirmarInhabilitar(id) {
@@ -284,7 +281,6 @@ $db = Database::connect();
             if (confirm("¿Estás seguro de que deseas habilitar esta área?")) {
                 window.location.href = "habilitarAreaTrabajo/" + id;
             }
-=======
 
             // Evento para mostrar/ocultar columnas al hacer clic en los botones de filtro
             $('button.toggle-vis').on('click', function (e) {
