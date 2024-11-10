@@ -124,13 +124,17 @@ $db = Database::connect();
                                         <!-- Menú de filtros lateral -->
                                         <div class="filter-menu" id="filterMenu" style="display:none;">
                                             <h3>Filtrar Columnas</h3>
-                                            <button class="toggle-vis" data-column="0">ID Reporte</button>
-                                            <button class="toggle-vis" data-column="1">Fecha y Hora</button>
-                                            <button class="toggle-vis" data-column="2">Usuario</button>
-                                            <button class="toggle-vis" data-column="3">Área</button>
-                                            <button class="toggle-vis" data-column="4">Estado Reporte</button>
-                                            <button class="toggle-vis" data-column="5">Fecha Solución</button>
-                                            <button class="toggle-vis" data-column="6">Observaciones</button>
+                                            <button class="toggle-vis" data-column="0">Id</button>
+                                            <button class="toggle-vis" data-column="1">Nombre</button>
+                                            <button class="toggle-vis" data-column="2">Capacidad</button>
+                                            <button class="toggle-vis" data-column="3">Ubicacion</button>
+                                            <button class="toggle-vis" data-column="4">Responsable</button>
+                                            <button class="toggle-vis" data-column="5">Tipo area</button>
+                                            <button class="toggle-vis" data-column="6">Equipo disponible</button>
+                                            <button class="toggle-vis" data-column="7">Estado area</button>
+                                            <button class="toggle-vis" data-column="8">Fecha creacion</button>
+                                            <button class="toggle-vis" data-column="9">Comentarios</button>
+                                            <button class="toggle-vis" data-column="10">Accion</button>
                                         </div>
                                         <tr>
                                             <th>Id</th>
