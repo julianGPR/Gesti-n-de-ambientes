@@ -66,12 +66,12 @@ $db = Database::connect();
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                            Proveedores
                         </a>
 
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
+                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Inventario
                         </a>
