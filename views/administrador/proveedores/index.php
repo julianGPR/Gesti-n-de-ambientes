@@ -36,7 +36,7 @@ $db = Database::connect();
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#">Configuración</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="login.html">Salir</a>
+                    <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
                 </div>
             </li>
         </ul>
@@ -60,10 +60,33 @@ $db = Database::connect();
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gestión de Usuarios
                         </a>
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/reporte/reportes">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Gestión de Reportes
-                        </a>
+                        <div class="nav-link d-flex align-items-center">
+                            <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
+                                class="d-flex align-items-center">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <span>Reportes</span>
+                            </a>
+                            <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
+                                aria-expanded="false" aria-controls="collapseLayouts">
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                        </div>
+
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link"
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">Tuberia</a>
+                                <a class="nav-link"
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">Ensamble</a>
+                                <a class="nav-link"
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">Corte</a>
+                                <a class="nav-link"
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">Satelite</a>
+                            </nav>
+                        </div>
+
+
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
