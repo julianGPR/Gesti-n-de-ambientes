@@ -115,26 +115,9 @@ $db = Database::connect();
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Gestion de Inventarios Gafra</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Menu</li>
-                    </ol>
-                    <div class="row">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-footer d-flex align-items-center justify-content-between">
-                                    <?php
-                                    $url_create = '/dashboard/gestion%20de%20ambientes/usuarios/createUsuario/';
-                                    ?>
-                                    <a class="small text-white stretched-link" href="<?php echo $url_create; ?>"
-                                        id="btn-create">Crear Nuevo Usuario</a>
-                                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <h1 class="mt-4">Area <?php echo htmlspecialchars($tipo_area); ?></h1>
                     <div class="card mb-4">
-                        <div class="card-header"><i class="fas fa-table mr-1"></i>Gestión de Usuarios</div>
+                        <div class="card-header"><i class="fas fa-table mr-1"></i>Menu</div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="tablaReportes" id="dataTable" width="100%"
@@ -214,8 +197,29 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../../assets/demo/datatables-demo.js"></script>
+    <!-- CSS de DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+    <!-- CSS de los botones -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery DataTables -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <!-- JS de botones de DataTables -->
+    <script src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+
+    <!-- Librería para exportar a Excel, PDF, etc. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#tablaReportes').DataTable({
                 dom: 'Bfrtip',
                 buttons: [
@@ -226,38 +230,38 @@ $db = Database::connect();
                 }
             });
 
-            $('.toggle-switch').change(function() {
+            $('.toggle-switch').change(function () {
                 const idReporte = $(this).attr('data-id');
                 const estadoReporte = $(this).is(':checked') ? '2' : '1';
 
                 if (estadoReporte === '2' && confirm("¿Estás seguro de que deseas aprobar el reporte? Una vez aprobado, no se podrá deshacer.")) {
                     $.ajax({
-                        url: '../actualizarEstadoReporte/', 
+                        url: '../actualizarEstadoReporte/',
                         method: 'POST',
                         data: {
                             id_reporte: idReporte,
                             estado_reporte: estadoReporte
                         },
-                        success: function(response) {
-    try {
-        const res = JSON.parse(response);
-        if (res.success) {
-            // Actualizar la fecha de solución en la tabla
-            const fechaActual = new Date().toLocaleString();
-            $(`.fecha-solucion[data-id="${idReporte}"]`).text(fechaActual);
-            $(this).prop('checked', true); // Dejar el interruptor activado
-        } else {
-            console.error("Error en la respuesta del servidor:", res.error);
-        }
-    } catch (e) {
-        console.error("Error al analizar JSON. Respuesta recibida:", response);
-    }
-},
+                        success: function (response) {
+                            try {
+                                const res = JSON.parse(response);
+                                if (res.success) {
+                                    // Actualizar la fecha de solución en la tabla
+                                    const fechaActual = new Date().toLocaleString();
+                                    $(`.fecha-solucion[data-id="${idReporte}"]`).text(fechaActual);
+                                    $(this).prop('checked', true); // Dejar el interruptor activado
+                                } else {
+                                    console.error("Error en la respuesta del servidor:", res.error);
+                                }
+                            } catch (e) {
+                                console.error("Error al analizar JSON. Respuesta recibida:", response);
+                            }
+                        },
 
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             console.error("Error en la solicitud AJAX:", error);
                             console.error("Estado:", status);
-                            console.error("Respuesta completa:", xhr.responseText); 
+                            console.error("Respuesta completa:", xhr.responseText);
                         }
                     });
                 } else {
@@ -265,7 +269,7 @@ $db = Database::connect();
                 }
             });
         });
-    </script>    
+    </script>
 </body>
 
 </html>

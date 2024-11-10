@@ -24,7 +24,7 @@ $db = Database::connect();
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <?php
-        $url_regresar ='../admin/home';
+        $url_regresar = '../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">GAFRA</a><button
             class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
@@ -50,7 +50,7 @@ $db = Database::connect();
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Inicio
                         </a>
-                        <div class="sb-sidenav-menu-heading" >Interface</div>
+                        <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Area de trabajo
@@ -91,10 +91,11 @@ $db = Database::connect();
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                           Proveedores
+                            Proveedores
                         </a>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
+                        <a class="nav-link"
+                            href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Inventario
                         </a>
@@ -115,9 +116,7 @@ $db = Database::connect();
             <main>
                 <div class="container-fluid">
                     <h1 class="mt-4">Gestion de Inventarios Gafra</h1>
-                    <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Menu</li>
-                    </ol>
+                  
                     <div class="row">
                         <div class="col-xl-3 col-md-6">
                             <div class="card bg-primary text-white mb-4">
@@ -153,7 +152,7 @@ $db = Database::connect();
                                             <button class="toggle-vis" data-column="4">Rol</button>
                                             <button class="toggle-vis" data-column="5">Acciones</button>
                                         </div>
-                                        
+
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombres</th>
@@ -220,6 +219,27 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
+    <!-- CSS de DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+    <!-- CSS de los botones -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery DataTables -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+    <!-- JS de botones de DataTables -->
+    <script src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+
+    <!-- Librería para exportar a Excel, PDF, etc. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+
     <script>
         $(document).ready(function () {
             // Inicializar DataTable con opciones
@@ -230,18 +250,18 @@ $db = Database::connect();
                 pageLength: 5
             });
 
-        // Configuración de los botones para mostrar/ocultar columnas
-        $('.toggle-vis').on('click', function(e) {  
-            e.preventDefault();
+            // Configuración de los botones para mostrar/ocultar columnas
+            $('.toggle-vis').on('click', function (e) {
+                e.preventDefault();
 
-            // Obtenemos el índice de la columna correspondiente al botón
-            var columnIdx = parseInt($(this).attr('data-column'));
+                // Obtenemos el índice de la columna correspondiente al botón
+                var columnIdx = parseInt($(this).attr('data-column'));
 
-            // Obtenemos el estado de visibilidad de la columna y lo invertimos
-            var column = table.column(columnIdx);
-            column.visible(!column.visible());
+                // Obtenemos el estado de visibilidad de la columna y lo invertimos
+                var column = table.column(columnIdx);
+                column.visible(!column.visible());
+            });
         });
-    });
 
         // Función para mostrar/ocultar el menú de filtros
         function toggleFilterMenu() {
