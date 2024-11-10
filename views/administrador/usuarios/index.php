@@ -207,13 +207,6 @@ $db = Database::connect();
                 paging: true,
                 pageLength: 5
             });
-
-            // Evento para mostrar/ocultar columnas al hacer clic en los botones de filtro
-            $('button.toggle-vis').on('click', function (e) {
-                e.preventDefault();
-                var columnIdx = $(this).attr('data-column'); // Obtener el índice de la columna
-                table.column(columnIdx).visible(!table.column(columnIdx).visible()); // Alternar visibilidad
-            });
         });
 
         // Función para mostrar/ocultar el menú de filtros

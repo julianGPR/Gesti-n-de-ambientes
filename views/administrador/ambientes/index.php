@@ -116,8 +116,9 @@ $db = Database::connect();
                                 <table class="table table-bordered" id="tabla-ambientes" id="dataTable" width="100%"
                                     cellspacing="0">
                                     <thead>
-                                        <!-- Botón para mostrar/ocultar el menú de filtros -->
-                                        <button class="filter-button" onclick="toggleFilterMenu()">Mostrar
+
+                                     <!-- Botón para mostrar/ocultar el menú de filtros -->
+                                     <button class="filter-button" onclick="toggleFilterMenu()">Mostrar
                                             Filtros</button>
 
                                         <!-- Menú de filtros lateral -->
@@ -135,7 +136,6 @@ $db = Database::connect();
                                             <button class="toggle-vis" data-column="9">Comentarios</button>
                                             <button class="toggle-vis" data-column="10">Accion</button>
                                         </div>
-
 
                                         <tr>
                                             <th>Id</th>
@@ -195,13 +195,12 @@ $db = Database::connect();
 
                                         $db->close();
                                         ?>
-                                    </tbody>
-                                </table>
-
-                                </section>
-                                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+                        </tbody>
+                    </table>
+                 </section>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
     <script src="../assets/Js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/chart-area-demo.js"></script>
@@ -210,22 +209,26 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
     <script>
-        $(document).ready(function () {
-            // Inicializar DataTable con opciones
-            var table = $('#tabla-reportes').DataTable({
+        $(document).ready(function() {
+            $('#tabla-ambientes').DataTable({
                 dom: 'Bfrtip',
                 buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 paging: true,
                 pageLength: 5
             });
-
-            // Evento para mostrar/ocultar columnas al hacer clic en los botones de filtro
-            $('button.toggle-vis').on('click', function (e) {
-                e.preventDefault();
-                var columnIdx = $(this).attr('data-column'); // Obtener el índice de la columna
-                table.column(columnIdx).visible(!table.column(columnIdx).visible()); // Alternar visibilidad
-            });
         });
+
+        function confirmarInhabilitar(id) {
+            if (confirm("¿Estás seguro de que deseas inhabilitar esta área?")) {
+                window.location.href = "inhabilitarAreaTrabajo/" + id;
+            }
+        }
+
+        function confirmarHabilitar(id) {
+            if (confirm("¿Estás seguro de que deseas habilitar esta área?")) {
+                window.location.href = "habilitarAreaTrabajo/" + id;
+            }
+        }
 
         // Función para mostrar/ocultar el menú de filtros
         function toggleFilterMenu() {
@@ -234,5 +237,4 @@ $db = Database::connect();
         }
     </script>
 </body>
-
 </html>
