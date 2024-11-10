@@ -45,11 +45,7 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Inicio
                         </a>
-
-                        class="admin">
-    <div class="subtitulo-admin">
-        <h2>Administrador</h2>
-    </div>
+                        
                         <div class="sb-sidenav-menu-heading" >Interface</div>
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
@@ -67,14 +63,14 @@
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/computadores">
+                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Computadores
+                           Proveedores
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Proveedores
+                            Inventario
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
