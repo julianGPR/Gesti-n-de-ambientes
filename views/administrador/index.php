@@ -45,34 +45,39 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Inicio
                         </a>
-                        <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/admin/areaTrabajo'>
+
+                        class="admin">
+    <div class="subtitulo-admin">
+        <h2>Administrador</h2>
+    </div>
+                        <div class="sb-sidenav-menu-heading" >Interface</div>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Area de trabajo
                         </a>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/usuarios/usuarios'>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/usuarios/usuarios">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gestión de Usuarios
                         </a>
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/admin/reportes'>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/reporte/reportes">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Gestión de Reportes
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/admin/computadores'>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/computadores">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Computadores
                         </a>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/proveedores/proveedores'>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Proveedores
                         </a>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/Producto/listarProductos'>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Productos
                         </a>
