@@ -160,6 +160,10 @@ $db = Database::connect();
                                                     $url_update = '/dashboard/gestion%20de%20ambientes/producto/actualizarProducto/' . $producto['id_producto'];
                                                     echo "<a href='$url_update' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
                                                     ?>
+                                                    <?php
+                                                    $url_delet = '/dashboard/gestion%20de%20ambientes/producto/eliminarProducto/' . $producto['id_producto'];
+                                                    echo "<a href='$url_delet' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
+                                                    ?>
                                                 </td>
                                             </tr>
                                         <?php endforeach; ?>
