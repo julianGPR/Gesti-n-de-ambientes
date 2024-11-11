@@ -126,8 +126,9 @@ $db = Database::connect();
                                         <tr>
                                             <th scope="col">ID Reporte</th>
                                             <th scope="col">Fecha y Hora</th>
-                                            <th scope="col">Usuario</th>
-                                            <th scope="col">Área</th>
+                                            <th scope="col">ID Usuario</th>
+                                            <th scope="col">ID Área</th>
+                                            <th scope="col">Estado</th>
                                             <th scope="col">Estado Reporte</th>
                                             <th scope="col">Fecha Solución</th>
                                             <th scope="col">Observaciones</th>
