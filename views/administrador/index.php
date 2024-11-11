@@ -287,6 +287,27 @@
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
+    <script>
+        function flyBell() {
+            var bellImage = document.getElementById("bellImage");
+            bellImage.classList.add("flying");
+        }
+
+        function flyBellAndShowPopup() {
+            var bellImage = document.getElementById("bellImage");
+            bellImage.classList.add("flying");
+
+            // Muestra el popup de notificaciones
+            document.getElementById("popup").style.display =
+                document.getElementById("popup").style.display === "none" ? "block" : "none";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+            location.reload(); // Recarga la página para actualizar el estado de las notificaciones
+        }
+    </script>
+
 </body>
 
 </html>
