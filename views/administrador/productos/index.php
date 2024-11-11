@@ -134,7 +134,7 @@ $db = Database::connect();
                         <div class="card-header"><i class="fas fa-table mr-1"></i>Lista de Productos</div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="tabla-reportes" id="dataTable" width="100%"
+                                <table class="table table-bordered" id="tabla-productos" id="dataTable" width="100%"
                                     cellspacing="0">
                                     <thead>
                                         <tr>
@@ -219,26 +219,12 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
+
     <script>
-        $(document).ready(function () {
-            // Inicializar DataTable con opciones
-            var table = $('#tabla-reportes').DataTable({
-                dom: 'Bfrtip',
-                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+        $(document).ready(function() {
+            $('#tabla-productos').DataTable({
                 paging: true,
-                pageLength: 5
-            });
-
-            // Configuración de los botones para mostrar/ocultar columnas
-            $('.toggle-vis').on('click', function (e) {
-                e.preventDefault();
-
-                // Obtenemos el índice de la columna correspondiente al botón
-                var columnIdx = parseInt($(this).attr('data-column'));
-
-                // Obtenemos el estado de visibilidad de la columna y lo invertimos
-                var column = table.column(columnIdx);
-                column.visible(!column.visible());
+                pageLength: 10
             });
         });
     </script>
