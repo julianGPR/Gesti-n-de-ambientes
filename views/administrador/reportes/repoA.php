@@ -134,26 +134,25 @@ $db = Database::connect();
                                             <th scope="col">Observaciones</th>
                                         </tr>
                                     <tbody>
-                                        <?php foreach ($reportes as $reporte): ?>
-                                            <tr>
-                                                <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['Nombres'] . ' ' . $reporte['Apellidos']); ?>
-                                                </td>
-                                                <td><?php echo htmlspecialchars($reporte['nombre_area']); ?></td>
-                                                <td>
-                                                    <label class="switch">
-                                                        <input type="checkbox" class="toggle-switch"
-                                                            data-id="<?php echo $reporte['Id_reporte']; ?>" <?php echo $reporte['Estado_Reporte'] == '2' ? 'checked disabled' : ''; ?>>
-                                                        <span class="slider"></span>
-                                                    </label>
-                                                </td>
-                                                <td class="fecha-solucion" data-id="<?php echo $reporte['Id_reporte']; ?>">
-                                                    <?php echo htmlspecialchars($reporte['Fecha_Solucion']); ?>
-                                                </td>
-                                                <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
+                                    <?php foreach ($reportes as $reporte): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['Id_usuario']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['Id_area']); ?></td>
+                                <td>
+                                    <?php echo htmlspecialchars($reporte['Estado']); ?>
+                                    <?php if ($reporte['Estado'] === 'Activo'): ?>
+                                        <i class="bi bi-circle-fill text-success"></i>
+                                    <?php elseif ($reporte['Estado'] === 'Inactivo'): ?>
+                                        <i class="bi bi-circle-fill text-secondary"></i>
+                                    <?php endif; ?>
+                                </td>
+                                <td><?php echo htmlspecialchars($reporte['Estado_Reporte']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['Fecha_Solucion']); ?></td>
+                                <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
+                            </tr> 
+                        <?php endforeach; ?>     
                                     </tbody>
                                 </table>
                             </div>
