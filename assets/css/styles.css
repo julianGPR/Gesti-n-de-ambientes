@@ -79,6 +79,14 @@ hr {
   overflow: visible;
 }
 
+.logo {
+  width: 50px; /* Tamaño del logo */
+  height: auto; /* Mantener proporción */
+  position: absolute; /* Posicionamiento absoluto para ubicarlo en la esquina */
+  top: 10px; /* Distancia desde la parte superior */
+  left: 10px; /* Distancia desde el lado izquierdo */
+}
+    
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
