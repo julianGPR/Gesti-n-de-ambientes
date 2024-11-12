@@ -153,6 +153,29 @@
                                     });
                                 });
                             </script>
+
+<script>
+    $(document).ready(function () {
+        $('#tabla-ambientes').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            paging: true,
+            pageLength: 5
+        });
+    });
+
+    function confirmarInhabilitar(id) {
+        if (confirm("¿Estás seguro de que deseas inhabilitar esta área?")) {
+            window.location.href = "inhabilitarAreaTrabajo/" + id;
+        }
+    }
+
+    function confirmarHabilitar(id) {
+        if (confirm("¿Estás seguro de que deseas habilitar esta área?")) {
+            window.location.href = "habilitarAreaTrabajo/" + id;
+        }
+    }
+</script>
 </body>
 
 </html>
