@@ -26,7 +26,7 @@ if (!isset($_SESSION['Id_usuario'])) {
                             <span>Inventario</span>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">Ver detalles</a>
+                            <a class="small text-white stretched-link" href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradas">Ver detalles</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['Id_usuario'])) {
                             <span>Reportes</span>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">Ver detalles</a>
+                            <a class="small text-white stretched-link" href="/dashboard/gestion%20de%20ambientes/reporte/verReportesPorUsuario/">Ver detalles</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

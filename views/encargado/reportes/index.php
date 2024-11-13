@@ -11,7 +11,7 @@
                                 $url_create = '/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/';
                                 ?>
                                 <a class="small text-white stretched-link" href="<?php echo $url_create; ?>"
-                                    id="btn-create">Crear Nueva area de trabajo</a>
+                                    id="btn-create">Crear Nuevo Reporte</a>
                                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                 </div>
                 
                 <div class="card mb-4">
-                    <div class="card-header"><i class="fas fa-table mr-1"></i>Area de trabajo</div>
+                    <div class="card-header"><i class="fas fa-table mr-1"></i>Reporte</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="tablaReportes" id="dataTable" width="100%"
