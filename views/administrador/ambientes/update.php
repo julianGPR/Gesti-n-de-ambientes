@@ -17,6 +17,56 @@
 </head>
 
 <body class="sb-nav-fixed">
+<style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f3f4f6;
+                }
+
+                .container {
+                    max-width: 800px;
+                }
+
+                .form-label {
+                    font-weight: 500;
+                    color: #6b7280;
+                }
+
+                .form-control,
+                .form-select {
+                    background-color: #f9fafb;
+                    border: 1px solid #d1d5db;
+                    border-radius: 4px;
+                    color: #374151;
+                }
+
+                .btn-primary {
+                    background-color: #6C63FF;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                }
+
+                .btn-secondary {
+                    background-color: #e5e7eb;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    color: #374151;
+                }
+
+                .icon {
+                    margin-right: 8px;
+                    color: #6b7280;
+                }
+
+                .header-title {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: #1D4A86;
+                    margin-bottom: 20px;
+                }
+            </style>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <?php
         $url_regresar = '../admin/home';
@@ -182,59 +232,6 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    background-color: #f3f4f6;
-                }
-
-                .container {
-                    max-width: 800px;
-                }
-
-                .form-label {
-                    font-weight: 500;
-                    color: #6b7280;
-                }
-
-                .form-control,
-                .form-select {
-                    background-color: #f9fafb;
-                    border: 1px solid #d1d5db;
-                    border-radius: 4px;
-                    color: #374151;
-                }
-
-                .btn-primary {
-                    background-color: #6C63FF;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                }
-
-                .btn-secondary {
-                    background-color: #e5e7eb;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 10px 20px;
-                    color: #374151;
-                }
-
-                .icon {
-                    margin-right: 8px;
-                    color: #6b7280;
-                }
-
-                .header-title {
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: #1D4A86;
-                    margin-bottom: 20px;
-                }
-            </style>
-            </head>
-
-            <body>
                 <!-- Título alineado a la izquierda -->
                 <div class="container mt-4">
                     <h1 class="header-title"><i class="fas fa-clipboard-list"></i> Editar Área de Trabajo</h1>
@@ -364,8 +361,39 @@
                         </div>
                     </div>
                 </div>
+
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-                <script>
+                
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="../../assets/Js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="../../assets/demo/chart-area-demo.js"></script>
+    <script src="../../assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+    <script src="../../assets/demo/datatables-demo.js"></script>
+    <script>
+        function flyBell() {
+            var bellImage = document.getElementById("bellImage");
+            bellImage.classList.add("flying");
+        }
+
+        function flyBellAndShowPopup() {
+            var bellImage = document.getElementById("bellImage");
+            bellImage.classList.add("flying");
+
+            // Muestra el popup de notificaciones
+            document.getElementById("popup").style.display =
+                document.getElementById("popup").style.display === "none" ? "block" : "none";
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+            location.reload(); // Recarga la página para actualizar el estado de las notificaciones
+        }
+   
                     function showConfirmModal(event) {
                         event.preventDefault(); // Evita el envío directo del formulario
                         var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
