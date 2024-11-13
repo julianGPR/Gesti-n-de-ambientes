@@ -159,9 +159,6 @@ $db = Database::connect();
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">Satelite</a>
                             </nav>
                         </div>
-
-
-
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
@@ -357,6 +354,7 @@ $db = Database::connect();
                         </div>
                     </div>
                 </div>
+        </main>
                 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
                     crossorigin="anonymous"></script>

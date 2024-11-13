@@ -403,53 +403,6 @@
                     function submitForm() {
                         document.getElementById('updateAreaTrabajoForm').submit(); // Envía el formulario después de la confirmación
                     }
-
-
-
-                    document.getElementById('createAreaTrabajoForm').addEventListener('submit', function (event) {
-                        event.preventDefault();
-
-                        var formData = new FormData(this);
-
-                        fetch('createAreaTrabajo', {
-                            method: 'POST',
-                            body: formData
-                        })
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('La respuesta no es válida');
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                if (data.success) {
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Éxito',
-                                        text: 'El Área ha sido creada exitosamente',
-                                        confirmButtonText: 'OK'
-                                    }).then(() => {
-                                        window.location.href = '../areaTrabajo';
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Error',
-                                        text: data.error || 'No se pudo crear el Área. Por favor, intenta de nuevo',
-                                        confirmButtonText: 'OK'
-                                    });
-                                }
-                            })
-                            .catch(error => {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: 'Hubo un problema de conexión o la respuesta no es válida. Por favor, intenta de nuevo',
-                                    confirmButtonText: 'OK'
-                                });
-                                console.error('Error:', error);
-                            });
-                    });
                 </script>
             </body>
 </html>

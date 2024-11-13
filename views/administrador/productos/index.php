@@ -107,12 +107,16 @@
 
 
     <script>
+        
         $(document).ready(function() {
             $('#tabla-productos').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
                 paging: true,
                 pageLength: 10
             });
         });
+  
     </script>
 </body>
 
