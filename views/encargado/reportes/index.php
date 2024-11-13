@@ -8,7 +8,7 @@
                         <div class="card bg-primary text-white mb-4">
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <?php
-                                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/';
+                                $url_create = '/dashboard/gestion%20de%20ambientes/reporte/createReporte';
                                 ?>
                                 <a class="small text-white stretched-link" href="<?php echo $url_create; ?>"
                                     id="btn-create">Crear Nuevo Reporte</a>
