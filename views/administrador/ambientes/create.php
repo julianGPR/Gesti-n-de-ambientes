@@ -23,64 +23,12 @@ $db = Database::connect();
 </head>
 
 <body class="sb-nav-fixed">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-        }
-
-        .container {
-            max-width: 800px;
-        }
-
-        .card {
-            border: none;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .card-header {
-            background-color: #4A4CF3;
-        }
-
-        .card-header h1 {
-            font-size: 1.5rem;
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: #6b7280;
-        }
-
-        .form-control,
-        .form-select {
-            background-color: #f9fafb;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            color: #374151;
-        }
-
-        .btn-primary {
-            background-color: #6C63FF;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-        }
-
-        .btn-secondary {
-            background-color: #e5e7eb;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            color: #374151;
-        }
-    </style>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <?php
         $url_regresar = '../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
-            <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
+            <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
                 class="fas fa-bars"></i></button>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -293,115 +241,150 @@ $db = Database::connect();
                     }
                 </style>
                 </head>
-                     <!-- Título alineado a la izquierda -->
-    <div class="container mt-4">
-        <h1 class="header-title"><i class="fas fa-clipboard-list"></i> Agregar Nueva Área de Trabajo</h1>
+                <!-- Título alineado a la izquierda -->
+                <div class="container mt-4">
+                    <h1 class="header-title"><i class="fas fa-clipboard-list"></i> Agregar Nueva Área de Trabajo</h1>
 
-        <!-- Formulario -->
-        <div class="card-body p-4">
-            <form id="areaTrabajoForm" action="createAreaTrabajo" method="POST" onsubmit="return showConfirmModal(event)">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="nombre_area" class="form-label"><i class="fas fa-building icon"></i> Nombre del Área</label>
-                        <input type="text" id="nombre_area" name="nombre_area" class="form-control" required>
+                    <!-- Formulario -->
+                    <div class="card-body p-4">
+                        <form id="areaTrabajoForm" action="createAreaTrabajo" method="POST"
+                            onsubmit="return showConfirmModal(event)">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombre_area" class="form-label"><i class="fas fa-building icon"></i>
+                                        Nombre del Área</label>
+                                    <input type="text" id="nombre_area" name="nombre_area" class="form-control"
+                                        required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="capacidad" class="form-label"><i class="fas fa-users icon"></i>
+                                        Capacidad</label>
+                                    <input type="number" id="capacidad" name="capacidad" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="ubicacion" class="form-label"><i class="fas fa-map-marker-alt icon"></i>
+                                        Ubicación</label>
+                                    <input type="text" id="ubicacion" name="ubicacion" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="responsable" class="form-label"><i class="fas fa-user icon"></i>
+                                        Responsable</label>
+                                    <select id="responsable" name="responsable" class="form-select" required>
+                                        <option value="">Seleccionar un responsable</option>
+                                        <?php foreach ($usuarios as $usuario): ?>
+                                            <option value="<?= htmlspecialchars($usuario['Id_usuario']) ?>">
+                                                <?= htmlspecialchars($usuario['Nombres']) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="tipo_area" class="form-label"><i class="fas fa-layer-group icon"></i>
+                                        Tipo de Área</label>
+                                    <select id="tipo_area" name="tipo_area" class="form-select" required>
+                                        <option value="">Seleccione un tipo de área</option>
+                                        <?php foreach ($tiposDeArea as $tipo): ?>
+                                            <option value="<?= htmlspecialchars($tipo) ?>"><?= htmlspecialchars($tipo) ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="equipo_disponible" class="form-label"><i class="fas fa-tools icon"></i>
+                                        Equipo Disponible</label>
+                                    <input type="text" id="equipo_disponible" name="equipo_disponible"
+                                        class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="estado_area" class="form-label"><i class="fas fa-toggle-on icon"></i>
+                                        Estado del Área</label>
+                                    <select id="estado_area" name="estado_area" class="form-select" required>
+                                        <option value="Habilitado">Habilitado</option>
+                                        <option value="Deshabilitado">Deshabilitado</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="fecha_creacion" class="form-label"><i
+                                            class="fas fa-calendar-alt icon"></i> Fecha de Creación</label>
+                                    <input type="date" id="fecha_creacion" name="fecha_creacion" class="form-control"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="comentarios" class="form-label"><i class="fas fa-comment icon"></i>
+                                    Comentarios</label>
+                                <textarea id="comentarios" name="comentarios" class="form-control" rows="3"></textarea>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i>
+                                    Aceptar</button>
+                                <a href="../areaTrabajo" class="btn btn-secondary ms-2"><i
+                                        class="fas fa-times-circle"></i> Cancelar</a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-md-6">
-                        <label for="capacidad" class="form-label"><i class="fas fa-users icon"></i> Capacidad</label>
-                        <input type="number" id="capacidad" name="capacidad" class="form-control" required>
+                </div>
+
+                <!-- Modal de confirmación -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro de que desea aceptar los cambios? Esta acción no se puede deshacer.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="submitForm()">Aceptar</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="ubicacion" class="form-label"><i class="fas fa-map-marker-alt icon"></i> Ubicación</label>
-                        <input type="text" id="ubicacion" name="ubicacion" class="form-control" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="responsable" class="form-label"><i class="fas fa-user icon"></i> Responsable</label>
-                        <select id="responsable" name="responsable" class="form-select" required>
-                            <option value="">Seleccionar un responsable</option>
-                            <?php foreach ($usuarios as $usuario): ?>
-                                <option value="<?= htmlspecialchars($usuario['Id_usuario']) ?>"><?= htmlspecialchars($usuario['Nombres']) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="../assets/Js/scripts.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="../assets/demo/chart-area-demo.js"></script>
+                <script src="../assets/demo/chart-bar-demo.js"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="../assets/demo/datatables-demo.js"></script>
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="tipo_area" class="form-label"><i class="fas fa-layer-group icon"></i> Tipo de Área</label>
-                        <select id="tipo_area" name="tipo_area" class="form-select" required>
-                            <option value="">Seleccione un tipo de área</option>
-                            <?php foreach ($tiposDeArea as $tipo): ?>
-                                <option value="<?= htmlspecialchars($tipo) ?>"><?= htmlspecialchars($tipo) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="equipo_disponible" class="form-label"><i class="fas fa-tools icon"></i> Equipo Disponible</label>
-                        <input type="text" id="equipo_disponible" name="equipo_disponible" class="form-control" required>
-                    </div>
-                </div>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+                    // Muestra el modal y evita que el formulario se envíe de inmediato
+                    function showConfirmModal(event) {
+                        event.preventDefault(); // Evita el envío directo del formulario
+                        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                        confirmModal.show(); // Muestra el modal de confirmación
+                    }
 
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="estado_area" class="form-label"><i class="fas fa-toggle-on icon"></i> Estado del Área</label>
-                        <select id="estado_area" name="estado_area" class="form-select" required>
-                            <option value="Habilitado">Habilitado</option>
-                            <option value="Deshabilitado">Deshabilitado</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fecha_creacion" class="form-label"><i class="fas fa-calendar-alt icon"></i> Fecha de Creación</label>
-                        <input type="date" id="fecha_creacion" name="fecha_creacion" class="form-control" required>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <label for="comentarios" class="form-label"><i class="fas fa-comment icon"></i> Comentarios</label>
-                    <textarea id="comentarios" name="comentarios" class="form-control" rows="3"></textarea>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Aceptar</button>
-                    <a href="../areaTrabajo" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i> Cancelar</a>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal de confirmación -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Está seguro de que desea aceptar los cambios? Esta acción no se puede deshacer.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="submitForm()">Aceptar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Muestra el modal y evita que el formulario se envíe de inmediato
-        function showConfirmModal(event) {
-            event.preventDefault(); // Evita el envío directo del formulario
-            var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-            confirmModal.show(); // Muestra el modal de confirmación
-        }
-
-        // Envía el formulario después de la confirmación
-        function submitForm() {
-            document.getElementById('areaTrabajoForm').submit(); // Envío manual tras confirmación
-        }
-    </script>
+                    // Envía el formulario después de la confirmación
+                    function submitForm() {
+                        document.getElementById('areaTrabajoForm').submit(); // Envío manual tras confirmación
+                    }
+                </script>
 </body>
+
 </html>
