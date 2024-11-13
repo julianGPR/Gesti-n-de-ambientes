@@ -205,7 +205,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
                         font-weight: bold;
                         display: flex;
                         align-items: center;
-                        justify-content: center;
+                        justify-content: left;
                         gap: 10px;
                         margin-bottom: 20px;
                     }
@@ -250,7 +250,9 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
                         </div>
 
                         <!-- Formulario de edición de proveedor -->
-                        <form id="proveedorForm" action="../updateProveedor.php?id=<?php echo $proveedor['Id_proveedor']; ?>" method="POST" onsubmit="return showConfirmModal(event)">
+                        <form id="proveedorForm"
+                            action="../updateProveedor.php?id=<?php echo $proveedor['Id_proveedor']; ?>" method="POST"
+                            onsubmit="return showConfirmModal(event)">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombre_proveedor" class="form-label"><i
@@ -321,22 +323,31 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
             </main>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/Js/scripts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/chart-area-demo.js"></script>
+            <script src="../../assets/demo/chart-bar-demo.js"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/datatables-demo.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
-                // Mostrar modal de confirmación antes de enviar el formulario
                 function showConfirmModal(event) {
-                    event.preventDefault();
-                    if (document.getElementById('proveedorForm').checkValidity()) {
-                        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-                        confirmModal.show();
-                    } else {
-                        document.getElementById('proveedorForm').reportValidity();
-                    }
+                    event.preventDefault(); // Evita el envío directo del formulario
+                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                    confirmModal.show(); // Muestra el modal de confirmación
                 }
 
-                // Enviar el formulario después de la confirmación
                 function submitForm() {
-                    document.getElementById('proveedorForm').submit();
+                    document.getElementById('proveerdorForm').submit(); // Envía el formulario después de la confirmación
                 }
+            </script>
             </script>
 
 </body>
