@@ -250,9 +250,8 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
                         </div>
 
                         <!-- Formulario de edición de proveedor -->
-                        <form id="proveedorForm"
-                            action="../updateProveedor.php?id=<?php echo $proveedor['Id_proveedor']; ?>" method="POST"
-                            onsubmit="return showConfirmModal(event)">
+                        <form id="proveedorForm" action="updateProveedor.php?id=<?php echo $id_proveedor; ?>"
+                            method="POST" onsubmit="return showConfirmModal(event)">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombre_proveedor" class="form-label"><i
@@ -321,8 +320,6 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
                         </div>
                     </div>
             </main>
-
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
                 crossorigin="anonymous"></script>
@@ -338,16 +335,17 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
             <script src="../../assets/demo/datatables-demo.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
+                // Función para mostrar el modal de confirmación
                 function showConfirmModal(event) {
-                    event.preventDefault(); // Evita el envío directo del formulario
-                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-                    confirmModal.show(); // Muestra el modal de confirmación
+                    event.preventDefault();
+                    const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                    modal.show();
                 }
 
+                // Enviar el formulario después de la confirmación
                 function submitForm() {
-                    document.getElementById('proveerdorForm').submit(); // Envía el formulario después de la confirmación
+                    document.getElementById('proveedorForm').submit();
                 }
-            </script>
             </script>
 
 </body>

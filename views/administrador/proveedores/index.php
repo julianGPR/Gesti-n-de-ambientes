@@ -62,6 +62,7 @@
                                                 echo "<td>" . $row["telefono"] . "</td>";
                                                 echo "<td>" . $row["email"] . "</td>";
                                                 echo "<td>";
+                                                
 
                                                 $url_update = '/dashboard/gestion%20de%20ambientes/proveedores/updateProveedor/' . $row['id_proveedor'];
                                                 echo "<a href='" . $url_update . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
