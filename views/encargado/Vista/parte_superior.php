@@ -16,10 +16,11 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue bg-white">
         <a class="navbar-brand" href="/dashboard/gestion%20de%20ambientes/encargado/home">
             <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
-            </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
+                class="fas fa-bars"></i></button>
         </a>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -52,8 +53,7 @@
                             Inventario
                         </a>
 
-                        <a class="nav-link"
-                            href='/dashboard/gestion%20de%20ambientes/reporte/verReportesPorUsuario/'>
+                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/reporte/verReportesPorUsuario/'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Reporte
                         </a>

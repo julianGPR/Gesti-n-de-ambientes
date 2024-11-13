@@ -15,24 +15,31 @@ $db = Database::connect();
     <meta name="author" content="" />
     <title>Sistema Web</title>
     <link href="../assets/css/styles.css" rel="stylesheet" />
-   
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
+<style>
+        body {
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+        }
+    </style>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue bg-white">
         <?php
         $url_regresar = '../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
-            </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
+                class="fas fa-bars"></i></button>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <!-- Notificaciones en el menú de la campana -->
             <li class="nav-item dropdown no-arrow mx-1">
@@ -121,25 +128,25 @@ $db = Database::connect();
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <a class="nav-link" href="<?php echo $url_regresar; ?>">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Inicio
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
                             Area de trabajo
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/usuarios/usuarios">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Gestión de Usuarios
                         </a>
 
                         <div class="nav-link d-flex align-items-center">
                             <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
                                 class="d-flex align-items-center">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
                             <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
@@ -152,13 +159,21 @@ $db = Database::connect();
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">Tuberia</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
+                                    <i class="fas fa-toolbox"></i> Tubería
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">Ensamble</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
+                                    <i class="fas fa-cogs"></i> Ensamble
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">Corte</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
+                                    <i class="fas fa-cut"></i> Corte
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">Satelite</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
+                                    <i class="fas fa-satellite"></i> Satélite
+                                </a>
                             </nav>
                         </div>
 
@@ -167,18 +182,18 @@ $db = Database::connect();
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
                             Proveedores
                         </a>
 
                         <a class="nav-link"
-                            href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Inventario
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                             Productos
                         </a>
                     </div>

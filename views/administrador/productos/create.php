@@ -17,7 +17,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue bg-white">
         <?php
         $url_regresar = '../../admin/home';
         ?>
@@ -113,25 +113,25 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <a class="nav-link" href="<?php echo $url_regresar; ?>">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Inicio
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
                             Area de trabajo
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/usuarios/usuarios">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Gestión de Usuarios
                         </a>
 
                         <div class="nav-link d-flex align-items-center">
                             <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
                                 class="d-flex align-items-center">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
                             <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
@@ -144,30 +144,41 @@
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">Tuberia</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
+                                    <i class="fas fa-toolbox"></i> Tubería
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">Ensamble</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
+                                    <i class="fas fa-cogs"></i> Ensamble
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">Corte</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
+                                    <i class="fas fa-cut"></i> Corte
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">Satelite</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
+                                    <i class="fas fa-satellite"></i> Satélite
+                                </a>
                             </nav>
                         </div>
+
+
+
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
                             Proveedores
                         </a>
 
                         <a class="nav-link"
-                            href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Inventario
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                             Productos
                         </a>
                     </div>

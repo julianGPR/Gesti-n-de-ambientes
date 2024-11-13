@@ -17,7 +17,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue bg-white">
         <a class="navbar-brand" href="/dashboard/gestion%20de%20ambientes/encargado/home">
             <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i

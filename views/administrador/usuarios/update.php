@@ -17,7 +17,7 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue bg-white">
         <?php
         $url_regresar = '../../admin/home';
         ?>
@@ -113,25 +113,25 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <a class="nav-link" href="<?php echo $url_regresar; ?>">
-                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Inicio
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
                             Area de trabajo
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/usuarios/usuarios">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Gestión de Usuarios
                         </a>
 
                         <div class="nav-link d-flex align-items-center">
                             <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
                                 class="d-flex align-items-center">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
                             <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
@@ -144,13 +144,21 @@
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">Tuberia</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
+                                    <i class="fas fa-toolbox"></i> Tubería
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">Ensamble</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
+                                    <i class="fas fa-cogs"></i> Ensamble
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">Corte</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
+                                    <i class="fas fa-cut"></i> Corte
+                                </a>
                                 <a class="nav-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">Satelite</a>
+                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
+                                    <i class="fas fa-satellite"></i> Satélite
+                                </a>
                             </nav>
                         </div>
 
@@ -159,18 +167,18 @@
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
                             Proveedores
                         </a>
 
                         <a class="nav-link"
-                            href='/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador'>
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador">
+                            <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Inventario
                         </a>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                             Productos
                         </a>
                     </div>
@@ -233,109 +241,107 @@
                         color: #374151;
                     }
                 </style>
-                    <div class="container">
-                        <!-- Encabezado con ícono y título -->
-                        <div class="header-title">
-                            <i class="fas fa-user-edit"></i>
-                            Editar Usuario
-                        </div>
-
-                        <!-- Formulario de edición de usuario -->
-                        <form id="usuarioForm" action="../updateUsuario/<?php echo $usuario['Id_usuario']; ?>"
-                            method="POST" onsubmit="return showConfirmModal(event)">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="nombres" class="form-label"><i class="fas fa-user icon"></i> Nombre del
-                                        Usuario</label>
-                                    <input type="text" id="nombres" name="nombres" class="form-control"
-                                        value="<?php echo isset($usuario['Nombres']) ? $usuario['Nombres'] : ''; ?>"
-                                        required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="apellidos" class="form-label"><i class="fas fa-user icon"></i> Apellidos
-                                        del Usuario</label>
-                                    <input type="text" id="apellidos" name="apellidos" class="form-control"
-                                        value="<?php echo isset($usuario['Apellidos']) ? $usuario['Apellidos'] : ''; ?>"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="correo" class="form-label"><i class="fas fa-envelope icon"></i> Correo
-                                        del Usuario</label>
-                                    <input type="email" id="correo" name="correo" class="form-control"
-                                        value="<?php echo isset($usuario['Correo']) ? $usuario['Correo'] : ''; ?>"
-                                        required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="clave" class="form-label"><i class="fas fa-key icon"></i> Clave</label>
-                                    <div class="input-group">
-                                        <input type="password" id="clave" name="clave" class="form-control"
-                                            value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>"
-                                            required>
-                                        <button type="button" id="mostrarClave" class="btn btn-primary">Mostrar</button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="rol" class="form-label"><i class="fas fa-user-tag icon"></i> Rol</label>
-                                    <select id="rol" name="rol" class="form-select" required>
-                                        <option value="Administrador" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Administrador') ? 'selected' : ''; ?>>Administrador
-                                        </option>
-                                        <option value="Encargado" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Encargado') ? 'selected' : ''; ?>>Encargado</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar
-                                    Cambios</button>
-                                <a href="../usuarios" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i>
-                                    Cancelar</a>
-                            </div>
-                        </form>
+                <div class="container">
+                    <!-- Encabezado con ícono y título -->
+                    <div class="header-title">
+                        <i class="fas fa-user-edit"></i>
+                        Editar Usuario
                     </div>
 
-                    <!-- Modal de confirmación -->
-                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Acción</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="submitForm()">Confirmar</button>
+                    <!-- Formulario de edición de usuario -->
+                    <form id="usuarioForm" action="../updateUsuario/<?php echo $usuario['Id_usuario']; ?>" method="POST"
+                        onsubmit="return showConfirmModal(event)">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="nombres" class="form-label"><i class="fas fa-user icon"></i> Nombre del
+                                    Usuario</label>
+                                <input type="text" id="nombres" name="nombres" class="form-control"
+                                    value="<?php echo isset($usuario['Nombres']) ? $usuario['Nombres'] : ''; ?>"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="apellidos" class="form-label"><i class="fas fa-user icon"></i> Apellidos
+                                    del Usuario</label>
+                                <input type="text" id="apellidos" name="apellidos" class="form-control"
+                                    value="<?php echo isset($usuario['Apellidos']) ? $usuario['Apellidos'] : ''; ?>"
+                                    required>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="correo" class="form-label"><i class="fas fa-envelope icon"></i> Correo
+                                    del Usuario</label>
+                                <input type="email" id="correo" name="correo" class="form-control"
+                                    value="<?php echo isset($usuario['Correo']) ? $usuario['Correo'] : ''; ?>" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="clave" class="form-label"><i class="fas fa-key icon"></i> Clave</label>
+                                <div class="input-group">
+                                    <input type="password" id="clave" name="clave" class="form-control"
+                                        value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>"
+                                        required>
+                                    <button type="button" id="mostrarClave" class="btn btn-primary">Mostrar</button>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="rol" class="form-label"><i class="fas fa-user-tag icon"></i> Rol</label>
+                                <select id="rol" name="rol" class="form-select" required>
+                                    <option value="Administrador" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Administrador') ? 'selected' : ''; ?>>Administrador
+                                    </option>
+                                    <option value="Encargado" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Encargado') ? 'selected' : ''; ?>>Encargado</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar
+                                Cambios</button>
+                            <a href="../usuarios" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i>
+                                Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal de confirmación -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirmar Acción</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="submitForm()">Confirmar</button>
+                            </div>
+                        </div>
                     </div>
+                </div>
             </main>
 
             <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                        crossorigin="anonymous"></script>
-                    <script src="../../assets/Js/scripts.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-                        crossorigin="anonymous"></script>
-                    <script src="../../assets/demo/chart-area-demo.js"></script>
-                    <script src="../../assets/demo/chart-bar-demo.js"></script>
-                    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-                        crossorigin="anonymous"></script>
-                    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-                        crossorigin="anonymous"></script>
-                    <script src="../../assets/demo/datatables-demo.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/Js/scripts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/chart-area-demo.js"></script>
+            <script src="../../assets/demo/chart-bar-demo.js"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/datatables-demo.js"></script>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>

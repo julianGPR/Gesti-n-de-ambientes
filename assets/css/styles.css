@@ -66,7 +66,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #f0f2f5;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -124,11 +124,12 @@ hr {
 
 
 body {
-  background-color: #f8f9fa;
+  background-color: #f0f2f5;
 }
 
 .container-fluid {
   padding: 20px;
+  background-color: #f0f2f5;
 }
 
 .card {
