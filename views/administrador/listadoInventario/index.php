@@ -113,50 +113,84 @@
     <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
     <script>
-        function filtrarPorArea(tipoArea) {
-            fetch(`/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ tipo_area: tipoArea })
+    // Función para filtrar por área
+
+    $(document).ready(function () {
+                            $('#tablaInventario').DataTable({
+                                dom: 'Bfrtip',
+                                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+                                paging: true,
+                                pageLength: 5
+                            });
+                        });
+
+    function filtrarPorArea(tipoArea) {
+        fetch(`/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ tipo_area: tipoArea })
+        })
+            .then(response => response.json())
+            .then(data => {
+                const tablaCuerpo = document.getElementById('tablaCuerpo');
+                tablaCuerpo.innerHTML = ''; // Limpiar la tabla
+
+                // Agregar filas a la tabla con un efecto de desvanecimiento
+                data.entradas.forEach((entrada, index) => {
+                    const fila = document.createElement('tr');
+                    fila.className = 'fila-datos';
+                    fila.style.animationDelay = `${index * 0.05}s`;
+
+                    fila.innerHTML = `
+                        <td>${entrada.id_entrada}</td>
+                        <td>${entrada.nombre}</td>
+                        <td>${entrada.nombre_proveedor}</td>
+                        <td>${entrada.cantidad}</td>
+                        <td>${entrada.precio_unitario}</td>
+                        <td>${entrada.unidad_medida}</td>
+                        <td>${entrada.ubicacion}</td>
+                        <td>${entrada.fecha_entrada}</td>
+                        <td>${entrada.observaciones}</td>
+                        <td>${entrada.nombre_usuario} ${entrada.apellido_usuario}</td>
+                        <td>${entrada.tipo_area}</td>
+                    `;
+
+                    tablaCuerpo.appendChild(fila);
+                });
             })
-                .then(response => response.json())
-                .then(data => {
-                    const tablaCuerpo = document.getElementById('tablaCuerpo');
-                    tablaCuerpo.innerHTML = ''; // Limpiar la tabla
+            .catch(error => console.error('Error al filtrar por área:', error));
+    }
 
-                    data.entradas.forEach(entrada => {
-                        const fila = document.createElement('tr');
+    // Función para mostrar/ocultar el menú de filtros
+    function toggleFilterMenu() {
+        var menu = document.getElementById("filterMenu");
+        menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
+    }
 
-                        fila.innerHTML = `
-                    <td>${entrada.id_entrada}</td>
-                    <td>${entrada.nombre}</td>
-                    <td>${entrada.nombre_proveedor}</td>
-                    <td>${entrada.cantidad}</td>
-                    <td>${entrada.precio_unitario}</td>
-                    <td>${entrada.unidad_medida}</td>
-                    <td>${entrada.ubicacion}</td>
-                    <td>${entrada.fecha_entrada}</td>
-                    <td>${entrada.observaciones}</td>
-                    <td>${entrada.nombre_usuario} ${entrada.apellido_usuario}</td>
-                    <td>${entrada.tipo_area}</td>
-                `;
+    // Función para ordenar las columnas de la tabla
+    function ordenarTabla(columnaIndex) {
+        const tabla = document.getElementById("tablaDatos");
+        const filas = Array.from(tabla.querySelectorAll("tbody tr"));
+        const esAscendente = tabla.getAttribute("data-orden") === "asc";
 
-                        tablaCuerpo.appendChild(fila);
-                    });
-                })
-                .catch(error => console.error('Error al filtrar por área:', error));
-        }
+        filas.sort((a, b) => {
+            const valorA = a.children[columnaIndex].textContent.trim().toLowerCase();
+            const valorB = b.children[columnaIndex].textContent.trim().toLowerCase();
 
+            return esAscendente ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
+        });
 
+        // Alternar el orden para la próxima vez
+        tabla.setAttribute("data-orden", esAscendente ? "desc" : "asc");
 
-        // Función para mostrar/ocultar el menú de filtros
-        function toggleFilterMenu() {
-            var menu = document.getElementById("filterMenu");
-            menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
-        }
-    </script>
+        const tablaCuerpo = document.getElementById("tablaCuerpo");
+        tablaCuerpo.innerHTML = "";
+        filas.forEach(fila => tablaCuerpo.appendChild(fila));
+    }
+</script>
+
 </body>
 
 </html>

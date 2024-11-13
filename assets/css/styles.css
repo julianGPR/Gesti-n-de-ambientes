@@ -79,6 +79,49 @@ hr {
   overflow: visible;
 }
 
+
+/* Estilos para la columna de acciones */
+.acciones {
+  text-align: center;
+  white-space: nowrap; /* Mantiene los botones en una sola línea */
+}
+
+/* Estilo para los botones de acción */
+.boton-accion {
+  margin: 0 5px;
+  text-decoration: none;
+  padding: 5px;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+/* Efecto al pasar el mouse */
+.boton-accion:hover {
+  background-color: #f0f0f0;
+}
+
+/* Estilo específico para cada acción */
+.boton-modificar {
+  background-color: #e0f7fa;
+}
+
+.boton-habilitar {
+  background-color: #c8e6c9;
+}
+
+.boton-inhabilitar {
+  background-color: #ffe0b2;
+}
+
+/* Estilo para los iconos */
+.icono-accion {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;
