@@ -25,14 +25,14 @@ $db = Database::connect();
         crossorigin="anonymous"></script>
 </head>
 <style>
-        body {
-            background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
-        }
-    </style>
+    body {
+        background-color: #f0f2f5;
+        font-family: Arial, sans-serif;
+    }
+</style>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-blue bg-white">
+    <nav class="sb-topnav navbar navbar-expand" style="background: linear-gradient(20deg, #c4c4c4, #1D4A86);">
         <?php
         $url_regresar = '../admin/home';
         ?>
@@ -145,12 +145,12 @@ $db = Database::connect();
 
                         <div class="nav-link d-flex align-items-center">
                             <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
-                                class="d-flex align-items-center">
+                                class="d-flex align-items-center custom-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
-                            <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
-                                aria-expanded="false" aria-controls="collapseLayouts">
+                            <a href="#" class="ml-auto custom-link" data-toggle="collapse"
+                                data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <i class="fas fa-angle-down"></i>
                             </a>
                         </div>
@@ -158,19 +158,19 @@ $db = Database::connect();
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
                                     <i class="fas fa-toolbox"></i> Tubería
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
                                     <i class="fas fa-cogs"></i> Ensamble
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
                                     <i class="fas fa-cut"></i> Corte
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
                                     <i class="fas fa-satellite"></i> Satélite
                                 </a>
