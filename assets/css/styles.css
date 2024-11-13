@@ -114,6 +114,7 @@ hr {
   background-color: #ffe0b2;
 }
 
+
 /* Estilo para los iconos */
 .icono-accion {
   width: 20px;
@@ -121,6 +122,46 @@ hr {
   vertical-align: middle;
 }
 
+
+body {
+  background-color: #f8f9fa;
+}
+
+.container-fluid {
+  padding: 20px;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-body i {
+  font-size: 2rem;
+  margin-right: 15px;
+}
+
+.card-footer {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb {
+  background-color: #f8f9fa;
+}
+
+.breadcrumb-item.active {
+  color: #6c757d;
+}
+
+.small.text-white {
+  font-weight: bold;
+}
+
+h1.mt-4 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #343a40;
+}
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
