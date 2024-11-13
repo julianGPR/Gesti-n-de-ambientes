@@ -32,7 +32,7 @@ $db = Database::connect();
 </style>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand" style="background: linear-gradient(20deg, #c4c4c4, #1D4A86);">
+    <nav class="sb-topnav navbar navbar-expand" style="background: linear-gradient(20deg,  #111112, #0e0f10);">
         <?php
         $url_regresar = '../admin/home';
         ?>
