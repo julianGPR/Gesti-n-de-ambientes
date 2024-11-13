@@ -182,66 +182,56 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <!DOCTYPE html>
-            <html lang="es">
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f3f4f6;
+                }
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Editar Área de Trabajo</title>
-                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-                <link rel="stylesheet"
-                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-                <style>
-                    body {
-                        font-family: Arial, sans-serif;
-                        background-color: #f3f4f6;
-                    }
+                .container {
+                    max-width: 800px;
+                }
 
-                    .container {
-                        max-width: 800px;
-                    }
+                .form-label {
+                    font-weight: 500;
+                    color: #6b7280;
+                }
 
-                    .form-label {
-                        font-weight: 500;
-                        color: #6b7280;
-                    }
+                .form-control,
+                .form-select {
+                    background-color: #f9fafb;
+                    border: 1px solid #d1d5db;
+                    border-radius: 4px;
+                    color: #374151;
+                }
 
-                    .form-control,
-                    .form-select {
-                        background-color: #f9fafb;
-                        border: 1px solid #d1d5db;
-                        border-radius: 4px;
-                        color: #374151;
-                    }
+                .btn-primary {
+                    background-color: #6C63FF;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                }
 
-                    .btn-primary {
-                        background-color: #6C63FF;
-                        border: none;
-                        border-radius: 8px;
-                        padding: 10px 20px;
-                    }
+                .btn-secondary {
+                    background-color: #e5e7eb;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    color: #374151;
+                }
 
-                    .btn-secondary {
-                        background-color: #e5e7eb;
-                        border: none;
-                        border-radius: 8px;
-                        padding: 10px 20px;
-                        color: #374151;
-                    }
+                .icon {
+                    margin-right: 8px;
+                    color: #6b7280;
+                }
 
-                    .icon {
-                        margin-right: 8px;
-                        color: #6b7280;
-                    }
-
-                    .header-title {
-                        font-size: 1.5rem;
-                        font-weight: bold;
-                        color: #1D4A86;
-                        margin-bottom: 20px;
-                    }
-                </style>
+                .header-title {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: #1D4A86;
+                    margin-bottom: 20px;
+                }
+            </style>
             </head>
 
             <body>
@@ -251,12 +241,13 @@
 
                     <!-- Formulario -->
                     <div class="card-body p-4">
-                        <!-- Cambia el action para que apunte al script PHP que maneja la actualización -->
-                        <form id="editAreaTrabajoForm" action="updateAreaTrabajo.php" method="POST"
-                            onsubmit="return showConfirmModal(event)">
+                        <!-- Construye la URL con el ID del área para enviarla al archivo de actualización -->
+                        <form id="updateAreaTrabajoForm"
+                            action="updateAreaTrabajo.php?id=<?php echo htmlspecialchars($areaTrabajo['id_area']); ?>"
+                            method="POST" onsubmit="return showConfirmModal(event)">
 
                             <!-- Campo oculto para el ID del registro a editar -->
-                            <input type="hidden" name="id" value="<?= htmlspecialchars($areaTrabajo['id']) ?>">
+                            <input type="hidden" name="id" value="<?= htmlspecialchars($areaTrabajo['id_area']) ?>">
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
@@ -383,8 +374,10 @@
                     }
 
                     function submitForm() {
-                        document.getElementById('editAreaTrabajoForm').submit(); // Envía el formulario después de la confirmación
+                        document.getElementById('updateAreaTrabajoForm').submit(); // Envía el formulario después de la confirmación
                     }
+
+
 
                     document.getElementById('createAreaTrabajoForm').addEventListener('submit', function (event) {
                         event.preventDefault();
@@ -433,4 +426,4 @@
                 </script>
             </body>
 
-            </html>
+</html>
