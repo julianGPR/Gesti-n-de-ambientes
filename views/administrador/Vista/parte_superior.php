@@ -29,10 +29,27 @@ $db = Database::connect();
         background-color: #f0f2f5;
         font-family: Arial, sans-serif;
     }
+
+    /* Estilo personalizado para el pie de la barra lateral */
+    .custom-footer {
+        background-color: #1D4A86!important;
+        /* Fondo azul personalizado */
+        color: #C4C4C4 !important;
+        /* Texto en color claro */
+        padding: 10px;
+        text-align: center;
+    }
+
+    .custom-footer .small {
+        color: #C4C4C4 !important;
+        /* Color del texto pequeño */
+        font-size: 0.85rem !important;
+    }
 </style>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand" style="background: linear-gradient(20deg,  #111112, #0e0f10);">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue "
+        style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
         $url_regresar = '../admin/home';
         ?>
@@ -41,6 +58,7 @@ $db = Database::connect();
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
                 class="fas fa-bars"></i></button>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
             <!-- Notificaciones en el menú de la campana -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
@@ -110,9 +128,10 @@ $db = Database::connect();
             </li>
 
             <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle dropdown-blue" id="userDropdown" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
@@ -198,9 +217,9 @@ $db = Database::connect();
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                <div class=" custom-footer">
+                    <div class="small">Conectado como:</div>
+                    Proyecto GAFRA
                 </div>
             </nav>
         </div>

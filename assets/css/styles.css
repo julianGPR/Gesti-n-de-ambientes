@@ -79,9 +79,11 @@ body {
   background-color: #f0f2f5;
 }
 
+
+
 /* Estilo personalizado para el sidebar */
 .sb-sidenav {
-  background: linear-gradient(180deg, #0D2444, #1D4A86);
+  background: linear-gradient(180deg, #046ddc, #022b4f);
   /* Degradado vertical */
 }
 
@@ -94,7 +96,7 @@ body {
 
 .sb-sidenav .nav-link:hover,
 .sb-sidenav .sb-sidenav-footer:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(17, 17, 17, 0.1);
   /* Efecto hover con transparencia */
 }
 
@@ -112,12 +114,6 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
-}
-
-/* Estilo personalizado para el sidebar */
-.sb-sidenav {
-  background: linear-gradient(180deg,  #111112, #0e0f10);
-  /* Degradado vertical */
 }
 
 .sb-sidenav .nav-link,
@@ -155,6 +151,31 @@ hr {
   border-radius: 5px;
   display: inline-block;
   transition: background-color 0.3s;
+}
+
+/* Cambia el color de los íconos en la barra de navegación */
+.navbar .fa-bell,
+.navbar .fa-user,
+.navbar .dropdown-toggle,
+.navbar .badge {
+    color: #1D4A86; /* Cambia a tu color deseado */
+}
+
+/* Cambia el color del interruptor o cualquier elemento específico */
+.switch, .toggle-switch {
+    background-color: #1D4A86; /* Cambia a tu color deseado */
+    color: #ffffff; /* Color del ícono o del texto */
+}
+
+/* Si necesitas cambiar el color de la campana específicamente */
+.navbar .fa-bell {
+    color: #0D2444; /* Cambia a tu color deseado */
+}
+
+/* Cambia el color de fondo y texto de la alerta del contador de notificaciones */
+.badge-danger {
+    background-color: #FF6B6B; /* Cambia el color de fondo de la alerta */
+    color: #ffffff; /* Color del texto en la alerta */
 }
 
 
