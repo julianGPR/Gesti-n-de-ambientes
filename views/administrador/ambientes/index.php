@@ -2,20 +2,20 @@
 <main>
     <div class="container-fluid">
         <div class="header-section">
-            <h1> Gestion de Inventarios Gafra</h1>
+            <h1><i class="fas fa-briefcase"></i> Area de Trabajo</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item active"><i class="fas fa-home"></i> Menú</li>
             </ol>
         </div>
-     
-          <div class="row">
-    <div class="col-xl-3 col-md-6">
-        <a href='/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/' id="btn-create">
-            Crear Nuevo Usuario <i class="fas fa-angle-right"></i>
-        </a>
-    </div>
-</div>
-        
+
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <a href='/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/' id="btn-create">
+                    Crear area de trabajo
+                </a>
+            </div>
+        </div>
+
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Area de trabajo</div>
             <div class="card-body">

@@ -1,128 +1,116 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
-            <main>
-                <div class="container-fluid">
-                    <h1 class="mt-4">Inventario - Entradas (Administrador)</h1>
-                    <div class="card mb-4">
-                        <div class="card-header"><i class="fas fa-table mr-1"></i>Inventario</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="tablaInventario" id="dataTable" width="100%"
-                                    cellspacing="0">
-                                    <thead>
-                                        <!-- Botón para mostrar/ocultar el menú de filtros -->
-                                        <button class="filter-button" onclick="toggleFilterMenu()">Mostrar
-                                            Filtros</button>
-
-                                        <!-- Menú de filtros lateral -->
-                                        <div class="filter-menu" id="filterMenu" style="display:none;">
-                                            <h3>Filtrar Columnas</h3>
-                                            <button class="btn btn-primary"
-                                                onclick="filtrarPorArea('Tubería')">Tubería</button>
-                                            <button class="btn btn-primary"
-                                                onclick="filtrarPorArea('Ensamble')">Ensamble</button>
-                                            <button class="btn btn-primary"
-                                                onclick="filtrarPorArea('Corte')">Corte</button>
-                                            <button class="btn btn-primary"
-                                                onclick="filtrarPorArea('Satélite')">Satélite</button>
-                                            <button class="btn btn-secondary" onclick="filtrarPorArea('')">Mostrar
-                                                Todo</button>
-                                        </div>
-
-
-                                        <tr>
-                                            <th>ID Entrada</th>
-                                            <th>Nombre</th>
-                                            <th>Proveedor</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio Unitario</th>
-                                            <th>Unidad de Medida</th>
-                                            <th>Ubicación</th>
-                                            <th>Fecha de Entrada</th>
-                                            <th>Observaciones</th>
-                                            <th>Responsable</th>
-                                            <th>Tipo de Área</th>
-                                        </tr>
-                                    <tbody id="tablaCuerpo">
-                                        <?php foreach ($entradas as $entrada): ?>
-                                            <tr>
-                                                <td><?= htmlspecialchars($entrada['id_entrada']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['nombre']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['nombre_proveedor']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['cantidad']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['precio_unitario']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['unidad_medida']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['ubicacion']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['fecha_entrada']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['observaciones']) ?></td>
-                                                <td><?= htmlspecialchars($entrada['nombre_usuario'] . ' ' . $entrada['apellido_usuario']) ?>
-                                                </td>
-                                                <td><?= htmlspecialchars($entrada['tipo_area']) ?></td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+<main>
+    <div class="container-fluid">
+        <div class="header-section">
+            <h1> <i class="fas fa-boxes"></i> Inventario - Entradas (Administrador)</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active"><i class="fas fa-home"></i> Menú</li>
+            </ol>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-        crossorigin="anonymous"></script>
-    <script src="../assets/Js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/demo/chart-area-demo.js"></script>
-    <script src="../assets/demo/chart-bar-demo.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-    <script src="../assets/demo/datatables-demo.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- CSS de DataTables -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Inventario</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tablaInventario" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <!-- Botón para mostrar/ocultar el menú de filtros -->
+                        <button class="filter-button" onclick="toggleFilterMenu()">Mostrar
+                            Filtros</button>
 
-    <!-- CSS de los botones -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css">
+                        <!-- Menú de filtros lateral -->
+                        <div class="filter-menu" id="filterMenu" style="display:none;">
+                            <h3>Filtrar Columnas</h3>
+                            <button class="btn btn-primary" onclick="filtrarPorArea('Tubería')">Tubería</button>
+                            <button class="btn btn-primary" onclick="filtrarPorArea('Ensamble')">Ensamble</button>
+                            <button class="btn btn-primary" onclick="filtrarPorArea('Corte')">Corte</button>
+                            <button class="btn btn-primary" onclick="filtrarPorArea('Satélite')">Satélite</button>
+                            <button class="btn btn-secondary" onclick="filtrarPorArea('')">Mostrar
+                                Todo</button>
+                        </div>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- jQuery DataTables -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+                        <tr>
+                            <th>ID Entrada</th>
+                            <th>Nombre</th>
+                            <th>Proveedor</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Unidad de Medida</th>
+                            <th>Ubicación</th>
+                            <th>Fecha de Entrada</th>
+                            <th>Observaciones</th>
+                            <th>Responsable</th>
+                            <th>Tipo de Área</th>
+                        </tr>
+                    <tbody id="tablaCuerpo">
+                        <?php foreach ($entradas as $entrada): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($entrada['id_entrada']) ?></td>
+                                <td><?= htmlspecialchars($entrada['nombre']) ?></td>
+                                <td><?= htmlspecialchars($entrada['nombre_proveedor']) ?></td>
+                                <td><?= htmlspecialchars($entrada['cantidad']) ?></td>
+                                <td><?= htmlspecialchars($entrada['precio_unitario']) ?></td>
+                                <td><?= htmlspecialchars($entrada['unidad_medida']) ?></td>
+                                <td><?= htmlspecialchars($entrada['ubicacion']) ?></td>
+                                <td><?= htmlspecialchars($entrada['fecha_entrada']) ?></td>
+                                <td><?= htmlspecialchars($entrada['observaciones']) ?></td>
+                                <td><?= htmlspecialchars($entrada['nombre_usuario'] . ' ' . $entrada['apellido_usuario']) ?>
+                                </td>
+                                <td><?= htmlspecialchars($entrada['tipo_area']) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
 
-    <!-- JS de botones de DataTables -->
-    <script src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
 
-    <!-- Librería para exportar a Excel, PDF, etc. -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="../assets/Js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="../assets/demo/chart-area-demo.js"></script>
+<script src="../assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="../assets/demo/datatables-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- CSS de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 
-    <script>
+<!-- CSS de los botones -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery DataTables -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- JS de botones de DataTables -->
+<script src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+
+<!-- Librería para exportar a Excel, PDF, etc. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+
+<script>
     // Función para filtrar por área
 
     $(document).ready(function () {
-                            $('#tablaInventario').DataTable({
-                                dom: 'Bfrtip',
-                                buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-                                paging: true,
-                                pageLength: 5
-                            });
-                        });
+        $('#tablaInventario').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            paging: true,
+            pageLength: 5
+        });
+    });
 
     function filtrarPorArea(tipoArea) {
         fetch(`/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador`, {

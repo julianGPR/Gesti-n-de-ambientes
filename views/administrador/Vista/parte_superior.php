@@ -14,6 +14,7 @@ $db = Database::connect();
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Sistema Web</title>
+    <link rel="icon" href="../assets/img/login02.ico" type="image/x-icon">
     <link href="../assets/css/styles.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -24,69 +25,6 @@ $db = Database::connect();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
-<style>
-    body {
-        background-color: #f0f2f5;
-        font-family: Arial, sans-serif;
-    }
-
-    /* Estilo personalizado para el pie de la barra lateral */
-    .custom-footer {
-        background-color: #1D4A86 !important;
-        /* Fondo azul personalizado */
-        color: #C4C4C4 !important;
-        /* Texto en color claro */
-        padding: 10px;
-        text-align: center;
-    }
-
-    .custom-footer .small {
-        color: #C4C4C4 !important;
-        /* Color del texto pequeño */
-        font-size: 0.85rem !important;
-    }
-
-    body {
-        background-color: #f0f2f5;
-        font-family: Arial, sans-serif;
-    }
-
-    .header-section {
-        background-color: #343a40;
-        color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-
-    .breadcrumb {
-        background-color: transparent;
-        margin-bottom: 0;
-        font-size: 0.9rem;
-    }
-
-    .breadcrumb-item.active {
-        color: #adb5bd;
-    }
-
-    .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
-        color: #adb5bd;
-    }
-
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    }
-
-
-    .card-footer {
-        background-color: transparent;
-        border-top: none;
-    }
-</style>
-
-
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">

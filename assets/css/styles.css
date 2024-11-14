@@ -199,8 +199,8 @@ hr {
   height: 0;
 }
 
- /* Contenedor principal del interruptor */
- .switch {
+/* Contenedor principal del interruptor */
+.switch {
   position: relative;
   display: inline-block;
   width: 50px;
@@ -222,7 +222,8 @@ hr {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #ccc; /* Color de fondo apagado */
+  background: #ccc;
+  /* Color de fondo apagado */
   transition: background-color 0.4s ease;
   border-radius: 34px;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
@@ -243,24 +244,27 @@ hr {
 }
 
 /* Estado activado del interruptor */
-input:checked + .slider {
-  background: #4CAF50; /* Fondo verde cuando está activado */
+input:checked+.slider {
+  background: #4CAF50;
+  /* Fondo verde cuando está activado */
 }
 
-input:checked + .slider:before {
-  transform: translateX(22px); /* Mueve el círculo a la derecha */
+input:checked+.slider:before {
+  transform: translateX(22px);
+  /* Mueve el círculo a la derecha */
 }
 
 /* Efecto deshabilitado */
-input:disabled + .slider {
+input:disabled+.slider {
   background: #ddd;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-input:disabled + .slider:before {
+input:disabled+.slider:before {
   background-color: #f5f5f5;
 }
+
 /* Opcional: Animación de fecha solución */
 .fecha-solucion {
   transition: color 0.3s ease;
@@ -273,46 +277,46 @@ input:disabled + .slider:before {
 
 
 
-    /* Estilo para el botón principal */
-    #btn-create {
-        display: inline-block;
-        padding: 12px 30px;
-        background: linear-gradient(135deg, #4a90e2, #007bff);
-        color: white;
-        font-size: 16px;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        border-radius: 10px;
-        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
+/* Estilo para el botón principal */
+#btn-create {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #4a90e2, #007bff);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
 
-    #btn-create:hover {
-        background: linear-gradient(135deg, #0062cc, #004085);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-2px);
-        text-decoration: none;
-    }
+#btn-create:hover {
+  background: linear-gradient(135deg, #0062cc, #004085);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
 
-    /* Estilo del icono */
-    .card-footer .fa-angle-right {
-        font-size: 18px;
-        margin-left: 10px;
-        transition: transform 0.3s ease;
-    }
+/* Estilo del icono */
+.card-footer .fa-angle-right {
+  font-size: 18px;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
 
-    /* Animación del icono al pasar el cursor */
-    .card-footer:hover .fa-angle-right {
-        transform: translateX(5px);
-    }
+/* Animación del icono al pasar el cursor */
+.card-footer:hover .fa-angle-right {
+  transform: translateX(5px);
+}
 
-    /* Centrar el contenido del footer */
-    .card-footer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+/* Centrar el contenido del footer */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
@@ -459,6 +463,66 @@ ul ol {
   margin-bottom: 0;
 }
 
+body {
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilo personalizado para el pie de la barra lateral */
+.custom-footer {
+  background-color: #1D4A86 !important;
+  /* Fondo azul personalizado */
+  color: #C4C4C4 !important;
+  /* Texto en color claro */
+  padding: 10px;
+  text-align: center;
+}
+
+.custom-footer .small {
+  color: #C4C4C4 !important;
+  /* Color del texto pequeño */
+  font-size: 0.85rem !important;
+}
+
+body {
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+}
+
+.header-section {
+  background-color: #343a40;
+  color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item.active {
+  color: #adb5bd;
+}
+
+.breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+  color: #adb5bd;
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.card-footer {
+  background-color: transparent;
+  border-top: none;
+}
+
 dt {
   font-weight: 700;
 }
@@ -471,6 +535,71 @@ dd {
 blockquote {
   margin: 0 0 1rem;
 }
+
+/* Estilos generales para la tabla */
+.table-responsive .table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Encabezado de la tabla */
+.table thead th {
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  border-top: none;
+  border-bottom: 2px solid #ddd;
+}
+
+/* Celdas de la tabla */
+.table tbody td {
+  padding: 10px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+/* Resaltar fila al pasar el mouse */
+.table tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo de la celda de acciones */
+.boton-modificar img {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.boton-modificar img:hover {
+  transform: scale(1.1);
+}
+
+/* Botón de filtro */
+.filter-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #0056b3;
+}
+
+
 
 b,
 strong {

@@ -14,6 +14,7 @@ $db = Database::connect();
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Sistema Web</title>
+    <link rel="icon" href="../../assets/img/login02.ico" type="image/x-icon">
     <link href="../../assets/css/styles.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
@@ -29,7 +30,7 @@ $db = Database::connect();
 
     /* Estilo personalizado para el pie de la barra lateral */
     .custom-footer {
-        background-color: #1D4A86!important;
+        background-color: #1D4A86 !important;
         /* Fondo azul personalizado */
         color: #C4C4C4 !important;
         /* Texto en color claro */
@@ -221,7 +222,12 @@ $db = Database::connect();
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Area <?php echo htmlspecialchars($tipo_area); ?></h1>
+                    <div class="header-section">
+                        <h1><i class="fas fa-pipe"></i> Area <?php echo htmlspecialchars($tipo_area); ?></h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class=" active"><i class="fas fa-home"></i> Menú </li>
+                        </ol>
+                    </div>
                     <div class="card mb-4">
                         <div class="card-header"><i class="fas fa-table mr-1"></i>Menu</div>
                         <?php if (!empty($reportes)): ?>
