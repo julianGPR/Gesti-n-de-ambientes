@@ -1,3 +1,9 @@
+<?php
+// Conectar a la base de datos
+require_once 'config/db.php';
+$db = Database::connect();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,7 +14,10 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Sistema Web</title>
-    <link href="../../assets/css/styles.css" rel="stylesheet" />
+    <link href="../assets/css/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
@@ -38,17 +47,19 @@
     }
 </style>
 
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../../admin/home';
+        $url_regresar = '../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
-            <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
+            <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
                 class="fas fa-bars"></i></button>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
             <!-- Notificaciones en el menú de la campana -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
@@ -118,9 +129,10 @@
             </li>
 
             <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle dropdown-blue" id="userDropdown" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
@@ -186,6 +198,7 @@
                         </div>
 
 
+
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
@@ -212,168 +225,3 @@
             </nav>
         </div>
         <div id="layoutSidenav_content">
-            <main>
-                <style>
-                        body {
-                            font-family: Arial, sans-serif;
-                            background-color: #f3f4f6;
-                        }
-
-                        .container {
-                            max-width: 800px;
-                            margin-top: 20px;
-                        }
-
-                        h1 {
-                            font-size: 1.5rem;
-                            font-weight: bold;
-                            color: #1D4A86;
-                            text-align: center;
-                            margin-bottom: 20px;
-                        }
-
-                        .form-label {
-                            font-weight: 500;
-                            color: #6b7280;
-                        }
-
-                        .form-control,
-                        .form-select {
-                            background-color: #f9fafb;
-                            border: 1px solid #d1d5db;
-                            border-radius: 4px;
-                            color: #374151;
-                        }
-
-                        .btn-primary {
-                            background-color: #6C63FF;
-                            border: none;
-                            border-radius: 8px;
-                            padding: 10px 20px;
-                        }
-
-                        .btn-secondary {
-                            background-color: #e5e7eb;
-                            border: none;
-                            border-radius: 8px;
-                            padding: 10px 20px;
-                            color: #374151;
-                        }
-
-                        .icon {
-                            margin-right: 8px;
-                            color: #6b7280;
-                        }
-                    </style>
-                </head>
-
-                <body>
-
-                    <div class="container">
-                        <h1><i class="fas fa-box icon"></i> Crear Producto</h1>
-
-                        <form id="crearProductoForm" action="crearProducto" method="POST"
-                            onsubmit="return showConfirmModal(event)">
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="nombre" class="form-label"><i class="fas fa-tag icon"></i>
-                                        Nombre:</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="descripcion" class="form-label"><i class="fas fa-align-left icon"></i>
-                                        Descripción:</label>
-                                    <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="precio" class="form-label"><i class="fas fa-dollar-sign icon"></i>
-                                        Precio:</label>
-                                    <input type="number" class="form-control" name="precio" id="precio" step="0.01"
-                                        required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="stock" class="form-label"><i class="fas fa-boxes icon"></i>
-                                        Stock:</label>
-                                    <input type="number" class="form-control" name="stock" id="stock" required>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="fecha_creacion" class="form-label"><i
-                                            class="fas fa-calendar-alt icon"></i> Fecha de Creación:</label>
-                                    <input type="date" class="form-control" name="fecha_creacion" id="fecha_creacion"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Crear
-                                    Producto</button>
-                                <a href="../listarProductos" class="btn btn-secondary ms-2"><i
-                                        class="fas fa-times-circle"></i> Regresar</a>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Modal de confirmación -->
-                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Creación</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Está seguro de que desea crear este producto?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="submitForm()">Confirmar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </main>
-
-            <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                crossorigin="anonymous"></script>
-            <script src="../../assets/Js/scripts.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-                crossorigin="anonymous"></script>
-            <script src="../../assets/demo/chart-area-demo.js"></script>
-            <script src="../../assets/demo/chart-bar-demo.js"></script>
-            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-                crossorigin="anonymous"></script>
-            <script src="../../assets/demo/datatables-demo.js"></script>
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-            <script>
-                // Función para mostrar el modal de confirmación
-                function showConfirmModal(event) {
-                    event.preventDefault();
-                    const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
-                    modal.show();
-                }
-
-                // Enviar el formulario después de la confirmación
-                function submitForm() {
-                    document.getElementById('crearProductoForm').submit();
-                }
-            </script>
-
-</body>
-
-</html>
