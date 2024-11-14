@@ -32,7 +32,7 @@ $db = Database::connect();
 
     /* Estilo personalizado para el pie de la barra lateral */
     .custom-footer {
-        background-color: #1D4A86!important;
+        background-color: #1D4A86 !important;
         /* Fondo azul personalizado */
         color: #C4C4C4 !important;
         /* Texto en color claro */
@@ -44,6 +44,45 @@ $db = Database::connect();
         color: #C4C4C4 !important;
         /* Color del texto pequeño */
         font-size: 0.85rem !important;
+    }
+
+    body {
+        background-color: #f0f2f5;
+        font-family: Arial, sans-serif;
+    }
+
+    .header-section {
+        background-color: #343a40;
+        color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+        margin-bottom: 0;
+        font-size: 0.9rem;
+    }
+
+    .breadcrumb-item.active {
+        color: #adb5bd;
+    }
+
+    .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+        color: #adb5bd;
+    }
+
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .card-footer {
+        background-color: transparent;
+        border-top: none;
     }
 </style>
 

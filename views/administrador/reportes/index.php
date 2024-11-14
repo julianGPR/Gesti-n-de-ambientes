@@ -60,6 +60,7 @@
 </style>
 <main>
     <div class="container-fluid">
+        
         <div class="header-section">
                 <h1><i class="fas fa-chart-line"></i> Reportes por Tipo de Área</h1>
                 <ol class="breadcrumb mb-4">

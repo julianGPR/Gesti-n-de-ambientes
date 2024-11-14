@@ -1,50 +1,4 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
-<style>
-    body {
-        background-color: #f0f2f5;
-        font-family: Arial, sans-serif;
-    }
-
-    .header-section {
-        background-color: #343a40;
-        color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 5px;
-        margin-bottom: 20px;
-    }
-
-    .breadcrumb {
-        background-color: transparent;
-        margin-bottom: 0;
-        font-size: 0.9rem;
-    }
-
-    .breadcrumb-item.active {
-        color: #adb5bd;
-    }
-
-    .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
-        color: #adb5bd;
-    }
-
-    .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s ease-in-out;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    }
-
-
-    .card-footer {
-        background-color: transparent;
-        border-top: none;
-    }
-</style>
 <main>
     <div class="container-fluid">
         <div class="header-section">
@@ -53,15 +7,15 @@
                 <li class="breadcrumb-item active"><i class="fas fa-home"></i> Menú</li>
             </ol>
         </div>
-
-        <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/' id="btn-create">
-                    Crear Nuevo Usuario
-                </a>
-            </div>
-        </div>
-
+     
+          <div class="row">
+    <div class="col-xl-3 col-md-6">
+        <a href='/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/' id="btn-create">
+            Crear Nuevo Usuario <i class="fas fa-angle-right"></i>
+        </a>
+    </div>
+</div>
+        
         <div class="card mb-4">
             <div class="card-header"><i class="fas fa-table mr-1"></i>Area de trabajo</div>
             <div class="card-body">
