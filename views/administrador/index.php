@@ -2,9 +2,9 @@
 <main>
     <div class="container-fluid">
         <div class="header-section">
-            <h1><i class="fas fa-home"></i>Inicio</h1>
+            <h1><i class="fas fa-home"></i> Inicio</h1>
             <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><i class="fas fa-home"></i> Menú</li>
+                <li class="breadcrumb-item"> Menú</li>
             </ol>
         </div>
         <div class="row">
