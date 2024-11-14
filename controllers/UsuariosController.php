@@ -88,5 +88,51 @@ class UsuariosController {
         header("Location: ../usuarios");
         exit();
     }
+
+    public function perfil() {
+        session_start();
+        $id_usuario = $_SESSION['Id_usuario'];
+        $usuariosModel = new UsuariosModel();
+        $usuario = $usuariosModel->obtenerUsuarioPorId($id_usuario);
+
+        if ($usuario && !empty($usuario['foto_perfil'])) {
+            $usuario['foto_perfil'] = 'data:image/jpeg;base64,' . base64_encode($usuario['foto_perfil']);
+        }
+        
+        require_once 'views/administrador/usuarios/perfil.php';
+    }
+    
+
+    // Mostrar el formulario de edición del perfil
+    public function editarPerfil() {
+        session_start();
+        $usuarioModel = new UsuariosModel();
+        $id = $_SESSION['Id_usuario'];
+        $usuario = $usuarioModel->obtenerUsuarioPorId($id);
+        
+        include 'views/administrador/usuarios/editar_perfil.php';
+    }
+
+    // Actualizar el perfil del usuario
+    public function actualizarPerfil() {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_SESSION['Id_usuario'];
+            $nombres = $_POST['nombres'];
+            $apellidos = $_POST['apellidos'];
+            $correo = $_POST['correo'];
+            $especialidad = $_POST['especialidad'];
+            $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
+                ? $_FILES['foto_perfil']['tmp_name'] 
+                : null;
+
+            $usuarioModel = new UsuariosModel();
+            $usuarioModel->actualizarPerfil($id, $nombres, $apellidos, $correo, $especialidad, $foto_perfil);
+            
+            header("Location: /dashboard/gestion%20de%20ambientes/usuarios/perfil");
+            exit();
+        }
+    }
+    
 }
 ?>

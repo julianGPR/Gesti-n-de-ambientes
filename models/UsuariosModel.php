@@ -91,5 +91,27 @@ class UsuariosModel{
             return false;
         }
     }
+
+    public function actualizarPerfil($id, $nombres, $apellidos, $correo, $especialidad, $foto_perfil = null) {
+        $conn = Database::connect();
+    
+        if ($foto_perfil) {
+            $foto_perfil = file_get_contents($foto_perfil); // Convertir la imagen a binario
+            $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Correo = ?, Especialidad = ?, foto_perfil = ? WHERE Id_usuario = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssbi", $nombres, $apellidos, $correo, $especialidad, $foto_perfil, $id);
+        } else {
+            $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Correo = ?, Especialidad = ? WHERE Id_usuario = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssi", $nombres, $apellidos, $correo, $especialidad, $id);
+        }
+        
+        $result = $stmt->execute();
+        $stmt->close();
+        $conn->close();
+
+        return $result;
+    }
+    
 }
 ?>
