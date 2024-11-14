@@ -225,7 +225,7 @@ $db = Database::connect();
                     <div class="header-section">
                         <h1><i class="fas fa-pipe"></i> Area <?php echo htmlspecialchars($tipo_area); ?></h1>
                         <ol class="breadcrumb mb-4">
-                            <li class=" active"><i class="fas fa-home"></i> Menú </li>
+                            <li class="breadcrumb-item"><i class="fas fa-home"></i> Menú </li>
                         </ol>
                     </div>
                     <div class="card mb-4">

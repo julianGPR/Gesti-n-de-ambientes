@@ -64,7 +64,7 @@
         <div class="header-section">
                 <h1><i class="fas fa-file-alt"></i> Reportes por Tipo de Área </h1>
                 <ol class="breadcrumb mb-4">
-                    <li class="breadcrumb-item active"><i class="fas fa-home"></i> Menú</li>
+                    <li class="breadcrumb-item"><i class="fas fa-home"></i> Menú</li>
                 </ol>
             </div>
         <div class="row">
