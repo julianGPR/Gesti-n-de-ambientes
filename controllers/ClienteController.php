@@ -14,22 +14,22 @@ class ClienteController {
         include 'views/administrador/clientes/index.php';
     }
 
+     // Código para manejar la creación del cliente (obtener datos de POST y llamar a modelo)
     public function crearCliente() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre = $_POST["nombre"];
             $direccion = $_POST["direccion"];
             $telefono = $_POST["telefono"];
             $correo = $_POST["correo"];
-    
+
             if ($this->clienteModel->crearCliente($nombre, $direccion, $telefono, $correo)) {
-                echo "
-                    <script>
-                        alert('Cliente creado exitosamente');
-                        window.location.href = '../listarClientes';
-                    </script>
-                ";
+                echo "Redirigiendo a la lista de clientes...";
+                // Redirigir a la lista de clientes después de la creación exitosa
+                header("Location: ../index.php?url=cliente/listarClientes");
                 exit();
+
             } else {
+                // Mostrar un mensaje de error si falla la creación
                 echo "
                     <script>
                         alert('Error al crear el cliente');
@@ -39,6 +39,7 @@ class ClienteController {
                 exit();
             }
         } else {
+            // Cargar la vista del formulario de creación
             include 'views/administrador/clientes/create.php';
         }
     }
@@ -49,13 +50,10 @@ class ClienteController {
             $direccion = $_POST["direccion"];
             $telefono = $_POST["telefono"];
             $correo = $_POST["correo"];
+            
             if ($this->clienteModel->actualizarCliente($id, $nombre, $direccion, $telefono, $correo)) {
-                echo "
-                    <script>
-                        alert('Cliente actualizado exitosamente');
-                        window.location.href = '../listarClientes';
-                    </script>
-                ";
+                // Redirección a la lista de clientes después de la actualización exitosa
+                header("Location: ../index.php?url=cliente/listarClientes");
                 exit();
             } else {
                 echo "

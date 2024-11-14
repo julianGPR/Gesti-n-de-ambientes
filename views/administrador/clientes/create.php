@@ -25,7 +25,7 @@
         
         <button type="submit">Guardar Cliente</button>
     </form>
-    <a href="index.php?controller=Cliente&action=listarClientes">Volver al listado</a>
+    <a href="index.php?url=cliente/listarClientes">Volver al listado</a>
 </body>
 </html>
 

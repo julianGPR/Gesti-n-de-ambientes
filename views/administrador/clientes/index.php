@@ -6,7 +6,8 @@
 </head>
 <body>
     <h1>Listado de Clientes</h1>
-    <a href="index.php?controller=Cliente&action=crearCliente">Agregar Cliente</a>
+    <a href="index.php?url=cliente/crearCliente">Agregar Cliente</a>
+
     <table border="1">
         <thead>
             <tr>

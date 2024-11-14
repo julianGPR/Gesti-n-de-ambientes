@@ -11,11 +11,14 @@ class Router {
 
         $controllerFile = __DIR__ . '/controllers/' . $controllerName . '.php';
 
+       
+
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
             $controller = new $controllerName();
 
             if (method_exists($controller, $methodName)) {
+            
                 $params = array_slice($urlSegments, 2);
                 call_user_func_array([$controller, $methodName], $params);
             } else {
@@ -28,4 +31,5 @@ class Router {
         }
     }
 }
+
 ?>
