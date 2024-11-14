@@ -14,9 +14,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
+<style>
+    body {
+        background-color: #f0f2f5;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Estilo personalizado para el pie de la barra lateral */
+    .custom-footer {
+        background-color: #1D4A86 !important;
+        /* Fondo azul personalizado */
+        color: #C4C4C4 !important;
+        /* Texto en color claro */
+        padding: 10px;
+        text-align: center;
+    }
+
+    .custom-footer .small {
+        color: #C4C4C4 !important;
+        /* Color del texto pequeño */
+        font-size: 0.85rem !important;
+    }
+</style>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue "
+        style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <a class="navbar-brand" href="/dashboard/gestion%20de%20ambientes/encargado/home">
             <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
@@ -59,9 +82,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                <div class=" custom-footer">
+                    <div class="small">Conectado como:</div>
+                    Proyecto GAFRA
                 </div>
             </nav>
         </div>
@@ -87,34 +110,41 @@
                     <div class="card mb-4">
                         <div class="card-header"><i class="fas fa-table mr-1"></i>Reporte</div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="tablaReportes" id="dataTable" width="100%"
-                                    cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>ID Reporte</th>
-                                            <th>Fecha y Hora</th>
-                                            <th>Área</th>
-                                            <th>Estado Reporte</th>
-                                            <th>Fecha Solución</th>
-                                            <th>Observaciones</th>
-                                        </tr>
-                                    <tbody>
-                                        <?php foreach ($reportes as $reporte): ?>
+                            <?php if (!empty($reportes)): ?>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="tablaReportes" id="dataTable" width="100%"
+                                        cellspacing="0">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['nombre_area']); ?></td>
-                                                <td><?php echo $reporte['Estado_Reporte'] == 2 ? 'Confirmado' : 'Pendiente'; ?>
-                                                </td>
-                                                <td><?php echo !empty($reporte['Fecha_Solucion']) ? htmlspecialchars($reporte['Fecha_Solucion']) : 'Sin aprobar'; ?>
-                                                </td>
-
-                                                <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
+                                                <th>ID Reporte</th>
+                                                <th>Fecha y Hora</th>
+                                                <th>Área</th>
+                                                <th>Estado Reporte</th>
+                                                <th>Fecha Solución</th>
+                                                <th>Observaciones</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                        <tbody>
+                                            <?php foreach ($reportes as $reporte): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
+                                                    <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
+                                                    <td><?php echo htmlspecialchars($reporte['nombre_area']); ?></td>
+                                                    <td><?php echo $reporte['Estado_Reporte'] == 2 ? 'Confirmado' : 'Pendiente'; ?>
+                                                    </td>
+                                                    <td><?php echo !empty($reporte['Fecha_Solucion']) ? htmlspecialchars($reporte['Fecha_Solucion']) : 'Sin aprobar'; ?>
+                                                    </td>
+
+                                                    <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                <?php else: ?>
+                                    <div class="alert alert-warning text-center mt-4" role="alert">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> No hay reportes disponibles.
+                                    </div>
+                                <?php endif; ?>
+
                                 </section>
                                 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
                                     crossorigin="anonymous"></script>

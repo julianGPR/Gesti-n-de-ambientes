@@ -47,6 +47,7 @@ $db = Database::connect();
     }
 </style>
 
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">

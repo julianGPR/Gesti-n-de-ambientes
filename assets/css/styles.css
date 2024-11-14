@@ -158,25 +158,163 @@ hr {
 .navbar .fa-user,
 .navbar .dropdown-toggle,
 .navbar .badge {
-    color: #1D4A86; /* Cambia a tu color deseado */
+  color: #1D4A86;
+  /* Cambia a tu color deseado */
 }
 
 /* Cambia el color del interruptor o cualquier elemento específico */
-.switch, .toggle-switch {
-    background-color: #1D4A86; /* Cambia a tu color deseado */
-    color: #ffffff; /* Color del ícono o del texto */
+.switch,
+.toggle-switch {
+  background-color: #1D4A86;
+  /* Cambia a tu color deseado */
+  color: #ffffff;
+  /* Color del ícono o del texto */
 }
 
 /* Si necesitas cambiar el color de la campana específicamente */
 .navbar .fa-bell {
-    color: #0D2444; /* Cambia a tu color deseado */
+  color: #0D2444;
+  /* Cambia a tu color deseado */
 }
 
 /* Cambia el color de fondo y texto de la alerta del contador de notificaciones */
 .badge-danger {
-    background-color: #FF6B6B; /* Cambia el color de fondo de la alerta */
-    color: #ffffff; /* Color del texto en la alerta */
+  background-color: #FF6B6B;
+  /* Cambia el color de fondo de la alerta */
+  color: #ffffff;
+  /* Color del texto en la alerta */
 }
+
+/* Contenedor principal del interruptor */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+ /* Contenedor principal del interruptor */
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  vertical-align: middle;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Fondo del interruptor */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ccc; /* Color de fondo apagado */
+  transition: background-color 0.4s ease;
+  border-radius: 34px;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Diseño del círculo del interruptor */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  background-color: white;
+  bottom: 3px;
+  left: 3px;
+  transition: transform 0.4s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Estado activado del interruptor */
+input:checked + .slider {
+  background: #4CAF50; /* Fondo verde cuando está activado */
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px); /* Mueve el círculo a la derecha */
+}
+
+/* Efecto deshabilitado */
+input:disabled + .slider {
+  background: #ddd;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+input:disabled + .slider:before {
+  background-color: #f5f5f5;
+}
+/* Opcional: Animación de fecha solución */
+.fecha-solucion {
+  transition: color 0.3s ease;
+}
+
+.fecha-solucion:hover {
+  color: #007bff;
+  font-weight: bold;
+}
+
+
+
+    /* Estilo para el botón principal */
+    #btn-create {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #4a90e2, #007bff);
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    #btn-create:hover {
+        background: linear-gradient(135deg, #0062cc, #004085);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+        text-decoration: none;
+    }
+
+    /* Estilo del icono */
+    .card-footer .fa-angle-right {
+        font-size: 18px;
+        margin-left: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    /* Animación del icono al pasar el cursor */
+    .card-footer:hover .fa-angle-right {
+        transform: translateX(5px);
+    }
+
+    /* Centrar el contenido del footer */
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
 
 
 .custom-link {
@@ -190,18 +328,22 @@ hr {
 }
 
 .custom-link:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Efecto hover */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* Efecto hover */
   color: #ffffff;
 }
 
 .sb-nav-link-icon {
   margin-right: 8px;
-  color: #ffffff; /* Asegura que el ícono tenga el color correcto */
+  color: #ffffff;
+  /* Asegura que el ícono tenga el color correcto */
 }
 
 .collapse .nav-link {
-  padding-left: 30px; /* Ajusta el padding para las opciones anidadas */
-  color: #c2c7d0; /* Color para los subelementos */
+  padding-left: 30px;
+  /* Ajusta el padding para las opciones anidadas */
+  color: #c2c7d0;
+  /* Color para los subelementos */
 }
 
 /* Efecto al pasar el mouse */

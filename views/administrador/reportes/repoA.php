@@ -26,6 +26,22 @@ $db = Database::connect();
         background-color: #f0f2f5;
         font-family: Arial, sans-serif;
     }
+
+    /* Estilo personalizado para el pie de la barra lateral */
+    .custom-footer {
+        background-color: #1D4A86!important;
+        /* Fondo azul personalizado */
+        color: #C4C4C4 !important;
+        /* Texto en color claro */
+        padding: 10px;
+        text-align: center;
+    }
+
+    .custom-footer .small {
+        color: #C4C4C4 !important;
+        /* Color del texto pequeño */
+        font-size: 0.85rem !important;
+    }
 </style>
 
 <body class="sb-nav-fixed">
@@ -143,12 +159,12 @@ $db = Database::connect();
 
                         <div class="nav-link d-flex align-items-center">
                             <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
-                                class="d-flex align-items-center">
+                                class="d-flex align-items-center custom-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
-                            <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
-                                aria-expanded="false" aria-controls="collapseLayouts">
+                            <a href="#" class="ml-auto custom-link" data-toggle="collapse"
+                                data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <i class="fas fa-angle-down"></i>
                             </a>
                         </div>
@@ -156,19 +172,19 @@ $db = Database::connect();
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
                                     <i class="fas fa-toolbox"></i> Tubería
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
                                     <i class="fas fa-cogs"></i> Ensamble
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
                                     <i class="fas fa-cut"></i> Corte
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
                                     <i class="fas fa-satellite"></i> Satélite
                                 </a>
@@ -196,9 +212,9 @@ $db = Database::connect();
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                <div class=" custom-footer">
+                    <div class="small">Conectado como:</div>
+                    Proyecto GAFRA
                 </div>
             </nav>
         </div>
@@ -208,61 +224,55 @@ $db = Database::connect();
                     <h1 class="mt-4">Area <?php echo htmlspecialchars($tipo_area); ?></h1>
                     <div class="card mb-4">
                         <div class="card-header"><i class="fas fa-table mr-1"></i>Menu</div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="tablaReportes" id="dataTable" width="100%"
-                                    cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID Reporte</th>
-                                            <th scope="col">Fecha y Hora</th>
-                                            <th scope="col">ID Usuario</th>
-                                            <th scope="col">ID Área</th>
-                                            <th scope="col">Estado</th>
-                                            <th scope="col">Estado Reporte</th>
-                                            <th scope="col">Fecha Solución</th>
-                                            <th scope="col">Observaciones</th>
-                                        </tr>
-                                    <tbody>
-                                        <?php foreach ($reportes as $reporte): ?>
+                        <?php if (!empty($reportes)): ?>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="tablaReportes" id="dataTable" width="100%"
+                                        cellspacing="0">
+                                        <thead>
                                             <tr>
-                                                <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['Id_usuario']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['Id_area']); ?></td>
-                                                <td>
-                                                    <?php echo htmlspecialchars($reporte['Estado']); ?>
-                                                    <?php if ($reporte['Estado'] === 'Activo'): ?>
-                                                        <i class="bi bi-circle-fill text-success"></i>
-                                                    <?php elseif ($reporte['Estado'] === 'Inactivo'): ?>
-                                                        <i class="bi bi-circle-fill text-secondary"></i>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td><?php echo htmlspecialchars($reporte['Estado_Reporte']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['Fecha_Solucion']); ?></td>
-                                                <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
+                                                <th scope="col">ID Reporte</th>
+                                                <th scope="col">Fecha y Hora</th>
+                                                <th scope="col">Usuario</th>
+                                                <th scope="col">Área</th>
+                                                <th scope="col">Estado Reporte</th>
+                                                <th scope="col">Fecha Solución</th>
+                                                <th scope="col">Observaciones</th>
                                             </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        <tbody>
+                                            <?php foreach ($reportes as $reporte): ?>
+                                                <tr>
+                                                    <td><?php echo htmlspecialchars($reporte['Id_reporte']); ?></td>
+                                                    <td><?php echo htmlspecialchars($reporte['FechaHora']); ?></td>
+                                                    <td><?php echo htmlspecialchars($reporte['Nombres'] . ' ' . $reporte['Apellidos']); ?>
+                                                    </td>
+                                                    <td><?php echo htmlspecialchars($reporte['nombre_area']); ?></td>
+                                                    <td>
+                                                        <label class="switch">
+                                                            <input type="checkbox" class="toggle-switch"
+                                                                data-id="<?php echo $reporte['Id_reporte']; ?>" <?php echo $reporte['Estado_Reporte'] == '2' ? 'checked disabled' : ''; ?>>
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </td>
+                                                    <td class="fecha-solucion" data-id="<?php echo $reporte['Id_reporte']; ?>">
+                                                        <?php echo htmlspecialchars($reporte['Fecha_Solucion']); ?>
+                                                    </td>
+                                                    <td><?php echo htmlspecialchars($reporte['Observaciones']); ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php else: ?>
+                                <div class="alert alert-warning text-center mt-4" role="alert">
+                                    <i class="bi bi-exclamation-triangle-fill"></i> No hay reportes para el tipo de área
+                                    seleccionado.
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </main>
-            <div class="container">
-                <?php if ($reportes): ?>
-                    <!-- Aquí va el código para mostrar los reportes -->
-                    <div class="reportes">
-                        <!-- Muestra los reportes aquí -->
-                    </div>
-                <?php else: ?>
-                    <div class="alert alert-warning text-center mt-4" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill"></i> No hay reportes para el tipo de área seleccionado.
-                    </div>
-                <?php endif; ?>
-            </div>
-
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
@@ -287,6 +297,16 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../../assets/demo/datatables-demo.js"></script>
+    <!-- Bootstrap JS y dependencias de DataTables -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
     <!-- CSS de DataTables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 

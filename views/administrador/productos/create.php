@@ -15,6 +15,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
+<style>
+    body {
+        background-color: #f0f2f5;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Estilo personalizado para el pie de la barra lateral */
+    .custom-footer {
+        background-color: #1D4A86!important;
+        /* Fondo azul personalizado */
+        color: #C4C4C4 !important;
+        /* Texto en color claro */
+        padding: 10px;
+        text-align: center;
+    }
+
+    .custom-footer .small {
+        color: #C4C4C4 !important;
+        /* Color del texto pequeño */
+        font-size: 0.85rem !important;
+    }
+</style>
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
@@ -131,12 +153,12 @@
 
                         <div class="nav-link d-flex align-items-center">
                             <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
-                                class="d-flex align-items-center">
+                                class="d-flex align-items-center custom-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
-                            <a href="#" class="ml-auto" data-toggle="collapse" data-target="#collapseLayouts"
-                                aria-expanded="false" aria-controls="collapseLayouts">
+                            <a href="#" class="ml-auto custom-link" data-toggle="collapse"
+                                data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <i class="fas fa-angle-down"></i>
                             </a>
                         </div>
@@ -144,25 +166,24 @@
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
                                     <i class="fas fa-toolbox"></i> Tubería
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
                                     <i class="fas fa-cogs"></i> Ensamble
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
                                     <i class="fas fa-cut"></i> Corte
                                 </a>
-                                <a class="nav-link"
+                                <a class="nav-link custom-link"
                                     href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
                                     <i class="fas fa-satellite"></i> Satélite
                                 </a>
                             </nav>
                         </div>
-
 
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
@@ -184,24 +205,15 @@
                         </a>
                     </div>
                 </div>
-                <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:</div>
-                    Start Bootstrap
+                <div class=" custom-footer">
+                    <div class="small">Conectado como:</div>
+                    Proyecto GAFRA
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <!DOCTYPE html>
-                <html lang="es">
-
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Crear Producto</title>
-                    <link rel="stylesheet"
-                        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-                    <style>
+                <style>
                         body {
                             font-family: Arial, sans-serif;
                             background-color: #f3f4f6;

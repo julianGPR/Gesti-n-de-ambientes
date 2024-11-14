@@ -6,24 +6,37 @@
         font-family: Arial, sans-serif;
     }
 
-    .container-fluid {
-        margin-top: 2rem;
+    .header-section {
+        background-color: #343a40;
+        color: #f8f9fa;
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 20px;
     }
 
     h1 {
         font-size: 1.8rem;
         font-weight: bold;
-        color: #4a4a4a;
+    }
+
+    .breadcrumb {
+        background-color: transparent;
+        margin-bottom: 0;
+        font-size: 0.9rem;
     }
 
     .breadcrumb-item.active {
-        color: #6c757d;
+        color: #adb5bd;
+    }
+
+    .breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+        color: #adb5bd;
     }
 
     .card {
         border: none;
         border-radius: 10px;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         transition: transform 0.2s ease-in-out;
     }
 
@@ -34,31 +47,25 @@
 
     .card-body {
         font-weight: 600;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         display: flex;
         align-items: center;
-    }
-
-    .card-body i {
-        font-size: 1.3rem;
-        margin-right: 10px;
+        gap: 10px;
     }
 
     .card-footer {
         background-color: transparent;
         border-top: none;
     }
-
-    .stretched-link:hover {
-        color: #f8f9fa;
-    }
 </style>
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">Reportes por Tipo de Área</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Menú</li>
-        </ol>
+        <div class="header-section">
+                <h1><i class="fas fa-chart-line"></i> Reportes por Tipo de Área</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"><i class="fas fa-home"></i> Menú</li>
+                </ol>
+            </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
                 <div class="card bg-primary text-white mb-4">
