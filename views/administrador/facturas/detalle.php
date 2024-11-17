@@ -216,42 +216,42 @@ $db = Database::connect();
         <div id="layoutSidenav_content">
             <style>
                 body {
-                    background-color: #f5f7fa;
-                    font-family: Arial, sans-serif;
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    background-color: #f8f9fa;
                 }
 
                 .container {
-                    margin-top: 40px;
-                    margin-bottom: 40px;
+                    margin-top: 50px;
+                    margin-bottom: 50px;
                 }
 
                 .card {
                     border: none;
-                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-                    border-radius: 15px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                    border-radius: 12px;
                 }
 
                 .card-header {
-                    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+                    background: linear-gradient(to right, #4e54c8, #8f94fb);
                     color: white;
-                    font-size: 1.5rem;
-                    font-weight: bold;
                     text-align: center;
-                    padding: 20px;
-                    border-radius: 15px 15px 0 0;
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                    padding: 15px;
+                    border-radius: 12px 12px 0 0;
                 }
 
                 .card-body {
-                    padding: 25px 30px;
+                    padding: 30px;
                 }
 
-                .card-body h5 {
+                .section-title {
+                    font-size: 1.3rem;
                     font-weight: bold;
                     color: #495057;
                     margin-bottom: 20px;
-                    border-bottom: 2px solid #6c63ff;
-                    display: inline-block;
-                    padding-bottom: 5px;
+                    padding-bottom: 10px;
+                    border-bottom: 2px solid #4e54c8;
                 }
 
                 .table {
@@ -260,12 +260,11 @@ $db = Database::connect();
                 }
 
                 .table th {
-                    background-color: #6c63ff;
+                    background-color: #4e54c8;
                     color: white;
                     text-align: center;
                     font-size: 1rem;
                     padding: 10px;
-                    border: none;
                 }
 
                 .table td {
@@ -276,20 +275,20 @@ $db = Database::connect();
                 }
 
                 .btn {
-                    border-radius: 50px;
                     padding: 10px 20px;
                     font-size: 0.95rem;
                     font-weight: bold;
+                    border-radius: 50px;
                     transition: all 0.3s ease;
                 }
 
                 .btn-primary {
-                    background-color: #6c63ff;
+                    background-color: #4e54c8;
                     border: none;
                 }
 
                 .btn-primary:hover {
-                    background-color: #4e54c8;
+                    background-color: #3a41b1;
                 }
 
                 .btn-success {
@@ -311,7 +310,7 @@ $db = Database::connect();
                 }
 
                 .footer-text {
-                    margin-top: 40px;
+                    margin-top: 50px;
                     text-align: center;
                     font-size: 0.9rem;
                     color: #6c757d;
@@ -326,50 +325,62 @@ $db = Database::connect();
                                 </div>
                                 <div class="card-body">
                                     <!-- Información del Cliente -->
-                                    <h5><i class="fas fa-user icon"></i> Información del Cliente</h5>
-                                    <p><strong>Nombre:</strong>
-                                        <?php echo htmlspecialchars($factura['cliente_nombre']); ?></p>
-                                    <p><strong>Documento/NIT:</strong>
-                                        <?php echo htmlspecialchars($factura['documento_nit']); ?></p>
-                                    <p><strong>Email:</strong>
-                                        <?php echo htmlspecialchars($factura['cliente_email']); ?></p>
-                                    <p><strong>Teléfono:</strong>
-                                        <?php echo htmlspecialchars($factura['cliente_telefono']); ?></p>
+                                    <div>
+                                        <h2 class="section-title"><i class="fas fa-user icon"></i> Información del
+                                            Cliente</h2>
+                                        <p><strong>Nombre:</strong>
+                                            <?php echo htmlspecialchars($factura['cliente_nombre']); ?></p>
+                                        <p><strong>Documento/NIT:</strong>
+                                            <?php echo htmlspecialchars($factura['documento_nit']); ?></p>
+                                        <p><strong>Email:</strong>
+                                            <?php echo htmlspecialchars($factura['cliente_email']); ?></p>
+                                        <p><strong>Teléfono:</strong>
+                                            <?php echo htmlspecialchars($factura['cliente_telefono']); ?></p>
+                                    </div>
 
                                     <!-- Información de la Factura -->
-                                    <h5 class="mt-4"><i class="fas fa-receipt icon"></i> Información de la Factura</h5>
-                                    <p><strong>Fecha:</strong> <?php echo htmlspecialchars($factura['fecha']); ?></p>
-                                    <p><strong>Subtotal:</strong> <?php echo number_format($factura['subtotal'], 2); ?>
-                                        COP</p>
-                                    <p><strong>IVA:</strong> <?php echo number_format($factura['iva'], 2); ?> COP</p>
-                                    <p><strong>Descuento:</strong>
-                                        <?php echo number_format($factura['descuento'], 2); ?> COP</p>
-                                    <p><strong>Total:</strong> <?php echo number_format($factura['total'], 2); ?> COP
-                                    </p>
+                                    <div class="mt-4">
+                                        <h2 class="section-title"><i class="fas fa-receipt icon"></i> Información de la
+                                            Factura</h2>
+                                        <p><strong>Fecha:</strong> <?php echo htmlspecialchars($factura['fecha']); ?>
+                                        </p>
+                                        <p><strong>Subtotal:</strong>
+                                            <?php echo number_format($factura['subtotal'], 2); ?> COP</p>
+                                        <p><strong>IVA:</strong> <?php echo number_format($factura['iva'], 2); ?> COP
+                                        </p>
+                                        <p><strong>Descuento:</strong>
+                                            <?php echo number_format($factura['descuento'], 2); ?> COP</p>
+                                        <p><strong>Total:</strong> <?php echo number_format($factura['total'], 2); ?>
+                                            COP</p>
+                                    </div>
 
                                     <!-- Detalles de los Productos -->
-                                    <h5 class="mt-4"><i class="fas fa-boxes icon"></i> Detalles de los Productos</h5>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Producto</th>
-                                                <th>Cantidad</th>
-                                                <th>Precio Unitario</th>
-                                                <th>Subtotal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($detalles as $detalle): ?>
+                                    <div class="mt-4">
+                                        <h2 class="section-title"><i class="fas fa-boxes icon"></i> Detalles de los
+                                            Productos</h2>
+                                        <table class="table">
+                                            <thead>
                                                 <tr>
-                                                    <td><?php echo htmlspecialchars($detalle['producto_nombre']); ?></td>
-                                                    <td><?php echo htmlspecialchars($detalle['cantidad']); ?></td>
-                                                    <td><?php echo number_format($detalle['precio_unitario'], 2); ?> COP
-                                                    </td>
-                                                    <td><?php echo number_format($detalle['subtotal'], 2); ?> COP</td>
+                                                    <th>Producto</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio Unitario</th>
+                                                    <th>Subtotal</th>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach ($detalles as $detalle): ?>
+                                                    <tr>
+                                                        <td><?php echo htmlspecialchars($detalle['producto_nombre']); ?>
+                                                        </td>
+                                                        <td><?php echo htmlspecialchars($detalle['cantidad']); ?></td>
+                                                        <td><?php echo number_format($detalle['precio_unitario'], 2); ?> COP
+                                                        </td>
+                                                        <td><?php echo number_format($detalle['subtotal'], 2); ?> COP</td>
+                                                    </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                     <!-- Botones de Acción -->
                                     <div class="text-right mt-4">
@@ -387,6 +398,20 @@ $db = Database::connect();
                         </div>
                     </div>
                 </div>
+
+                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="../../assets/Js/scripts.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="../../assets/demo/chart-area-demo.js"></script>
+                <script src="../../assets/demo/chart-bar-demo.js"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                    crossorigin="anonymous"></script>
+                <script src="../../assets/demo/datatables-demo.js"></script>
 
                 <script>
                     function imprimirFactura() {
