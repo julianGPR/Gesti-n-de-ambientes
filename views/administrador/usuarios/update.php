@@ -273,7 +273,7 @@
 
                     <!-- Formulario de edición de usuario -->
                     <form id="usuarioForm" action="../updateUsuario/<?php echo $usuario['Id_usuario']; ?>" method="POST"
-                        onsubmit="return showConfirmModal(event)">
+                        onsubmit="return showConfirmModal(event)" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="nombres" class="form-label"><i class="fas fa-user icon"></i> Nombre del
@@ -318,6 +318,11 @@
                                     <option value="Encargado" <?php echo (isset($usuario['Rol']) && $usuario['Rol'] === 'Encargado') ? 'selected' : ''; ?>>Encargado</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto_perfil">Foto de Perfil</label>
+                            <input type="file" class="form-control-file" name="foto_perfil" id="foto_perfil">
                         </div>
 
                         <div class="text-center">

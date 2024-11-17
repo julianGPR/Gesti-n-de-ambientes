@@ -53,18 +53,26 @@
         <div class="row profile-container">
             <!-- Sidebar del perfil -->
             <div class="col-md-4 profile-sidebar">
-                <?php
-                if (!empty($usuario['foto_perfil'])) {
-                    echo '<img src="' . $usuario['foto_perfil'] . '" alt="Foto de perfil" class="profile-img">';
-                } else {
-                    echo '<img src="../assets/icon-5355896_1280.png" alt="Foto de perfil" class="profile-img">';
-                }
-                ?>
-                <h3><?php echo htmlspecialchars($usuario['Nombres'] . ' ' . $usuario['Apellidos']); ?></h3>
-                <p><strong>Correo:</strong> <?php echo htmlspecialchars($usuario['Correo']); ?></p>
-                <p><strong>Rol:</strong> <?php echo htmlspecialchars($usuario['Rol']); ?></p>
-                <p><strong>Estado:</strong> <?php echo htmlspecialchars($usuario['Estado']); ?></p>
-            </div>
+    <?php
+    if (!empty($usuario['foto_perfil'])) {
+        // Verifica si ya contiene el prefijo "data:image/jpeg;base64,"
+        if (strpos($usuario['foto_perfil'], 'data:image/') === 0) {
+            echo '<img src="' . $usuario['foto_perfil'] . '" alt="Foto de perfil" class="profile-img">';
+        } else {
+            // Si no contiene el prefijo, codifica en Base64
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($usuario['foto_perfil']) . '" alt="Foto de perfil" class="profile-img">';
+        }
+    } else {
+        echo '<img src="../assets/icon-5355896_1280.png" alt="Foto de perfil" class="profile-img">';
+    }
+    
+    ?>
+    <h3><?php echo htmlspecialchars($usuario['Nombres'] . ' ' . $usuario['Apellidos']); ?></h3>
+    <p><strong>Correo:</strong> <?php echo htmlspecialchars($usuario['Correo']); ?></p>
+    <p><strong>Rol:</strong> <?php echo htmlspecialchars($usuario['Rol']); ?></p>
+    <p><strong>Estado:</strong> <?php echo htmlspecialchars($usuario['Estado']); ?></p>
+</div>
+
 
             <!-- Formulario de edición del perfil -->
             <div class="col-md-8 form-section">
