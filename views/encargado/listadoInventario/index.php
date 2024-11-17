@@ -56,11 +56,6 @@
                                                 class="btn btn-outline-primary btn-sm me-2 d-flex align-items-center">
                                                 <i class="bi bi-pencil-fill me-1"></i> Editar
                                             </a>
-                                            <a href="/inventario/eliminar/<?= $entrada['id_entrada'] ?>"
-                                                class="btn btn-outline-danger btn-sm d-flex align-items-center"
-                                                onclick="return confirm('¿Estás seguro de eliminar esta entrada?');">
-                                                <i class="bi bi-trash-fill me-1"></i> Eliminar
-                                            </a>
                                         </div>
 
                                     </td>

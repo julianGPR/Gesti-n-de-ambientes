@@ -285,7 +285,7 @@ if (isset($_GET['success']) && $_GET['success'] === 'true'): ?>
                         </div>
 
                         <!-- Formulario de edición de proveedor -->
-                        <form id="proveedorForm" action="updateProveedor.php?id=<?php echo $id_proveedor; ?>"
+                        <form id="proveedorForm" action="../updateProveedor/<?php echo $id_proveedor; ?>"
                             method="POST" onsubmit="return showConfirmModal(event)">
                             <div class="row mb-3">
                                 <div class="col-md-6">

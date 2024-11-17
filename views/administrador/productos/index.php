@@ -1,4 +1,5 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
+
 <main>
     <div class="container-fluid">
         <div class="header-section">

@@ -10,9 +10,31 @@ class ProductoModel {
     }
 
     public function obtenerTodosLosProductos() {
+        $conn = Database::connect();
         $sql = "SELECT * FROM productos";
-        $resultado = $this->db->query($sql);
-        return $resultado->fetch_all(MYSQLI_ASSOC);
+        $result = $conn->query($sql);
+
+        $productos = [];
+        while ($fila = $result->fetch_assoc()) {
+            $productos[] = $fila;
+        }
+
+        return $productos;
+    }
+
+    public function obtenerStockProducto($id_producto) {
+        $conn = Database::connect();
+        $sql = "SELECT stock FROM productos WHERE id_producto = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id_producto);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc()['stock'];
+        } else {
+            return null;
+        }
     }
     
     public function crearProducto($nombre, $descripcion, $precio, $stock, $fecha_creacion) {
@@ -43,6 +65,17 @@ class ProductoModel {
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_assoc();
+    }
+
+    public function actualizarStockProducto($id_producto, $cantidad_reducir) {
+        $conn = Database::connect();
+
+        // Reducir el stock disponible
+        $sql = "UPDATE productos SET stock = stock - ? WHERE id_producto = ? AND stock >= ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iii", $cantidad_reducir, $id_producto, $cantidad_reducir);
+
+        return $stmt->execute();
     }
 
 }

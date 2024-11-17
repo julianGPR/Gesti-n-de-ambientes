@@ -283,7 +283,7 @@
 
                     <!-- Formulario de creación de usuario -->
                     <form id="usuarioForm" action="createUsuario" method="POST"
-                        onsubmit="return showConfirmModal(event)">
+                        onsubmit="return showConfirmModal(event)" enctype="multipart/form-data">
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="nombres" class="form-label"><i class="fas fa-user icon"></i> Nombre del
@@ -321,6 +321,11 @@
                                     <option value="Encargado">Encargado</option>
                                 </select>
                             </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="foto_perfil">Foto de Perfil</label>
+                            <input type="file" class="form-control-file" name="foto_perfil" id="foto_perfil">
                         </div>
 
                         <div class="text-center">

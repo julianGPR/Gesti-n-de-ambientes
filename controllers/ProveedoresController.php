@@ -33,7 +33,7 @@ class ProveedoresController {
     }
 
     // Método para actualizar un proveedor existente
-    public function updateProveedor($id) {
+    public function updateProveedor($id_proveedor) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombre = $_POST["nombre_proveedor"];
             $direccion = $_POST["direccion"];
@@ -41,18 +41,18 @@ class ProveedoresController {
             $email = $_POST["email"];
 
             $proveedoresModel = new ProveedoresModel();
-            $result = $proveedoresModel->modificarProveedor($id, $nombre, $direccion, $telefono, $email);
+            $result = $proveedoresModel->modificarProveedor($id_proveedor, $nombre, $direccion, $telefono, $email);
 
             if ($result) {
                 header("Location: ../proveedores");
                 exit();
             } else {
-                header("Location: index.php?error=Error al actualizar el proveedor&id=$id");
+                header("Location: index.php?error=Error al actualizar el proveedor&id=$id_proveedor");
                 exit();
             }
         } else {
             $proveedoresModel = new ProveedoresModel();
-            $proveedor = $proveedoresModel->obtenerProveedorPorId($id);
+            $proveedor = $proveedoresModel->obtenerProveedorPorId($id_proveedor);
             include 'views/administrador/proveedores/update.php';
         }
     }
