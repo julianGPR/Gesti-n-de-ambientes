@@ -8,12 +8,107 @@
             </ol>
         </div>
 
+<<<<<<< HEAD
         <div class="row">
             <div class="col-xl-3 col-md-6">
                 <a href='/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/' id="btn-create">
                     Crear area de trabajo
                 </a>
             </div>
+=======
+                                        <!-- Menú de filtros lateral -->
+                                        <div class="filter-menu" id="filterMenu" style="display:none;">
+                                            <h3>Filtrar Columnas</h3>
+                                            <button class="toggle-vis" data-column="0">Id</button>
+                                            <button class="toggle-vis" data-column="1">Nombre</button>
+                                            <button class="toggle-vis" data-column="2">Capacidad</button>
+                                            <button class="toggle-vis" data-column="3">Ubicacion</button>
+                                            <button class="toggle-vis" data-column="4">Responsable</button>
+                                            <button class="toggle-vis" data-column="5">Tipo area</button>
+                                            <button class="toggle-vis" data-column="6">Equipo disponible</button>
+                                            <button class="toggle-vis" data-column="7">Estado area</button>
+                                            <button class="toggle-vis" data-column="8">Fecha creacion</button>
+                                            <button class="toggle-vis" data-column="9">Comentarios</button>
+                                            <button class="toggle-vis" data-column="10">Accion</button>
+                                        </div>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Nombre</th>
+                                            <th>Capacidad</th>
+                                            <th>Ubicacion</th>
+                                            <th>Responsable</th>
+                                            <th>Area</th>
+                                            <th>Equipo</th>
+                                            <th>Estado</th>
+                                            <th>Fecha</th>
+                                            <th>Comentarios</th>
+                                            <th>Accion</th>
+                                        </tr>
+                                    <tbody>
+                                        <?php
+                                        $query = "SELECT * FROM AreaTrabajo";
+
+                                        if (!empty($filtros)) {
+                                            $query .= " WHERE " . implode(" AND ", $filtros);
+                                        }
+
+                                        $result = $db->query($query);
+
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "<tr>";
+                                                echo "<td>" . $row['id_area'] . "</td>";
+                                                echo "<td>" . $row['nombre_area'] . "</td>";
+                                                echo "<td>" . $row['capacidad'] . "</td>";
+                                                echo "<td>" . $row['ubicacion'] . "</td>";
+                                                echo "<td>" . $row['responsable'] . "</td>";
+                                                echo "<td>" . $row['tipo_area'] . "</td>";
+                                                echo "<td>" . $row['equipo_disponible'] . "</td>";
+                                                echo "<td>" . $row['estado_area'] . "</td>";
+                                                echo "<td>" . $row['fecha_creacion'] . "</td>";
+                                                echo "<td>" . $row['comentarios'] . "</td>";
+                                                echo "<td>";
+                                                if ($row['estado_area'] !== 'Inhabilitado') {
+                                                    $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAreaTrabajo/';
+                                                    echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
+
+                                                    $url_update = '/dashboard/gestion%20de%20ambientes/admin/generateQR/';
+                                                    echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-generar-qr' boton-accion ><img src='../assets/qr-code.svg'></a>";
+                                                } else {
+                                                    echo "<a href='#' onclick='confirmarHabilitar(" . $row['id_area'] . ")' class='boton-habilitar boton-accion'><img src='../assets/habilitar.svg'></a>";
+                                                }
+                                                if ($row['estado_area'] !== 'Inhabilitado') {
+                                                    echo "<a href='#' onclick='confirmarInhabilitar(" . $row['id_area'] . ")' class='boton-inhabilitar boton-accion'><img src='../assets/inhabilitar1.svg'></a>";
+                                                }
+                                                echo "</td>";
+                                                echo "</tr>";
+                                            }
+                                        } else {
+                                            echo "<tr><td colspan='11'>No hay registros</td></tr>";
+                                        }
+
+                                        $db->close();
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2019</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+>>>>>>> devJeffreyInicio
         </div>
 
         <div class="card mb-4">
