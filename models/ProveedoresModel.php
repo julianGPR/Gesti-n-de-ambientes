@@ -23,7 +23,7 @@ class ProveedoresModel {
         }
     }
 
-    public function modificarProveedor($id, $nombre, $direccion, $telefono, $email) {
+    public function modificarProveedor($id_proveedor, $nombre, $direccion, $telefono, $email) {
         $conn = Database::connect();
     
         $sql = "UPDATE proveedores SET nombre_proveedor = ?, direccion = ?, telefono = ?, email = ? WHERE id_proveedor = ?";
@@ -34,7 +34,7 @@ class ProveedoresModel {
             return false;
         }
     
-        $stmt->bind_param("ssssi", $nombre, $direccion, $telefono, $email, $id);
+        $stmt->bind_param("ssssi", $nombre, $direccion, $telefono, $email, $id_proveedor);
     
         $result = $stmt->execute();
     
@@ -48,7 +48,7 @@ class ProveedoresModel {
         $conn->close();
     }
 
-    public function obtenerProveedorPorId($id) {
+    public function obtenerProveedorPorId($id_proveedor) {
         $conn = Database::connect();
         $sql = "SELECT * FROM proveedores WHERE id_proveedor = ?";
     
@@ -56,7 +56,7 @@ class ProveedoresModel {
         $stmt = $conn->prepare($sql);
     
         // Vincular los parámetros
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("i", $id_proveedor);
     
         // Ejecutar la consulta
         $stmt->execute();
