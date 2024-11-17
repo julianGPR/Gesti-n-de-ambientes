@@ -316,108 +316,109 @@ $db = Database::connect();
                     color: #6c757d;
                 }
             </style>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-10">
-                            <div class="card">
-                                <div class="card-header">
-                                    Factura #<?php echo htmlspecialchars($factura['id']); ?>
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <div class="card">
+                            <div class="card-header">
+                                Factura #<?php echo htmlspecialchars($factura['id']); ?>
+                            </div>
+                            <div class="card-body">
+                                <!-- Información del Cliente -->
+                                <div>
+                                    <h2 class="section-title"><i class="fas fa-user icon"></i> Información del
+                                        Cliente</h2>
+                                    <p><strong>Nombre:</strong>
+                                        <?php echo htmlspecialchars($factura['cliente_nombre']); ?></p>
+                                    <p><strong>Documento/NIT:</strong>
+                                        <?php echo htmlspecialchars($factura['documento_nit']); ?></p>
+                                    <p><strong>Email:</strong>
+                                        <?php echo htmlspecialchars($factura['cliente_email']); ?></p>
+                                    <p><strong>Teléfono:</strong>
+                                        <?php echo htmlspecialchars($factura['cliente_telefono']); ?></p>
                                 </div>
-                                <div class="card-body">
-                                    <!-- Información del Cliente -->
-                                    <div>
-                                        <h2 class="section-title"><i class="fas fa-user icon"></i> Información del
-                                            Cliente</h2>
-                                        <p><strong>Nombre:</strong>
-                                            <?php echo htmlspecialchars($factura['cliente_nombre']); ?></p>
-                                        <p><strong>Documento/NIT:</strong>
-                                            <?php echo htmlspecialchars($factura['documento_nit']); ?></p>
-                                        <p><strong>Email:</strong>
-                                            <?php echo htmlspecialchars($factura['cliente_email']); ?></p>
-                                        <p><strong>Teléfono:</strong>
-                                            <?php echo htmlspecialchars($factura['cliente_telefono']); ?></p>
-                                    </div>
 
-                                    <!-- Información de la Factura -->
-                                    <div class="mt-4">
-                                        <h2 class="section-title"><i class="fas fa-receipt icon"></i> Información de la
-                                            Factura</h2>
-                                        <p><strong>Fecha:</strong> <?php echo htmlspecialchars($factura['fecha']); ?>
-                                        </p>
-                                        <p><strong>Subtotal:</strong>
-                                            <?php echo number_format($factura['subtotal'], 2); ?> COP</p>
-                                        <p><strong>IVA:</strong> <?php echo number_format($factura['iva'], 2); ?> COP
-                                        </p>
-                                        <p><strong>Descuento:</strong>
-                                            <?php echo number_format($factura['descuento'], 2); ?> COP</p>
-                                        <p><strong>Total:</strong> <?php echo number_format($factura['total'], 2); ?>
-                                            COP</p>
-                                    </div>
+                                <!-- Información de la Factura -->
+                                <div class="mt-4">
+                                    <h2 class="section-title"><i class="fas fa-receipt icon"></i> Información de la
+                                        Factura</h2>
+                                    <p><strong>Fecha:</strong> <?php echo htmlspecialchars($factura['fecha']); ?>
+                                    </p>
+                                    <p><strong>Subtotal:</strong>
+                                        <?php echo number_format($factura['subtotal'], 2); ?> COP</p>
+                                    <p><strong>IVA:</strong> <?php echo number_format($factura['iva'], 2); ?> COP
+                                    </p>
+                                    <p><strong>Descuento:</strong>
+                                        <?php echo number_format($factura['descuento'], 2); ?> COP</p>
+                                    <p><strong>Total:</strong> <?php echo number_format($factura['total'], 2); ?>
+                                        COP</p>
+                                </div>
 
-                                    <!-- Detalles de los Productos -->
-                                    <div class="mt-4">
-                                        <h2 class="section-title"><i class="fas fa-boxes icon"></i> Detalles de los
-                                            Productos</h2>
-                                        <table class="table">
-                                            <thead>
+                                <!-- Detalles de los Productos -->
+                                <div class="mt-4">
+                                    <h2 class="section-title"><i class="fas fa-boxes icon"></i> Detalles de los
+                                        Productos</h2>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio Unitario</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($detalles as $detalle): ?>
                                                 <tr>
-                                                    <th>Producto</th>
-                                                    <th>Cantidad</th>
-                                                    <th>Precio Unitario</th>
-                                                    <th>Subtotal</th>
+                                                    <td><?php echo htmlspecialchars($detalle['producto_nombre']); ?>
+                                                    </td>
+                                                    <td><?php echo htmlspecialchars($detalle['cantidad']); ?></td>
+                                                    <td><?php echo number_format($detalle['precio_unitario'], 2); ?> COP
+                                                    </td>
+                                                    <td><?php echo number_format($detalle['subtotal'], 2); ?> COP</td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach ($detalles as $detalle): ?>
-                                                    <tr>
-                                                        <td><?php echo htmlspecialchars($detalle['producto_nombre']); ?>
-                                                        </td>
-                                                        <td><?php echo htmlspecialchars($detalle['cantidad']); ?></td>
-                                                        <td><?php echo number_format($detalle['precio_unitario'], 2); ?> COP
-                                                        </td>
-                                                        <td><?php echo number_format($detalle['subtotal'], 2); ?> COP</td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                    <!-- Botones de Acción -->
-                                    <div class="text-right mt-4">
-                                        <button class="btn btn-primary" onclick="imprimirFactura()"><i
-                                                class="fas fa-print"></i> Imprimir</button>
-                                        <a class="btn btn-success"
-                                            href="/dashboard/gestion%20de%20ambientes/facturas/generarPDF/<?php echo $factura['id']; ?>"
-                                            target="_blank"><i class="fas fa-file-pdf"></i> Exportar PDF</a>
-                                        <button class="btn btn-secondary" onclick="window.close()"><i
-                                                class="fas fa-times"></i> Cerrar</button>
-                                    </div>
+                                <!-- Botones de Acción -->
+                                <div class="text-right mt-4">
+                                    <button class="btn btn-primary" onclick="imprimirFactura()"><i
+                                            class="fas fa-print"></i> Imprimir</button>
+                                    <a class="btn btn-success"
+                                        href="/dashboard/gestion%20de%20ambientes/facturas/generarPDF/<?php echo $factura['id']; ?>"
+                                        target="_blank"><i class="fas fa-file-pdf"></i> Exportar PDF</a>
+                                    <a href="../index" class="btn btn-secondary ms-2"><i
+                                            class="fas fa-times-circle"></i> Cancelar</a>
                                 </div>
                             </div>
-                            <p class="footer-text">Factura generada automáticamente por el sistema. © 2024.</p>
                         </div>
+                        <p class="footer-text">Factura generada automáticamente por el sistema. © 2024.</p>
                     </div>
                 </div>
+            </div>
 
-                <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                    crossorigin="anonymous"></script>
-                <script src="../../assets/Js/scripts.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-                    crossorigin="anonymous"></script>
-                <script src="../../assets/demo/chart-area-demo.js"></script>
-                <script src="../../assets/demo/chart-bar-demo.js"></script>
-                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
-                    crossorigin="anonymous"></script>
-                <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
-                    crossorigin="anonymous"></script>
-                <script src="../../assets/demo/datatables-demo.js"></script>
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/Js/scripts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/chart-area-demo.js"></script>
+            <script src="../../assets/demo/chart-bar-demo.js"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/datatables-demo.js"></script>
 
-                <script>
-                    function imprimirFactura() {
-                        window.print();
-                    }
-                </script>
-            </body>
+            <script>
+                function imprimirFactura() {
+                    window.print();
+                }
+            </script>
+</body>
 
 </html>
