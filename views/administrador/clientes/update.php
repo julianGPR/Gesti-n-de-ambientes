@@ -215,149 +215,199 @@ $db = Database::connect();
         </div>
         <div id="layoutSidenav_content">
             <main>
-            <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-        }
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f3f4f6;
+                    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+                    .container {
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                    }
 
-        .header-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1D4A86;
-            margin-bottom: 20px;
-        }
+                    .header-title {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #1D4A86;
+                        margin-bottom: 20px;
+                    }
 
-        .form-label {
-            font-weight: 500;
-            color: #6b7280;
-            display: block;
-            margin-bottom: 8px;
-        }
+                    .form-label {
+                        font-weight: 500;
+                        color: #6b7280;
+                        display: block;
+                        margin-bottom: 8px;
+                    }
 
-        .form-control,
-        .form-select {
-            background-color: #f9fafb;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            color: #374151;
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 15px;
-        }
+                    .form-control,
+                    .form-select {
+                        background-color: #f9fafb;
+                        border: 1px solid #d1d5db;
+                        border-radius: 4px;
+                        color: #374151;
+                        padding: 10px;
+                        width: 100%;
+                        margin-bottom: 15px;
+                    }
 
-        .btn-primary {
-            background-color: #6C63FF;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            color: white;
-            cursor: pointer;
-        }
+                    .btn-primary {
+                        background-color: #6C63FF;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 10px 20px;
+                        color: white;
+                        cursor: pointer;
+                    }
 
-        .btn-secondary {
-            background-color: #e5e7eb;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            color: #374151;
-            cursor: pointer;
-            margin-left: 10px;
-        }
+                    .btn-secondary {
+                        background-color: #e5e7eb;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 10px 20px;
+                        color: #374151;
+                        cursor: pointer;
+                        margin-left: 10px;
+                    }
 
-        .btn-primary:hover {
-            background-color: #5a54d2;
-        }
+                    .btn-primary:hover {
+                        background-color: #5a54d2;
+                    }
 
-        .btn-secondary:hover {
-            background-color: #d1d5db;
-        }
+                    .btn-secondary:hover {
+                        background-color: #d1d5db;
+                    }
 
-        .icon {
-            margin-right: 8px;
-            color: #6b7280;
-        }
-    </style>
-</head>
+                    .icon {
+                        margin-right: 8px;
+                        color: #6b7280;
+                    }
+                </style>
+                </head>
 
-<body>
-    <div class="container">
-        <h1 class="header-title"><i class="fas fa-edit icon"></i> Editar Cliente</h1>
+                <body>
+                    <div class="container">
+                        <h1 class="header-title"><i class="fas fa-edit icon"></i> Editar Cliente</h1>
 
-        <!-- Formulario -->
-        <form id="clienteForm" action="../updateCliente/<?php echo $cliente['id']; ?>" method="POST" onsubmit="return showConfirmModal(event)">
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="nombre" class="form-label"><i class="fas fa-user icon"></i> Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo $cliente['nombre']; ?>" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="documento_nit" class="form-label"><i class="fas fa-id-card icon"></i> Documento/NIT</label>
-                    <input type="text" id="documento_nit" name="documento_nit" class="form-control" value="<?php echo $cliente['documento_nit']; ?>" required>
-                </div>
-            </div>
+                        <!-- Formulario -->
+                        <form id="clienteForm" action="../updateCliente/<?php echo $cliente['id']; ?>" method="POST"
+                            onsubmit="return showConfirmModal(event)">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombre" class="form-label"><i class="fas fa-user icon"></i>
+                                        Nombre</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control"
+                                        value="<?php echo $cliente['nombre']; ?>" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="documento_nit" class="form-label"><i class="fas fa-id-card icon"></i>
+                                        Documento/NIT</label>
+                                    <input type="text" id="documento_nit" name="documento_nit" class="form-control"
+                                        value="<?php echo $cliente['documento_nit']; ?>" required>
+                                </div>
+                            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="direccion" class="form-label"><i class="fas fa-map-marker-alt icon"></i> Dirección</label>
-                    <input type="text" id="direccion" name="direccion" class="form-control" value="<?php echo $cliente['direccion']; ?>" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="telefono" class="form-label"><i class="fas fa-phone icon"></i> Teléfono</label>
-                    <input type="text" id="telefono" name="telefono" class="form-control" value="<?php echo $cliente['telefono']; ?>" required>
-                </div>
-            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="direccion" class="form-label"><i class="fas fa-map-marker-alt icon"></i>
+                                        Dirección</label>
+                                    <input type="text" id="direccion" name="direccion" class="form-control"
+                                        value="<?php echo $cliente['direccion']; ?>" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label"><i class="fas fa-phone icon"></i>
+                                        Teléfono</label>
+                                    <input type="text" id="telefono" name="telefono" class="form-control"
+                                        value="<?php echo $cliente['telefono']; ?>" required>
+                                </div>
+                            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="email" class="form-label"><i class="fas fa-envelope icon"></i> Email</label>
-                    <input type="email" id="email" name="email" class="form-control" value="<?php echo $cliente['email']; ?>" required>
-                </div>
-            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label"><i class="fas fa-envelope icon"></i>
+                                        Email</label>
+                                    <input type="email" id="email" name="email" class="form-control"
+                                        value="<?php echo $cliente['email']; ?>" required>
+                                </div>
+                            </div>
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle icon"></i> Actualizar</button>
-                <a href="../clientes" class="btn btn-secondary"><i class="fas fa-times-circle icon"></i> Cancelar</a>
-            </div>
-        </form>
-    </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle icon"></i>
+                                    Actualizar</button>
+                                <a href="../clientes" class="btn btn-secondary"><i class="fas fa-times-circle icon"></i>
+                                    Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
 
-    <!-- Modal de confirmación -->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="submitForm()">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <!-- Modal de confirmación -->
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
+                                </div>
+                                <div class="modal-footer">
+                                    <button href="../clientes" type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="submitForm()">Actualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </main>
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/Js/scripts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/chart-area-demo.js"></script>
+            <script src="../../assets/demo/chart-bar-demo.js"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/datatables-demo.js"></script>
 
-    <script>
-        function showConfirmModal(event) {
-            event.preventDefault(); // Evita el envío inmediato del formulario
-            var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-            confirmModal.show(); // Muestra el modal de confirmación
-        }
+            <script>
+                function flyBell() {
+                    var bellImage = document.getElementById("bellImage");
+                    bellImage.classList.add("flying");
+                }
 
-        function submitForm() {
-            document.getElementById('clienteForm').submit(); // Envía el formulario tras confirmación
-        }
-    </script>
-                </body>
+                function flyBellAndShowPopup() {
+                    var bellImage = document.getElementById("bellImage");
+                    bellImage.classList.add("flying");
+
+                    // Muestra el popup de notificaciones
+                    document.getElementById("popup").style.display =
+                        document.getElementById("popup").style.display === "none" ? "block" : "none";
+                }
+
+                function closePopup() {
+                    document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+                    location.reload(); // Recarga la página para actualizar el estado de las notificaciones
+                }
+
+                function showConfirmModal(event) {
+                    event.preventDefault(); // Evita el envío inmediato del formulario
+                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                    confirmModal.show(); // Muestra el modal de confirmación
+                }
+
+                function submitForm() {
+                    document.getElementById('clienteForm').submit(); // Envía el formulario tras confirmación
+                }
+            </script>
+</body>
 
 </html>
