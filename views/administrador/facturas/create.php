@@ -214,168 +214,237 @@ $db = Database::connect();
             </nav>
         </div>
         <div id="layoutSidenav_content">
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f3f4f6;
-            }
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f3f4f6;
+                }
 
-            .container {
-                max-width: 800px;
-                margin: 0 auto;
-                padding: 20px;
-            }
+                .container {
+                    max-width: 800px;
+                    margin: 0 auto;
+                    padding: 20px;
+                }
 
-            .header-title {
-                font-size: 1.5rem;
-                font-weight: bold;
-                color: #1D4A86;
-                margin-bottom: 20px;
-            }
+                .header-title {
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    color: #1D4A86;
+                    margin-bottom: 20px;
+                }
 
-            .form-label {
-                font-weight: 500;
-                color: #6b7280;
-                display: block;
-                margin-bottom: 8px;
-            }
+                .form-label {
+                    font-weight: 500;
+                    color: #6b7280;
+                    display: block;
+                    margin-bottom: 8px;
+                }
 
-            .form-control,
-            .form-select {
-                background-color: #f9fafb;
-                border: 1px solid #d1d5db;
-                border-radius: 4px;
-                color: #374151;
-                padding: 10px;
-                margin-bottom: 15px;
-            }
+                .form-control,
+                .form-select {
+                    background-color: #f9fafb;
+                    border: 1px solid #d1d5db;
+                    border-radius: 4px;
+                    color: #374151;
+                    padding: 10px;
+                    margin-bottom: 15px;
+                }
 
-            .btn-primary {
-                background-color: #6C63FF;
-                border: none;
-                border-radius: 8px;
-                padding: 10px 20px;
-                color: white;
-                cursor: pointer;
-            }
+                .btn-primary {
+                    background-color: #6C63FF;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    color: white;
+                    cursor: pointer;
+                }
 
-            .btn-secondary {
-                background-color: #e5e7eb;
-                border: none;
-                border-radius: 8px;
-                padding: 10px 20px;
-                color: #374151;
-                cursor: pointer;
-                margin-left: 10px;
-            }
+                .btn-secondary {
+                    background-color: #e5e7eb;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 20px;
+                    color: #374151;
+                    cursor: pointer;
+                    margin-left: 10px;
+                }
 
-            .btn-primary:hover {
-                background-color: #5a54d2;
-            }
+                .btn-primary:hover {
+                    background-color: #5a54d2;
+                }
 
-            .btn-secondary:hover {
-                background-color: #d1d5db;
-            }
+                .btn-secondary:hover {
+                    background-color: #d1d5db;
+                }
 
-            .icon {
-                margin-right: 8px;
-                color: #6b7280;
-            }
-        </style>
-        </head>
+                .icon {
+                    margin-right: 8px;
+                    color: #6b7280;
+                }
+            </style>
+            </head>
 
-        <body>
-            <div class="container">
-                <h1 class="header-title"><i class="fas fa-file-invoice icon"></i> Crear Factura</h1>
+            <body>
+                <div class="container">
+                    <h1 class="header-title"><i class="fas fa-file-invoice icon"></i> Crear Factura</h1>
 
-                <!-- Formulario -->
-                <form action="../store" method="POST">
-                    <!-- Datos del Cliente -->
-                    <label for="id_cliente" class="form-label"><i class="fas fa-user icon"></i> Cliente</label>
-                    <select name="id_cliente" class="form-control" required>
-                        <option value="">Seleccione un cliente</option>
-                        <?php foreach ($clientes as $cliente): ?>
-                            <option value="<?php echo $cliente['id']; ?>">
-                                <?php echo $cliente['nombre']; ?> - <?php echo $cliente['email']; ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <!-- Formulario -->
+                    <form action="../store" method="POST">
+                        <!-- Datos del Cliente -->
+                        <label for="id_cliente" class="form-label"><i class="fas fa-user icon"></i> Cliente</label>
+                        <select name="id_cliente" class="form-control" required>
+                            <option value="">Seleccione un cliente</option>
+                            <?php foreach ($clientes as $cliente): ?>
+                                <option value="<?php echo $cliente['id']; ?>">
+                                    <?php echo $cliente['nombre']; ?> - <?php echo $cliente['email']; ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
 
-                    <!-- Fecha de Factura -->
-                    <label for="fecha" class="form-label"><i class="fas fa-calendar-alt icon"></i> Fecha</label>
-                    <input type="date" name="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>" required>
+                        <!-- Fecha de Factura -->
+                        <label for="fecha" class="form-label"><i class="fas fa-calendar-alt icon"></i> Fecha</label>
+                        <input type="date" name="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>"
+                            required>
 
-                    <!-- Productos y Detalles -->
-                    <h4 class="mt-4">Productos</h4>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Stock</th>
-                                <th>Cantidad</th>
-                                <th>Precio Unitario</th>
-                                <th>Subtotal</th>
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody id="productos-list">
-                            <tr>
-                                <td>
-                                    <select name="productos[]" class="form-control producto-select"
-                                        onchange="actualizarStockDisponible(this)" required>
-                                        <option value="">Seleccione un producto</option>
-                                        <?php foreach ($productos as $producto): ?>
-                                            <option value="<?php echo $producto['id_producto']; ?>"
-                                                data-stock="<?php echo $producto['stock']; ?>"
-                                                data-precio="<?php echo $producto['precio']; ?>">
-                                                <?php echo $producto['nombre']; ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </td>
-                                <td class="stock-disponible">0</td>
-                                <td>
-                                    <input type="number" name="cantidades[]" class="form-control cantidad-input" min="1"
-                                        max="0" oninput="calcularSubtotal(this)" required>
-                                </td>
-                                <td class="precio-unitario">0.00</td>
-                                <td class="subtotal">0.00</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                        onclick="eliminarFila(this)">Eliminar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Producto</button>
+                        <!-- Productos y Detalles -->
+                        <h4 class="mt-4">Productos</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Stock</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Unitario</th>
+                                    <th>Subtotal</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productos-list">
+                                <tr>
+                                    <td>
+                                        <select name="productos[]" class="form-control producto-select"
+                                            onchange="actualizarStockDisponible(this)" required>
+                                            <option value="">Seleccione un producto</option>
+                                            <?php foreach ($productos as $producto): ?>
+                                                <option value="<?php echo $producto['id_producto']; ?>"
+                                                    data-stock="<?php echo $producto['stock']; ?>"
+                                                    data-precio="<?php echo $producto['precio']; ?>">
+                                                    <?php echo $producto['nombre']; ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </td>
+                                    <td class="stock-disponible">0</td>
+                                    <td>
+                                        <input type="number" name="cantidades[]" class="form-control cantidad-input"
+                                            min="1" max="0" oninput="calcularSubtotal(this)" required>
+                                    </td>
+                                    <td class="precio-unitario">0.00</td>
+                                    <td class="subtotal">0.00</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            onclick="eliminarFila(this)">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Producto</button>
 
-                    <!-- Totales -->
-                    <h4 class="mt-4">Totales</h4>
-                    <div class="form-group">
-                        <label for="subtotal" class="form-label"><i class="fas fa-dollar-sign icon"></i>
-                            Subtotal</label>
-                        <input type="text" name="subtotal" class="form-control" id="subtotal" readonly value="0.00">
-                    </div>
-                    <div class="form-group">
-                        <label for="iva" class="form-label"><i class="fas fa-percentage icon"></i> IVA</label>
-                        <input type="text" name="iva" class="form-control" id="iva" readonly value="0.00">
-                    </div>
-                    <div class="form-group">
-                        <label for="descuento-total" class="form-label"><i class="fas fa-tags icon"></i>
-                            Descuento</label>
-                        <input type="text" name="descuento-total" class="form-control" id="descuento-total" readonly
-                            value="0.00">
-                    </div>
-                    <div class="form-group">
-                        <label for="total" class="form-label"><i class="fas fa-calculator icon"></i> Total</label>
-                        <input type="text" name="total" class="form-control" id="total" readonly value="0.00">
-                    </div>
+                        <!-- Totales -->
+                        <h4 class="mt-4">Totales</h4>
+                        <div class="form-group">
+                            <label for="subtotal" class="form-label"><i class="fas fa-dollar-sign icon"></i>
+                                Subtotal</label>
+                            <input type="text" name="subtotal" class="form-control" id="subtotal" readonly value="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="iva" class="form-label"><i class="fas fa-percentage icon"></i> IVA</label>
+                            <input type="text" name="iva" class="form-control" id="iva" readonly value="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="descuento-total" class="form-label"><i class="fas fa-tags icon"></i>
+                                Descuento</label>
+                            <input type="text" name="descuento-total" class="form-control" id="descuento-total" readonly
+                                value="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="total" class="form-label"><i class="fas fa-calculator icon"></i> Total</label>
+                            <input type="text" name="total" class="form-control" id="total" readonly value="0.00">
+                        </div>
 
-                    <!-- Botón Guardar -->
-                    <button type="submit" class="btn btn-success"><i class="fas fa-save icon"></i> Guardar
-                        Factura</button>
-                </form>
-            </div>
-        </body>
+                        <!-- Botón Guardar -->
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save icon"></i> Guardar
+                            Factura</button>
+                    </form>
+                </div>
+
+                <!-- Scripts -->
+                <script>
+                    function actualizarStockDisponible(select) {
+                        const stock = select.options[select.selectedIndex].getAttribute('data-stock');
+                        const precio = select.options[select.selectedIndex].getAttribute('data-precio');
+                        const fila = select.closest('tr');
+                        fila.querySelector('.stock-disponible').textContent = stock || 0;
+                        fila.querySelector('.precio-unitario').textContent = parseFloat(precio || 0).toFixed(2);
+                        fila.querySelector('.cantidad-input').setAttribute('max', stock || 0);
+                        fila.querySelector('.subtotal').textContent = parseFloat(0).toFixed(2);
+                        actualizarTotales();
+                    }
+
+                    function calcularSubtotal(input) {
+                        const fila = input.closest('tr');
+                        const cantidad = parseFloat(input.value) || 0;
+                        const precioUnitario = parseFloat(fila.querySelector('.precio-unitario').textContent) || 0;
+                        const subtotal = cantidad * precioUnitario;
+                        fila.querySelector('.subtotal').textContent = subtotal.toFixed(2);
+                        actualizarTotales();
+                    }
+
+                    function toggleDescuento() {
+                        const descuentoContainer = document.getElementById('descuento-container');
+                        descuentoContainer.style.display = document.getElementById('aplicar-descuento').checked ? 'block' : 'none';
+                        actualizarTotales();
+                    }
+
+                    function actualizarTotales() {
+                        let subtotal = 0;
+                        document.querySelectorAll('.subtotal').forEach(cell => {
+                            subtotal += parseFloat(cell.textContent) || 0;
+                        });
+
+                        const aplicarIva = document.getElementById('aplicar-iva').checked;
+                        const aplicarDescuento = document.getElementById('aplicar-descuento').checked;
+
+                        let descuento = aplicarDescuento ? (subtotal * (parseFloat(document.getElementById('descuento').value) || 0)) / 100 : 0;
+                        let iva = aplicarIva ? subtotal * 0.19 : 0;
+
+                        const total = subtotal + iva - descuento;
+
+                        document.getElementById('subtotal').value = subtotal.toFixed(2);
+                        document.getElementById('iva').value = iva.toFixed(2);
+                        document.getElementById('descuento-total').value = descuento.toFixed(2);
+                        document.getElementById('total').value = total.toFixed(2);
+                    }
+
+                    function agregarFila() {
+                        const nuevaFila = document.querySelector('#productos-list tr').cloneNode(true);
+                        nuevaFila.querySelectorAll('input, select').forEach(input => input.value = '');
+                        nuevaFila.querySelector('.stock-disponible').textContent = '0';
+                        nuevaFila.querySelector('.precio-unitario').textContent = parseFloat(0).toFixed(2);
+                        nuevaFila.querySelector('.subtotal').textContent = parseFloat(0).toFixed(2);
+                        document.getElementById('productos-list').appendChild(nuevaFila);
+                    }
+
+                    function eliminarFila(button) {
+                        const fila = button.closest('tr');
+                        fila.remove();
+                        actualizarTotales();
+                    }
+
+                    document.addEventListener('DOMContentLoaded', () => {
+                        actualizarTotales();
+                    });
+                </script>
+            </body>
 
 </html>
