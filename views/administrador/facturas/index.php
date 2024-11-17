@@ -48,7 +48,7 @@
         </table>
     </div>
 </div>
-
+</main>
 <!-- Modal para mostrar la factura -->
 <div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -71,6 +71,7 @@
         </div>
     </div>
 </div>
+</main>
 
 
 <footer class="py-4 bg-light mt-auto">
