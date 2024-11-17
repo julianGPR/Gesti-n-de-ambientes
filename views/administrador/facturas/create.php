@@ -409,6 +409,8 @@ $db = Database::connect();
                     <!-- Botón Guardar -->
                     <button type="submit" class="btn btn-success"><i class="fas fa-save icon"></i> Guardar
                         Factura</button>
+                        <a href="../index" class="btn btn-secondary ms-2"><i
+                        class="fas fa-times-circle"></i> Cancelar</a>
                 </form>
             </div>
 
