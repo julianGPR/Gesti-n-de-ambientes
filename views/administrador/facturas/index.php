@@ -20,33 +20,32 @@
         <i class="fas fa-table mr-1"></i>Lista de Productos
     </div>
     <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" width="100%" cellspacing="0">
-                <thead>
+    <div class="table-responsive">
+        <table id="tablaFacturas" class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($facturas as $factura): ?>
                     <tr>
-                        <th>#</th>
-                        <th>Cliente</th>
-                        <th>Fecha</th>
-                        <th>Total</th>
-                        <th>Acciones</th>
+                        <td><?php echo htmlspecialchars($factura['id']); ?></td>
+                        <td><?php echo htmlspecialchars($factura['cliente_nombre']); ?></td>
+                        <td><?php echo htmlspecialchars($factura['fecha']); ?></td>
+                        <td>$<?php echo number_format($factura['total'], 2); ?></td>
+                        <td>
+                            <a href="/dashboard/gestion%20de%20ambientes/facturas/detalle/<?php echo $factura['id']; ?>" 
+                                class="btn btn-info btn-sm">Ver</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($facturas as $factura): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($factura['id']); ?></td>
-                            <td><?php echo htmlspecialchars($factura['cliente_nombre']); ?></td>
-                            <td><?php echo htmlspecialchars($factura['fecha']); ?></td>
-                            <td>$<?php echo number_format($factura['total'], 2); ?></td>
-                            <td>
-                                <a href="/dashboard/gestion%20de%20ambientes/facturas/detalle/<?php echo $factura['id']; ?>" 
-                                    class="btn btn-info btn-sm">Ver</a>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -72,6 +71,7 @@
         </div>
     </div>
 </div>
+
 
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
@@ -117,15 +117,25 @@
 <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
-
 <script>
 
-    $(document).ready(function () {
-        $('#tablafacturas').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
-            paging: true,
-            pageLength: 10
+$(document).ready(function() {
+        $('#tablaFacturas').DataTable({
+            "paging": true,          // Habilitar paginación
+            "searching": true,       // Habilitar búsqueda
+            "lengthChange": true,    // Habilitar selección de filas visibles
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ filas por página",
+                "zeroRecords": "No se encontraron resultados",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay datos disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                }
+            }
         });
     });
 
