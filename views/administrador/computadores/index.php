@@ -4,6 +4,7 @@
     $db = Database::connect();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -174,3 +175,4 @@
     </footer>
 </body>
 </html>
+

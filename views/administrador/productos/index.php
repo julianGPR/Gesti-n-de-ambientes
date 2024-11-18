@@ -1,100 +1,121 @@
-<?php
-// Conectar a la base de datos
-require_once 'config/db.php';
-$db = Database::connect();
+<?php require_once "views/administrador/Vista/parte_superior.php" ?>
 
-// Suponiendo que ya tienes la variable $productos definida
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Productos</title>
-    <link rel="stylesheet" type="text/css" href="../assets/styles.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <img src="../assets/Logo-Sena.jpg" alt="Logo de la empresa" class="logo">
+<main>
+    <div class="container-fluid">
+        <div class="header-section">
+            <h1><i class="fas fa-tags"></i> Gestion de Productos</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><i class="fas fa-home"></i> Menú</li>
+            </ol>
         </div>
-        <div class="title">
-            <h1>Lista de Productos</h1>
-        </div>
-    </header>
-
-    <div class="filtro-y-crear">
-            <div class="crear-area">
-                <?php
-                $url_create = '/dashboard/gestion%20de%20ambientes/Producto/crearProducto/';
-                ?>
-                <ul>
-                    <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nueva area de trabajo</a></li>
-                </ul>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <a href='/dashboard/gestion%20de%20ambientes/Producto/crearProducto/' id="btn-create">
+                    Nuevo Producto
+                </a>
             </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header"><i class="fas fa-table mr-1"></i>Lista de Productos</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="tabla-productos" id="dataTable" width="100%"
+                        cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Fecha de creacion</th>
+                                <th>Acciones</th>
+                            </tr>
+                        <tbody>
+                            <?php foreach ($productos as $producto): ?>
+                                <tr>
+                                    <td><?php echo $producto['id_producto']; ?></td>
+                                    <td><?php echo $producto['nombre']; ?></td>
+                                    <td><?php echo $producto['descripcion'] ?></td>
+                                    <td>$<?php echo number_format($producto['precio'], 2); ?></td>
+                                    <td><?php echo $producto['stock'] ?></td>
+                                    <td><?php echo $producto['fecha_creacion'] ?></td>
+                                    <td>
+                                        <?php
+                                        $url_update = '/dashboard/gestion%20de%20ambientes/producto/actualizarProducto/' . $producto['id_producto'];
+                                        echo "<a href='$url_update' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
+                                        ?>
+                                        <?php
+                                        $url_delet = '/dashboard/gestion%20de%20ambientes/producto/eliminarProducto/' . $producto['id_producto'];
+                                        echo "<a href='$url_delet' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
+                                        ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
+</main>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; Your Website 2019</div>
+            <div>
+                <a href="#">Privacy Policy</a>
+                &middot;
+                <a href="#">Terms &amp; Conditions</a>
+            </div>
         </div>
-    <section class="producto" id="section-producto">
-        <div class="tabla-productos">
-            <table id="tabla-productos" class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
-                        <th>Stock</th>
-                        <th>Fecha de creacion</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($productos as $producto): ?>
-                        <tr>
-                            <td><?php echo $producto['id_producto']; ?></td>
-                            <td><?php echo $producto['nombre']; ?></td>
-                            <td><?php echo $producto['descripcion']?></td>
-                            <td>$<?php echo number_format($producto['precio'], 2); ?></td>
-                            <td><?php echo $producto['stock']?></td>
-                            <td><?php echo $producto['fecha_creacion']?></td>
-                            <td>
-                            <?php
-                             $url_update = '/dashboard/gestion%20de%20ambientes/producto/actualizarProducto/' . $producto['id_producto'];
-                             echo "<a href='$url_update' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
-                            ?>
-                            <?php
-                             $url_delet = '/dashboard/gestion%20de%20ambientes/producto/eliminarProducto/' . $producto['id_producto'];
-                             echo "<a href='$url_delet' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
-                            ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-        <div class="regresar">
-            <?php
-            $url_regresar = '../admin/home';
-            ?>
-            <a href="<?php echo $url_regresar; ?>" class="button boton-centrado" id="btn-regresar">Regresar</a>
-        </div>
-    </section>
+    </div>
+</footer>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="../assets/Js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="../assets/demo/chart-area-demo.js"></script>
+<script src="../assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="../assets/demo/datatables-demo.js"></script>
+<!-- CSS de DataTables -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 
-    <script>
-        $(document).ready(function() {
-            $('#tabla-productos').DataTable({
-                paging: true,
-                pageLength: 10
-            });
+<!-- CSS de los botones -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery DataTables -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
+<!-- JS de botones de DataTables -->
+<script src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
+
+<!-- Librería para exportar a Excel, PDF, etc. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#tabla-productos').DataTable({
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            paging: true,
+            pageLength: 10
         });
-    </script>
+    });
 
-    <footer>
-        <p>Gafra todos los derechos reservados</p>
-    </footer>
+</script>
 </body>
+
 </html>

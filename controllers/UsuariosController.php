@@ -15,15 +15,16 @@ class UsuariosController {
             $apellidos = $_POST["apellidos"];
             $correo = $_POST["correo"];
             $rol = $_POST["rol"];
-            
-            // Generar contraseña aleatoria de 4 dígitos
+            $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
+                ? $_FILES['foto_perfil']['tmp_name'] 
+                : null;
+
             $clave = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
 
             $usuariosModel = new UsuariosModel();
-            $result = $usuariosModel->guardarUsuario($nombres, $apellidos, $clave, $correo, $rol);
+            $result = $usuariosModel->guardarUsuario($nombres, $apellidos, $clave, $correo, $rol, $foto_perfil);
 
             if ($result) {
-                // Redirigir al usuario a la lista de usuarios
                 header("Location: ../usuarios");
                 exit();
             } else {
@@ -35,7 +36,6 @@ class UsuariosController {
         }
     }
 
-    // Método para actualizar un usuario existente
     public function updateUsuario($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombres = $_POST["nombres"];
@@ -43,9 +43,12 @@ class UsuariosController {
             $clave = $_POST["clave"];
             $correo = $_POST["correo"];
             $rol = $_POST["rol"];
+            $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
+                ? $_FILES['foto_perfil']['tmp_name'] 
+                : null;
 
             $usuariosModel = new UsuariosModel();
-            $result = $usuariosModel->modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol);
+            $result = $usuariosModel->modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol, $foto_perfil);
 
             if ($result) {
                 header("Location: ../usuarios");
@@ -88,5 +91,55 @@ class UsuariosController {
         header("Location: ../usuarios");
         exit();
     }
+
+    public function perfil() {
+        session_start();
+        $id_usuario = $_SESSION['Id_usuario'];
+        $usuariosModel = new UsuariosModel();
+        $usuario = $usuariosModel->obtenerUsuarioPorId($id_usuario);
+
+        if ($usuario && !empty($usuario['foto_perfil'])) {
+            $usuario['foto_perfil'] = 'data:image/jpeg;base64,' . base64_encode($usuario['foto_perfil']);
+        }
+        
+        require_once 'views/administrador/usuarios/perfil.php';
+    }
+    
+
+    // Mostrar el formulario de edición del perfil
+    public function editarPerfil() {
+        session_start();
+        $usuarioModel = new UsuariosModel();
+        $id = $_SESSION['Id_usuario'];
+        $usuario = $usuarioModel->obtenerUsuarioPorId($id);
+        
+        include 'views/administrador/usuarios/editar_perfil.php';
+    }
+
+    // Actualizar el perfil del usuario
+    public function actualizarPerfil() {
+        session_start();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_SESSION['Id_usuario'];
+            $nombres = $_POST['nombres'];
+            $apellidos = $_POST['apellidos'];
+            $correo = $_POST['correo'];
+            $especialidad = $_POST['especialidad'];
+            $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
+                ? $_FILES['foto_perfil']['tmp_name'] 
+                : null;
+    
+            $usuarioModel = new UsuariosModel();
+            $result = $usuarioModel->actualizarPerfil($id, $nombres, $apellidos, $correo, $especialidad, $foto_perfil);
+    
+            if ($result) {
+                header("Location: /dashboard/gestion%20de%20ambientes/usuarios/perfil");
+            } else {
+                echo "Error al actualizar el perfil.";
+            }
+            exit();
+        }
+    }
+        
 }
 ?>

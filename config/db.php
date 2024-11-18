@@ -13,6 +13,7 @@ class Database {
 <<<<<<< HEAD
     }
 }
+
 ?>
 =======
     }

@@ -1,9 +1,66 @@
-<?php
-// Conectar a la base de datos
-require_once 'config/db.php';
-$db = Database::connect();
-?>
+<?php require_once "views/administrador/Vista/parte_superior.php" ?>
+<main>
+    <div class="container-fluid">
+        <div class="header-section">
+            <h1><i class="fas fa-home"></i> Inicio</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"> Menú</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Primary Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                    <div class="card-body">Warning Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                    <div class="card-body">Success Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-danger text-white mb-4">
+                    <div class="card-body">Danger Card</div>
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="#">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-chart-area mr-1"></i>Area Chart Example</div>
+                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card mb-4">
+                    <div class="card-header"><i class="fas fa-chart-bar mr-1"></i>Bar Chart Example</div>
+                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                </div>
+            </div>
+        </div>
 
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -99,33 +156,58 @@ $db = Database::connect();
         }
 
 </style>
+=======
+    </div>
+    </div>
+    </div>
+</main>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; Your Website 2019</div>
+            <div>
+                <a href="#">Privacy Policy</a>
+                &middot;
+                <a href="#">Terms &amp; Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<script src="../assets/Js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="../assets/demo/chart-area-demo.js"></script>
+<script src="../assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="../assets/demo/datatables-demo.js"></script>
+>>>>>>> devJulian
 <script>
+    function flyBell() {
+        var bellImage = document.getElementById("bellImage");
+        bellImage.classList.add("flying");
+    }
 
-        function flyBell() {
-            var bellImage = document.getElementById("bellImage");
-            bellImage.classList.add("flying");
-        }
-        function flyBellAndShowPopup() {
-            var bellImage = document.getElementById("bellImage");
-            bellImage.classList.add("flying");
-            document.getElementById("popup").style.display = "block"; // Muestra la ventana emergente
-        }
+    function flyBellAndShowPopup() {
+        var bellImage = document.getElementById("bellImage");
+        bellImage.classList.add("flying");
 
-        function closePopup() {
-            document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
-            location.reload();
-        }
+        // Muestra el popup de notificaciones
+        document.getElementById("popup").style.display =
+            document.getElementById("popup").style.display === "none" ? "block" : "none";
+    }
 
+    function closePopup() {
+        document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+        location.reload(); // Recarga la página para actualizar el estado de las notificaciones
+    }
 </script>
-<div class="notification-bell">
-            <button id="bellButton" onclick="flyBellAndShowPopup()">
-            <img id="bellImage" src="../assets/campana.png" alt="Icono de la campana">
-            <span class="notification-counter">
-                <?php
-                $conn = Database::connect();
-                $sql = "SELECT COUNT(*) AS total FROM t_reportes WHERE Estado = '1'";
-                $result = $conn->query($sql);
 
+<<<<<<< HEAD
                 // Verifica si la consulta fue exitosa
                 if ($result) {
                     // Obtiene el número de reportes pendientes
@@ -326,5 +408,8 @@ $db = Database::connect();
 =======
 >>>>>>> e3254bd64ca89f11e0378ba5f7d9babc9f142128
 >>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+=======
+>>>>>>> devJulian
 </body>
+
 </html>

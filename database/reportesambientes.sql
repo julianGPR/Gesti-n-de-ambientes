@@ -4,10 +4,14 @@
 --
 -- Servidor: localhost
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Tiempo de generación: 30-10-2024 a las 07:58:07
 =======
 -- Tiempo de generación: 30-06-2024 a las 03:52:22
 >>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+=======
+-- Tiempo de generación: 04-11-2024 a las 07:14:23
+>>>>>>> devJulian
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -51,7 +55,18 @@ CREATE TABLE `AreaTrabajo` (
 
 INSERT INTO `AreaTrabajo` (`id_area`, `nombre_area`, `capacidad`, `ubicacion`, `responsable`, `tipo_area`, `equipo_disponible`, `estado_area`, `fecha_creacion`, `comentarios`) VALUES
 (1, 'Tuberia', 10, 'Piso 1', 'Julian', 'Tuberia', 'Todo', 'Habilitado', '2024-10-26', 'nada'),
-(2, 'Area dobladora', 3, 'seccion 5', 'Edgar Agilar', 'Tuberia', 'dobladora', 'Inhabilitado', '2024-10-26', 'nada');
+(2, 'Area dobladora', 3, 'seccion 5', 'Edgar Agilar', 'Tuberia', 'dobladora', 'Habilitado', '2024-10-26', 'nada'),
+(3, 'sCd', 32, '', '', 'Tuberia', 'si', 'Habilitado', '2024-10-30', 'casd'),
+(4, 'sCd', 32, '', '', 'Tuberia', 'si', 'Habilitado', '2024-10-30', 'casd'),
+(5, 'sCd', 32, '', '', 'Tuberia', 'si', 'Habilitado', '2024-10-30', 'casd'),
+(6, 'pollo', 2, '', '', 'Corte', 'si', 'Habilitado', '2024-10-30', '12312e'),
+(7, 'dedwefwde', 123, '', '', 'Corte', 'si', 'Habilitado', '2024-10-30', ''),
+(8, 'pollo', 23, ' Bogota', 'nadie ', 'Ensamble', 'si', 'Habilitado', '2024-10-30', 'sss'),
+(9, 'dasdasd', 2, ' Bogota', ' sdasd', 'Ensamble', 'si', 'Inhabilitado', '2024-10-30', 'sdaasd c sda'),
+(10, 'xdexed', 222, ' Bogota', '106', 'Ensamble', 'si', 'Habilitado', '2024-10-30', 'aza'),
+(11, 'aaaa', 23, ' Bogota', '106', 'Tuberia', 'Todo', 'Habilitado', '2024-10-31', '2312dewf'),
+(12, 'aaaa', 122, ' Bogota', '107', 'Corte', 'si', 'Habilitado', '2024-10-31', 'w21xax'),
+(13, 'pollo', 4, ' Bogota', '115', 'Satelite', 'si', 'Habilitado', '2024-11-03', 'nada que comentar');
 
 -- --------------------------------------------------------
 
@@ -104,13 +119,24 @@ CREATE TABLE `facturas` (
 
 CREATE TABLE `inventario_entrada` (
   `id_entrada` int(11) NOT NULL,
-  `fecha_entrada` date DEFAULT NULL,
-  `producto_id` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  `proveedor_id` int(11) DEFAULT NULL,
-  `usuario_registro` int(11) DEFAULT NULL,
-  `observaciones` text DEFAULT NULL
+  `proveedor_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio_unitario` decimal(10,2) DEFAULT NULL,
+  `unidad_medida` varchar(50) DEFAULT NULL,
+  `ubicacion` varchar(100) DEFAULT NULL,
+  `fecha_entrada` date NOT NULL,
+  `observaciones` text DEFAULT NULL,
+  `Id_usuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `inventario_entrada`
+--
+
+INSERT INTO `inventario_entrada` (`id_entrada`, `proveedor_id`, `cantidad`, `precio_unitario`, `unidad_medida`, `ubicacion`, `fecha_entrada`, `observaciones`, `Id_usuario`) VALUES
+(1, 1, 1000, 10000.00, 'unitario', ' Bogota', '2024-11-03', 'nada', 112),
+(2, 2, 500, 100.00, 'millares', 'Medellin', '2024-11-03', 'nada', 113),
+(3, 2, 27, 1000.00, 'unitario', ' Bogota', '2024-11-04', 'nada', 112);
 
 -- --------------------------------------------------------
 
@@ -923,8 +949,12 @@ DELIMITER ;
 CREATE TABLE `t_reportes` (
   `Id_reporte` int(4) NOT NULL,
   `FechaHora` datetime DEFAULT NULL,
+<<<<<<< HEAD
   `Id_usuario` int(2) DEFAULT NULL,
 <<<<<<< HEAD
+=======
+  `Id_usuario` int(11) DEFAULT NULL,
+>>>>>>> devJulian
   `Id_area` int(2) DEFAULT NULL,
 =======
   `Id_ambiente` int(2) DEFAULT NULL,
@@ -948,6 +978,7 @@ INSERT INTO `t_reportes` (`Id_reporte`, `FechaHora`, `Id_usuario`, `Id_area`, `E
 (32, '2024-10-28 01:20:41', 107, 1, '2', 0, NULL, ''),
 (33, '2024-10-28 01:20:44', 107, 1, '2', 0, NULL, ''),
 (34, '2024-10-28 01:20:45', 107, 1, '2', 0, NULL, ''),
+<<<<<<< HEAD
 (35, '2024-10-28 01:20:46', 107, 1, '2', 0, NULL, '');
 =======
 INSERT INTO `t_reportes` (`Id_reporte`, `FechaHora`, `Id_usuario`, `Id_ambiente`, `Estado`, `Estado_Reporte`, `Fecha_Solucion`, `Observaciones`) VALUES
@@ -1175,6 +1206,18 @@ END
 $$
 DELIMITER ;
 >>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+=======
+(35, '2024-10-28 01:20:46', 112, 1, '2', 0, NULL, ''),
+(36, '2024-10-31 21:47:51', 112, 10, '2', 0, NULL, 'nada'),
+(79, '2024-11-02 00:31:29', 112, 11, '2', 0, '2024-11-09 00:31:29', 'nsadoihfao'),
+(85, '2024-11-03 06:08:41', 112, 3, '2', 0, '2024-11-03 00:08:00', '1231231fedvdsc'),
+(86, '2024-11-03 06:34:18', 112, 1, '2', 0, '2024-11-03 00:34:00', 'nada que repprtar '),
+(87, '2024-11-03 07:04:53', 113, 3, '2', 0, '2024-11-03 01:04:00', 'la b¡vida'),
+(88, '2024-11-03 07:21:55', 113, 8, '2', 0, '2024-11-03 01:21:00', 'nadajsfansf '),
+(89, '2024-11-03 07:29:32', 115, 2, '2', 0, '2024-11-03 01:29:00', 'se necesitan tubo de media quedan pocas cantidades'),
+(90, '2024-11-03 07:36:05', 115, 6, '2', 0, '2024-11-03 01:35:00', 'prueba 1'),
+(91, '2024-11-03 07:36:30', 115, 13, '2', 0, '2024-11-03 01:36:00', 'prueba 2');
+>>>>>>> devJulian
 
 -- --------------------------------------------------------
 
@@ -1189,7 +1232,7 @@ CREATE TABLE `t_usuarios` (
   `Apellidos` varchar(100) NOT NULL,
   `Correo` varchar(100) DEFAULT NULL,
   `Clave` varchar(255) DEFAULT NULL,
-  `Rol` enum('Administrador','Instructor','Encargado') NOT NULL,
+  `Rol` enum('Administrador','Encargado') NOT NULL,
   `Especialidad` varchar(100) DEFAULT NULL,
   `Estado` varchar(255) NOT NULL DEFAULT 'Habilitado'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -1213,6 +1256,7 @@ CREATE TABLE `t_usuarios` (
 INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Correo`, `Clave`, `Rol`, `Especialidad`, `Estado`) VALUES
 <<<<<<< HEAD
 (106, 'julian', 'Garcia', 'diaz@gmail.com', '5949', 'Administrador', NULL, 'Habilitado'),
+<<<<<<< HEAD
 (107, 'camilo', 'Guzman', 'Guz@gamil.com', '9188', 'Instructor', NULL, 'Habilitado');
 =======
 (1, 'ALVARO', 'BUSTOS JEREZ', 'abustosj@sena.edu.co', '4720', 'Instructor', NULL, 'Habilitado'),
@@ -1321,6 +1365,16 @@ INSERT INTO `t_usuarios` (`Id_usuario`, `Nombres`, `Apellidos`, `Correo`, `Clave
 (104, 'Juan Manuel', 'Infante Quiroga', 'juanmainqui123@gmail.com', '1211', 'Administrador', NULL, 'Habilitado'),
 (105, 'julian', 'garcia', 'garciajulian1002@gmail.com', '9608', 'Administrador', NULL, 'Habilitado');
 >>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+=======
+(107, 'camilo', 'Guzman', 'pepe@gamil.com', '9188', 'Encargado', NULL, 'Habilitado'),
+(108, 'DAmian', 'gomez', 'd@gmail.com', '3646', 'Administrador', NULL, 'Habilitado'),
+(110, 'jose', 'dqddd', 'zxs@gmail.com', '1184', 'Administrador', NULL, 'Habilitado'),
+(111, 'Dianuchis', 'Sachez', 'sanchez@gmail.com', '0573', 'Administrador', NULL, 'Habilitado'),
+(112, 'diana', 'sanchez', 'sa@gmail.com', '1233', 'Encargado', NULL, 'Habilitado'),
+(113, 'luna', 'g', 'lg@.com', '3735', 'Encargado', NULL, 'Habilitado'),
+(114, 'bob', 's', 'bob@vf.com', '2680', 'Administrador', NULL, 'Habilitado'),
+(115, 'danilo', 'garzon', 'da@.com', '4418', 'Encargado', NULL, 'Habilitado');
+>>>>>>> devJulian
 
 --
 -- Índices para tablas volcadas
@@ -1361,7 +1415,7 @@ ALTER TABLE `facturas`
 ALTER TABLE `inventario_entrada`
   ADD PRIMARY KEY (`id_entrada`),
   ADD KEY `proveedor_id` (`proveedor_id`),
-  ADD KEY `usuario_registro` (`usuario_registro`);
+  ADD KEY `fk_usuario_modificacion` (`Id_usuario`);
 
 --
 -- Indices de la tabla `inventario_salida`
@@ -1422,7 +1476,7 @@ ALTER TABLE `t_usuarios`
 -- AUTO_INCREMENT de la tabla `AreaTrabajo`
 --
 ALTER TABLE `AreaTrabajo`
-  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -1446,7 +1500,7 @@ ALTER TABLE `facturas`
 -- AUTO_INCREMENT de la tabla `inventario_entrada`
 --
 ALTER TABLE `inventario_entrada`
-  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_entrada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario_salida`
@@ -1487,20 +1541,28 @@ ALTER TABLE `t_computadores`
 --
 ALTER TABLE `t_reportes`
 <<<<<<< HEAD
+<<<<<<< HEAD
   MODIFY `Id_reporte` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 =======
   MODIFY `Id_reporte` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 >>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+=======
+  MODIFY `Id_reporte` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+>>>>>>> devJulian
 
 --
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
 <<<<<<< HEAD
+<<<<<<< HEAD
   MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 =======
   MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 >>>>>>> f3e6f5f1e9317ed2b94983815a884a8a3c06bb06
+=======
+  MODIFY `Id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+>>>>>>> devJulian
 
 --
 -- Restricciones para tablas volcadas
@@ -1524,9 +1586,8 @@ ALTER TABLE `facturas`
 -- Filtros para la tabla `inventario_entrada`
 --
 ALTER TABLE `inventario_entrada`
-  ADD CONSTRAINT `inventario_entrada_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id_producto`),
-  ADD CONSTRAINT `inventario_entrada_ibfk_2` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`id_proveedor`),
-  ADD CONSTRAINT `inventario_entrada_ibfk_3` FOREIGN KEY (`usuario_registro`) REFERENCES `t_usuarios` (`Id_usuario`);
+  ADD CONSTRAINT `fk_usuario_modificacion` FOREIGN KEY (`Id_usuario`) REFERENCES `t_usuarios` (`Id_usuario`),
+  ADD CONSTRAINT `inventario_entrada_ibfk_1` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`id_proveedor`);
 
 --
 -- Filtros para la tabla `inventario_salida`
