@@ -310,7 +310,7 @@ $db = Database::connect();
 
             <div class="text-center">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Aceptar</button>
-                <a href="../areaTrabajo" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i> Cancelar</a>
+                <a href="../clientes" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i> Cancelar</a>
             </div>
         </form>
     </div>

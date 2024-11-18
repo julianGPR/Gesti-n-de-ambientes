@@ -409,10 +409,25 @@ $db = Database::connect();
                     <!-- Botón Guardar -->
                     <button type="submit" class="btn btn-success"><i class="fas fa-save icon"></i> Guardar
                         Factura</button>
+                        <a href="../index" class="btn btn-secondary ms-2"><i
+                        class="fas fa-times-circle"></i> Cancelar</a>
                 </form>
             </div>
 
             <!-- Scripts -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/Js/scripts.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/chart-area-demo.js"></script>
+            <script src="../../assets/demo/chart-bar-demo.js"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"
+                crossorigin="anonymous"></script>
+            <script src="../../assets/demo/datatables-demo.js"></script>
             <script>
                 function actualizarStockDisponible(select) {
                     const stock = select.options[select.selectedIndex].getAttribute('data-stock');
