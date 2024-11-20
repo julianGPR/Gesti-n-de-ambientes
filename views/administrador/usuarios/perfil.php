@@ -3,22 +3,6 @@
 require_once 'config/db.php';
 $db = Database::connect();
 ?>
-<?php
-$url_regresar = '#'; // Valor predeterminado en caso de error
-if (!empty($usuario['Rol'])) {
-    switch (htmlspecialchars($usuario['Rol'])) {
-        case 'Administrador':
-            $url_regresar = '/dashboard/gestion%20de%20ambientes/admin/home';
-            break;
-        case 'Usuario':
-            $url_regresar = 'encargado/home';
-            break;
-        default:
-          
-    }
-}
-?>
-
 
 <!DOCTYPE html>
 <html lang="es">
