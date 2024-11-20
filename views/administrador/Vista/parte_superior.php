@@ -25,11 +25,13 @@ $db = Database::connect();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
+
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../admin/home';
+        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+        $url_regresar = $base_url . 'admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
@@ -111,7 +113,8 @@ $db = Database::connect();
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                             class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/usuarios/perfil">Configuración</a>
+                        <a class="dropdown-item"
+                            href="/dashboard/gestion%20de%20ambientes/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
                     </div>

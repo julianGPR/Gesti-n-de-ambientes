@@ -16,46 +16,27 @@ $db = Database::connect();
     <title>Sistema Web</title>
     <link rel="icon" href="../../assets/img/login02.ico" type="image/x-icon">
     <link href="../../assets/css/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
-<style>
-    body {
-        background-color: #f0f2f5;
-        font-family: Arial, sans-serif;
-    }
-
-    /* Estilo personalizado para el pie de la barra lateral */
-    .custom-footer {
-        background-color: #1D4A86!important;
-        /* Fondo azul personalizado */
-        color: #C4C4C4 !important;
-        /* Texto en color claro */
-        padding: 10px;
-        text-align: center;
-    }
-
-    .custom-footer .small {
-        color: #C4C4C4 !important;
-        /* Color del texto pequeño */
-        font-size: 0.85rem !important;
-    }
-</style>
-
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../../admin/home';
+        $url_regresar = '../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
                 class="fas fa-bars"></i></button>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
+
             <!-- Notificaciones en el menú de la campana -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
@@ -104,7 +85,7 @@ $db = Database::connect();
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
-                            echo "<span class='font-weight-bold'>El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
+                            echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
                                 " envió un reporte en el área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
 
@@ -125,11 +106,12 @@ $db = Database::connect();
             </li>
 
             <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle dropdown-blue" id="userDropdown" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Configuración</a>
+                        <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
                     </div>
@@ -210,6 +192,16 @@ $db = Database::connect();
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
                             <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                             Productos
+                        </a>
+
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/clientes/clientes">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Clientes
+                        </a>
+
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/facturas/index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Ventas
                         </a>
                     </div>
                 </div>

@@ -30,8 +30,10 @@ $db = Database::connect();
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../admin/home';
+        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+        $url_regresar = $base_url . 'admin/home';
         ?>
+
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
@@ -409,8 +411,7 @@ $db = Database::connect();
                     <!-- Botón Guardar -->
                     <button type="submit" class="btn btn-success"><i class="fas fa-save icon"></i> Guardar
                         Factura</button>
-                        <a href="../index" class="btn btn-secondary ms-2"><i
-                        class="fas fa-times-circle"></i> Cancelar</a>
+                    <a href="../index" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i> Cancelar</a>
                 </form>
             </div>
 

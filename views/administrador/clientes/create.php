@@ -49,7 +49,8 @@ $db = Database::connect();
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../../admin/home';
+        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+        $url_regresar = $base_url . 'admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
@@ -221,119 +222,129 @@ $db = Database::connect();
         </div>
         <div id="layoutSidenav_content">
             <main>
-            <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f3f4f6;
-    }
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        background-color: #f3f4f6;
+                    }
 
-    .container {
-        max-width: 800px;
-    }
+                    .container {
+                        max-width: 800px;
+                    }
 
-    .form-label {
-        font-weight: 500;
-        color: #6b7280;
-    }
+                    .form-label {
+                        font-weight: 500;
+                        color: #6b7280;
+                    }
 
-    .form-control,
-    .form-select {
-        background-color: #f9fafb;
-        border: 1px solid #d1d5db;
-        border-radius: 4px;
-        color: #374151;
-    }
+                    .form-control,
+                    .form-select {
+                        background-color: #f9fafb;
+                        border: 1px solid #d1d5db;
+                        border-radius: 4px;
+                        color: #374151;
+                    }
 
-    .btn-primary {
-        background-color: #6C63FF;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-    }
+                    .btn-primary {
+                        background-color: #6C63FF;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 10px 20px;
+                    }
 
-    .btn-secondary {
-        background-color: #e5e7eb;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        color: #374151;
-    }
+                    .btn-secondary {
+                        background-color: #e5e7eb;
+                        border: none;
+                        border-radius: 8px;
+                        padding: 10px 20px;
+                        color: #374151;
+                    }
 
-    .icon {
-        margin-right: 8px;
-        color: #6b7280;
-    }
+                    .icon {
+                        margin-right: 8px;
+                        color: #6b7280;
+                    }
 
-    .header-title {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #1D4A86;
-        margin-bottom: 20px;
-    }
-</style>
+                    .header-title {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #1D4A86;
+                        margin-bottom: 20px;
+                    }
+                </style>
 
-<!-- Título alineado a la izquierda -->
-<div class="container mt-4">
-    <h1 class="header-title"><i class="fas fa-user-plus"></i> Agregar Cliente</h1>
+                <!-- Título alineado a la izquierda -->
+                <div class="container mt-4">
+                    <h1 class="header-title"><i class="fas fa-user-plus"></i> Agregar Cliente</h1>
 
-    <!-- Formulario -->
-    <div class="card-body p-4">
-        <form id="clienteForm" action="createCliente" method="POST" onsubmit="return showConfirmModal(event)">
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="nombre" class="form-label"><i class="fas fa-user"></i> Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    <!-- Formulario -->
+                    <div class="card-body p-4">
+                        <form id="clienteForm" action="createCliente" method="POST"
+                            onsubmit="return showConfirmModal(event)">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="nombre" class="form-label"><i class="fas fa-user"></i> Nombre</label>
+                                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="documento_nit" class="form-label"><i class="fas fa-id-card"></i>
+                                        Documento/NIT</label>
+                                    <input type="text" id="documento_nit" name="documento_nit" class="form-control"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="direccion" class="form-label"><i class="fas fa-map-marker-alt"></i>
+                                        Dirección</label>
+                                    <input type="text" id="direccion" name="direccion" class="form-control" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label"><i class="fas fa-phone"></i>
+                                        Teléfono</label>
+                                    <input type="text" id="telefono" name="telefono" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label"><i class="fas fa-envelope"></i> Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i>
+                                    Aceptar</button>
+                                <a href="../clientes" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i>
+                                    Cancelar</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="documento_nit" class="form-label"><i class="fas fa-id-card"></i> Documento/NIT</label>
-                    <input type="text" id="documento_nit" name="documento_nit" class="form-control" required>
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="direccion" class="form-label"><i class="fas fa-map-marker-alt"></i> Dirección</label>
-                    <input type="text" id="direccion" name="direccion" class="form-control" required>
+                <!-- Modal de confirmación -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ¿Está seguro de que desea aceptar los cambios? Esta acción no se puede deshacer.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="submitForm()">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label for="telefono" class="form-label"><i class="fas fa-phone"></i> Teléfono</label>
-                    <input type="text" id="telefono" name="telefono" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="email" class="form-label"><i class="fas fa-envelope"></i> Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
-                </div>
-            </div>
-
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i> Aceptar</button>
-                <a href="../clientes" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i> Cancelar</a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Modal de confirmación -->
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¿Está seguro de que desea aceptar los cambios? Esta acción no se puede deshacer.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" onclick="submitForm()">Aceptar</button>
-            </div>
-        </div>
-    </div>
-</div>
 
             </main>
 
@@ -351,35 +362,35 @@ $db = Database::connect();
                 crossorigin="anonymous"></script>
             <script src="../../assets/demo/datatables-demo.js"></script>
             <script>
-    function flyBell() {
-        var bellImage = document.getElementById("bellImage");
-        bellImage.classList.add("flying");
-    }
+                function flyBell() {
+                    var bellImage = document.getElementById("bellImage");
+                    bellImage.classList.add("flying");
+                }
 
-    function flyBellAndShowPopup() {
-        var bellImage = document.getElementById("bellImage");
-        bellImage.classList.add("flying");
+                function flyBellAndShowPopup() {
+                    var bellImage = document.getElementById("bellImage");
+                    bellImage.classList.add("flying");
 
-        // Muestra el popup de notificaciones
-        document.getElementById("popup").style.display =
-            document.getElementById("popup").style.display === "none" ? "block" : "none";
-    }
+                    // Muestra el popup de notificaciones
+                    document.getElementById("popup").style.display =
+                        document.getElementById("popup").style.display === "none" ? "block" : "none";
+                }
 
-    function closePopup() {
-        document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
-        location.reload(); // Recarga la página para actualizar el estado de las notificaciones
-    }
+                function closePopup() {
+                    document.getElementById("popup").style.display = "none"; // Oculta la ventana emergente
+                    location.reload(); // Recarga la página para actualizar el estado de las notificaciones
+                }
 
-    function showConfirmModal(event) {
-        event.preventDefault(); // Evita el envío directo del formulario
-        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-        confirmModal.show(); // Muestra el modal de confirmación
-    }
+                function showConfirmModal(event) {
+                    event.preventDefault(); // Evita el envío directo del formulario
+                    var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                    confirmModal.show(); // Muestra el modal de confirmación
+                }
 
-    function submitForm() {
-        document.getElementById('clienteForm').submit(); // Envío manual tras confirmación
-    }
-</script>
+                function submitForm() {
+                    document.getElementById('clienteForm').submit(); // Envío manual tras confirmación
+                }
+            </script>
 </body>
 
 </html>

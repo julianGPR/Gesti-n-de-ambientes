@@ -16,6 +16,15 @@
       <div class="signin-signup">
         <form action="/dashboard/gestion%20de%20ambientes/login/login" method="POST" class="sign-in-form">
           <h2 class="title"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</h2>
+          <?php
+          session_start();
+          if (isset($_SESSION['error_message'])) {
+            echo '<div class="error-message">';
+            echo '<i class="fas fa-exclamation-circle"></i> ' . $_SESSION['error_message'];
+            echo '</div>';
+            unset($_SESSION['error_message']); // Limpiar el mensaje después de mostrarlo
+          }
+          ?>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" id="login" name="login" placeholder="Correo" required />
@@ -65,15 +74,6 @@
 
 </html>
 <script src="assets\Js\app.js"></script>
-<script>
-  function showPopup() {
-    document.getElementById('creditPopup').style.display = 'block';
-  }
-
-  function hidePopup() {
-    document.getElementById('creditPopup').style.display = 'none';
-  }
-</script>
 </body>
 
 </html>

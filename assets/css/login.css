@@ -42,6 +42,22 @@ input {
   z-index: 5;
 }
 
+/* Mensaje de error */
+.error-message {
+  color: #e4655c; /* Color rojo de error */
+  font-size: 14px; /* Tamaño del texto */
+  margin-top: 5px; /* Espaciado hacia abajo del campo */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Separación entre el ícono y el texto */
+}
+
+.error-message i {
+  font-size: 16px; /* Tamaño del ícono */
+}
+
+
+
 form {
   display: flex;
   align-items: center;
@@ -153,6 +169,7 @@ form.sign-in-form {
 .btn:hover {
   background-color: #4d84e2;
 }
+
 .panels-container {
   position: absolute;
   height: 100%;
@@ -181,12 +198,13 @@ form.sign-in-form {
   width: 100%;
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
-  
+
 }
 
 .image1 {
   width: 100px;
-  height: auto; /* Esto mantiene la proporción de la imagen */
+  height: auto;
+  /* Esto mantiene la proporción de la imagen */
   transition: transform 1.1s ease-in-out;
   transition-delay: 0.4s;
 }
@@ -286,6 +304,7 @@ form.sign-in-form {
     min-height: 800px;
     height: 100vh;
   }
+
   .signin-signup {
     width: 100%;
     top: 95%;
@@ -392,9 +411,11 @@ form.sign-in-form {
   .image {
     display: none;
   }
+
   .panel .content {
     padding: 0.5rem 1rem;
   }
+
   .container {
     padding: 1.5rem;
   }
