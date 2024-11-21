@@ -123,7 +123,7 @@
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Configuración</a>
+                    <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
                     </div>
@@ -203,6 +203,15 @@
                         <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
                             <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                             Productos
+                        </a>
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/clientes/clientes">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Clientes
+                        </a>
+
+                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/facturas/index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Ventas
                         </a>
                     </div>
                 </div>

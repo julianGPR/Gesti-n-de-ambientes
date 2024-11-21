@@ -42,7 +42,11 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
-        <a class="navbar-brand" href="/dashboard/gestion%20de%20ambientes/encargado/home">
+        <?php
+        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+        $url_regresar = $base_url . 'encargado/home';
+        ?>
+        <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
         </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
                 class="fas fa-bars"></i></button>
