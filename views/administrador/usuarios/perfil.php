@@ -47,14 +47,36 @@ $db = Database::connect();
         </ul>
     </nav>
     <style>
-        .ui-w-80 {
-            width: 80px !important;
-            height: auto;
+        /* General Styles */
+        body {
+            background: #f5f5f5;
+            margin-top: -15px;
         }
 
+        .container-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .card {
+            background-clip: padding-box;
+            box-shadow: 0 1px 4px rgba(24, 28, 33, 0.12);
+            margin-bottom: 20px;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1D4A86;
+            margin-bottom: 20px;
+        }
+
+        /* Buttons */
         .btn-default {
             border-color: rgba(24, 28, 33, 0.1);
-            background: rgba(0, 0, 0, 0);
+            background: transparent;
             color: #4E5155;
         }
 
@@ -75,23 +97,13 @@ $db = Database::connect();
             border: none;
             margin-top: 20px;
         }
-        .card {
-            background-clip: padding-box;
-            box-shadow: 0 1px 4px rgba(24, 28, 33, 0.12);
-            margin-bottom: 20px;
+
+        .btn-back:hover {
+            background-color: #5a6268;
+            color: #fff;
         }
 
-        .account-settings-links .list-group-item.active {
-            font-weight: bold;
-            background-color: #26B4FF !important;
-            color: #fff !important;
-        }
-
-        .list-group-item {
-            padding: 0.85rem 1.5rem;
-            border-color: rgba(24, 28, 33, 0.03);
-        }
-
+        /* Progress Bar */
         .progress {
             height: 6px;
             border-radius: 4px;
@@ -101,36 +113,7 @@ $db = Database::connect();
             border-radius: 4px;
         }
 
-        body {
-            background: #f5f5f5;
-            margin-top: -15px;
-        }
-
-        .container-box {
-            background: #fff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-back {
-            background-color: #6c757d;
-            color: #fff;
-            border: none;
-            margin-top: 20px;
-        }
-
-        .btn-back:hover {
-            background-color: #5a6268;
-            color: #fff;
-        }
-
-        .card {
-            background-clip: padding-box;
-            box-shadow: 0 1px 4px rgba(24, 28, 33, 0.12);
-            margin-bottom: 20px;
-        }
-
+        /* Sidebar Navigation */
         .sb-sidenav-dark {
             background-color: #343a40;
             color: white;
@@ -158,7 +141,26 @@ $db = Database::connect();
             text-align: center;
         }
 
-        /* Estilo para alinear el título a la izquierda */
+        /* Account Settings */
+        .account-settings-links .list-group-item.active {
+            font-weight: bold;
+            background-color: #26B4FF !important;
+            color: #fff !important;
+        }
+
+        .list-group-item {
+            padding: 0.85rem 1.5rem;
+            border-color: rgba(24, 28, 33, 0.03);
+        }
+
+        /* Image/Profile Section */
+        .ui-w-80 {
+            /* Imagen o perfil relacionado */
+            width: 280px !important;
+            height: auto;
+        }
+
+        /* Specific to Titles or Text Alignment */
         .header-title {
             font-size: 1.5rem;
             font-weight: bold;
