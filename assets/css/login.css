@@ -44,8 +44,8 @@ input {
 
 /* Mensaje de error */
 .error-message {
-  color: #e4655c; /* Color rojo de error */
-  font-size: 14px; /* Tamaño del texto */
+  color: #e01b0d; /* Color rojo de error */
+  font-size: 18px; /* Tamaño del texto */
   margin-top: 5px; /* Espaciado hacia abajo del campo */
   display: flex;
   align-items: center;
@@ -80,10 +80,17 @@ form.sign-in-form {
 }
 
 .title {
-  font-size: 2.2rem;
-  color: #0a0a0a;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: #ffffff; /* Color del texto principal */
+  text-shadow: 2px 2px 0 #000000, -2px 2px 0 #000000, 2px -2px 0 #000000, -2px -2px 0 #000000; /* Efecto bordado */
+  -webkit-text-stroke: 2px #000000; /* Contorno negro alrededor del texto */
+  font-weight: bold; /* Texto más grueso */
+  padding: 10px 20px; /* Espaciado alrededor del texto */
+  display: inline-block; /* Para ajustar el tamaño al texto */
+  text-align: center; /* Alineación central */
 }
+
+
 
 .input-field {
   max-width: 380px;
