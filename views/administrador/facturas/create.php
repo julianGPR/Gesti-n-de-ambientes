@@ -18,14 +18,11 @@ $db = Database::connect();
     <link href="../../assets/css/styles.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
 </head>
-
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
@@ -306,7 +303,7 @@ $db = Database::connect();
                 <h1 class="header-title"><i class="fas fa-file-invoice icon"></i> Crear Factura</h1>
 
                 <!-- Formulario -->
-                <form action="../store" method="POST">
+                <form action="../store" method="POST" onsubmit="return validarFormulario();">
                     <!-- Datos del Cliente -->
                     <label for="id_cliente" class="form-label"><i class="fas fa-user icon"></i> Cliente</label>
                     <select name="id_cliente" class="form-control" required>
@@ -412,7 +409,7 @@ $db = Database::connect();
                     <button type="submit" class="btn btn-success"><i class="fas fa-save icon"></i> Guardar
                         Factura</button>
                     <a href="../index" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i> Cancelar</a>
-                </form>
+                    </form>
             </div>
 
             <!-- Scripts -->
