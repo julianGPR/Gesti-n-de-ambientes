@@ -3,12 +3,24 @@ include_once 'models/AdminModel.php';
 
 class AdminController {
     public function home() {
+        $adminModel = new AdminModel();
+    
+        $data = [
+            'totalFacturas' => $adminModel->obtenerNumeroTotalFacturas(),
+            'facturacionTotal' => $adminModel->obtenerFacturacionTotal(),
+            'facturacionPromedio' => $adminModel->obtenerFacturacionPromedioPorCliente(),
+            'facturasPorMes' => $adminModel->obtenerFacturasPorMes(), // Incluye datos del nuevo método
+            'productosMasVendidos' => $adminModel->obtenerProductosVendidos(),
+        ];
+
+    
         include 'views/administrador/index.php';
     }
     public function areaTrabajo() {
         include 'views/administrador/ambientes/index.php';
     }
-
+    
+    
     public function createAreaTrabajo() {
         $adminModel = new AdminModel();
         $usuarios = $adminModel->obtenerUsuarios();
@@ -91,5 +103,6 @@ class AdminController {
         header("Location: ../areaTrabajo");
         exit();
     }
+    
 }
 ?>
