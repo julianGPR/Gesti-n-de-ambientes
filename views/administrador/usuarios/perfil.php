@@ -1,6 +1,23 @@
 <?php
-// Conectar a la base de datos
+// Iniciar sesión
+//session_start();
 require_once 'config/db.php';
+
+// Verificar si hay sesión activa
+if (!isset($_SESSION['user'])) {
+    header("Location: /dashboard/gestion%20de%20ambientes/login");
+    exit();
+}
+
+// Asignar variables de la sesión
+$user = $_SESSION['user'];
+$usuario_activo = $user['Nombres'] . ' ' . $user['Apellidos'];
+$rol_usuario = $user['Rol'];
+
+// Determinar la URL de inicio según el rol del usuario
+$base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+$url_inicio = $rol_usuario === 'Administrador' ? $base_url . 'admin/home' : $base_url . 'encargado/home';
+
 $db = Database::connect();
 ?>
 
@@ -16,34 +33,33 @@ $db = Database::connect();
     <title>Sistema Web</title>
     <link rel="icon" href="../assets/img/login02.ico" type="image/x-icon">
     <link href="../assets/css/styles.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
-        crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
-        crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-blue "
-        style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
-        <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
+    <nav class="sb-topnav navbar navbar-expand navbar-blue" style="background: linear-gradient(20deg, #C4C4C4, #C4C4C4);">
+        <!-- Logo con redirección dinámica según el rol -->
+        <a class="navbar-brand" href="<?php echo $url_inicio; ?>">
             <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
-        </a><button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i
-                class="fas fa-bars"></i></button>
+        </a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
         <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle dropdown-blue" id="userDropdown" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                            class="fas fa-user fa-fw"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
-                    </div>
-                </li>
-            </ul>
+            <!-- Menú desplegable del usuario -->
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle dropdown-blue" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user fa-fw"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/usuarios/perfil">Configuración</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
+                </div>
+            </li>
         </ul>
     </nav>
     <style>
