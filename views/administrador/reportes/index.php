@@ -75,7 +75,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link"
-                            href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">Ver
+                            href="/gafra/reporte/verReporteAdministrador/Tuberia">Ver
                             reporte</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link"
-                            href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">Ver
+                            href="/gafra/reporte/verReporteAdministrador/Ensamble">Ver
                             reporte</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link"
-                            href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">Ver
+                            href="/gafra/reporte/verReporteAdministrador/Corte">Ver
                             reporte</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link"
-                            href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">Ver
+                            href="/gafra/reporte/verReporteAdministrador/Satelite">Ver
                             reporte</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>

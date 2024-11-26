@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/inventario/crearEntrada' id="btn-create">
+                <a href='/gafra/inventario/crearEntrada' id="btn-create">
                     Crear Entrada
                 </a>
             </div>
@@ -52,7 +52,7 @@
                                     <td><?= htmlspecialchars($entrada['tipo_area']) ?></td>
                                     <td>
                                         <div class="d-flex align-items-center">
-                                            <a href="/dashboard/gestion%20de%20ambientes/inventario/editarEntrada/<?= $entrada['id_entrada'] ?>"
+                                            <a href="/gafra/inventario/editarEntrada/<?= $entrada['id_entrada'] ?>"
                                                 class="btn btn-outline-primary btn-sm me-2 d-flex align-items-center">
                                                 <i class="bi bi-pencil-fill me-1"></i> Editar
                                             </a>

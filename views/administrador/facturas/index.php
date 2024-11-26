@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/facturas/create/' id="btn-create">
+                <a href='/gafra/facturas/create/' id="btn-create">
                     Nueva Factura
                 </a>
             </div>
@@ -39,7 +39,7 @@
                         <td><?php echo htmlspecialchars($factura['fecha']); ?></td>
                         <td>$<?php echo number_format($factura['total'], 2); ?></td>
                         <td>
-                            <a href="/dashboard/gestion%20de%20ambientes/facturas/detalle/<?php echo $factura['id']; ?>" 
+                            <a href="/gafra/facturas/detalle/<?php echo $factura['id']; ?>" 
                                 class="btn btn-info btn-sm">Ver</a>
                         </td>
                     </tr>
@@ -143,7 +143,7 @@ $(document).ready(function() {
     function cargarFactura(button) {
         const facturaId = button.getAttribute("data-id");
 
-        fetch(`dashboard/gestion%20de%20ambientes/facturas/detalle/${facturaId}`)
+        fetch(`gafra/facturas/detalle/${facturaId}`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById("detalleFactura").innerHTML = data;

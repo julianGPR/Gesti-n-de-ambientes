@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/proveedores/createProveedor/' id="btn-create">
+                <a href='/gafra/proveedores/createProveedor/' id="btn-create">
                 Nuevo Proveedor
                 </a>
             </div>
@@ -62,7 +62,7 @@
                                     echo "<td>";
 
 
-                                    $url_update = '/dashboard/gestion%20de%20ambientes/proveedores/updateProveedor/' . $row['id_proveedor'];
+                                    $url_update = '/gafra/proveedores/updateProveedor/' . $row['id_proveedor'];
                                     echo "<a href='" . $url_update . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
                                     echo "</td>";
                                     echo "</tr>";

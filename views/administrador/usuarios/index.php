@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/usuarios/createUsuario/' id="btn-create">
+                <a href='/gafra/usuarios/createUsuario/' id="btn-create">
                     Nuevo Usuario 
                 </a>
             </div>
@@ -60,7 +60,7 @@
                                     echo "<td>" . $row["Rol"] . "</td>";
                                     echo "<td>";
 
-                                    $url_update = '/dashboard/gestion%20de%20ambientes/usuarios/updateUsuario/' . $row['id_usuario'];
+                                    $url_update = '/gafra/usuarios/updateUsuario/' . $row['id_usuario'];
                                     echo "<a href='" . $url_update . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
                                     echo "</td>";
                                     echo "</tr>";

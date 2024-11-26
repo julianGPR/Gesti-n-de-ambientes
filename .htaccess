@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /dashboard/gestion%20de%20ambientes/
+RewriteBase /gafra/
 
 # Redirigir todas las solicitudes no existentes a index.php
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -111,7 +111,7 @@
                             echo "<td>" . $row['EstadoHardware'] . "</td>";
                             echo "<td>" . $row['EstadoSoftware'] . "</td>";
                             echo "<td>";
-                            $url_update_c = '/dashboard/gestion%20de%20ambientes/admin/updateComputador/';
+                            $url_update_c = '/gafra/admin/updateComputador/';
                             echo "<a href='" . $url_update_c . $row['Id_computador'] . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
                             echo "</td>";
                             echo "</tr>";
@@ -131,7 +131,7 @@
             <div class="crear-ambiente">
                 <?php
                 // Construir la URL adecuada para el botón de "Gestión de Ambientes"
-                $url_create = '/dashboard/gestion%20de%20ambientes/admin/createComputador/';
+                $url_create = '/gafra/admin/createComputador/';
                 ?>
                 <ul>
                     <li><a href="<?php echo $url_create; ?>" id="btn-create">Crear Nuevo Computador</a></li>

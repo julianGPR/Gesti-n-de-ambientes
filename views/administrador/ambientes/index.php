@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/admin/createAreaTrabajo/' id="btn-create">
+                <a href='/gafra/admin/createAreaTrabajo/' id="btn-create">
                     Crear area de trabajo
                 </a>
             </div>
@@ -78,7 +78,7 @@
 
                                         // Botón de editar (si el área no está inhabilitada)
                                         if ($row['estado_area'] !== 'Inhabilitado') {
-                                            $url_update = '/dashboard/gestion%20de%20ambientes/admin/updateAreaTrabajo/';
+                                            $url_update = '/gafra/admin/updateAreaTrabajo/';
                                             echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-modificar boton-accion' title='Editar'>
                     <img src='../assets/editar.svg' alt='Editar' class='icono-accion'>
                   </a>";
@@ -171,13 +171,13 @@
 
     function confirmarHabilitar(id) {
         if (confirm("¿Está seguro de que desea habilitar este área de trabajo?")) {
-            window.location.href = '/dashboard/gestion%20de%20ambientes/admin/habilitarAreaTrabajo/' + id;
+            window.location.href = '/gafra/admin/habilitarAreaTrabajo/' + id;
         }
     }
 
     function confirmarInhabilitar(id) {
         if (confirm("¿Está seguro de que desea inhabilitar este área de trabajo?")) {
-            window.location.href = '/dashboard/gestion%20de%20ambientes/admin/inhabilitarAreaTrabajo/' + id;
+            window.location.href = '/gafra/admin/inhabilitarAreaTrabajo/' + id;
         }
     }
 

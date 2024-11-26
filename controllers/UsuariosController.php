@@ -133,7 +133,7 @@ class UsuariosController {
             $result = $usuarioModel->actualizarPerfil($id, $nombres, $apellidos, $correo, $especialidad, $foto_perfil);
     
             if ($result) {
-                header("Location: /dashboard/gestion%20de%20ambientes/usuarios/perfil");
+                header("Location: /gafra/usuarios/perfil");
             } else {
                 echo "Error al actualizar el perfil.";
             }

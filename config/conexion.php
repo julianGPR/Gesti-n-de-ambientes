@@ -1,6 +1,6 @@
 <?php
 
-$conexion = new mysqli("localhost", "root", "", "reportesambientes");
+$conexion = new mysqli("localhost", "root", "", "gafra");
 
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);

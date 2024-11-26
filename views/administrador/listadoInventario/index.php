@@ -113,7 +113,7 @@
     });
 
     function filtrarPorArea(tipoArea) {
-        fetch(`/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador`, {
+        fetch(`/gafra/inventario/listarEntradasAdministrador`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

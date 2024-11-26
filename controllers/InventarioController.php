@@ -183,7 +183,7 @@ class InventarioController {
             if ($result) {
                 echo "<script>
                         alert('Editado con éxito');
-                        window.location.href = '/dashboard/gestion%20de%20ambientes/admin/areaTrabajo';
+                        window.location.href = '/gafra/admin/areaTrabajo';
                       </script>";
                 exit();
             } else {

@@ -5,7 +5,7 @@ require_once 'config/db.php';
 
 // Verificar si hay sesión activa
 if (!isset($_SESSION['user'])) {
-    header("Location: /dashboard/gestion%20de%20ambientes/login");
+    header("Location: /gafra/login");
     exit();
 }
 
@@ -15,7 +15,7 @@ $usuario_activo = $user['Nombres'] . ' ' . $user['Apellidos'];
 $rol_usuario = $user['Rol'];
 
 // Determinar la URL de inicio según el rol del usuario
-$base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+$base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/gafra/';
 $url_inicio = $rol_usuario === 'Administrador' ? $base_url . 'admin/home' : $base_url . 'encargado/home';
 
 $db = Database::connect();
@@ -55,9 +55,9 @@ $db = Database::connect();
                     <i class="fas fa-user fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/usuarios/perfil">Configuración</a>
+                    <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login">Salir</a>
                 </div>
             </li>
         </ul>
@@ -264,7 +264,7 @@ $db = Database::connect();
                             <!-- Editar Perfil -->
                             <div class="tab-pane fade" id="account-edit-profile">
                                 <div class="card-body">
-                                    <form action="/dashboard/gestion%20de%20ambientes/usuarios/actualizarPerfil" method="POST" enctype="multipart/form-data">
+                                    <form action="/gafra/usuarios/actualizarPerfil" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="nombres">Nombres</label>
                                             <input type="text" class="form-control" name="nombres" id="nombres" value="<?php echo htmlspecialchars($usuario['Nombres']); ?>" required>

@@ -43,7 +43,7 @@
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/gafra/';
         $url_regresar = $base_url . 'encargado/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
@@ -59,7 +59,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
+                        <a class="dropdown-item" href="/gafra/login">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -70,19 +70,19 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/encargado/home">
+                        <a class="nav-link" href="/gafra/encargado/home">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Inicio
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradas">
+                        <a class="nav-link" href="/gafra/inventario/listarEntradas">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Inventario
                         </a>
 
-                        <a class="nav-link" href='/dashboard/gestion%20de%20ambientes/reporte/verReportesPorUsuario/'>
+                        <a class="nav-link" href='/gafra/reporte/verReportesPorUsuario/'>
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Reporte
                         </a>

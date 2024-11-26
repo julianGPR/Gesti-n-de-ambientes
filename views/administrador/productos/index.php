@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/Producto/crearProducto/' id="btn-create">
+                <a href='/gafra/Producto/crearProducto/' id="btn-create">
                     Nuevo Producto
                 </a>
             </div>
@@ -42,7 +42,7 @@
                                     <td><?php echo $producto['fecha_creacion'] ?></td>
                                     <td>
                                         <?php
-                                        $url_update = '/dashboard/gestion%20de%20ambientes/producto/actualizarProducto/' . $producto['id_producto'];
+                                        $url_update = '/gafra/producto/actualizarProducto/' . $producto['id_producto'];
                                         echo "<a href='$url_update' class='boton-modificar'><img src='../assets/editar.svg' alt='Editar'></a>";
                                         ?>
                                     </td>

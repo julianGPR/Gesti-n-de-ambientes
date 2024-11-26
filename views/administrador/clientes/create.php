@@ -49,7 +49,7 @@ $db = Database::connect();
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/dashboard/gestion%20de%20ambientes/';
+        $base_url = 'http://' . $_SERVER['HTTP_HOST'] . '/gafra/';
         $url_regresar = $base_url . 'admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
@@ -132,7 +132,7 @@ $db = Database::connect();
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/dashboard/gestion%20de%20ambientes/login">Salir</a>
+                        <a class="dropdown-item" href="/gafra/login">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -149,18 +149,18 @@ $db = Database::connect();
                         </a>
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/admin/areaTrabajo">
+                        <a class="nav-link" href="/gafra/admin/areaTrabajo">
                             <div class="sb-nav-link-icon"><i class="fas fa-briefcase"></i></div>
                             Area de trabajo
                         </a>
 
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/usuarios/usuarios">
+                        <a class="nav-link" href="/gafra/usuarios/usuarios">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Gestión de Usuarios
                         </a>
 
                         <div class="nav-link d-flex align-items-center">
-                            <a href="/dashboard/gestion%20de%20ambientes/reporte/reportes"
+                            <a href="/gafra/reporte/reportes"
                                 class="d-flex align-items-center custom-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
@@ -175,19 +175,19 @@ $db = Database::connect();
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link custom-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Tuberia">
+                                    href="/gafra/reporte/verReporteAdministrador/Tuberia">
                                     <i class="fas fa-toolbox"></i> Tubería
                                 </a>
                                 <a class="nav-link custom-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Ensamble">
+                                    href="/gafra/reporte/verReporteAdministrador/Ensamble">
                                     <i class="fas fa-cogs"></i> Ensamble
                                 </a>
                                 <a class="nav-link custom-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Corte">
+                                    href="/gafra/reporte/verReporteAdministrador/Corte">
                                     <i class="fas fa-cut"></i> Corte
                                 </a>
                                 <a class="nav-link custom-link"
-                                    href="/dashboard/gestion%20de%20ambientes/reporte/verReporteAdministrador/Satelite">
+                                    href="/gafra/reporte/verReporteAdministrador/Satelite">
                                     <i class="fas fa-satellite"></i> Satélite
                                 </a>
                             </nav>
@@ -197,18 +197,18 @@ $db = Database::connect();
 
                         <div class="sb-sidenav-menu-heading">Interface</div>
 
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/proveedores/proveedores">
+                        <a class="nav-link" href="/gafra/proveedores/proveedores">
                             <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
                             Proveedores
                         </a>
 
                         <a class="nav-link"
-                            href="/dashboard/gestion%20de%20ambientes/inventario/listarEntradasAdministrador">
+                            href="/gafra/inventario/listarEntradasAdministrador">
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Inventario
                         </a>
 
-                        <a class="nav-link" href="/dashboard/gestion%20de%20ambientes/Producto/listarProductos">
+                        <a class="nav-link" href="/gafra/Producto/listarProductos">
                             <div class="sb-nav-link-icon"><i class="fas fa-tags"></i></div>
                             Productos
                         </a>

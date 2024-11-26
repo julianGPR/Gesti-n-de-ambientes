@@ -10,7 +10,7 @@
         </div>
         <div class="row">
             <div class="col-xl-3 col-md-6">
-                <a href='/dashboard/gestion%20de%20ambientes/clientes/createCliente/' id="btn-create">
+                <a href='/gafra/clientes/createCliente/' id="btn-create">
                     Nuevo Cliente
                 </a>
             </div>
@@ -44,7 +44,7 @@
                     <td><?php echo $cliente['fecha_registro']; ?></td>
                     <td>
                         <?php
-                        $url_update = '/dashboard/gestion%20de%20ambientes/clientes/updateCliente/' . $cliente['id'];
+                        $url_update = '/gafra/clientes/updateCliente/' . $cliente['id'];
                         echo "<a href='" . $url_update . "' class='boton-modificar'><img src='../assets/editar.svg'></a>";
                         ?>
                     </td>
