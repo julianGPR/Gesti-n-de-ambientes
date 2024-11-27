@@ -15,7 +15,7 @@
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="/dashboard/gestion%20de%20ambientes/login/login" method="POST" class="sign-in-form">
+        <form action="/gafra/login/login" method="POST" class="sign-in-form">
           <h2 class="title"> Iniciar sesión</h2>
           <?php
           session_start();

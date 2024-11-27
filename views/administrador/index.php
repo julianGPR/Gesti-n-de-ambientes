@@ -1,107 +1,141 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="header-section text-center py-5"
+        style="background: linear-gradient(90deg, #2b2b2b, #1e1e1e); border-radius: 12px; color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        <h1 class="display-5 fw-bold">
+            <i class="fas fa-chart-bar"></i> Estadísticas
+        </h1>
+        <p class="mt-3" style="font-size: 1.2rem; color: #d1d1d1;">Explora datos clave con visualizaciones interactivas
+        </p>
+    </div>
 
-
-<main>
-    <div class="container-fluid">
-        <div class="header-section text-center my-4 p-4" style="background-color: #f8f9fa; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-            <h1 class="display-4 font-weight-bold text-primary mb-3">
-                <i class="fas fa-chart-bar"></i> Estadísticas
-            </h1>
-            <p class="text-secondary" style="font-size: 1.1rem;">Seleccione una opción para explorar los datos y gráficos clave</p>
+    <!-- Opciones -->
+    <div class="row text-center mt-5">
+        <div class="col-lg-3 col-md-6 mb-4">
+            <button class="btn btn-outline-primary w-100 py-4 shadow-sm" onclick="mostrarModulo('totalFacturas')">
+                <i class="fas fa-file-invoice fa-2x mb-2"></i>
+                <h5 class="fw-bold mt-2">Número Total de Facturas</h5>
+            </button>
         </div>
-
-        <!-- Opciones -->
-        <div class="row mb-4 text-center">
-            <div class="col-md-3">
-                <button class="btn btn-primary w-100 py-3" onclick="mostrarModulo('totalFacturas')">
-                    <i class="fas fa-file-invoice"></i> Número Total de Facturas
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-success w-100 py-3" onclick="mostrarModulo('facturacionTotal')">
-                    <i class="fas fa-dollar-sign"></i> Facturación Total
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-warning w-100 py-3" onclick="mostrarModulo('facturacionPromedio')">
-                    <i class="fas fa-chart-line"></i> Facturación Promedio por Cliente
-                </button>
-            </div>
-            <div class="col-md-3">
-                <button class="btn btn-danger w-100 py-3" onclick="mostrarModulo('productosMasVendidos')">
-                    <i class="fas fa-box"></i> Productos Más Vendidos
-                </button>
-            </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <button class="btn btn-outline-success w-100 py-4 shadow-sm" onclick="mostrarModulo('facturacionTotal')">
+                <i class="fas fa-dollar-sign fa-2x mb-2"></i>
+                <h5 class="fw-bold mt-2">Facturación Total</h5>
+            </button>
         </div>
-
-        <!-- Contenedor dinámico -->
-        <div id="contenedorModulos" class="row">
-            <!-- Total de Facturas -->
-            <div class="col-lg-12" id="totalFacturas" style="display: none;">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <i class="fas fa-file-invoice"></i> Número Total de Facturas
-                    </div>
-                    <div class="card-body text-center">
-                        <h2 class="text-dark">Total: <?= $data['totalFacturas'] ?></h2>
-                        <canvas id="graficaFacturasPorMes" style="max-height: 200px;" class="mt-4"></canvas>
-                        <canvas id="graficaTotalVentasPorMes" style="max-height: 200px;" class="mt-4"></canvas> <!-- Nueva gráfica -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Facturación Total -->
-            <div class="col-lg-12" id="facturacionTotal" style="display: none;">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <i class="fas fa-dollar-sign"></i> Facturación Total
-                    </div>
-                    <div class="card-body text-center">
-                        <h2 class="text-dark">Total: $<?= number_format($data['facturacionTotal'], 2) ?></h2>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Facturación Promedio por Cliente -->
-            <div class="col-lg-12" id="facturacionPromedio" style="display: none;">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-warning text-white">
-                        <i class="fas fa-chart-bar"></i> Facturación Promedio por Cliente
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <canvas id="graficaFacturacionPromedio" style="max-height: 200px;"></canvas>
-                            </div>
-                            <div class="col-md-6">
-                                <canvas id="graficaClientesComparativa" style="max-height: 200px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Productos Más Vendidos -->
-            <div class="col-lg-12" id="productosMasVendidos" style="display: none;">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-danger text-white">
-                        <i class="fas fa-box"></i> Productos Más Vendidos
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <canvas id="graficaProductosMasVendidosBar" style="max-height: 200px;"></canvas>
-                            </div>
-                            <div class="col-md-6">
-                                <canvas id="graficaProductosMasVendidosPie" style="max-height: 200px;"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <button class="btn btn-outline-warning w-100 py-4 shadow-sm" onclick="mostrarModulo('facturacionPromedio')">
+                <i class="fas fa-chart-line fa-2x mb-2"></i>
+                <h5 class="fw-bold mt-2">Facturación Promedio</h5>
+            </button>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-4">
+            <button class="btn btn-outline-danger w-100 py-4 shadow-sm" onclick="mostrarModulo('productosMasVendidos')">
+                <i class="fas fa-box fa-2x mb-2"></i>
+                <h5 class="fw-bold mt-2">Productos Más Vendidos</h5>
+            </button>
         </div>
     </div>
-</main>
+
+    <!-- Contenedor dinámico -->
+    <div id="contenedorModulos" class="row mt-4">
+        <!-- Total de Facturas -->
+        <div class="col-12" id="totalFacturas" style="display: none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header text-white bg-primary">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-invoice"></i> Número Total de Facturas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Título y resumen -->
+                    <h2 class="fw-bold text-dark text-center mb-4">Total: <?= $data['totalFacturas'] ?></h2>
+
+                    <!-- Gráficas -->
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <h6 class="text-secondary mb-3">Facturas por Mes</h6>
+                            <canvas id="graficaFacturasPorMes" style="max-height: 300px;"></canvas>
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <h6 class="text-secondary mb-3">Ventas Totales por Mes</h6>
+                            <canvas id="graficaTotalVentasPorMes" style="max-height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Facturación Total -->
+        <div class="col-12" id="facturacionTotal" style="display: none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header text-white bg-success">
+                    <h5 class="mb-0">
+                        <i class="fas fa-dollar-sign"></i> Facturación Total
+                    </h5>
+                </div>
+                <div class="card-body text-center">
+                    <h2 class="fw-bold text-dark">Total: $<?= number_format($data['facturacionTotal'], 2) ?></h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Facturación Promedio por Cliente -->
+        <div class="col-12" id="facturacionPromedio" style="display: none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header text-white bg-warning">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar"></i> Facturación Promedio por Cliente
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <canvas id="graficaFacturacionPromedio"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <canvas id="graficaClientesComparativa"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Productos Más Vendidos -->
+        <div class="col-12" id="productosMasVendidos" style="display: none;">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header text-white bg-danger">
+                    <h5 class="mb-0">
+                        <i class="fas fa-box"></i> Productos Más Vendidos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <!-- Gráfica de Barras -->
+                        <div class="col-md-6 text-center">
+                            <h6 class="text-secondary mb-3">Gráfica de Barras</h6>
+                            <div style="max-width: 400px; margin: auto;">
+                                <canvas id="graficaProductosMasVendidosBar" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                        <!-- Gráfica de Pie -->
+                        <div class="col-md-6 text-center">
+                            <h6 class="text-secondary mb-3">Gráfica Circular</h6>
+                            <div style="max-width: 400px; margin: auto;">
+                                <canvas id="graficaProductosMasVendidosPie" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
@@ -166,209 +200,209 @@
     }
 
     function renderFacturasPorMes() {
-    // Destruir gráficos previos si existen
-    if (chartFacturasPorMes) chartFacturasPorMes.destroy();
-    if (chartTotalVentasPorMes) chartTotalVentasPorMes.destroy();
+        // Destruir gráficos previos si existen
+        if (chartFacturasPorMes) chartFacturasPorMes.destroy();
+        if (chartTotalVentasPorMes) chartTotalVentasPorMes.destroy();
 
-    // Gráfica de cantidad de facturas por mes
-    const ctxLine = document.getElementById('graficaFacturasPorMes').getContext('2d');
-    chartFacturasPorMes = new Chart(ctxLine, {
-        type: 'line',
-        data: {
-            labels: facturasPorMes.map(item => item.mes), // Meses como etiquetas
-            datasets: [{
-                label: 'Cantidad de Facturas',
-                data: facturasPorMes.map(item => item.cantidad),
-                borderColor: 'rgba(54, 162, 235, 1)', // Color azul profesional
-                backgroundColor: 'rgba(54, 162, 235, 0.2)', // Transparente relleno
-                borderWidth: 2, // Grosor de la línea
-                pointBackgroundColor: 'rgba(54, 162, 235, 1)', // Color de los puntos
-                pointBorderColor: '#fff', // Borde blanco de los puntos
-                pointHoverRadius: 6, // Tamaño de los puntos al pasar el mouse
-                tension: 0.4 // Suavidad de la curva
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Cantidad de Facturas por Mes',
-                    font: {
-                        size: 18,
-                        weight: 'bold',
-                        family: 'Arial'
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function (tooltipItem) {
-                            const index = tooltipItem.dataIndex;
-                            const totalVentas = facturasPorMes[index].total_ventas;
-                            return `Facturas: ${tooltipItem.raw} - Total Vendido: $${totalVentas.toLocaleString()}`;
-                        }
-                    }
-                },
-                legend: {
-                    labels: {
+        // Gráfica de cantidad de facturas por mes
+        const ctxLine = document.getElementById('graficaFacturasPorMes').getContext('2d');
+        chartFacturasPorMes = new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: facturasPorMes.map(item => item.mes), // Meses como etiquetas
+                datasets: [{
+                    label: 'Cantidad de Facturas',
+                    data: facturasPorMes.map(item => item.cantidad),
+                    borderColor: 'rgba(54, 162, 235, 1)', // Color azul profesional
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Transparente relleno
+                    borderWidth: 2, // Grosor de la línea
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)', // Color de los puntos
+                    pointBorderColor: '#fff', // Borde blanco de los puntos
+                    pointHoverRadius: 6, // Tamaño de los puntos al pasar el mouse
+                    tension: 0.4 // Suavidad de la curva
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Cantidad de Facturas por Mes',
                         font: {
-                            size: 14,
+                            size: 18,
+                            weight: 'bold',
                             family: 'Arial'
                         }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Meses',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                const index = tooltipItem.dataIndex;
+                                const totalVentas = facturasPorMes[index].total_ventas;
+                                return `Facturas: ${tooltipItem.raw} - Total Vendido: $${totalVentas.toLocaleString()}`;
+                            }
                         }
                     },
-                    ticks: {
-                        font: {
-                            size: 14
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Arial'
+                            }
                         }
                     }
                 },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Cantidad de Facturas',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Meses',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            }
                         }
                     },
-                    ticks: {
-                        font: {
-                            size: 14
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Cantidad de Facturas',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            }
                         }
                     }
                 }
             }
-        }
-    });
+        });
 
-    // Gráfica de total vendido por mes
-    const ctxBar = document.getElementById('graficaTotalVentasPorMes').getContext('2d');
-    chartTotalVentasPorMes = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: facturasPorMes.map(item => item.mes), // Meses como etiquetas
-            datasets: [{
-                label: 'Total Ventas ($)',
-                data: facturasPorMes.map(item => item.total_ventas),
-                backgroundColor: 'rgba(255, 99, 132, 0.7)', // Rojo semitransparente
-                borderColor: 'rgba(255, 99, 132, 1)', // Borde rojo
-                borderWidth: 1 // Grosor de las barras
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Total de Ventas por Mes',
-                    font: {
-                        size: 18,
-                        weight: 'bold',
-                        family: 'Arial'
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function (tooltipItem) {
-                            return `Total Ventas: $${tooltipItem.raw.toLocaleString()}`;
-                        }
-                    }
-                },
-                legend: {
-                    display: false // Ocultar leyenda para gráfico de barras
-                }
+        // Gráfica de total vendido por mes
+        const ctxBar = document.getElementById('graficaTotalVentasPorMes').getContext('2d');
+        chartTotalVentasPorMes = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: facturasPorMes.map(item => item.mes), // Meses como etiquetas
+                datasets: [{
+                    label: 'Total Ventas ($)',
+                    data: facturasPorMes.map(item => item.total_ventas),
+                    backgroundColor: 'rgba(255, 99, 132, 0.7)', // Rojo semitransparente
+                    borderColor: 'rgba(255, 99, 132, 1)', // Borde rojo
+                    borderWidth: 1 // Grosor de las barras
+                }]
             },
-            scales: {
-                x: {
+            options: {
+                responsive: true,
+                plugins: {
                     title: {
                         display: true,
-                        text: 'Meses',
+                        text: 'Total de Ventas por Mes',
                         font: {
-                            size: 16,
-                            weight: 'bold'
+                            size: 18,
+                            weight: 'bold',
+                            family: 'Arial'
                         }
                     },
-                    ticks: {
-                        font: {
-                            size: 14
+                    tooltip: {
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                return `Total Ventas: $${tooltipItem.raw.toLocaleString()}`;
+                            }
                         }
+                    },
+                    legend: {
+                        display: false // Ocultar leyenda para gráfico de barras
                     }
                 },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Total Ventas ($)',
-                        font: {
-                            size: 16,
-                            weight: 'bold'
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Meses',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            }
                         }
                     },
-                    ticks: {
-                        font: {
-                            size: 14
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Total Ventas ($)',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            font: {
+                                size: 14
+                            }
                         }
                     }
                 }
             }
-        }
-    });
-    // Gráfica de total vendido por mes
-    const ctxBar1 = document.getElementById('graficaTotalVentasPorMes').getContext('2d');
-    chartTotalVentasPorMes = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: facturasPorMes.map(item => item.mes),
-            datasets: [{
-                label: 'Total Ventas ($)',
-                data: facturasPorMes.map(item => item.total_ventas),
-                backgroundColor: 'rgba(255, 159, 64, 0.7)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { title: { display: true, text: 'Meses' } },
-                y: { beginAtZero: true, title: { display: true, text: 'Total Ventas ($)' } }
+        });
+        // Gráfica de total vendido por mes
+        const ctxBar1 = document.getElementById('graficaTotalVentasPorMes').getContext('2d');
+        chartTotalVentasPorMes = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: facturasPorMes.map(item => item.mes),
+                datasets: [{
+                    label: 'Total Ventas ($)',
+                    data: facturasPorMes.map(item => item.total_ventas),
+                    backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Meses' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'Total Ventas ($)' } }
+                }
             }
-        }
-    });
-    // Gráfica de total vendido por mes
-    const ctxBar2 = document.getElementById('graficaTotalVentasPorMes').getContext('2d');
-    chartTotalVentasPorMes = new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: facturasPorMes.map(item => item.mes),
-            datasets: [{
-                label: 'Total Ventas ($)',
-                data: facturasPorMes.map(item => item.total_ventas),
-                backgroundColor: 'rgba(255, 159, 64, 0.7)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                x: { title: { display: true, text: 'Meses' } },
-                y: { beginAtZero: true, title: { display: true, text: 'Total Ventas ($)' } }
+        });
+        // Gráfica de total vendido por mes
+        const ctxBar2 = document.getElementById('graficaTotalVentasPorMes').getContext('2d');
+        chartTotalVentasPorMes = new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: facturasPorMes.map(item => item.mes),
+                datasets: [{
+                    label: 'Total Ventas ($)',
+                    data: facturasPorMes.map(item => item.total_ventas),
+                    backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'Meses' } },
+                    y: { beginAtZero: true, title: { display: true, text: 'Total Ventas ($)' } }
+                }
             }
-        }
-    });
-}
+        });
+    }
 
 
     function renderFacturacionPromedio() {
@@ -441,7 +475,7 @@
                 plugins: {
                     tooltip: {
                         callbacks: {
-                            label: function(tooltipItem) {
+                            label: function (tooltipItem) {
                                 const total = data.reduce((sum, value) => sum + value, 0);
                                 const porcentaje = ((tooltipItem.raw / total) * 100).toFixed(2);
                                 return `${labels[tooltipItem.dataIndex]}: ${tooltipItem.raw} (${porcentaje}%)`;
