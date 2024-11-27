@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="icon" href="assets/img/login02.ico" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/login.css" />
   <title>Login</title>
@@ -14,8 +15,8 @@
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="/gafra/login/login" method="POST" class="sign-in-form">
-          <h2 class="title"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</h2>
+        <form action="/dashboard/gestion%20de%20ambientes/login/login" method="POST" class="sign-in-form">
+          <h2 class="title"> Iniciar sesión</h2>
           <?php
           session_start();
           if (isset($_SESSION['error_message'])) {
@@ -37,7 +38,7 @@
         </form>
 
         <form action="/recuperar_clave" method="POST" id="form-recuperar" class="sign-up-form">
-          <h2 class="title"><i class="fas fa-key"></i> Recuperar Contraseña</h2>
+          <h2 class="title"> Recuperar Contraseña</h2>
           <div class="input-field">
             <i class="fas fa-envelope"></i>
             <input type="email" id="correo" name="correo" placeholder="Correo" required />

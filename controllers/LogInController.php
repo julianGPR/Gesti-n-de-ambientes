@@ -31,18 +31,18 @@ class LoginController
 
                 switch ($user['Rol']) {
                     case 'Administrador':
-                        header("Location: /gafra/admin/home");
+                        header("Location: /dashboard/gestion%20de%20ambientes/admin/home");
                         exit();
                     case 'Encargado':
-                        header("Location: /gafra/encargado/home");
+                        header("Location: /dashboard/gestion%20de%20ambientes/encargado/home");
                         exit();
                     default:
-                        header("Location: /gafra/login");
+                        header("Location: /dashboard/gestion%20de%20ambientes/login");
                         exit();
                 }
             } else {
                 $_SESSION['error_message'] = "La contraseña es incorrecta. Inténtalo de nuevo.";
-                header("Location: /gafra/login");
+                header("Location: /dashboard/gestion%20de%20ambientes/login");
                 exit();
             }
         } else {
@@ -61,7 +61,7 @@ class LoginController
         header("Pragma: no-cache");
         header("Expires: 0");
 
-        header("Location: /gafra/login"); // Redirigir al inicio de sesión después de cerrar sesión
+        header("Location: /dashboard/gestion%20de%20ambientes/login"); // Redirigir al inicio de sesión después de cerrar sesión
         exit();
     }
 }
