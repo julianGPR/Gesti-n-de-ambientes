@@ -42,9 +42,10 @@ $db = Database::connect();
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-blue" style="background: linear-gradient(20deg, #C4C4C4, #C4C4C4);">
         <!-- Logo con redirección dinámica según el rol -->
-        <a class="navbar-brand" href="<?php echo $url_inicio; ?>">
-            <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
-        </a>
+        <a class="navbar-brand" href="/gafra/usuarios/perfil?id=<?php echo $user['id_usuario']; ?>">
+    <img src="../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
+</a>
+
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
             <i class="fas fa-bars"></i>
         </button>
