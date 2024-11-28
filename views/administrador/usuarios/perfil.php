@@ -45,6 +45,7 @@ $db = Database::connect();
     <nav class="sb-topnav navbar navbar-expand navbar-blue"
         style="background: linear-gradient(20deg, #C4C4C4, #C4C4C4);">
         <!-- Logo con redirección dinámica según el rol -->
+
         <a class="navbar-brand"></a>
         <nav class="sb-topnav navbar navbar-expand navbar-blue "
             style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
@@ -55,8 +56,7 @@ $db = Database::connect();
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <a class="dropdown-item" href="/grafa/login"><i
-                    class="fas fa-user fa-fw"></i> Salir</a>
+                <a class="dropdown-item" href="/grafa/login"><i class="fas fa-user fa-fw"></i> Salir</a>
             </ul>
         </nav>
     </nav>
@@ -243,8 +243,8 @@ $db = Database::connect();
                                 <!-- Editar Perfil -->
                                 <div class="tab-pane fade" id="account-edit-profile">
                                     <div class="card-body">
-                                        <form action="/gafra/usuarios/actualizarPerfil"
-                                            method="POST" enctype="multipart/form-data">
+                                        <form action="/gafra/usuarios/actualizarPerfil" method="POST"
+                                            enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label for="nombres">Nombres</label>
                                                 <input type="text" class="form-control" name="nombres" id="nombres"
