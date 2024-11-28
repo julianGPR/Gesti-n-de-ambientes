@@ -96,7 +96,7 @@ $db = Database::connect();
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/gafra/logout">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login">Salir</a>
                 </div>
             </li>
         </ul>

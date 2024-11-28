@@ -1,5 +1,16 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
-
+<?php
+    if (isset($_SESSION['mensaje'])): ?>
+        <div class="alert alert-<?= $_SESSION['mensaje_tipo']; ?> alert-dismissible fade show" role="alert">
+            <?= $_SESSION['mensaje']; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+        // Eliminar las notificaciones después de mostrarlas
+        unset($_SESSION['mensaje']);
+        unset($_SESSION['mensaje_tipo']);
+    endif;
+    ?>
 <main>
     <div class="container-fluid">
         <div class="header-section">

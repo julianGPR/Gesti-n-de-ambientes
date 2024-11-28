@@ -160,8 +160,7 @@ $db = Database::connect();
                         </a>
 
                         <div class="nav-link d-flex align-items-center">
-                            <a href="/gafra/reporte/reportes"
-                                class="d-flex align-items-center custom-link">
+                            <a href="/gafra/reporte/reportes" class="d-flex align-items-center custom-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
@@ -174,20 +173,16 @@ $db = Database::connect();
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Tuberia">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Tuberia">
                                     <i class="fas fa-toolbox"></i> Tubería
                                 </a>
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Ensamble">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Ensamble">
                                     <i class="fas fa-cogs"></i> Ensamble
                                 </a>
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Corte">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Corte">
                                     <i class="fas fa-cut"></i> Corte
                                 </a>
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Satelite">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Satelite">
                                     <i class="fas fa-satellite"></i> Satélite
                                 </a>
                             </nav>
@@ -202,8 +197,7 @@ $db = Database::connect();
                             Proveedores
                         </a>
 
-                        <a class="nav-link"
-                            href="/gafra/inventario/listarEntradasAdministrador">
+                        <a class="nav-link" href="/gafra/inventario/listarEntradasAdministrador">
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Inventario
                         </a>
@@ -279,6 +273,21 @@ $db = Database::connect();
 
                     <!-- Formulario -->
                     <div class="card-body p-4">
+                        <!-- Mostrar Notificaciones -->
+                        <?php
+                        if (isset($_SESSION['mensaje'])): ?>
+                            <div class="alert alert-<?= $_SESSION['mensaje_tipo']; ?> alert-dismissible fade show"
+                                role="alert">
+                                <?= $_SESSION['mensaje']; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            <?php
+                            // Eliminar las notificaciones después de mostrarlas
+                            unset($_SESSION['mensaje']);
+                            unset($_SESSION['mensaje_tipo']);
+                        endif;
+                        ?>
+
                         <form id="clienteForm" action="createCliente" method="POST"
                             onsubmit="return showConfirmModal(event)">
                             <div class="row mb-3">
@@ -322,29 +331,30 @@ $db = Database::connect();
                             </div>
                         </form>
                     </div>
-                </div>
 
-                <!-- Modal de confirmación -->
-                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                ¿Está seguro de que desea aceptar los cambios? Esta acción no se puede deshacer.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary"
-                                    data-bs-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary" onclick="submitForm()">Aceptar</button>
+                    <!-- Modal de confirmación -->
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Está seguro de que desea aceptar los cambios? Esta acción no se puede deshacer.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="submitForm()">Aceptar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
 
             </main>
 
