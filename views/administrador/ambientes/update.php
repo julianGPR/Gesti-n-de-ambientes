@@ -270,7 +270,7 @@
         <div id="layoutSidenav_content">
                 <!-- Título alineado a la izquierda -->
                 <div class="container mt-4">
-                    <h1 class="header-title"><i class="fas fa-clipboard-list"></i> Editar Área de Trabajo</h1>
+                    <h1 class="header-title"><i class="fas fa-clipboard-list"></i> Editar Sup-Área de Trabajo</h1>
 
                     <!-- Formulario -->
                     <div class="card-body p-4">
