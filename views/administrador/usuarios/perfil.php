@@ -56,7 +56,7 @@ $db = Database::connect();
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0">
-                <a class="dropdown-item" href="/grafa/login"><i class="fas fa-user fa-fw"></i> Salir</a>
+                <a class="dropdown-item" href="/gafra/login"><i class="fas fa-user fa-fw"></i> Salir</a>
             </ul>
         </nav>
     </nav>
