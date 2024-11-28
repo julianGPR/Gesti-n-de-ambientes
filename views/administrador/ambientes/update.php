@@ -430,15 +430,20 @@
             location.reload(); // Recarga la página para actualizar el estado de las notificaciones
         }
    
-                    function showConfirmModal(event) {
-                        event.preventDefault(); // Evita el envío directo del formulario
-                        var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-                        confirmModal.show(); // Muestra el modal de confirmación
-                    }
+        function showConfirmModal(event) {
+                                            event.preventDefault();
+                            const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                     modal.show();
 
-                    function submitForm() {
-                        document.getElementById('updateAreaTrabajoForm').submit(); // Envía el formulario después de la confirmación
-                    }
+    // Asegura que el botón "Aceptar" realmente envíe el formulario.
+    const acceptButton = document.querySelector('#confirmModal .btn-primary');
+    acceptButton.onclick = () => {
+        document.getElementById('updateAreaTrabajoForm').submit();
+    };
+
+    return false; // Previene el envío inicial hasta que se confirme.
+}
+
                 </script>
             </body>
 </html>
