@@ -276,7 +276,7 @@ $db = Database::connect();
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombre_area" class="form-label"><i class="fas fa-building icon"></i>
-                                        Nombre del Área</label>
+                                        Nombre de sup-àrea</label>
                                     <input type="text" id="nombre_area" name="nombre_area" class="form-control"
                                         required>
                                 </div>
