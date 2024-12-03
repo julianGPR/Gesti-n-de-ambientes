@@ -49,68 +49,60 @@
                                     <th>Comentarios</th>
                                     <th>Accion</th>
                                 </tr>
-                            <tbody>
-                                <?php
-                                // Consulta para seleccionar las áreas de trabajo
-                                $query = "SELECT * FROM AreaTrabajo";
-                                if (!empty($filtros)) {
-                                    $query .= " WHERE " . implode(" AND ", $filtros);
-                                }
+                                <tbody>
+    <?php
+    if (!empty($areas)) {
+        foreach ($areas as $row) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($row['id_area']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['nombre_area']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['capacidad']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['ubicacion']) . "</td>";
 
-                                $result = $db->query($query);
+            // Mostrar nombre y rol del responsable o "Sin asignar"
+            if (!empty($row['responsable_nombre'])) {
+                echo "<td>" . htmlspecialchars($row['responsable_nombre']) . " (" . htmlspecialchars($row['responsable_rol']) . ")</td>";
+            } else {
+                echo "<td>Sin asignar</td>";
+            }
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<tr>";
-                                        echo "<td>" . htmlspecialchars($row['id_area']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['nombre_area']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['capacidad']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['ubicacion']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['responsable']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['tipo_area']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['equipo_disponible']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['estado_area']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['fecha_creacion']) . "</td>";
-                                        echo "<td>" . htmlspecialchars($row['comentarios']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['tipo_area']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['equipo_disponible']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['estado_area']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['fecha_creacion']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['comentarios']) . "</td>";
 
-                                        // Sección de botones de acción en una sola línea
-                                        echo "<td class='acciones'>";
+            // Botones de acción
+            echo "<td class='acciones'>";
 
-                                        // Botón de editar (si el área no está inhabilitada)
-                                        if ($row['estado_area'] !== 'Inhabilitado') {
-                                            $url_update = '/gafra/admin/updateAreaTrabajo/';
-                                            echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-modificar boton-accion' title='Editar'>
+            if ($row['estado_area'] !== 'Inhabilitado') {
+                $url_update = '/gafra/admin/updateAreaTrabajo/';
+                echo "<a href='" . $url_update . $row['id_area'] . "' class='boton-modificar boton-accion' title='Editar'>
                     <img src='../assets/editar.svg' alt='Editar' class='icono-accion'>
                   </a>";
-                                        }
+            }
 
-                                        // Botón de habilitar (si el área no está habilitada)
-                                        if ($row['estado_area'] !== 'Habilitado') {
-                                            echo "<a href='#' onclick='confirmarHabilitar(" . $row['id_area'] . ")' class='boton-habilitar boton-accion' title='Habilitar'>
+            if ($row['estado_area'] !== 'Habilitado') {
+                echo "<a href='#' onclick='confirmarHabilitar(" . $row['id_area'] . ")' class='boton-habilitar boton-accion' title='Habilitar'>
                     <img src='../assets/habilitar.svg' alt='Habilitar' class='icono-accion'>
                   </a>";
-                                        }
+            }
 
-                                        // Botón de inhabilitar (si el área no está inhabilitada)
-                                        if ($row['estado_area'] !== 'Inhabilitado') {
-                                            echo "<a href='#' onclick='confirmarInhabilitar(" . $row['id_area'] . ")' class='boton-inhabilitar boton-accion' title='Inhabilitar'>
+            if ($row['estado_area'] !== 'Inhabilitado') {
+                echo "<a href='#' onclick='confirmarInhabilitar(" . $row['id_area'] . ")' class='boton-inhabilitar boton-accion' title='Inhabilitar'>
                     <img src='../assets/inhabilitar1.svg' alt='Inhabilitar' class='icono-accion'>
                   </a>";
-                                        }
+            }
 
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                } else {
-                                    echo "<tr><td colspan='11'>No hay registros</td></tr>";
-                                }
+            echo "</td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='11'>No hay registros</td></tr>";
+    }
+    ?>
+</tbody>
 
-                                $db->close();
-                                ?>
-
-                            </tbody>
-                        </table>
-                        </tbody>
                         </table>
                     </div>
                 </div>
@@ -160,14 +152,57 @@
 <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
 <script>
-    $(document).ready(function () {
+      $(document).ready(function () {
         $('#tabla-ambientes').DataTable({
             dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copiar'
+                },
+                {
+                    extend: 'csv',
+                    text: 'Exportar CSV'
+                },
+                {
+                    extend: 'excel',
+                    text: 'Exportar Excel'
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Exportar PDF'
+                },
+                {
+                    extend: 'print',
+                    text: 'Imprimir'
+                }
+            ],
             paging: true,
-            pageLength: 5
+            pageLength: 10,
+            language: {
+                processing: "Procesando...",
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                infoFiltered: "(filtrado de _MAX_ registros en total)",
+                loadingRecords: "Cargando...",
+                zeroRecords: "No se encontraron registros coincidentes",
+                emptyTable: "No hay datos disponibles en la tabla",
+                paginate: {
+                    first: "Primero",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Último"
+                },
+                aria: {
+                    sortAscending: ": activar para ordenar la columna de manera ascendente",
+                    sortDescending: ": activar para ordenar la columna de manera descendente"
+                }
+            }
         });
     });
+
 
     function confirmarHabilitar(id) {
         if (confirm("¿Está seguro de que desea habilitar este área de trabajo?")) {

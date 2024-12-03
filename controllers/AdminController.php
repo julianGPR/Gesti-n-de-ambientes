@@ -17,6 +17,8 @@ class AdminController {
         include 'views/administrador/index.php';
     }
     public function areaTrabajo() {
+        $adminModel = new AdminModel();
+        $areas = $adminModel->obtenerAreasDeTrabajo(); 
         include 'views/administrador/ambientes/index.php';
     }
     
@@ -31,7 +33,7 @@ class AdminController {
             $capacidad = $_POST["capacidad"];
             $ubicacion = $_POST["ubicacion"];
             $responsable = $_POST["responsable"];
-            $tipo_area = $_POST["tipo_area"];
+            $tipo_area  = $_POST["tipo_area"];
             $equipo_disponible = $_POST["equipo_disponible"];
             $estado_area = $_POST["estado_area"];
             $fecha_creacion = $_POST["fecha_creacion"];

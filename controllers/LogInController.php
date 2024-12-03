@@ -17,18 +17,23 @@ class LoginController
 
     public function login()
     {
-        session_start(); // Asegúrate de iniciar la sesión al principio
+        if (!isset($_SESSION)) {
+            session_start(); // Asegúrate de iniciar la sesión si no ha sido iniciada
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['login'];
             $password = $_POST['password'];
 
+            // Obtener usuario por correo electrónico
             $user = $this->loginModel->getUserByEmail($email);
 
-            if ($user && $password === $user['Clave']) {
+            // Validar las credenciales
+            if ($user && password_verify($password, $user['Clave'])) { 
                 $_SESSION['user'] = $user;
                 $_SESSION['Id_usuario'] = $user['Id_usuario'];
 
+                // Redirigir según el rol del usuario
                 switch ($user['Rol']) {
                     case 'Administrador':
                         header("Location: /gafra/admin/home");
@@ -37,11 +42,12 @@ class LoginController
                         header("Location: /gafra/encargado/home");
                         exit();
                     default:
+                        $_SESSION['error_message'] = "Rol no válido.";
                         header("Location: /gafra/login");
                         exit();
                 }
             } else {
-                $_SESSION['error_message'] = "La contraseña es incorrecta. Inténtalo de nuevo.";
+                $_SESSION['error_message'] = "La contraseña o correo son incorrectos. Inténtalo de nuevo.";
                 header("Location: /gafra/login");
                 exit();
             }
@@ -50,18 +56,24 @@ class LoginController
             echo "Método no permitido.";
         }
     }
+
     public function logout()
     {
-        session_start();
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+
+        // Limpiar la sesión
         session_unset();
         session_destroy();
 
-        // Headers para deshabilitar la caché
+        // Prevenir el caché
         header("Cache-Control: no-cache, no-store, must-revalidate");
         header("Pragma: no-cache");
         header("Expires: 0");
 
-        header("Location: /gafra/login"); // Redirigir al inicio de sesión después de cerrar sesión
+        // Redirigir al inicio de sesión
+        header("Location: /gafra/login");
         exit();
     }
 }

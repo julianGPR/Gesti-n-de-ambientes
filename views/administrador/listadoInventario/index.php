@@ -101,17 +101,58 @@
 <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
 <script>
-    // Función para filtrar por área
-
     $(document).ready(function () {
         $('#tablaInventario').DataTable({
             dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copiar'
+                },
+                {
+                    extend: 'csv',
+                    text: 'Exportar CSV'
+                },
+                {
+                    extend: 'excel',
+                    text: 'Exportar Excel'
+                },
+                {
+                    extend: 'pdf',
+                    text: 'Exportar PDF'
+                },
+                {
+                    extend: 'print',
+                    text: 'Imprimir'
+                }
+            ],
             paging: true,
-            pageLength: 5
+            pageLength: 5,
+            language: {
+                processing: "Procesando...",
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                infoFiltered: "(filtrado de _MAX_ registros en total)",
+                loadingRecords: "Cargando...",
+                zeroRecords: "No se encontraron registros coincidentes",
+                emptyTable: "No hay datos disponibles en la tabla",
+                paginate: {
+                    first: "Primero",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Último"
+                },
+                aria: {
+                    sortAscending: ": activar para ordenar la columna de manera ascendente",
+                    sortDescending: ": activar para ordenar la columna de manera descendente"
+                }
+            }
         });
     });
 
+    // Función para filtrar por área
     function filtrarPorArea(tipoArea) {
         fetch(`/gafra/inventario/listarEntradasAdministrador`, {
             method: 'POST',
@@ -156,28 +197,8 @@
         var menu = document.getElementById("filterMenu");
         menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
     }
-
-    // Función para ordenar las columnas de la tabla
-    function ordenarTabla(columnaIndex) {
-        const tabla = document.getElementById("tablaDatos");
-        const filas = Array.from(tabla.querySelectorAll("tbody tr"));
-        const esAscendente = tabla.getAttribute("data-orden") === "asc";
-
-        filas.sort((a, b) => {
-            const valorA = a.children[columnaIndex].textContent.trim().toLowerCase();
-            const valorB = b.children[columnaIndex].textContent.trim().toLowerCase();
-
-            return esAscendente ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
-        });
-
-        // Alternar el orden para la próxima vez
-        tabla.setAttribute("data-orden", esAscendente ? "desc" : "asc");
-
-        const tablaCuerpo = document.getElementById("tablaCuerpo");
-        tablaCuerpo.innerHTML = "";
-        filas.forEach(fila => tablaCuerpo.appendChild(fila));
-    }
 </script>
+
 
 </body>
 

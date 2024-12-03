@@ -105,8 +105,8 @@ $db = Database::connect();
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
-                            echo "<span class='font-weight-bold'>El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
-                                " envió un reporte en el área " . $row['nombre_area'] . "</span>";
+                            echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
+                                " envió un reporte de la sup-área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
 
                             // Marcar la notificación como vista
@@ -132,7 +132,7 @@ $db = Database::connect();
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gafra/login">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>

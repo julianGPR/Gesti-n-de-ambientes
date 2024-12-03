@@ -104,8 +104,8 @@ $db = Database::connect();
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
-                            echo "<span class='font-weight-bold'>El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
-                                " envió un reporte en el área " . $row['nombre_area'] . "</span>";
+                            echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
+                                " envió un reporte de la sup-área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
 
                             // Marcar la notificación como vista
@@ -131,7 +131,7 @@ $db = Database::connect();
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gafra/login">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -344,57 +344,77 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#tablaReportes').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'csv', 'excel', 'print'
-                ],
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" // Traducción al español
+    $(document).ready(function () {
+        // Inicializar DataTable con opciones
+        $('#tablaReportes').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copiar'
+                },
+                {
+                    extend: 'csv',
+                    text: 'Exportar CSV'
+                },
+                {
+                    extend: 'excel',
+                    text: 'Exportar Excel'
+                },
+                {
+                    extend: 'print',
+                    text: 'Imprimir'
                 }
-            });
-
-            $('.toggle-switch').change(function () {
-                const idReporte = $(this).attr('data-id');
-                const estadoReporte = $(this).is(':checked') ? '2' : '1';
-
-                if (estadoReporte === '2' && confirm("¿Estás seguro de que deseas aprobar el reporte? Una vez aprobado, no se podrá deshacer.")) {
-                    $.ajax({
-                        url: '../actualizarEstadoReporte/',
-                        method: 'POST',
-                        data: {
-                            id_reporte: idReporte,
-                            estado_reporte: estadoReporte
-                        },
-                        success: function (response) {
-                            try {
-                                const res = JSON.parse(response);
-                                if (res.success) {
-                                    // Actualizar la fecha de solución en la tabla
-                                    const fechaActual = new Date().toLocaleString();
-                                    $(`.fecha-solucion[data-id="${idReporte}"]`).text(fechaActual);
-                                    $(this).prop('checked', true); // Dejar el interruptor activado
-                                } else {
-                                    console.error("Error en la respuesta del servidor:", res.error);
-                                }
-                            } catch (e) {
-                                console.error("Error al analizar JSON. Respuesta recibida:", response);
-                            }
-                        },
-
-                        error: function (xhr, status, error) {
-                            console.error("Error en la solicitud AJAX:", error);
-                            console.error("Estado:", status);
-                            console.error("Respuesta completa:", xhr.responseText);
-                        }
-                    });
-                } else {
-                    $(this).prop('checked', false);
-                }
-            });
+            ],
+            paging: true,
+            pageLength: 5,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+            }
         });
-    </script>
+
+        // Manejar cambios en los interruptores de estado
+        $('.toggle-switch').change(function () {
+            const idReporte = $(this).attr('data-id');
+            const estadoReporte = $(this).is(':checked') ? '2' : '1';
+
+            if (estadoReporte === '2' && confirm("¿Estás seguro de que deseas aprobar el reporte? Una vez aprobado, no se podrá deshacer.")) {
+                $.ajax({
+                    url: '../actualizarEstadoReporte/',
+                    method: 'POST',
+                    data: {
+                        id_reporte: idReporte,
+                        estado_reporte: estadoReporte
+                    },
+                    success: function (response) {
+                        try {
+                            const res = JSON.parse(response);
+                            if (res.success) {
+                                const fechaActual = new Date().toLocaleString();
+                                $(`.fecha-solucion[data-id="${idReporte}"]`).text(fechaActual);
+                                $(this).prop('checked', true);
+                            } else {
+                                alert("Ocurrió un error: " + res.error);
+                                $(this).prop('checked', false);
+                            }
+                        } catch (e) {
+                            alert("Error inesperado al procesar la respuesta del servidor.");
+                            console.error("Respuesta recibida:", response);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Error al intentar actualizar el estado del reporte.");
+                        console.error("Estado:", status);
+                        console.error("Respuesta completa:", xhr.responseText);
+                    }
+                });
+            } else {
+                $(this).prop('checked', false);
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

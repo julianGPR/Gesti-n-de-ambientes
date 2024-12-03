@@ -50,18 +50,36 @@ class AdminModel {
         }
         return $usuarios;
     }
-
-    // Obtener tipos de área disponibles
-    public function obtenerTiposDeArea() {
+    public function obtenerAreasDeTrabajo() {
         $conn = Database::connect();
-        $sql = "SELECT DISTINCT tipo_area FROM AreaTrabajo";
+        $sql = "
+            SELECT 
+                at.*, 
+                u.Nombres AS responsable_nombre, 
+                u.Rol AS responsable_rol 
+            FROM AreaTrabajo at
+            LEFT JOIN t_usuarios u ON at.responsable = u.Id_usuario
+        ";
         $result = $conn->query($sql);
-        $tiposDeArea = [];
+    
+        $areas = [];
         while ($row = $result->fetch_assoc()) {
-            $tiposDeArea[] = $row['tipo_area'];
+            $areas[] = $row;
         }
-        return $tiposDeArea;
+        return $areas;
     }
+    
+
+    public function obtenerTiposDeArea() {
+        $sql = "SHOW COLUMNS FROM AreaTrabajo LIKE 'tipo_area'";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        
+        // Extraer los valores del ENUM
+        $enumValues = str_replace(['enum(', ')', '\''], '', $row['Type']);
+        return explode(',', $enumValues);
+    }
+    
     public function inhabilitarAreaTrabajo($id) {
         $conn = Database::connect();
         $sql = "UPDATE AreaTrabajo SET estado_area = 'Inhabilitado' WHERE Id_area='$id'";

@@ -98,8 +98,8 @@
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
-                            echo "<span class='font-weight-bold'>El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
-                                " envió un reporte en el área " . $row['nombre_area'] . "</span>";
+                            echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
+                                " envió un reporte de la sup-área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
 
                             // Marcar la notificación como vista
@@ -125,7 +125,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gafra/login">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -309,14 +309,14 @@
                                     value="<?php echo isset($usuario['Correo']) ? $usuario['Correo'] : ''; ?>" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="clave" class="form-label"><i class="fas fa-key icon"></i> Clave</label>
+                                <label for="clave" class="form-label"><i class="fas fa-key icon"></i> Nueva Contraseña</label>
                                 <div class="input-group">
-                                    <input type="password" id="clave" name="clave" class="form-control"
-                                        value="<?php echo isset($usuario['Clave']) ? $usuario['Clave'] : ''; ?>"
-                                        required>
+                                    <input type="password" id="clave" name="clave" class="form-control" placeholder="Dejar en blanco para no cambiar">
                                     <button type="button" id="mostrarClave" class="btn btn-primary">Mostrar</button>
                                 </div>
                             </div>
+
+
                         </div>
 
                         <div class="row mb-3">
@@ -383,17 +383,17 @@
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
             <script>
-                // Mostrar u ocultar la clave
-                document.getElementById('mostrarClave').addEventListener('click', function () {
-                    var claveInput = document.getElementById('clave');
-                    if (claveInput.type === "password") {
-                        claveInput.type = "text";
-                        this.textContent = "Ocultar";
-                    } else {
-                        claveInput.type = "password";
-                        this.textContent = "Mostrar";
-                    }
-                });
+    document.getElementById('mostrarClave').addEventListener('click', function () {
+        var claveInput = document.getElementById('clave');
+        if (claveInput.type === "password") {
+            claveInput.type = "text";
+            this.textContent = "Ocultar";
+        } else {
+            claveInput.type = "password";
+            this.textContent = "Mostrar";
+        }
+    });
+
 
                 // Mostrar modal de confirmación antes de enviar el formulario
                 function showConfirmModal(event) {

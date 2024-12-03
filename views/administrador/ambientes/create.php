@@ -29,7 +29,7 @@ $db = Database::connect();
     <nav class="sb-topnav navbar navbar-expand navbar-blue "
         style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../admin/home';
+        $url_regresar = '../../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
@@ -85,9 +85,10 @@ $db = Database::connect();
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
-                            echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
-                                " envió un reporte en el área " . $row['nombre_area'] . "</span>";
+                            echo "<span class='font-weight-bold'>gado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
+                                " envió un reporteEl Encar del área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
+
 
                             // Marcar la notificación como vista
                             $reporte_id = $row['Id_reporte'];
@@ -113,7 +114,7 @@ $db = Database::connect();
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gafra/login">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -124,7 +125,7 @@ $db = Database::connect();
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link" href="<?php echo $url_regresar; ?>">
+                    <a class="nav-link" href="<?php echo $url_regresar; ?>">
                             <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
                             Inicio
                         </a>
@@ -309,15 +310,13 @@ $db = Database::connect();
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label for="tipo_area" class="form-label"><i class="fas fa-layer-group icon"></i>
-                                        Tipo de Área</label>
-                                    <select id="tipo_area" name="tipo_area" class="form-select" required>
-                                        <option value="">Seleccione un tipo de área</option>
-                                        <?php foreach ($tiposDeArea as $tipo): ?>
-                                            <option value="<?= htmlspecialchars($tipo) ?>"><?= htmlspecialchars($tipo) ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                <label for="tipo_area" class="form-label"><i class="fas fa-layer-group icon"></i> Tipo de Área</label>
+                                <select id="tipo_area" name="tipo_area" class="form-select" required>
+                                    <option value="">Seleccione un tipo de área</option>
+                                    <?php foreach ($tiposDeArea as $tipo): ?>
+                                        <option value="<?= htmlspecialchars($tipo) ?>"><?= htmlspecialchars($tipo) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="equipo_disponible" class="form-label"><i class="fas fa-tools icon"></i>

@@ -101,16 +101,24 @@
 
 
 <script>
-
     $(document).ready(function () {
+        // Inicializar DataTable con opciones
         $('#tabla-productos').DataTable({
             dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            buttons: [
+                { extend: 'copy', text: 'Copiar' },
+                { extend: 'csv', text: 'Exportar CSV' },
+                { extend: 'excel', text: 'Exportar Excel' },
+                { extend: 'pdf', text: 'Exportar PDF' },
+                { extend: 'print', text: 'Imprimir' }
+            ],
             paging: true,
-            pageLength: 10
+            pageLength: 10,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json" // Traducción al español
+            }
         });
     });
-
 </script>
 </body>
 

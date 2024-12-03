@@ -128,19 +128,23 @@
         // Inicializar DataTable con opciones
         var table = $('#tabla-ambientes').DataTable({
             dom: 'Bfrtip',
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            buttons: [
+                { extend: 'copy', text: 'Copiar' },
+                { extend: 'csv', text: 'Exportar CSV' },
+                { extend: 'excel', text: 'Exportar Excel' },
+                { extend: 'print', text: 'Imprimir' }
+            ],
             paging: true,
-            pageLength: 5
+            pageLength: 5,
+            language: {
+                url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+            }
         });
 
         // Configuración de los botones para mostrar/ocultar columnas
         $('.toggle-vis').on('click', function (e) {
             e.preventDefault();
-
-            // Obtenemos el índice de la columna correspondiente al botón
             var columnIdx = parseInt($(this).attr('data-column'));
-
-            // Obtenemos el estado de visibilidad de la columna y lo invertimos
             var column = table.column(columnIdx);
             column.visible(!column.visible());
         });

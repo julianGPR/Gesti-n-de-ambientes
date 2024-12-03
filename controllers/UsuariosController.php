@@ -40,16 +40,16 @@ class UsuariosController {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombres = $_POST["nombres"];
             $apellidos = $_POST["apellidos"];
-            $clave = $_POST["clave"];
+            $clave = !empty($_POST["clave"]) ? $_POST["clave"] : null; // Solo pasa la clave si no está vacía
             $correo = $_POST["correo"];
             $rol = $_POST["rol"];
             $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
                 ? $_FILES['foto_perfil']['tmp_name'] 
                 : null;
-
+    
             $usuariosModel = new UsuariosModel();
             $result = $usuariosModel->modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol, $foto_perfil);
-
+    
             if ($result) {
                 header("Location: ../usuarios");
                 exit();
@@ -63,6 +63,7 @@ class UsuariosController {
             include 'views/administrador/usuarios/update.php';
         }
     }
+    
 
     public function inhabilitarUsuario($id) {
         $usuariosModel = new UsuariosModel(); // Corregido a UsuariosModel
@@ -93,17 +94,26 @@ class UsuariosController {
     }
 
     public function perfil() {
-        session_start();
-        $id_usuario = $_SESSION['Id_usuario'];
+        session_start(); // Asegúrate de que la sesión esté iniciada
+        $id_usuario = $_GET['id'] ?? $_SESSION['Id_usuario']; // Obtén el ID del usuario desde la URL o la sesión
+        
         $usuariosModel = new UsuariosModel();
         $usuario = $usuariosModel->obtenerUsuarioPorId($id_usuario);
-
-        if ($usuario && !empty($usuario['foto_perfil'])) {
+    
+        if (!$usuario) {
+            // Redirigir o mostrar un mensaje de error si no se encuentra el usuario
+            die('Error: Usuario no encontrado.');
+        }
+    
+        // Codificar la foto de perfil si existe
+        if (!empty($usuario['foto_perfil'])) {
             $usuario['foto_perfil'] = 'data:image/jpeg;base64,' . base64_encode($usuario['foto_perfil']);
         }
-        
+    
         require_once 'views/administrador/usuarios/perfil.php';
     }
+    
+    
     
 
     // Mostrar el formulario de edición del perfil

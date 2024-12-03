@@ -58,7 +58,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/gafra/login">Salir</a>
+                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>

@@ -28,7 +28,6 @@ $db = Database::connect();
     <title>Sistema Web</title>
     <link rel="icon" href="../assets/img/login02.ico" type="image/x-icon">
     <link href="../assets/css/styles.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
@@ -78,7 +77,7 @@ $db = Database::connect();
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>";
-                            echo "<span class='font-weight-bold'>El encargado {$row['Nombres']} {$row['Apellidos']} envió un reporte en el área {$row['nombre_area']}.</span>";
+                            echo "<span class='font-weight-bold'>El encargado {$row['Nombres']} {$row['Apellidos']} envió un reporte de la sup-área {$row['nombre_area']}.</span>";
                             echo "</div></a>";
                         }
                     } else {
@@ -94,9 +93,9 @@ $db = Database::connect();
                     <i class="fas fa-user fa-fw"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/gafra/login">Salir</a>
+                <a class="dropdown-item" href="/gafra/usuarios/perfil?id=<?php echo $_SESSION['Id_usuario']; ?>">Configuración</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                 </div>
             </li>
         </ul>

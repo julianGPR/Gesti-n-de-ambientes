@@ -6,48 +6,65 @@ class UsuariosModel{
 
     public function guardarUsuario($nombres, $apellidos, $clave, $correo, $rol, $foto_perfil = null) {
         $conn = Database::connect();
+        $hashed_password = password_hash($clave, PASSWORD_BCRYPT); // Encriptar la contraseña
     
         if ($foto_perfil) {
             $foto_perfil = file_get_contents($foto_perfil); // Convertir la imagen en binario
             $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Correo, Rol, foto_perfil)
                     VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssssb", $nombres, $apellidos, $clave, $correo, $rol, $foto_perfil);
+            $stmt->bind_param("sssssb", $nombres, $apellidos, $hashed_password, $correo, $rol, $foto_perfil);
         } else {
             $sql = "INSERT INTO t_usuarios (Nombres, Apellidos, Clave, Correo, Rol)
                     VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssss", $nombres, $apellidos, $clave, $correo, $rol);
+            $stmt->bind_param("sssss", $nombres, $apellidos, $hashed_password, $correo, $rol);
         }
     
-        $stmt->send_long_data(5, $foto_perfil); // Envía datos largos si es binario
         $result = $stmt->execute();
         $stmt->close();
         $conn->close();
     
         return $result;
     }
+    
 
     public function modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol, $foto_perfil = null) {
         $conn = Database::connect();
-
-        if ($foto_perfil) {
-            $foto_perfil = file_get_contents($foto_perfil); // Convertir la imagen a binario
-            $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Correo = ?, Rol = ?, foto_perfil = ? WHERE Id_usuario = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("ssssssi", $nombres, $apellidos, $clave, $correo, $rol, $foto_perfil, $id);
+    
+        // Construye la consulta dependiendo de si se proporciona una nueva contraseña
+        if (!empty($clave)) {
+            $hashed_password = password_hash($clave, PASSWORD_BCRYPT); // Encripta la nueva contraseña
+            if ($foto_perfil) {
+                $foto_perfil = file_get_contents($foto_perfil); // Convertir la imagen a binario
+                $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Correo = ?, Rol = ?, foto_perfil = ? WHERE Id_usuario = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ssssssi", $nombres, $apellidos, $hashed_password, $correo, $rol, $foto_perfil, $id);
+            } else {
+                $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Correo = ?, Rol = ? WHERE Id_usuario = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssssi", $nombres, $apellidos, $hashed_password, $correo, $rol, $id);
+            }
         } else {
-            $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Clave = ?, Correo = ?, Rol = ? WHERE Id_usuario = ?";
-            $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssssi", $nombres, $apellidos, $clave, $correo, $rol, $id);
+            if ($foto_perfil) {
+                $foto_perfil = file_get_contents($foto_perfil); // Convertir la imagen a binario
+                $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Correo = ?, Rol = ?, foto_perfil = ? WHERE Id_usuario = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssssi", $nombres, $apellidos, $correo, $rol, $foto_perfil, $id);
+            } else {
+                $sql = "UPDATE t_usuarios SET Nombres = ?, Apellidos = ?, Correo = ?, Rol = ? WHERE Id_usuario = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("ssssi", $nombres, $apellidos, $correo, $rol, $id);
+            }
         }
-
+    
         $result = $stmt->execute();
         $stmt->close();
         $conn->close();
-
+    
         return $result;
     }
+    
 
     public function obtenerUsuarioPorId($id) {
         $conn = Database::connect();

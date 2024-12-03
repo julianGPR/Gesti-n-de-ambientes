@@ -88,7 +88,7 @@
      <nav class="sb-topnav navbar navbar-expand navbar-blue "
      style="background: linear-gradient(20deg,  #C4C4C4, #C4C4C4);">
         <?php
-        $url_regresar = '../admin/home';
+        $url_regresar = '../../admin/home';
         ?>
         <a class="navbar-brand" href="<?php echo $url_regresar; ?>">
             <img src="../../assets/img/login0.png" class="logo" style="width: 150px; height: auto; max-height: 50px;">
@@ -143,8 +143,8 @@
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
-                            echo "<span class='font-weight-bold'>El instructor " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
-                                " envió un reporte en el área " . $row['nombre_area'] . "</span>";
+                            echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
+                                " envió un reporte de la sup-área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
 
                             // Marcar la notificación como vista
@@ -275,10 +275,7 @@
                     <!-- Formulario -->
                     <div class="card-body p-4">
                         <!-- Construye la URL con el ID del área para enviarla al archivo de actualización -->
-                        <form id="updateAreaTrabajoForm"
-                            action="updateAreaTrabajo.php?id=<?php echo htmlspecialchars($areaTrabajo['id_area']); ?>"
-                            method="POST" onsubmit="return showConfirmModal(event)">
-
+                        <form id="updateAreaTrabajoForm" action="/gafra/admin/updateAreaTrabajo/<?php echo htmlspecialchars($areaTrabajo['id_area']); ?>" method="POST" onsubmit="return showConfirmModal(event)">
                             <!-- Campo oculto para el ID del registro a editar -->
                             <input type="hidden" name="id" value="<?= htmlspecialchars($areaTrabajo['id_area']) ?>">
 
