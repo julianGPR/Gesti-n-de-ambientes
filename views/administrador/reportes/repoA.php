@@ -355,11 +355,11 @@ $db = Database::connect();
                 },
                 {
                     extend: 'csv',
-                    text: 'Exportar CSV'
+                    text: 'CSV'
                 },
                 {
                     extend: 'excel',
-                    text: 'Exportar Excel'
+                    text: 'Excel'
                 },
                 {
                     extend: 'print',

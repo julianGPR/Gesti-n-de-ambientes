@@ -82,12 +82,7 @@
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between small">
-            <div class="text-muted">Copyright &copy; Your Website 2019</div>
-            <div>
-                <a href="#">Privacy Policy</a>
-                &middot;
-                <a href="#">Terms &amp; Conditions</a>
-            </div>
+            <div class="text-muted">Copyright &copy; GAFRA 2024</div>
         </div>
     </div>
 </footer>
@@ -124,22 +119,38 @@
 <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
 <script>
-    $(document).ready(function () {
-        // Inicializar DataTable con opciones
-        var table = $('#tabla-ambientes').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                { extend: 'copy', text: 'Copiar' },
-                { extend: 'csv', text: 'Exportar CSV' },
-                { extend: 'excel', text: 'Exportar Excel' },
-                { extend: 'print', text: 'Imprimir' }
-            ],
-            paging: true,
-            pageLength: 5,
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+   $(document).ready(function () {
+    // Inicializar DataTable con opciones
+    var table = $('#tabla-ambientes').DataTable({
+        dom: 'Bfrtip',
+        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'], // Botones traducidos
+        paging: true,
+        pageLength: 5,
+        language: {
+            processing: "Procesando...",
+            search: "Buscar:",
+            lengthMenu: "Mostrar _MENU_ registros",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            infoEmpty: "Mostrando 0 a 0 de 0 registros",
+            infoFiltered: "(filtrado de _MAX_ registros totales)",
+            loadingRecords: "Cargando...",
+            zeroRecords: "No se encontraron resultados",
+            emptyTable: "No hay datos disponibles en la tabla",
+            paginate: {
+                first: "Primero",
+                previous: "Anterior",
+                next: "Siguiente",
+                last: "Último"
+            },
+            buttons: {
+                copy: "Copiar",
+                csv: "CSV",
+                excel: "Excel",
+                pdf: "PDF",
+                print: "Imprimir"
             }
-        });
+        }
+    });
 
         // Configuración de los botones para mostrar/ocultar columnas
         $('.toggle-vis').on('click', function (e) {

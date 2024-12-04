@@ -132,6 +132,13 @@
         </div>
     </div>
 </div>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; GAFRA 2024</div>
+        </div>
+    </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
@@ -484,5 +491,3 @@
         });
     }
 </script>
-
-<?php require_once "views/administrador/Vista/parte_inferior.php"; ?>

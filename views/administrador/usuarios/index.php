@@ -77,6 +77,13 @@
         </div>
     </div>
 </main>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Copyright &copy; GAFRA 2024</div>
+        </div>
+    </div>
+</footer>
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
@@ -120,15 +127,15 @@
                 },
                 {
                     extend: 'csv',
-                    text: 'Exportar CSV'
+                    text: 'CSV'
                 },
                 {
                     extend: 'excel',
-                    text: 'Exportar Excel'
+                    text: 'Excel'
                 },
                 {
                     extend: 'pdf',
-                    text: 'Exportar PDF'
+                    text: 'PDF'
                 },
                 {
                     extend: 'print',
@@ -179,8 +186,6 @@
         menu.style.display = menu.style.display === "none" || menu.style.display === "" ? "block" : "none";
     }
 </script>
-
-<?php require_once "views/administrador/Vista/parte_inferior.php" ?>
 </body>
 
 </html>
