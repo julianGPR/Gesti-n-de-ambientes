@@ -127,15 +127,15 @@
                     },
                     {
                         extend: 'csv',
-                        text: 'Exportar CSV'
+                        text: 'CSV'
                     },
                     {
                         extend: 'excel',
-                        text: 'Exportar a Excel'
+                        text: 'Excel'
                     },
                     {
                         extend: 'pdf',
-                        text: 'Exportar a PDF'
+                        text: 'PDF'
                     },
                     {
                         extend: 'print',

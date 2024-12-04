@@ -191,20 +191,36 @@
                 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
                 <script>
-                    $(document).ready(function () {
-                        $('#tablaReportes').DataTable({
-                            dom: 'Bfrtip',
-                            buttons: [
-                                'copy', 'csv', 'excel', 'print'
-                            ],
-                            language: {
-                                url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+                    var table = $('#tablaReportes').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'], // Botones traducidos
+                        paging: true,
+                        pageLength: 5,
+                        language: {
+                            processing: "Procesando...",
+                            search: "Buscar:",
+                            lengthMenu: "Mostrar _MENU_ registros",
+                            info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                            infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                            infoFiltered: "(filtrado de _MAX_ retablaReportesgistros totales)",
+                            loadingRecords: "Cargando...",
+                            zeroRecords: "No se encontraron resultados",
+                            emptyTable: "No hay datos disponibles en la tabla",
+                            paginate: {
+                                first: "Primero",
+                                previous: "Anterior",
+                                next: "Siguiente",
+                                last: "Último"
+                            },
+                            buttons: {
+                                copy: "Copiar",
+                                csv: "CSV",
+                                excel: "Excel",
+                                pdf: "PDF",
+                                print: "Imprimir"
                             }
-                        });
+                        }
                     });
-                </script>
-
-                <script>
 
                     function confirmarInhabilitar(id) {
                         if (confirm("¿Estás seguro de que deseas inhabilitar esta área?")) {
