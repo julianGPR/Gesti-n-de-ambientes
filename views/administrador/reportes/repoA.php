@@ -232,7 +232,7 @@ $db = Database::connect();
             <main>
                 <div class="container-fluid">
                     <div class="header-section">
-                        <h1><i class="fas fa-pipe"></i> Area <?php echo htmlspecialchars($tipo_area); ?></h1>
+                        <h1><i class="fas fa-pipe"></i> Área <?php echo htmlspecialchars($tipo_area); ?></h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><i class="fas fa-home"></i> Menú </li>
                         </ol>
