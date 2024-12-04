@@ -129,9 +129,9 @@ $db = Database::connect();
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
+                        <a class="dropdown-item" href="/gafra/usuarios/perfil">Configuración</a>
                         <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
+                        <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -159,8 +159,7 @@ $db = Database::connect();
                         </a>
 
                         <div class="nav-link d-flex align-items-center">
-                            <a href="/gafra/reporte/reportes"
-                                class="d-flex align-items-center custom-link">
+                            <a href="/gafra/reporte/reportes" class="d-flex align-items-center custom-link">
                                 <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
                                 <span>Reportes</span>
                             </a>
@@ -173,20 +172,16 @@ $db = Database::connect();
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Tuberia">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Tuberia">
                                     <i class="fas fa-toolbox"></i> Tubería
                                 </a>
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Ensamble">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Ensamble">
                                     <i class="fas fa-cogs"></i> Ensamble
                                 </a>
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Corte">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Corte">
                                     <i class="fas fa-cut"></i> Corte
                                 </a>
-                                <a class="nav-link custom-link"
-                                    href="/gafra/reporte/verReporteAdministrador/Satelite">
+                                <a class="nav-link custom-link" href="/gafra/reporte/verReporteAdministrador/Satelite">
                                     <i class="fas fa-satellite"></i> Satélite
                                 </a>
                             </nav>
@@ -201,8 +196,7 @@ $db = Database::connect();
                             Proveedores
                         </a>
 
-                        <a class="nav-link"
-                            href="/gafra/inventario/listarEntradasAdministrador">
+                        <a class="nav-link" href="/gafra/inventario/listarEntradasAdministrador">
                             <div class="sb-nav-link-icon"><i class="fas fa-boxes"></i></div>
                             Inventario
                         </a>
@@ -291,12 +285,7 @@ $db = Database::connect();
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
+                        <div class="text-muted">Copyright &copy; GAFRA 2024</div>
                     </div>
                 </div>
             </footer>
@@ -344,76 +333,76 @@ $db = Database::connect();
     <script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
 
     <script>
-    $(document).ready(function () {
-        // Inicializar DataTable con opciones
-        $('#tablaReportes').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'copy',
-                    text: 'Copiar'
-                },
-                {
-                    extend: 'csv',
-                    text: 'CSV'
-                },
-                {
-                    extend: 'excel',
-                    text: 'Excel'
-                },
-                {
-                    extend: 'print',
-                    text: 'Imprimir'
-                }
-            ],
-            paging: true,
-            pageLength: 5,
-            language: {
-                url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
-            }
-        });
-
-        // Manejar cambios en los interruptores de estado
-        $('.toggle-switch').change(function () {
-            const idReporte = $(this).attr('data-id');
-            const estadoReporte = $(this).is(':checked') ? '2' : '1';
-
-            if (estadoReporte === '2' && confirm("¿Estás seguro de que deseas aprobar el reporte? Una vez aprobado, no se podrá deshacer.")) {
-                $.ajax({
-                    url: '../actualizarEstadoReporte/',
-                    method: 'POST',
-                    data: {
-                        id_reporte: idReporte,
-                        estado_reporte: estadoReporte
+        $(document).ready(function () {
+            // Inicializar DataTable con opciones
+            $('#tablaReportes').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copiar'
                     },
-                    success: function (response) {
-                        try {
-                            const res = JSON.parse(response);
-                            if (res.success) {
-                                const fechaActual = new Date().toLocaleString();
-                                $(`.fecha-solucion[data-id="${idReporte}"]`).text(fechaActual);
-                                $(this).prop('checked', true);
-                            } else {
-                                alert("Ocurrió un error: " + res.error);
-                                $(this).prop('checked', false);
-                            }
-                        } catch (e) {
-                            alert("Error inesperado al procesar la respuesta del servidor.");
-                            console.error("Respuesta recibida:", response);
-                        }
+                    {
+                        extend: 'csv',
+                        text: 'CSV'
                     },
-                    error: function (xhr, status, error) {
-                        alert("Error al intentar actualizar el estado del reporte.");
-                        console.error("Estado:", status);
-                        console.error("Respuesta completa:", xhr.responseText);
+                    {
+                        extend: 'excel',
+                        text: 'Excel'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Imprimir'
                     }
-                });
-            } else {
-                $(this).prop('checked', false);
-            }
+                ],
+                paging: true,
+                pageLength: 5,
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+                }
+            });
+
+            // Manejar cambios en los interruptores de estado
+            $('.toggle-switch').change(function () {
+                const idReporte = $(this).attr('data-id');
+                const estadoReporte = $(this).is(':checked') ? '2' : '1';
+
+                if (estadoReporte === '2' && confirm("¿Estás seguro de que deseas aprobar el reporte? Una vez aprobado, no se podrá deshacer.")) {
+                    $.ajax({
+                        url: '../actualizarEstadoReporte/',
+                        method: 'POST',
+                        data: {
+                            id_reporte: idReporte,
+                            estado_reporte: estadoReporte
+                        },
+                        success: function (response) {
+                            try {
+                                const res = JSON.parse(response);
+                                if (res.success) {
+                                    const fechaActual = new Date().toLocaleString();
+                                    $(`.fecha-solucion[data-id="${idReporte}"]`).text(fechaActual);
+                                    $(this).prop('checked', true);
+                                } else {
+                                    alert("Ocurrió un error: " + res.error);
+                                    $(this).prop('checked', false);
+                                }
+                            } catch (e) {
+                                alert("Error inesperado al procesar la respuesta del servidor.");
+                                console.error("Respuesta recibida:", response);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Error al intentar actualizar el estado del reporte.");
+                            console.error("Estado:", status);
+                            console.error("Respuesta completa:", xhr.responseText);
+                        }
+                    });
+                } else {
+                    $(this).prop('checked', false);
+                }
+            });
         });
-    });
-</script>
+    </script>
 
 </body>
 
