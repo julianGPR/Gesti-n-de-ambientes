@@ -77,7 +77,7 @@ $db = Database::connect();
                             echo "</div></div>";
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>";
-                            echo "<span class='font-weight-bold'>El encargado {$row['Nombres']} {$row['Apellidos']} envió un reporte de la sup-área {$row['nombre_area']}.</span>";
+                            echo "<span class='font-weight-bold'>El encargado {$row['Nombres']} {$row['Apellidos']} envió un reporte del área {$row['nombre_area']}.</span>";
                             echo "</div></a>";
                         }
                     } else {

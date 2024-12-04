@@ -2,100 +2,107 @@
 <div class="container-fluid">
     <!-- Header -->
     <div class="header-section text-center py-5"
-        style="background: linear-gradient(90deg, #2b2b2b, #1e1e1e); border-radius: 12px; color: #f8f9fa; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+        style="background: linear-gradient(90deg, #2c3e50, #34495e); border-radius: 12px; color: #ecf0f1; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
         <h1 class="display-5 fw-bold">
-            <i class="fas fa-chart-bar"></i> Estadísticas
+            <i class="fas fa-chart-bar"></i> Panel de Estadísticas
         </h1>
-        <p class="mt-3" style="font-size: 1.2rem; color: #d1d1d1;">Explora datos clave con visualizaciones interactivas
-        </p>
+        <p class="mt-3" style="font-size: 1.2rem;">Visualiza y analiza datos clave con gráficas dinámicas e interactivas.</p>
     </div>
 
-    <!-- Opciones -->
-    <div class="row text-center mt-5">
+    <!-- Opciones de navegación -->
+    <div class="row mt-5 text-center">
         <div class="col-lg-3 col-md-6 mb-4">
-            <button class="btn btn-outline-primary w-100 py-4 shadow-sm" onclick="mostrarModulo('totalFacturas')">
-                <i class="fas fa-file-invoice fa-2x mb-2"></i>
-                <h5 class="fw-bold mt-2">Número Total de Facturas</h5>
-            </button>
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <button class="btn btn-outline-primary w-100" onclick="mostrarModulo('totalFacturas')">
+                        <i class="fas fa-file-invoice fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Número Total de Facturas</h5>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
-            <button class="btn btn-outline-success w-100 py-4 shadow-sm" onclick="mostrarModulo('facturacionTotal')">
-                <i class="fas fa-dollar-sign fa-2x mb-2"></i>
-                <h5 class="fw-bold mt-2">Facturación Total</h5>
-            </button>
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <button class="btn btn-outline-success w-100" onclick="mostrarModulo('facturacionTotal')">
+                        <i class="fas fa-dollar-sign fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Facturación Total</h5>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
-            <button class="btn btn-outline-warning w-100 py-4 shadow-sm" onclick="mostrarModulo('facturacionPromedio')">
-                <i class="fas fa-chart-line fa-2x mb-2"></i>
-                <h5 class="fw-bold mt-2">Facturación Promedio</h5>
-            </button>
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <button class="btn btn-outline-warning w-100" onclick="mostrarModulo('facturacionPromedio')">
+                        <i class="fas fa-chart-line fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Facturación Promedio</h5>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="col-lg-3 col-md-6 mb-4">
-            <button class="btn btn-outline-danger w-100 py-4 shadow-sm" onclick="mostrarModulo('productosMasVendidos')">
-                <i class="fas fa-box fa-2x mb-2"></i>
-                <h5 class="fw-bold mt-2">Productos Más Vendidos</h5>
-            </button>
+            <div class="card shadow border-0">
+                <div class="card-body">
+                    <button class="btn btn-outline-danger w-100" onclick="mostrarModulo('productosMasVendidos')">
+                        <i class="fas fa-box fa-3x mb-3"></i>
+                        <h5 class="fw-bold">Productos Más Vendidos</h5>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Contenedor dinámico -->
-    <div id="contenedorModulos" class="row mt-4">
+    <div id="contenedorModulos" class="mt-5">
         <!-- Total de Facturas -->
-        <div class="col-12" id="totalFacturas" style="display: none;">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header text-white bg-primary">
-                    <h5 class="mb-0">
-                        <i class="fas fa-file-invoice"></i> Número Total de Facturas
-                    </h5>
+        <div class="module-section" id="totalFacturas" style="display: none;">
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0"><i class="fas fa-file-invoice"></i> Número Total de Facturas</h4>
                 </div>
                 <div class="card-body">
-                    <!-- Título y resumen -->
-                    <h2 class="fw-bold text-dark text-center mb-4">Total: <?= $data['totalFacturas'] ?></h2>
-
-                    <!-- Gráficas -->
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <h6 class="text-secondary mb-3">Facturas por Mes</h6>
-                            <canvas id="graficaFacturasPorMes" style="max-height: 300px;"></canvas>
+                    <h2 class="text-center text-dark">Total: <?= $data['totalFacturas'] ?></h2>
+                    <div class="row mt-4">
+                        <div class="col-lg-6">
+                            <h6 class="text-center text-secondary">Facturas por Mes</h6>
+                            <canvas id="graficaFacturasPorMes"></canvas>
                         </div>
-                        <div class="col-md-6 text-center">
-                            <h6 class="text-secondary mb-3">Ventas Totales por Mes</h6>
-                            <canvas id="graficaTotalVentasPorMes" style="max-height: 300px;"></canvas>
+                        <div class="col-lg-6">
+                            <h6 class="text-center text-secondary">Ventas Totales por Mes</h6>
+                            <canvas id="graficaTotalVentasPorMes"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <!-- Facturación Total -->
-        <div class="col-12" id="facturacionTotal" style="display: none;">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header text-white bg-success">
-                    <h5 class="mb-0">
-                        <i class="fas fa-dollar-sign"></i> Facturación Total
-                    </h5>
+        <div class="module-section" id="facturacionTotal" style="display: none;">
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-success text-white text-center">
+                    <h4 class="mb-0"><i class="fas fa-dollar-sign"></i> Facturación Total</h4>
                 </div>
-                <div class="card-body text-center">
-                    <h2 class="fw-bold text-dark">Total: $<?= number_format($data['facturacionTotal'], 2) ?></h2>
+                <div class="card-body">
+                    <h2 class="text-center text-dark">Total: $<?= number_format($data['facturacionTotal'], 2) ?></h2>
                 </div>
             </div>
         </div>
 
-        <!-- Facturación Promedio por Cliente -->
-        <div class="col-12" id="facturacionPromedio" style="display: none;">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header text-white bg-warning">
-                    <h5 class="mb-0">
-                        <i class="fas fa-chart-bar"></i> Facturación Promedio por Cliente
-                    </h5>
+        <!-- Facturación Promedio -->
+        <div class="module-section" id="facturacionPromedio" style="display: none;">
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-warning text-dark text-center">
+                    <h4 class="mb-0"><i class="fas fa-chart-line"></i> Facturación Promedio</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
+                            <h6 class="text-center text-secondary">Facturación Promedio por Cliente</h6>
                             <canvas id="graficaFacturacionPromedio"></canvas>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
+                            <h6 class="text-center text-secondary">Comparativa entre Clientes</h6>
                             <canvas id="graficaClientesComparativa"></canvas>
                         </div>
                     </div>
@@ -104,37 +111,27 @@
         </div>
 
         <!-- Productos Más Vendidos -->
-        <div class="col-12" id="productosMasVendidos" style="display: none;">
-            <div class="card border-0 shadow-sm">
-                <div class="card-header text-white bg-danger">
-                    <h5 class="mb-0">
-                        <i class="fas fa-box"></i> Productos Más Vendidos
-                    </h5>
+        <div class="module-section" id="productosMasVendidos" style="display: none;">
+            <div class="card shadow border-0 mb-4">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4 class="mb-0"><i class="fas fa-box"></i> Productos Más Vendidos</h4>
                 </div>
                 <div class="card-body">
-                    <div class="row justify-content-center">
-                        <!-- Gráfica de Barras -->
-                        <div class="col-md-6 text-center">
-                            <h6 class="text-secondary mb-3">Gráfica de Barras</h6>
-                            <div style="max-width: 400px; margin: auto;">
-                                <canvas id="graficaProductosMasVendidosBar" style="max-height: 300px;"></canvas>
-                            </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h6 class="text-center text-secondary">Gráfica de Barras</h6>
+                            <canvas id="graficaProductosMasVendidosBar"></canvas>
                         </div>
-                        <!-- Gráfica de Pie -->
-                        <div class="col-md-6 text-center">
-                            <h6 class="text-secondary mb-3">Gráfica Circular</h6>
-                            <div style="max-width: 400px; margin: auto;">
-                                <canvas id="graficaProductosMasVendidosPie" style="max-height: 300px;"></canvas>
-                            </div>
+                        <div class="col-lg-6">
+                            <h6 class="text-center text-secondary">Gráfica Circular</h6>
+                            <canvas id="graficaProductosMasVendidosPie"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"

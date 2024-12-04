@@ -144,7 +144,7 @@
                             echo "<div>";
                             echo "<div class='small text-gray-500'>" . date("F d, Y") . "</div>"; // Fecha del día actual
                             echo "<span class='font-weight-bold'>El Encargado " . $row['nombre_usuario'] . " " . $row['apellido_usuario'] .
-                                " envió un reporte de la sup-área " . $row['nombre_area'] . "</span>";
+                                " envió un reporte del área " . $row['nombre_area'] . "</span>";
                             echo "</div></a>";
 
                             // Marcar la notificación como vista
