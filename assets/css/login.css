@@ -79,16 +79,23 @@ form.sign-in-form {
   z-index: 2;
 }
 
-.title {
-  font-size: 2.5rem;
-  color: #ffffff; /* Color del texto principal */
-  text-shadow: 2px 2px 0 #000000, -2px 2px 0 #000000, 2px -2px 0 #000000, -2px -2px 0 #000000; /* Efecto bordado */
-  -webkit-text-stroke: 2px #000000; /* Contorno negro alrededor del texto */
-  font-weight: bold; /* Texto más grueso */
-  padding: 10px 20px; /* Espaciado alrededor del texto */
-  display: inline-block; /* Para ajustar el tamaño al texto */
-  text-align: center; /* Alineación central */
-}
+  .title {
+    font-size: 2.5rem;
+    color: #ffffff; /* Color del texto principal */
+    text-shadow: none; /* Eliminado el efecto bordado */
+    -webkit-text-stroke: none; /* Eliminado el contorno */
+    font-weight: normal; /* Texto con peso normal */
+    padding: 10px 20px; /* Espaciado alrededor del texto */
+    display: inline-block; /* Para ajustar el tamaño al texto */
+    text-align: center; /* Alineación central */
+    position: relative; /* Para superponer el fondo */
+    z-index: 1; /* Asegura que el texto esté delante del fondo */
+    margin: 20px auto; /* Centra el elemento horizontalmente */
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Sombra para el cuadro */
+  }
+  
 
 
 
