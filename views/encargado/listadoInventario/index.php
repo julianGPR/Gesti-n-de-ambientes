@@ -1,4 +1,10 @@
 <?php require_once "views/encargado/Vista/parte_superior.php" ?>
+<?php if (isset($_SESSION['mensaje'])): ?>
+    <div class="alert alert-<?= $_SESSION['tipo_mensaje']; ?>">
+        <?= $_SESSION['mensaje']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']); ?>
+<?php endif; ?>
 <main>
     <div class="container-fluid">
         <div class="header-section">

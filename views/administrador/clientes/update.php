@@ -361,12 +361,12 @@ $db = Database::connect();
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                                    <h5 class="modal-title" id="confirmModalLabel">Actualizar Cambios</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
+                                    ¿Está seguro de que desea actualizar los cambios? Esta acción no se puede deshacer.
                                 </div>
                                 <div class="modal-footer">
                                     <button href="../clientes" type="button" class="btn btn-secondary"

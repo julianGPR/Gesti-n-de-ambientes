@@ -365,7 +365,7 @@
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary"><i class="fas fa-check-circle"></i>
-                                    Guardar Cambios</button>
+                                    Actualizar</button>
                                 <a href="../areaTrabajo" class="btn btn-secondary ms-2"><i
                                         class="fas fa-times-circle"></i> Cancelar</a>
                             </div>
@@ -379,12 +379,12 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                                <h5 class="modal-title" id="confirmModalLabel">Actualizar cambios</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
+                                ¿Está seguro de que desea actualizar los cambios? Esta acción no se puede deshacer.
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"

@@ -7,11 +7,12 @@ class ProductoController {
 
     public function __construct() {
         $this->productoModel = new ProductoModel();
+        session_start(); // Iniciar la sesión para manejar mensajes
     }
 
     public function listarProductos() {
         $productos = $this->productoModel->obtenerTodosLosProductos();
-        include 'views/administrador/productos/index.php'; // Cambiado a include
+        include 'views/administrador/productos/index.php';
     }
 
     public function crearProducto() {
@@ -20,32 +21,23 @@ class ProductoController {
             $descripcion = $_POST["descripcion"];
             $precio = $_POST["precio"];
             $stock = $_POST["stock"];
-            $fecha_creacion = $_POST["fecha_creacion"]; // Corrección aquí
-    
+            $fecha_creacion = $_POST["fecha_creacion"];
+
             if ($this->productoModel->crearProducto($nombre, $descripcion, $precio, $stock, $fecha_creacion)) {
-                // Redirigir con una alerta de éxito
-                echo "
-                    <script>
-                        alert('Producto creado exitosamente');
-                        window.location.href = '../listarProductos';
-                    </script>
-                ";
+                $_SESSION['mensaje'] = "Producto creado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
+                header("Location: ../listarProductos");
                 exit();
             } else {
-                // Redirigir con una alerta de error
-                echo "
-                    <script>
-                        alert('Error al crear el producto');
-                        window.history.back();
-                    </script>
-                ";
+                $_SESSION['mensaje'] = "Error al crear el producto.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?controller=Producto&action=crearProducto");
                 exit();
             }
         } else {
-            include 'views/administrador/productos/create.php'; // Suponiendo que existe una vista de creación
+            include 'views/administrador/productos/create.php';
         }
     }
-    
 
     public function actualizarProducto($id) {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -54,28 +46,21 @@ class ProductoController {
             $precio = $_POST["precio"];
             $stock = $_POST["stock"];
             $fecha_creacion = $_POST["fecha_creacion"];
+
             if ($this->productoModel->actualizarProducto($id, $nombre, $descripcion, $precio, $stock, $fecha_creacion)) {
-                // Redirigir con una alerta de éxito
-                echo "
-                    <script>
-                        alert('Producto actualizado exitosamente');
-                        window.location.href = '../listarProductos';
-                    </script>
-                ";
+                $_SESSION['mensaje'] = "Producto actualizado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
+                header("Location: ../listarProductos");
                 exit();
             } else {
-                // Redirigir con una alerta de error
-                echo "
-                    <script>
-                        alert('Error al actualizar el producto');
-                        window.history.back();
-                    </script>
-                ";
+                $_SESSION['mensaje'] = "Error al actualizar el producto.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?controller=Producto&action=actualizarProducto&id=$id");
                 exit();
             }
         } else {
-            $producto = $this->productoModel->obtenerProductoPorId($id); // Método para obtener producto por ID
-            include 'views/administrador/productos/update.php'; // Suponiendo que existe una vista de actualización
+            $producto = $this->productoModel->obtenerProductoPorId($id);
+            include 'views/administrador/productos/update.php';
         }
     }
 
@@ -83,23 +68,15 @@ class ProductoController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             if ($this->productoModel->eliminarProducto($id)) {
-                echo "
-                    <script>
-                        alert('Producto eliminado exitosamente');
-                        window.location.href = 'index.php?controller=Producto&action=listarProductos';
-                    </script>
-                ";
+                $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
             } else {
-                echo "
-                    <script>
-                        alert('Error al eliminar el producto');
-                        window.history.back();
-                    </script>
-                ";
+                $_SESSION['mensaje'] = "Error al eliminar el producto.";
+                $_SESSION['tipo_mensaje'] = "danger";
             }
+            header("Location: index.php?controller=Producto&action=listarProductos");
             exit();
         }
     }
-    
 }
 ?>

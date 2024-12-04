@@ -336,8 +336,7 @@
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar
-                                Cambios</button>
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>Actualizar</button>
                             <a href="../usuarios" class="btn btn-secondary ms-2"><i class="fas fa-times-circle"></i>
                                 Cancelar</a>
                         </div>
@@ -355,7 +354,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ¿Está seguro de que desea guardar los cambios? Esta acción no se puede deshacer.
+                                ¿Está seguro de que desea actualizar los cambios? Esta acción no se puede deshacer.
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"

@@ -9,21 +9,21 @@ class AdminController {
             'totalFacturas' => $adminModel->obtenerNumeroTotalFacturas(),
             'facturacionTotal' => $adminModel->obtenerFacturacionTotal(),
             'facturacionPromedio' => $adminModel->obtenerFacturacionPromedioPorCliente(),
-            'facturasPorMes' => $adminModel->obtenerFacturasPorMes(), // Incluye datos del nuevo método
+            'facturasPorMes' => $adminModel->obtenerFacturasPorMes(),
             'productosMasVendidos' => $adminModel->obtenerProductosVendidos(),
         ];
 
-    
         include 'views/administrador/index.php';
     }
+
     public function areaTrabajo() {
         $adminModel = new AdminModel();
-        $areas = $adminModel->obtenerAreasDeTrabajo(); 
+        $areas = $adminModel->obtenerAreasDeTrabajo();
         include 'views/administrador/ambientes/index.php';
     }
-    
-    
+
     public function createAreaTrabajo() {
+        session_start(); // Iniciar sesión para manejar notificaciones
         $adminModel = new AdminModel();
         $usuarios = $adminModel->obtenerUsuarios();
         $tiposDeArea = $adminModel->obtenerTiposDeArea();
@@ -42,9 +42,15 @@ class AdminController {
             $result = $adminModel->guardarAreaTrabajo($nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $fecha_creacion, $comentarios);
 
             if ($result) {
-                echo "<script>alert('Área creada con éxito'); window.location.href = '../areaTrabajo';</script>";
+                $_SESSION['mensaje'] = "Área creada con éxito.";
+                $_SESSION['tipo_mensaje'] = "success";
+                header("Location: ../areaTrabajo");
+                exit();
             } else {
-                echo "<script>alert('Error al crear el área'); window.history.back();</script>";
+                $_SESSION['mensaje'] = "Error al crear el área.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?action=createAreaTrabajo");
+                exit();
             }
         } else {
             include 'views/administrador/ambientes/create.php';
@@ -52,6 +58,7 @@ class AdminController {
     }
 
     public function updateAreaTrabajo($id) {
+        session_start();
         $adminModel = new AdminModel();
         $usuarios = $adminModel->obtenerUsuarios();
         $tiposDeArea = $adminModel->obtenerTiposDeArea();
@@ -69,42 +76,54 @@ class AdminController {
             $result = $adminModel->modificarAreaTrabajo($id, $nombre_area, $capacidad, $ubicacion, $responsable, $tipo_area, $equipo_disponible, $estado_area, $comentarios);
 
             if ($result) {
-                echo "<script>alert('Área actualizada con éxito'); window.location.href = '../areaTrabajo';</script>";
+                $_SESSION['mensaje'] = "Área actualizada con éxito.";
+                $_SESSION['tipo_mensaje'] = "success";
+                header("Location: ../areaTrabajo");
+                exit();
             } else {
-                echo "<script>alert('Error al actualizar el área'); window.history.back();</script>";
+                $_SESSION['mensaje'] = "Error al actualizar el área.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?action=updateAreaTrabajo&id=$id");
+                exit();
             }
         } else {
             $areaTrabajo = $adminModel->obtenerAreaTrabajoPorId($id);
             include 'views/administrador/ambientes/update.php';
         }
     }
+
     public function inhabilitarAreaTrabajo($id) {
+        session_start();
         $adminModel = new AdminModel();
         $result = $adminModel->inhabilitarAreaTrabajo($id);
 
         if ($result) {
-            echo "<script>alert('Area inhabilitada exitosamente');</script>";
+            $_SESSION['mensaje'] = "Área inhabilitada con éxito.";
+            $_SESSION['tipo_mensaje'] = "success";
         } else {
-            echo "<script>alert('Error al inhabilitar el area');</script>";
+            $_SESSION['mensaje'] = "Error al inhabilitar el área.";
+            $_SESSION['tipo_mensaje'] = "danger";
         }
-        
+
         header("Location: ../areaTrabajo");
         exit();
     }
 
     public function habilitarAreaTrabajo($id) {
+        session_start();
         $adminModel = new AdminModel();
         $result = $adminModel->habilitarAreaTrabajo($id);
 
         if ($result) {
-            echo "<script>alert('Area habilitada exitosamente');</script>";
+            $_SESSION['mensaje'] = "Área habilitada con éxito.";
+            $_SESSION['tipo_mensaje'] = "success";
         } else {
-            echo "<script>alert('Error al habilitar el area');</script>";
+            $_SESSION['mensaje'] = "Error al habilitar el área.";
+            $_SESSION['tipo_mensaje'] = "danger";
         }
-        
+
         header("Location: ../areaTrabajo");
         exit();
     }
-    
 }
 ?>

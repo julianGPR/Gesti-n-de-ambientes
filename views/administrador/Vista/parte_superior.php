@@ -1,5 +1,9 @@
 <?php
-session_start();
+// Verificar si ya se inició una sesión
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once 'config/db.php';
 
 // Verificar si hay sesión activa
@@ -10,11 +14,13 @@ if (!isset($_SESSION['user'])) {
 
 // Asignar variables de la sesión
 $user = $_SESSION['user'];
-$usuario_activo = $user['Nombres'] . ' ' . $user['Apellidos'];
-$rol_usuario = $user['Rol'];
+$usuario_activo = htmlspecialchars($user['Nombres']) . ' ' . htmlspecialchars($user['Apellidos']);
+$rol_usuario = htmlspecialchars($user['Rol']);
 
+// Conexión a la base de datos
 $db = Database::connect();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

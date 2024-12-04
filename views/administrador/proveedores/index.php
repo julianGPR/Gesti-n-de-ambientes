@@ -1,8 +1,14 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
+<?php if (isset($_SESSION['mensaje'])): ?>
+    <div class="alert alert-<?= $_SESSION['tipo_mensaje']; ?>">
+        <?= $_SESSION['mensaje']; ?>
+    </div>
+    <?php unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']); ?>
+<?php endif; ?>
 <main>
     <div class="container-fluid">
         <div class="header-section">
-            <h1><i class="fas fa-truck"></i> Gestion de Proveedor</h1>
+            <h1><i class="fas fa-truck"></i> Gestión de Proveedores</h1>
             <ol class="breadcrumb mb-4">
                 <li class="breadcrumb-item"><i class="fas fa-home"></i> Menú</li>
             </ol>

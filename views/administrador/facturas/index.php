@@ -1,4 +1,16 @@
 <?php require_once "views/administrador/Vista/parte_superior.php" ?>
+<?php
+if (isset($_SESSION['mensaje'])): ?>
+    <div class="alert alert-<?= htmlspecialchars($_SESSION['tipo_mensaje']) ?> alert-dismissible fade show" role="alert">
+        <?= htmlspecialchars($_SESSION['mensaje']) ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <?php
+    // Limpiar el mensaje después de mostrarlo
+    unset($_SESSION['mensaje']);
+    unset($_SESSION['tipo_mensaje']);
+endif;
+?>
 
 <main>
     <div class="container-fluid">
@@ -16,62 +28,64 @@
             </div>
         </div>
         <div class="card mb-4">
-    <div class="card-header">
-        <i class="fas fa-table mr-1"></i>Lista de Productos
-    </div>
-    <div class="card-body">
-    <div class="table-responsive">
-        <table id="tablaFacturas" class="table table-bordered" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Cliente</th>
-                    <th>Fecha</th>
-                    <th>Total</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($facturas as $factura): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($factura['id']); ?></td>
-                        <td><?php echo htmlspecialchars($factura['cliente_nombre']); ?></td>
-                        <td><?php echo htmlspecialchars($factura['fecha']); ?></td>
-                        <td>$<?php echo number_format($factura['total'], 2); ?></td>
-                        <td>
-                            <a href="/gafra/facturas/detalle/<?php echo $factura['id']; ?>" 
-                                class="btn btn-info btn-sm">Ver</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+            <div class="card-header">
+                <i class="fas fa-table mr-1"></i>Lista de Productos
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tablaFacturas" class="table table-bordered" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cliente</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($facturas as $factura): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($factura['id']); ?></td>
+                                    <td><?php echo htmlspecialchars($factura['cliente_nombre']); ?></td>
+                                    <td><?php echo htmlspecialchars($factura['fecha']); ?></td>
+                                    <td>$<?php echo number_format($factura['total'], 2); ?></td>
+                                    <td>
+                                        <a href="/gafra/facturas/detalle/<?php echo $factura['id']; ?>"
+                                            class="btn btn-info btn-sm">Ver</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Modal para mostrar la factura -->
+            <div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="facturaModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="facturaModalLabel">Detalle de la Factura</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Aquí se cargará dinámicamente la factura -->
+                            <div id="detalleFactura">Cargando...</div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="imprimirFactura()">Imprimir</button>
+                            <button type="button" class="btn btn-success" onclick="exportarPDF()">Exportar PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
 </div>
-</main>
-<!-- Modal para mostrar la factura -->
-<div class="modal fade" id="facturaModal" tabindex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="facturaModalLabel">Detalle de la Factura</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Aquí se cargará dinámicamente la factura -->
-                <div id="detalleFactura">Cargando...</div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="imprimirFactura()">Imprimir</button>
-                <button type="button" class="btn btn-success" onclick="exportarPDF()">Exportar PDF</button>
-            </div>
-        </div>
-    </div>
 </div>
-</main>
 <footer class="py-4 bg-light mt-auto">
     <div class="container-fluid">
         <div class="d-flex align-items-center justify-content-between small">
@@ -79,8 +93,7 @@
         </div>
     </div>
 </footer>
-</div>
-</div>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
@@ -113,7 +126,7 @@
 
 <script>
 
-$(document).ready(function() {
+    $(document).ready(function () {
         $('#tablaFacturas').DataTable({
             "paging": true,          // Habilitar paginación
             "searching": true,       // Habilitar búsqueda

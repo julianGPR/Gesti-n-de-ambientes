@@ -5,11 +5,14 @@ require_once 'models/UsuariosModel.php'; // Asegúrate de que la ruta y el nombr
 class UsuariosController {
 
     public function usuarios() {
+        session_start();
         include 'views/administrador/usuarios/index.php';
     }
 
     // Método para crear un nuevo usuario
     public function createUsuario() {
+        session_start(); // Inicia la sesión para manejar mensajes
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombres = $_POST["nombres"];
             $apellidos = $_POST["apellidos"];
@@ -25,10 +28,14 @@ class UsuariosController {
             $result = $usuariosModel->guardarUsuario($nombres, $apellidos, $clave, $correo, $rol, $foto_perfil);
 
             if ($result) {
+                $_SESSION['mensaje'] = "Usuario creado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
                 header("Location: ../usuarios");
                 exit();
             } else {
-                header("Location: index.php?error=Error al crear el usuario");
+                $_SESSION['mensaje'] = "Error al crear el usuario.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?action=createUsuario");
                 exit();
             }
         } else {
@@ -37,24 +44,30 @@ class UsuariosController {
     }
 
     public function updateUsuario($id) {
+        session_start(); // Inicia la sesión para manejar mensajes
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nombres = $_POST["nombres"];
             $apellidos = $_POST["apellidos"];
-            $clave = !empty($_POST["clave"]) ? $_POST["clave"] : null; // Solo pasa la clave si no está vacía
+            $clave = !empty($_POST["clave"]) ? $_POST["clave"] : null;
             $correo = $_POST["correo"];
             $rol = $_POST["rol"];
             $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
                 ? $_FILES['foto_perfil']['tmp_name'] 
                 : null;
-    
+
             $usuariosModel = new UsuariosModel();
             $result = $usuariosModel->modificarUsuario($id, $nombres, $apellidos, $clave, $correo, $rol, $foto_perfil);
-    
+
             if ($result) {
+                $_SESSION['mensaje'] = "Usuario actualizado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
                 header("Location: ../usuarios");
                 exit();
             } else {
-                header("Location: index.php?error=Error al actualizar el usuario&id=$id");
+                $_SESSION['mensaje'] = "Error al actualizar el usuario.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?action=updateUsuario&id=$id");
                 exit();
             }
         } else {
@@ -63,72 +76,73 @@ class UsuariosController {
             include 'views/administrador/usuarios/update.php';
         }
     }
-    
 
     public function inhabilitarUsuario($id) {
-        $usuariosModel = new UsuariosModel(); // Corregido a UsuariosModel
+        session_start(); // Inicia la sesión para manejar mensajes
+
+        $usuariosModel = new UsuariosModel();
         $result = $usuariosModel->inhabilitarUsuario($id);
-    
+
         if ($result) {
-            echo "<script>alert('Usuario inhabilitado exitosamente');</script>";
+            $_SESSION['mensaje'] = "Usuario inhabilitado exitosamente.";
+            $_SESSION['tipo_mensaje'] = "success";
         } else {
-            echo "<script>alert('Error al inhabilitar el usuario');</script>";
+            $_SESSION['mensaje'] = "Error al inhabilitar el usuario.";
+            $_SESSION['tipo_mensaje'] = "danger";
         }
-        
+
         header("Location: ../usuarios");
         exit();
     }
-    
+
     public function habilitarUsuario($id) {
-        $usuariosModel = new UsuariosModel(); // Corregido a UsuariosModel
+        session_start(); // Inicia la sesión para manejar mensajes
+
+        $usuariosModel = new UsuariosModel();
         $result = $usuariosModel->habilitarUsuario($id);
-    
+
         if ($result) {
-            echo "<script>alert('Usuario habilitado exitosamente');</script>";
+            $_SESSION['mensaje'] = "Usuario habilitado exitosamente.";
+            $_SESSION['tipo_mensaje'] = "success";
         } else {
-            echo "<script>alert('Error al habilitar el usuario');</script>";
+            $_SESSION['mensaje'] = "Error al habilitar el usuario.";
+            $_SESSION['tipo_mensaje'] = "danger";
         }
-        
+
         header("Location: ../usuarios");
         exit();
     }
 
     public function perfil() {
-        session_start(); // Asegúrate de que la sesión esté iniciada
-        $id_usuario = $_GET['id'] ?? $_SESSION['Id_usuario']; // Obtén el ID del usuario desde la URL o la sesión
-        
+        session_start();
+        $id_usuario = $_GET['id'] ?? $_SESSION['Id_usuario'];
+
         $usuariosModel = new UsuariosModel();
         $usuario = $usuariosModel->obtenerUsuarioPorId($id_usuario);
-    
+
         if (!$usuario) {
-            // Redirigir o mostrar un mensaje de error si no se encuentra el usuario
             die('Error: Usuario no encontrado.');
         }
-    
-        // Codificar la foto de perfil si existe
+
         if (!empty($usuario['foto_perfil'])) {
             $usuario['foto_perfil'] = 'data:image/jpeg;base64,' . base64_encode($usuario['foto_perfil']);
         }
-    
-        require_once 'views/administrador/usuarios/perfil.php';
-    }
-    
-    
-    
 
-    // Mostrar el formulario de edición del perfil
+        include 'views/administrador/usuarios/perfil.php';
+    }
+
     public function editarPerfil() {
         session_start();
         $usuarioModel = new UsuariosModel();
         $id = $_SESSION['Id_usuario'];
         $usuario = $usuarioModel->obtenerUsuarioPorId($id);
-        
+
         include 'views/administrador/usuarios/editar_perfil.php';
     }
 
-    // Actualizar el perfil del usuario
     public function actualizarPerfil() {
         session_start();
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $_SESSION['Id_usuario'];
             $nombres = $_POST['nombres'];
@@ -138,18 +152,22 @@ class UsuariosController {
             $foto_perfil = isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] == UPLOAD_ERR_OK 
                 ? $_FILES['foto_perfil']['tmp_name'] 
                 : null;
-    
+
             $usuarioModel = new UsuariosModel();
             $result = $usuarioModel->actualizarPerfil($id, $nombres, $apellidos, $correo, $especialidad, $foto_perfil);
-    
+
             if ($result) {
+                $_SESSION['mensaje'] = "Perfil actualizado exitosamente.";
+                $_SESSION['tipo_mensaje'] = "success";
                 header("Location: /gafra/usuarios/perfil");
+                exit();
             } else {
-                echo "Error al actualizar el perfil.";
+                $_SESSION['mensaje'] = "Error al actualizar el perfil.";
+                $_SESSION['tipo_mensaje'] = "danger";
+                header("Location: index.php?action=editarPerfil");
+                exit();
             }
-            exit();
         }
     }
-        
 }
 ?>
