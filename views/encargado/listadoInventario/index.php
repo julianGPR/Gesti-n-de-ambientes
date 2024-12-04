@@ -67,6 +67,13 @@
             </div>
         </div>
     </div>
+    <footer class="py-4 bg-light mt-auto">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; GAFRA 2024</div>
+            </div>
+        </div>
+    </footer>
     </section>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
@@ -104,63 +111,63 @@
 
     </script>
     <script>
-    $(document).ready(function () {
-        $('#tabla-ambientes').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'copy',
-                    text: 'Copiar'
-                },
-                {
-                    extend: 'csv',
-                    text: 'Exportar CSV'
-                },
-                {
-                    extend: 'excel',
-                    text: 'Exportar a Excel'
-                },
-                {
-                    extend: 'pdf',
-                    text: 'Exportar a PDF'
-                },
-                {
-                    extend: 'print',
-                    text: 'Imprimir'
+        $(document).ready(function () {
+            $('#tabla-ambientes').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copiar'
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'Exportar CSV'
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Exportar a Excel'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'Exportar a PDF'
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Imprimir'
+                    }
+                ],
+                paging: true,
+                pageLength: 5,
+                language: {
+                    processing: "Procesando...",
+                    search: "Buscar:",
+                    lengthMenu: "Mostrar _MENU_ registros",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    infoEmpty: "Mostrando 0 a 0 de 0 registros",
+                    infoFiltered: "(filtrado de _MAX_ registros en total)",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron registros coincidentes",
+                    emptyTable: "No hay datos disponibles en la tabla",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Último"
+                    },
+                    aria: {
+                        sortAscending: ": activar para ordenar la columna de manera ascendente",
+                        sortDescending: ": activar para ordenar la columna de manera descendente"
+                    },
+                    buttons: {
+                        copy: "Copiar",
+                        csv: "Exportar a CSV",
+                        excel: "Exportar a Excel",
+                        pdf: "Exportar a PDF",
+                        print: "Imprimir"
+                    }
                 }
-            ],
-            paging: true,
-            pageLength: 5,
-            language: {
-                processing: "Procesando...",
-                search: "Buscar:",
-                lengthMenu: "Mostrar _MENU_ registros",
-                info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
-                infoEmpty: "Mostrando 0 a 0 de 0 registros",
-                infoFiltered: "(filtrado de _MAX_ registros en total)",
-                loadingRecords: "Cargando...",
-                zeroRecords: "No se encontraron registros coincidentes",
-                emptyTable: "No hay datos disponibles en la tabla",
-                paginate: {
-                    first: "Primero",
-                    previous: "Anterior",
-                    next: "Siguiente",
-                    last: "Último"
-                },
-                aria: {
-                    sortAscending: ": activar para ordenar la columna de manera ascendente",
-                    sortDescending: ": activar para ordenar la columna de manera descendente"
-                },
-                buttons: {
-                    copy: "Copiar",
-                    csv: "Exportar a CSV",
-                    excel:"Exportar a Excel",
-                    pdf: "Exportar a PDF",
-                    print: "Imprimir"
-                }
-            }
+            });
         });
-    });
 
         function confirmarInhabilitar(id) {
             if (confirm("¿Estás seguro de que deseas inhabilitar esta área?")) {

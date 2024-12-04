@@ -58,7 +58,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="#">Configuración</a>
                         <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
+                        <a class="dropdown-item" href="/gafra/login/logout">Salir</a>
                     </div>
                 </li>
             </ul>
@@ -150,6 +150,13 @@
                         </div>
                     </div>
                 </div>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; GAFRA 2024</div>
+                        </div>
+                    </div>
+                </footer>
 
                 </section>
                 <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
